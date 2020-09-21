@@ -1,0 +1,58 @@
+2020-09-02 14:34:30.3003 | TRACE | EIPBuilder.NetworkNode.BaseOperator.SetCpuModuleName | NodeId = 0, name = Dev_1  
+
+2020-09-02 14:34:30.3159 | TRACE | EIPBuilder.NetworkNode.EIPOperator.AddNode | NodeId = 0  
+
+2020-09-02 14:34:30.3159 | TRACE | EIPBuilder.NetworkNode.BaseOperator.SetNodeName | NodeId = 0, Name = AS324MT  
+
+2020-09-02 14:34:30.3159 | TRACE | EIPBuilder.NetworkNode.BaseOperator.SetCpuModulePortNum | NodeId = 0, PortNum = 1  
+
+2020-09-02 14:34:30.3315 | TRACE | EIPBuilder.NetworkNode.EIPOperator.SetConnectionPortIp | NodeId = 0, moduleType = CPU, portIdx = 0, PortIPAddr = 192.168.1.6  
+
+2020-09-02 14:34:30.3627 | TRACE | EIPBuilder.NetworkNode.BaseOperator.SetModuleName | SetModuleName() nodeId = 0, newName = Right_1_1  
+
+2020-09-02 14:34:30.4121 | TRACE | EIPBuilder.NetworkNode.EIPOperator.AddModule | NodeId = 0isRight = TrueslotIndex = 0modulePortNum = 0  
+
+2020-09-02 14:34:30.4121 | TRACE | EIPBuilder.NetworkNode.BaseOperator.SetModuleDescFilePath | SetModuleDescFilePath() nodeId = 0, path = C:\Users\shibin.hoo\AppData\Roaming\Delta Industrial Automation\Communication\EIP Builder\DescrFile\EIP_EDS\031F000A540100010001.eds  
+
+2020-09-02 14:34:30.4746 | TRACE | EIPBuilder.NetworkNode.BaseOperator.SetCpuModuleName | NodeId = 0, name = Dev_1  
+
+2020-09-02 14:34:30.4746 | TRACE | EIPBuilder.NetworkNode.EIPOperator.AddNode | NodeId = 0  
+
+2020-09-02 14:34:30.4746 | TRACE | EIPBuilder.NetworkNode.BaseOperator.SetNodeName | NodeId = 0, Name = AS324MT  
+
+2020-09-02 14:34:30.4746 | TRACE | EIPBuilder.NetworkNode.BaseOperator.SetCpuModulePortNum | NodeId = 0, PortNum = 1  
+
+2020-09-02 14:34:30.4746 | TRACE | EIPBuilder.NetworkNode.EIPOperator.SetConnectionPortIp | NodeId = 0, moduleType = CPU, portIdx = 0, PortIPAddr = 192.168.1.6  
+
+2020-09-02 14:34:30.5058 | TRACE | EIPBuilder.NetworkNode.BaseOperator.SetModuleName | SetModuleName() nodeId = 0, newName = Right_1_1  
+
+2020-09-02 14:34:30.5058 | TRACE | EIPBuilder.NetworkNode.EIPOperator.AddModule | NodeId = 0isRight = TrueslotIndex = 0modulePortNum = 0  
+
+2020-09-02 14:34:30.5058 | TRACE | EIPBuilder.NetworkNode.BaseOperator.SetModuleDescFilePath | SetModuleDescFilePath() nodeId = 0, path = C:\Users\shibin.hoo\AppData\Roaming\Delta Industrial Automation\Communication\EIP Builder\DescrFile\EIP_EDS\031F000A540100010001.eds  
+
+2020-09-02 14:34:41.1196 | INFO | EIPBuilder.Utility.CommSetInfo.GetCommgrPath | x86/COMMGR InstallPath : C:\Program Files (x86)\Delta Industrial Automation\COMMGR 1.12\  
+
+2020-09-02 14:34:41.1196 | INFO | EIPBuilder.Utility.CommSetInfo.GetDriverInfoPath | Register Path : C:\Program Files (x86)\Delta Industrial Automation\COMMGR 1.12\  
+
+2020-09-02 14:34:41.1352 | INFO | EIPBuilder.Utility.CommSetInfo.GetDriverInfoPath | DriverInfo Path : C:\Users\shibin.hoo\AppData\Roaming\Delta Industrial Automation\COMMGR\DriverInfo.dri  
+
+2020-09-02 14:34:41.1352 | INFO | EIPBuilder.Utility.CommSetInfo.GetCommgrPath | x86/COMMGR InstallPath : C:\Program Files (x86)\Delta Industrial Automation\COMMGR 1.12\  
+
+2020-09-02 14:34:41.1352 | INFO | EIPBuilder.Utility.CommSetInfo.GetDriverInfoPath | Register Path : C:\Program Files (x86)\Delta Industrial Automation\COMMGR 1.12\  
+
+2020-09-02 14:34:41.1352 | INFO | EIPBuilder.Utility.CommSetInfo.GetDriverInfoPath | DriverInfo Path : C:\Users\shibin.hoo\AppData\Roaming\Delta Industrial Automation\COMMGR\DriverInfo.dri  
+
+2020-09-02 14:34:50.8593 | TRACE | EIPBuilder.NetworkNode.BaseOperator.SetLineName | SetLineName() lineId = 0, newName = Network_0  
+
+2020-09-02 14:34:50.8749 | TRACE | EIPBuilder.NetworkNode.BaseOperator.AddLine | AddLine() lineId = 0  
+
+2020-09-02 14:34:57.2447 | TRACE | EIPBuilder.NetworkNode.BaseOperator.SetCpuModuleName | NodeId = 1, name = Dev_1  
+
+2020-09-02 14:34:57.2923 | TRACE | EIPBuilder.NetworkNode.EIPOperator.AddNode | NodeId = 1  
+
+2020-09-02 14:34:57.6245 | TRACE | EIPBuilder.NetworkNode.BaseOperator.SetNodeName | NodeId = 1, Name = CMM-EIP01  
+
+2020-09-02 14:34:57.6245 | TRACE | EIPBuilder.NetworkNode.BaseOperator.SetCpuModulePortNum | NodeId = 1, PortNum = 1  
+
+2020-09-02 14:34:57.6245 | TRACE | EIPBuilder.NetworkNode.EIPOperator.SetConnectionPortIp | NodeId = 1, moduleType = CPU, portIdx = 0, PortIPAddr = 192.168.1.1  
+
