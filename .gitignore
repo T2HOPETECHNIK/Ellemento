@@ -1,0 +1,12 @@
+*.ini
+*.bak
+*.dlhw
+*.eiptag
+*.ex
+*.hwc
+*.inivals
+*.isp
+*.pnt
+*.~bak
+*.~isp
+rack_control/plc/project_file/logfile.txt
