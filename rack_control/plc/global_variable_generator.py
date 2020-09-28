@@ -1,9 +1,15 @@
 """
     Global Variable Generator:
 
+    Function:
     - generate a csv file that contains all shelf-related global variable
       based on the inputs in global_variable_template.xlsx
     - csv file can be imported into Delta ISPSoft
+
+    How to use:
+    - configure parameter in global_variable_template.xlsx
+    - run this script at the same directory as global_variable_template.xlsx
+    - global_variable_table.csv will be generated upon script completion
 """
 
 import os
