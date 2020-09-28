@@ -27,6 +27,8 @@ if __name__ == "__main__":
     shelf_no = int(excel_data['shelf_no'].tolist()[0])
     base_addr = int(excel_data['base_addr'].tolist()[0])
     shelf_reg_size = int(excel_data['shelf_reg_size'].tolist()[0])
+    shelf_no_addr = str(excel_data['shelf_no_addr'].tolist()[0])
+    shelf_reg_size_addr = str(excel_data['shelf_reg_size_addr'].tolist()[0])
 
     var_name_list = excel_data['variable_name'].tolist()
     is_float_list = excel_data['is_float'].tolist()
@@ -60,5 +62,11 @@ if __name__ == "__main__":
         writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
         writer.writerow(header)
+
+        # write constant variable
+        writer.writerow(['VAR', "shelf_no", shelf_no_addr, "INT", "N/A"])
+        writer.writerow(['VAR', "shelf_reg_size", shelf_reg_size_addr, "INT", "N/A"])
+
+        # write variable / parameter
         for i in range(len(c_var)):
             writer.writerow(['VAR', c_var[i], 'D{}'.format(c_addr[i]), c_type[i], c_default[i]])

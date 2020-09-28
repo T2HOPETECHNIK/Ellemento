@@ -1,4 +1,6 @@
 Class,Identifiers,Address,Type,Initial Value,Comment
+VAR,shelf_no,D28001,INT,N/A
+VAR,shelf_reg_size,D28002,INT,N/A
 VAR,s0_Addr,D10000,WORD,0
 VAR,s0_PV_OnArr,D10001.0,ARRAY [3] OF BOOL,[3(FALSE)]
 VAR,s0_PV_SpArr,D10002,ARRAY [3] OF REAL,[3(0.0)]
