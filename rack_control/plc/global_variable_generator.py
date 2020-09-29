@@ -22,38 +22,53 @@ if __name__ == "__main__":
     input_name = "global_variable_template.xlsx"
     output_name = "global_variable_table.csv"
 
-    excel_data = pd.read_excel(os.path.join(curr_dir, input_name), sheet_name="Sheet1")
+    shelf_data = pd.read_excel(os.path.join(curr_dir, input_name), sheet_name="Shelf")
+    constant_data = pd.read_excel(os.path.join(curr_dir, input_name), sheet_name="Constants")
 
-    shelf_no = int(excel_data['shelf_no'].tolist()[0])
-    base_addr = int(excel_data['base_addr'].tolist()[0])
-    shelf_reg_size = int(excel_data['shelf_reg_size'].tolist()[0])
-    shelf_no_addr = str(excel_data['shelf_no_addr'].tolist()[0])
-    shelf_reg_size_addr = str(excel_data['shelf_reg_size_addr'].tolist()[0])
+    # extract data from "Constants" sheet
+    const_list = constant_data['variable_name'].tolist()
+    const_addr_list = constant_data['addr'].tolist()
+    const_type_list = constant_data['type'].tolist()
+    const_value_list = constant_data['init_value'].tolist()
 
-    var_name_list = excel_data['variable_name'].tolist()
-    is_float_list = excel_data['is_float'].tolist()
-    addr_offset_list = excel_data['addr_offset'].tolist()
-    type_list = excel_data['type'].tolist()
-    init_value_list = excel_data['init_value'].tolist()
+    assert ("shelf_no" in const_list) and ("shelf_reg_size" in const_list) == True
+    shelf_no = const_value_list[const_list.index("shelf_no")]
+    shelf_reg_size = const_value_list[const_list.index("shelf_reg_size")]
 
-    c_var = []
-    c_addr = []
-    c_type = []
-    c_default = []
+    k_var = []
+    k_addr = []
+    k_type = []
+    k_value = []
+
+    for i in range(len(const_list)):
+        k_var.append(const_list[i])
+        k_addr.append("D{}".format(const_addr_list[i]))
+        k_type.append(const_type_list[i])
+        k_value.append(const_value_list[i])
+
+    # extract data from "Shelf" sheet
+    base_addr = int(shelf_data['base_addr'].tolist()[0])
+    var_name_list = shelf_data['variable_name'].tolist()
+    addr_offset_list = shelf_data['addr_offset'].tolist()
+    type_list = shelf_data['type'].tolist()
+    init_value_list = shelf_data['init_value'].tolist()
+
+    s_var = []
+    s_addr = []
+    s_type = []
+    s_default = []
 
     for i in range(shelf_no):
         for var_name in var_name_list:
-            c_var.append("s{}{}".format(i, var_name))
+            s_var.append("s{}_{}".format(i, var_name))
         for j, offset in enumerate(addr_offset_list):
-            if is_float_list[j] == 'B':
-                offset = float(offset)
-            else:
-                offset = int(offset)
-            c_addr.append(base_addr + offset + i * shelf_reg_size)
+            offset = float(offset) if "BOOL" in type_list[j] else int(offset)
+            s_addr.append("D{}".format(base_addr + offset + i * shelf_reg_size))
         for var_type in type_list:
-            c_type.append(var_type)
+            s_type.append(var_type)
         for var_default in init_value_list:
-            c_default.append(var_default)
+            s_default.append(var_default)
+
 
     # write parsed data to csv file
     header = ["Class", "Identifiers", "Address", "Type", "Initial Value", "Comment"]
@@ -64,9 +79,11 @@ if __name__ == "__main__":
         writer.writerow(header)
 
         # write constant variable
-        writer.writerow(['VAR', "shelf_no", shelf_no_addr, "INT", "N/A"])
-        writer.writerow(['VAR', "shelf_reg_size", shelf_reg_size_addr, "INT", "N/A"])
+        for i in range(len(k_var)):
+            writer.writerow(['VAR', k_var[i], k_addr[i], k_type[i], k_value[i]])
 
         # write variable / parameter
-        for i in range(len(c_var)):
-            writer.writerow(['VAR', c_var[i], 'D{}'.format(c_addr[i]), c_type[i], c_default[i]])
+        for i in range(len(s_var)):
+            writer.writerow(['VAR', s_var[i], s_addr[i], s_type[i], s_default[i]])
+
+    print("Global variable generation completed.")
