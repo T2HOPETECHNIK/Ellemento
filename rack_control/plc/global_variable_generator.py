@@ -21,9 +21,12 @@ if __name__ == "__main__":
     curr_dir = os.path.dirname(os.path.abspath(__file__))
     input_name = "global_variable_template.xlsx"
     output_name = "global_variable_table.csv"
+    dir_name = os.path.join(curr_dir, input_name)
 
-    shelf_data = pd.read_excel(os.path.join(curr_dir, input_name), sheet_name="Shelf")
-    constant_data = pd.read_excel(os.path.join(curr_dir, input_name), sheet_name="Constants")
+    shelf_data = pd.read_excel(dir_name, sheet_name="Shelf")
+    constant_data = pd.read_excel(dir_name, sheet_name="Constants")
+    shelf_sensor_list_data = pd.read_excel(dir_name, sheet_name="Shelf Sensor")
+    sensor_data_structure_data = pd.read_excel(dir_name, sheet_name="Sensor Data")
 
     # extract data from "Constants" sheet
     const_list = constant_data['variable_name'].tolist()
@@ -32,8 +35,8 @@ if __name__ == "__main__":
     const_value_list = constant_data['init_value'].tolist()
 
     assert ("shelf_no" in const_list) and ("shelf_reg_size" in const_list) == True
-    shelf_no = const_value_list[const_list.index("shelf_no")]
-    shelf_reg_size = const_value_list[const_list.index("shelf_reg_size")]
+    shelf_no = int(const_value_list[const_list.index("shelf_no")])
+    shelf_reg_size = int(const_value_list[const_list.index("shelf_reg_size")])
 
     k_var = []
     k_addr = []
@@ -69,6 +72,31 @@ if __name__ == "__main__":
         for var_default in init_value_list:
             s_default.append(var_default)
 
+    # extract data from "Sensor Data" sheet
+    snsr_data_list = sensor_data_structure_data['variable_name'].tolist()
+    snsr_data_type_list = sensor_data_structure_data['type'].tolist()
+    snsr_data_default_value_list = sensor_data_structure_data['init_value'].tolist()
+
+    # extract data from "Shelf Sensor" sheet
+    shelf_sensor_list = shelf_sensor_list_data['variable_name'].tolist()
+    snsr_data_base_addr = int(shelf_sensor_list_data['base_addr'].tolist()[0])
+
+    snsr_var = ["snsr_base_addr"]
+    snsr_addr = ["D{}".format(snsr_data_base_addr)]
+    snsr_type = ["WORD"]
+    snsr_default = [0]
+
+    offset_addr = 1
+
+    for i in range(shelf_no):
+        for snsr in shelf_sensor_list:
+            for j, data in enumerate(snsr_data_list):
+                snsr_var.append("snsr_s{}_{}_{}".format(i, snsr, data))
+                snsr_addr.append("D{}".format(snsr_data_base_addr + offset_addr))
+                snsr_type.append(snsr_data_type_list[j])
+                snsr_default.append(snsr_data_default_value_list[j])
+                offset_addr += 1
+
 
     # write parsed data to csv file
     header = ["Class", "Identifiers", "Address", "Type", "Initial Value", "Comment"]
@@ -85,5 +113,9 @@ if __name__ == "__main__":
         # write variable / parameter
         for i in range(len(s_var)):
             writer.writerow(['VAR', s_var[i], s_addr[i], s_type[i], s_default[i]])
+
+        # write sensors variable
+        for i in range(len(snsr_var)):
+            writer.writerow(['VAR', snsr_var[i], snsr_addr[i], snsr_type[i], snsr_default[i]])
 
     print("Global variable generation completed.")
