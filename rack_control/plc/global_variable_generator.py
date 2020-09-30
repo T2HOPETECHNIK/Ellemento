@@ -88,8 +88,8 @@ if __name__ == "__main__":
 
     offset_addr = 1
 
-    for i in range(shelf_no):
-        for snsr in shelf_sensor_list:
+    for snsr in shelf_sensor_list:
+        for i in range(shelf_no):
             for j, data in enumerate(snsr_data_list):
                 snsr_var.append("snsr_s{}_{}_{}".format(i, snsr, data))
                 snsr_addr.append("D{}".format(snsr_data_base_addr + offset_addr))
