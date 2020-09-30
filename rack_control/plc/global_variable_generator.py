@@ -79,14 +79,15 @@ if __name__ == "__main__":
 
     # extract data from "Shelf Sensor" sheet
     shelf_sensor_list = shelf_sensor_list_data['variable_name'].tolist()
-    snsr_data_base_addr = shelf_sensor_list_data['base_addr'].tolist()[0]
+    snsr_data_base_addr = int(shelf_sensor_list_data['base_addr'].tolist()[0])
 
-    snsr_var = []
-    snsr_addr = []
-    snsr_type = []
-    snsr_default = []
+    snsr_var = ["snsr_base_addr"]
+    snsr_addr = ["D{}".format(snsr_data_base_addr)]
+    snsr_type = ["WORD"]
+    snsr_default = [0]
 
-    offset_addr = 0
+    offset_addr = 1
+
     for i in range(shelf_no):
         for snsr in shelf_sensor_list:
             for j, data in enumerate(snsr_data_list):
