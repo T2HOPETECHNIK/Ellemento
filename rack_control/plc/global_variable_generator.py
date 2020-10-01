@@ -15,6 +15,7 @@
 import os
 import csv
 import pandas as pd
+import numpy as np
 
 if __name__ == "__main__":
 
@@ -25,7 +26,7 @@ if __name__ == "__main__":
 
     shelf_data = pd.read_excel(dir_name, sheet_name="Shelf")
     constant_data = pd.read_excel(dir_name, sheet_name="Constants")
-    shelf_sensor_list_data = pd.read_excel(dir_name, sheet_name="Shelf Sensor")
+    shelf_sensor_list_data = pd.read_excel(dir_name, sheet_name="Sensor List")
     sensor_data_structure_data = pd.read_excel(dir_name, sheet_name="Sensor Data")
 
     # extract data from "Constants" sheet
@@ -78,8 +79,9 @@ if __name__ == "__main__":
     snsr_data_default_value_list = sensor_data_structure_data['init_value'].tolist()
 
     # extract data from "Shelf Sensor" sheet
-    shelf_sensor_list = shelf_sensor_list_data['variable_name'].tolist()
     snsr_data_base_addr = int(shelf_sensor_list_data['base_addr'].tolist()[0])
+    shelf_sensor_list = [x for x in shelf_sensor_list_data['shelf_sensor'].tolist() if not pd.isna(x)]
+    general_sensor_list = [x for x in shelf_sensor_list_data['general_sensor'].tolist() if not pd.isna(x)]
 
     snsr_var = ["snsr_base_addr"]
     snsr_addr = ["D{}".format(snsr_data_base_addr)]
@@ -96,6 +98,14 @@ if __name__ == "__main__":
                 snsr_type.append(snsr_data_type_list[j])
                 snsr_default.append(snsr_data_default_value_list[j])
                 offset_addr += 1
+
+    for snsr in general_sensor_list:
+        for i, data in enumerate(snsr_data_list):
+            snsr_var.append("snsr_{}_{}".format(snsr, data))
+            snsr_addr.append("D{}".format(snsr_data_base_addr + offset_addr))
+            snsr_type.append(snsr_data_type_list[i])
+            snsr_default.append(snsr_data_default_value_list[i])
+            offset_addr += 1
 
 
     # write parsed data to csv file
