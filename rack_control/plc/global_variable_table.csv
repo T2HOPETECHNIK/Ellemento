@@ -1,7 +1,7 @@
 Class,Identifiers,Address,Type,Initial Value,Comment
 VAR,shelf_no,D28001,INT,10
 VAR,shelf_reg_size,D28002,INT,100
-VAR,snsr_no,D28003,INT,80
+VAR,snsr_no,D28003,INT,152
 VAR,snsr_data_reg_size,D28004,INT,6
 VAR,s0_Addr,D10000,WORD,0
 VAR,s0_PV_OnArr,D10001.0,ARRAY [3] OF BOOL,[3(FALSE)]
