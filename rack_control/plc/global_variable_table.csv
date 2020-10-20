@@ -223,7 +223,6 @@ VAR,s9_m_PV_PosArr,D10478,ARRAY [3] OF WORD,[3(0)]
 VAR,s9_o_lightIntensity,D10481,WORD,0
 VAR,s9_o_lightOn,D10482.0,BOOL,FALSE
 VAR,s9_o_PV_PosArr,D10483,ARRAY [3] OF WORD,[3(0)]
-VAR,snsr_base_addr,D12000,WORD,0
 VAR,snsr_s0_wPres0_value,D12001,WORD,0
 VAR,snsr_s0_wPres0_state,D12002,WORD,0
 VAR,snsr_s0_wPres0_err_u,D12003,WORD,0
