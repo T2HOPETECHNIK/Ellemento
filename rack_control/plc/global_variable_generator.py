@@ -20,9 +20,11 @@ import numpy as np
 
 def main():
 
+    # parameter
     input_name = "global_variable_template.xlsx"
     global_var_table_name = "global_variable_table.csv"
     hmi_tag_table_name = "hmi_tag.csv"
+    hmi_tag_plc_name = "{EtherLink1}1@"
 
     curr_dir = os.path.dirname(os.path.abspath(__file__))
     dir_name = os.path.join(curr_dir, input_name)
@@ -64,144 +66,103 @@ def main():
             name = "s{}_{}".format(i, var_name)
             offset = shelf_data['addr_offset']
             addr_offset = float(offset) if "BOOL" in shelf_data['type'] else int(offset)
-            addr = "D{}".format((shelf_base_addr + addr_offset + i * shelf_reg_size))
+            addr = "D{}".format(shelf_base_addr + addr_offset + i * shelf_reg_size)
             write_rec_glob_var_table(global_var_table, name, addr, shelf_data['type'], shelf_data['init_value'])
 
+    # parse shelfs and write into hmi_tag_table
+    for i in range(shelf_no):
+        for var_name in shelfs:
+            shelf_data = shelfs[var_name]
+
+            # filter those that should go into hmi_tag
+            if not shelf_data['hmi_tag']:
+                continue
+
+            # check if variable is an array
+            if "ARRAY" in shelf_data['type']:
+                tmp = shelf_data['type'].split(' ')
+                array_size = int(tmp[1].replace('[','').replace(']',''))
+                array_type = tmp[3]
+
+                for j in range(array_size):
+                    name = f"s{i}_{var_name}{j}"
+                    offset = shelf_data['addr_offset'] 
+
+                    # convert addr_offset to float / int depends on type
+                    if array_type == "BOOL":
+                        addr_offset = float(offset) + 0.1 * j
+                        var_type = "BIT"
+                    elif array_type == "WORD":
+                        addr_offset = int(offset) + 1 * j
+                        var_type = "WORD"
+                    else:
+                        raise RuntimeError("Invalid type")
+
+                    addr = hmi_tag_plc_name + \
+                            "D{}".format(shelf_base_addr + addr_offset + i * shelf_reg_size)
+                    
+                    write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr)
+
+
+            # non-array variable
+            else:
+                name = f"s{i}_{var_name}"
+                offset = shelf_data['addr_offset']
+
+                if shelf_data['type'] == "BOOL":
+                    addr_offset = float(offset)
+                    var_type = "BIT"
+                elif shelf_data['type'] == "WORD":
+                    addr_offset = int(offset)
+                    var_type = "WORD"
+                else:
+                    raise RuntimeError("Invalid type")
+
+                addr = hmi_tag_plc_name + \
+                        "D{}".format(shelf_base_addr + addr_offset + i * shelf_reg_size)
+
+                write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr)
+
     # parse sensors, sensor_data and write into global_var_table
+    # parse sensors, sensor_data and write into hmi_tag_table
     addr_offset = 1
     for snsr_name in sensors['shelf_sensors']:
         for i in range(shelf_no):
             for j, var_name in enumerate(sensor_data):
                 data = sensor_data[var_name]
                 name = "snsr_s{}_{}_{}".format(i, snsr_name, var_name)
+                
+                # for global_var_table
                 addr = "D{}".format(sensor_base_addr + addr_offset)
                 write_rec_glob_var_table(global_var_table, name, addr, data['type'], data['init_value'])
+
+                # for hmi_tag_table
+                addr = hmi_tag_plc_name + "D{}".format(sensor_base_addr + addr_offset)
+                write_rec_hmi_tag_table(hmi_tag_table, name, data['type'], addr)
+
                 addr_offset += 1
 
     for snsr_name in sensors['other_sensors']:
         for i, var_name in enumerate(sensor_data):
             data = sensor_data[var_name]
             name = "snsr_{}_{}".format(snsr_name, var_name)
+
+            # for global_var_table
             addr = "D{}".format(sensor_base_addr + addr_offset)
             write_rec_glob_var_table(global_var_table, name, addr, data['type'], data['init_value'])
+            
+            # for hmi_tag_table
+            addr = hmi_tag_plc_name + "D{}".format(sensor_base_addr + addr_offset)
+            write_rec_hmi_tag_table(hmi_tag_table, name, data['type'], addr)
+            
             addr_offset += 1
-
-    # parse shelfs and write into hmi_tag_table
-
-    # parse sensors, sensor_data and write into hmi_tag_table
-
+    
     # write global_var_table into global_variable_table.csv
     write_glob_var_table_to_csv(global_var_table_name, global_var_table)
 
     # write hmi_tag_table into hmi_tag_table.csv
-
-    #####################
-
+    write_hmi_tag_table_to_csv(hmi_tag_table_name, hmi_tag_table)
     
-    """
-    # extract data from "Constants" table
-    const_vars = constant_table['variable_name'].tolist()
-    const_addrs = constant_table['addr'].tolist()
-    const_types = constant_table['type'].tolist()
-    const_values = constant_table['init_value'].tolist()
-
-    assert ("shelf_no" in const_vars) and ("shelf_reg_size" in const_vars) == True
-    shelf_no = int(const_values[const_vars.index("shelf_no")])
-    shelf_reg_size = int(const_values[const_vars.index("shelf_reg_size")])
-
-    k_var = []
-    k_addr = []
-    k_type = []
-    k_value = []
-
-    for i in range(len(const_vars)):
-        k_var.append(const_vars[i])
-        k_addr.append("D{}".format(const_addrs[i]))
-        k_type.append(const_types[i])
-        k_value.append(const_values[i])
-
-    # extract data from "Shelf" sheet
-    base_addr = int(shelf_table['base_addr'].tolist()[0])
-    var_name_list = shelf_table['variable_name'].tolist()
-    addr_offset_list = shelf_table['addr_offset'].tolist()
-    type_list = shelf_table['type'].tolist()
-    init_value_list = shelf_table['init_value'].tolist()
-
-    s_var = []
-    s_addr = []
-    s_type = []
-    s_default = []
-
-    for i in range(shelf_no):
-        for var_name in var_name_list:
-            s_var.append("s{}_{}".format(i, var_name))
-        for j, offset in enumerate(addr_offset_list):
-            offset = float(offset) if "BOOL" in type_list[j] else int(offset)
-            s_addr.append("D{}".format(base_addr + offset + i * shelf_reg_size))
-        for var_type in type_list:
-            s_type.append(var_type)
-        for var_default in init_value_list:
-            s_default.append(var_default)
-
-    # extract data from "Sensor Data" sheet
-    snsr_data_list = sensor_data_table['variable_name'].tolist()
-    snsr_data_type_list = sensor_data_table['type'].tolist()
-    snsr_data_default_value_list = sensor_data_table['init_value'].tolist()
-
-    # extract data from "Shelf Sensor" sheet
-    snsr_data_base_addr = int(sensor_list_table['base_addr'].tolist()[0])
-    shelf_sensor_list = [x for x in sensor_list_table['shelf_sensor'].tolist() if not pd.isna(x)]
-    general_sensor_list = [x for x in sensor_list_table['general_sensor'].tolist() if not pd.isna(x)]
-
-    snsr_var = ["snsr_base_addr"]
-    snsr_addr = ["D{}".format(snsr_data_base_addr)]
-    snsr_type = ["WORD"]
-    snsr_default = [0]
-
-    offset_addr = 1
-
-    for snsr in shelf_sensor_list:
-        for i in range(shelf_no):
-            for j, data in enumerate(snsr_data_list):
-                snsr_var.append("snsr_s{}_{}_{}".format(i, snsr, data))
-                snsr_addr.append("D{}".format(snsr_data_base_addr + offset_addr))
-                snsr_type.append(snsr_data_type_list[j])
-                snsr_default.append(snsr_data_default_value_list[j])
-                offset_addr += 1
-
-    for snsr in general_sensor_list:
-        for i, data in enumerate(snsr_data_list):
-            snsr_var.append("snsr_{}_{}".format(snsr, data))
-            snsr_addr.append("D{}".format(snsr_data_base_addr + offset_addr))
-            snsr_type.append(snsr_data_type_list[i])
-            snsr_default.append(snsr_data_default_value_list[i])
-            offset_addr += 1
-
-
-    # write parsed data to csv file
-    header = ["Class", "Identifiers", "Address", "Type", "Initial Value", "Comment"]
-
-    with open(os.path.join(curr_dir, global_var_table_name), mode='w', newline='') as file:
-        writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        writer.writerow(header)
-
-        # write constant variable
-        for i in range(len(k_var)):
-            writer.writerow(['VAR', k_var[i], k_addr[i], k_type[i], k_value[i]])
-
-        # write variable / parameter
-        for i in range(len(s_var)):
-            writer.writerow(['VAR', s_var[i], s_addr[i], s_type[i], s_default[i]])
-
-        # write sensors variable
-        for i in range(len(snsr_var)):
-            writer.writerow(['VAR', snsr_var[i], snsr_addr[i], snsr_type[i], snsr_default[i]])
-
-    print("Global variable generation completed.")
-
-    """
-
-
 def read_const_table(c_table: dict) -> dict:
     c_dict = {}
     c_vars = c_table['variable_name'].tolist()
@@ -222,15 +183,17 @@ def read_shelf_table(s_table: dict) -> dict:
     s_addr_offsets = s_table['addr_offset'].tolist()
     s_types = s_table['type'].tolist()
     s_init_values = s_table['init_value'].tolist()
+    s_hmi_tags = s_table['hmi_tag'].tolist()
 
     # inject name, addr_offset, type, init_value
-    for s_name, s_addr_offset, s_type, s_init_value \
-        in zip (s_names, s_addr_offsets, s_types, s_init_values):
+    for s_name, s_addr_offset, s_type, s_init_value, s_hmi_tag \
+        in zip (s_names, s_addr_offsets, s_types, s_init_values, s_hmi_tags):
 
         s_dict[s_name] = {
             'addr_offset': s_addr_offset,
             'type': s_type,
-            'init_value': s_init_value
+            'init_value': s_init_value,
+            'hmi_tag': True if not pd.isna(s_hmi_tag) else False
             }
 
     return s_base_addr, s_dict
@@ -263,8 +226,7 @@ def read_sensor_list_table(sl_table: dict) -> dict:
 
 def write_rec_glob_var_table(
     global_var_table: dict, var_name: str, var_addr: str, \
-    var_type: str, var_init_value: str
-) -> None:
+    var_type: str, var_init_value: str) -> None:
 
     global_var_table[var_name] = {
         "addr": var_addr,
@@ -288,6 +250,33 @@ def write_glob_var_table_to_csv(filename, global_var_table):
             writer.writerow(['VAR', var_name, var_data['addr'], var_data['type'], var_data['init_value']])
 
     print("completed: global_variable_table.csv")
+
+
+def write_rec_hmi_tag_table(
+    table: dict, var_name: str, var_type: str, var_addr: str) -> None:
+
+    table[var_name] = {
+        "type": var_type,
+        "addr": var_addr
+    }
+
+    return
+
+
+def write_hmi_tag_table_to_csv(filename, hmi_tag_table):
+    header = ['Define Name', 'Type', 'Address', 'Description']
+    curr_dir = os.path.dirname(os.path.abspath(__file__))
+
+    with open(os.path.join(curr_dir, "../hmi/", filename), mode='w', newline='') as file:
+        writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        writer.writerow(header)
+
+        for var_name in hmi_tag_table:
+            var_data = hmi_tag_table[var_name]
+            writer.writerow([var_name, var_data['type'], var_data['addr']])
+
+    print("completed: hmi_tag_table.csv")
+
 
 if __name__ == "__main__":
     main()
