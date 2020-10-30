@@ -12,6 +12,7 @@
     - global_variable_table.csv will be generated upon script completion
 """
 
+from typing import Union
 import os
 import csv
 import pandas as pd
@@ -34,14 +35,14 @@ def main():
     shelf_table = pd.read_excel(dir_name, sheet_name="Shelf")
     sensor_list_table = pd.read_excel(dir_name, sheet_name="Sensor List")
     sensor_data_table = pd.read_excel(dir_name, sheet_name="Sensor Data")
-
-    #####################
+    pump_data_table = pd.read_excel(dir_name, sheet_name="Pump")
 
     # read data from tables
     constants = read_const_table(constant_table)
-    shelf_base_addr, shelfs = read_shelf_table(shelf_table)
+    shelf_base_addr, shelfs = read_var_table(shelf_table)
     sensor_base_addr, sensors = read_sensor_list_table(sensor_list_table)
     sensor_data = read_sensor_data_table(sensor_data_table)
+    pump_base_addr, pumps = read_var_table(pump_data_table)
 
     # define common properties
     shelf_no = constants['shelf_no']['init_value']
@@ -59,6 +60,15 @@ def main():
         addr = "D{}".format(var_data['addr'])
         write_rec_glob_var_table(global_var_table, var_name, addr, var_data['type'], var_data['init_value'])
 
+    # parse pump_data and write into global_var_tabe
+    for var_name in pumps:
+        pump_data = pumps[var_name]
+        offset = pump_data['addr_offset']
+        addr_offset = float(offset) if "BOOL" in pump_data['type'] else int (offset)
+        addr = "D{}".format(pump_base_addr + addr_offset)
+        write_rec_glob_var_table(global_var_table, var_name, addr, pump_data['type'], pump_data['init_value'])
+        
+
     # parse shelfs and write into global_var_table
     for i in range(shelf_no):
         for var_name in shelfs:
@@ -68,6 +78,41 @@ def main():
             addr_offset = float(offset) if "BOOL" in shelf_data['type'] else int(offset)
             addr = "D{}".format(shelf_base_addr + addr_offset + i * shelf_reg_size)
             write_rec_glob_var_table(global_var_table, name, addr, shelf_data['type'], shelf_data['init_value'])
+
+    # parse pump_data and write into hmi_tag_table
+    for var_name in pumps:
+        pump_data = pumps[var_name]
+
+        # filter those that should go into hmi_tag
+        if not pump_data['hmi_tag']:
+            continue
+
+        # check if variable is an array
+        if "ARRAY" in pump_data['type']:
+            array_size = get_array_size(pump_data['type'])
+            array_type = get_array_type(pump_data['type'])
+
+            for j in range(array_size):
+                addr_offset = calc_addr_offset_hmi_tag(is_array=True, var_type=array_type, 
+                                                       offset=pump_data['addr_offset'], array_index=j)
+                var_type = translate_var_type_hmi_tag(var_type=array_type)
+
+                addr = hmi_tag_plc_name + \
+                       "D{}".format(pump_base_addr + addr_offset)
+                
+                write_rec_hmi_tag_table(hmi_tag_table, var_name, var_type, addr)
+
+        # non-array variable
+        else:
+            addr_offset = calc_addr_offset_hmi_tag(is_array=False, var_type=pump_data['type'], 
+                                                   offset=pump_data['addr_offset'])
+            var_type = translate_var_type_hmi_tag(var_type=pump_data['type'])
+
+            addr = hmi_tag_plc_name + \
+                   "D{}".format(pump_base_addr + addr_offset)
+
+            write_rec_hmi_tag_table(hmi_tag_table, var_name, var_type, addr)
+        
 
     # parse shelfs and write into hmi_tag_table
     for i in range(shelf_no):
@@ -80,23 +125,15 @@ def main():
 
             # check if variable is an array
             if "ARRAY" in shelf_data['type']:
-                tmp = shelf_data['type'].split(' ')
-                array_size = int(tmp[1].replace('[','').replace(']',''))
-                array_type = tmp[3]
+                array_size = get_array_size(shelf_data['type'])
+                array_type = get_array_type(shelf_data['type'])
 
                 for j in range(array_size):
                     name = f"s{i}_{var_name}{j}"
-                    offset = shelf_data['addr_offset'] 
 
-                    # convert addr_offset to float / int depends on type
-                    if array_type == "BOOL":
-                        addr_offset = float(offset) + 0.1 * j
-                        var_type = "BIT"
-                    elif array_type == "WORD":
-                        addr_offset = int(offset) + 1 * j
-                        var_type = "WORD"
-                    else:
-                        raise RuntimeError("Invalid type")
+                    addr_offset = calc_addr_offset_hmi_tag(is_array=True, var_type=array_type,
+                                                           offset=shelf_data['addr_offset'], array_index=j)
+                    var_type = translate_var_type_hmi_tag(var_type=array_type)
 
                     addr = hmi_tag_plc_name + \
                             "D{}".format(shelf_base_addr + addr_offset + i * shelf_reg_size)
@@ -107,16 +144,9 @@ def main():
             # non-array variable
             else:
                 name = f"s{i}_{var_name}"
-                offset = shelf_data['addr_offset']
 
-                if shelf_data['type'] == "BOOL":
-                    addr_offset = float(offset)
-                    var_type = "BIT"
-                elif shelf_data['type'] == "WORD":
-                    addr_offset = int(offset)
-                    var_type = "WORD"
-                else:
-                    raise RuntimeError("Invalid type")
+                addr_offset = calc_addr_offset_hmi_tag(is_array=False, var_type=array_type, offset=shelf_data['addr_offset'])
+                var_type = translate_var_type_hmi_tag(var_type=shelf_data['type'])
 
                 addr = hmi_tag_plc_name + \
                         "D{}".format(shelf_base_addr + addr_offset + i * shelf_reg_size)
@@ -176,7 +206,7 @@ def read_const_table(c_table: dict) -> dict:
     return c_dict
 
 
-def read_shelf_table(s_table: dict) -> dict:
+def read_var_table(s_table: dict) -> dict:
     s_dict = {}
     s_base_addr = int(s_table['base_addr'].tolist()[0])
     s_names = s_table['variable_name'].tolist()
@@ -276,6 +306,33 @@ def write_hmi_tag_table_to_csv(filename, hmi_tag_table):
             writer.writerow([var_name, var_data['type'], var_data['addr']])
 
     print("completed: hmi_tag_table.csv")
+
+
+def calc_addr_offset_hmi_tag(is_array: bool, var_type: str, offset: str, array_index: int=None) -> Union[int, float]:
+    if var_type == "BOOL":
+        return (float(offset) + 0.1 * array_index) if is_array else float(offset)
+    elif var_type == "WORD":
+        return (int(offset) + 1 * array_index) if is_array else int(offset)
+    else:
+        raise RuntimeError("Invalid type")
+
+
+def translate_var_type_hmi_tag(var_type: str) -> str:
+    if var_type == "BOOL":
+        return "BIT"
+    elif var_type == "WORD":
+        return "WORD"
+    else:
+        raise RuntimeError("Invalid type")
+
+
+def get_array_size(data: str) -> int:
+    tmp = data.split(' ')
+    return int(tmp[1].replace('[', '').replace(']',''))
+
+
+def get_array_type(data: str) -> int:
+    return data.split(' ')[3]
 
 
 if __name__ == "__main__":
