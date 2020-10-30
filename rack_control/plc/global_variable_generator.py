@@ -36,6 +36,7 @@ def main():
     sensor_list_table = pd.read_excel(dir_name, sheet_name="Sensor List")
     sensor_data_table = pd.read_excel(dir_name, sheet_name="Sensor Data")
     pump_data_table = pd.read_excel(dir_name, sheet_name="Pump")
+    hmi_data_table = pd.read_excel(dir_name, sheet_name="HMI Internal")
 
     # read data from tables
     constants = read_const_table(constant_table)
@@ -43,6 +44,7 @@ def main():
     sensor_base_addr, sensors = read_sensor_list_table(sensor_list_table)
     sensor_data = read_sensor_data_table(sensor_data_table)
     pump_base_addr, pumps = read_var_table(pump_data_table)
+    hmi_base_addr, hmi_internal = read_hmi_internal_table(hmi_data_table)
 
     # define common properties
     shelf_no = constants['shelf_no']['init_value']
@@ -70,7 +72,6 @@ def main():
 
         write_rec_glob_var_table(global_var_table, var_name, addr, pump_data['type'], pump_data['init_value'])
         
-
     # parse shelfs and write into global_var_table
     for i in range(shelf_no):
         shelf_curr_addr = shelf_base_addr + i * shelf_reg_size
@@ -125,7 +126,6 @@ def main():
             pump_curr_addr += addr_offset
             write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr)
         
-
     # parse shelfs and write into hmi_tag_table
     for i in range(shelf_no):
         shelf_curr_addr = shelf_base_addr + i * shelf_reg_size
@@ -203,7 +203,24 @@ def main():
             write_rec_hmi_tag_table(hmi_tag_table, name, data['type'], addr)
             
             addr_offset += 1
+
     
+    # parse hmi_internal and write into hmi_tag_table
+    hmi_curr_addr =  hmi_base_addr
+    for var_name in hmi_internal:
+
+        addr = "$"
+        hmi_data = hmi_internal[var_name]
+        if hmi_data['type'] == "BIT":
+            addr += str(round(float(hmi_curr_addr), 1))
+        elif hmi_data['type'] == "WORD":
+            addr += str(hmi_curr_addr)
+        else:
+            raise RuntimeError("Invalid type")
+
+        write_rec_hmi_tag_table(hmi_tag_table, var_name, hmi_data['type'], addr)
+        hmi_curr_addr += int(hmi_data['addr_offset'])
+
     # write global_var_table into global_variable_table.csv
     write_glob_var_table_to_csv(global_var_table_name, global_var_table)
 
@@ -269,6 +286,23 @@ def read_sensor_list_table(sl_table: dict) -> dict:
     sl_dict['other_sensors'] = other_sensors
 
     return sl_base_addr, sl_dict
+
+
+def read_hmi_internal_table(h_table: dict) -> dict:
+    h_dict = {}
+    h_base_addr = int(h_table['base_addr'].tolist()[0])
+    h_names = h_table['var_name'].tolist()
+    h_addr_offsets = h_table['addr_offset'].tolist()
+    h_types = h_table['var_type'].tolist()
+
+    # inject name, addr_offset, type
+    for h_name, h_addr_offset, h_type in zip (h_names, h_addr_offsets, h_types):
+        h_dict[h_name] = {
+            'addr_offset': h_addr_offset,
+            'type': h_type,
+        }
+
+    return h_base_addr, h_dict
 
 
 def write_rec_glob_var_table(
