@@ -61,25 +61,30 @@ def main():
         write_rec_glob_var_table(global_var_table, var_name, addr, var_data['type'], var_data['init_value'])
 
     # parse pump_data and write into global_var_tabe
+    pump_curr_addr = pump_base_addr
     for var_name in pumps:
         pump_data = pumps[var_name]
-        offset = pump_data['addr_offset']
-        addr_offset = float(offset) if "BOOL" in pump_data['type'] else int (offset)
-        addr = "D{}".format(pump_base_addr + addr_offset)
+
+        addr = "D{}".format( round(float(pump_curr_addr), 1) if "BOOL" in pump_data['type'] else int (pump_curr_addr) )
+        pump_curr_addr += int(pump_data['addr_offset'])
+
         write_rec_glob_var_table(global_var_table, var_name, addr, pump_data['type'], pump_data['init_value'])
         
 
     # parse shelfs and write into global_var_table
     for i in range(shelf_no):
+        shelf_curr_addr = shelf_base_addr + i * shelf_reg_size
         for var_name in shelfs:
             shelf_data = shelfs[var_name]
             name = "s{}_{}".format(i, var_name)
-            offset = shelf_data['addr_offset']
-            addr_offset = float(offset) if "BOOL" in shelf_data['type'] else int(offset)
-            addr = "D{}".format(shelf_base_addr + addr_offset + i * shelf_reg_size)
+
+            addr = "D{}".format( round(float(shelf_curr_addr), 1) if "BOOL" in shelf_data['type'] else int (shelf_curr_addr))
+            shelf_curr_addr += int(shelf_data['addr_offset'])
+
             write_rec_glob_var_table(global_var_table, name, addr, shelf_data['type'], shelf_data['init_value'])
 
     # parse pump_data and write into hmi_tag_table
+    pump_curr_addr = pump_base_addr
     for var_name in pumps:
         pump_data = pumps[var_name]
 
@@ -91,31 +96,39 @@ def main():
         if "ARRAY" in pump_data['type']:
             array_size = get_array_size(pump_data['type'])
             array_type = get_array_type(pump_data['type'])
+            pump_arr_addr = pump_curr_addr
 
             for j in range(array_size):
+                name = f"{var_name}{j}"
                 addr_offset = calc_addr_offset_hmi_tag(is_array=True, var_type=array_type, 
-                                                       offset=pump_data['addr_offset'], array_index=j)
+                                                       offset=pump_data['addr_offset'])
                 var_type = translate_var_type_hmi_tag(var_type=array_type)
 
                 addr = hmi_tag_plc_name + \
-                       "D{}".format(pump_base_addr + addr_offset)
+                       "D{}".format( round(float(pump_arr_addr), 1) if "BOOL" in pump_data['type'] else int (pump_arr_addr) )
                 
-                write_rec_hmi_tag_table(hmi_tag_table, var_name, var_type, addr)
+                pump_arr_addr += addr_offset
+                write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr)
+
+            pump_curr_addr += pump_data['addr_offset']
 
         # non-array variable
         else:
+            name = f"{var_name}"
             addr_offset = calc_addr_offset_hmi_tag(is_array=False, var_type=pump_data['type'], 
                                                    offset=pump_data['addr_offset'])
             var_type = translate_var_type_hmi_tag(var_type=pump_data['type'])
 
             addr = hmi_tag_plc_name + \
-                   "D{}".format(pump_base_addr + addr_offset)
+                   "D{}".format( round(float(pump_curr_addr), 1) if "BOOL" in shelf_data['type'] else int (pump_curr_addr))
 
-            write_rec_hmi_tag_table(hmi_tag_table, var_name, var_type, addr)
+            pump_curr_addr += addr_offset
+            write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr)
         
 
     # parse shelfs and write into hmi_tag_table
     for i in range(shelf_no):
+        shelf_curr_addr = shelf_base_addr + i * shelf_reg_size
         for var_name in shelfs:
             shelf_data = shelfs[var_name]
 
@@ -127,19 +140,22 @@ def main():
             if "ARRAY" in shelf_data['type']:
                 array_size = get_array_size(shelf_data['type'])
                 array_type = get_array_type(shelf_data['type'])
+                shelf_arr_addr = shelf_curr_addr
 
                 for j in range(array_size):
                     name = f"s{i}_{var_name}{j}"
 
                     addr_offset = calc_addr_offset_hmi_tag(is_array=True, var_type=array_type,
-                                                           offset=shelf_data['addr_offset'], array_index=j)
+                                                           offset=shelf_data['addr_offset'])
                     var_type = translate_var_type_hmi_tag(var_type=array_type)
 
                     addr = hmi_tag_plc_name + \
-                            "D{}".format(shelf_base_addr + addr_offset + i * shelf_reg_size)
+                           "D{}".format( round(float(shelf_arr_addr),1) if "BOOL" in shelf_data['type'] else int (shelf_arr_addr))
                     
+                    shelf_arr_addr += addr_offset
                     write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr)
 
+                pump_curr_addr += shelf_data['addr_offset']
 
             # non-array variable
             else:
@@ -149,8 +165,9 @@ def main():
                 var_type = translate_var_type_hmi_tag(var_type=shelf_data['type'])
 
                 addr = hmi_tag_plc_name + \
-                        "D{}".format(shelf_base_addr + addr_offset + i * shelf_reg_size)
+                        "D{}".format( round(float(shelf_curr_addr), 1) if "BOOL" in shelf_data['type'] else int (shelf_curr_addr))
 
+                shelf_curr_addr += addr_offset
                 write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr)
 
     # parse sensors, sensor_data and write into global_var_table
@@ -308,11 +325,11 @@ def write_hmi_tag_table_to_csv(filename, hmi_tag_table):
     print("completed: hmi_tag_table.csv")
 
 
-def calc_addr_offset_hmi_tag(is_array: bool, var_type: str, offset: str, array_index: int=None) -> Union[int, float]:
+def calc_addr_offset_hmi_tag(is_array: bool, var_type: str, offset: str) -> Union[int, float]:
     if var_type == "BOOL":
-        return (float(offset) + 0.1 * array_index) if is_array else float(offset)
+        return (0.1) if is_array else float(offset)
     elif var_type == "WORD":
-        return (int(offset) + 1 * array_index) if is_array else int(offset)
+        return (1) if is_array else int(offset)
     else:
         raise RuntimeError("Invalid type")
 
