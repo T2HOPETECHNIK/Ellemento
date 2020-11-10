@@ -36,6 +36,7 @@ def main():
     sensor_list_table = pd.read_excel(dir_name, sheet_name="Sensor List")
     sensor_data_table = pd.read_excel(dir_name, sheet_name="Sensor Data")
     pump_data_table = pd.read_excel(dir_name, sheet_name="Pump")
+    io_mapping_table = pd.read_excel(dir_name, sheet_name="IO Mapping")
     hmi_data_table = pd.read_excel(dir_name, sheet_name="HMI Internal")
 
     # read data from tables
@@ -44,6 +45,7 @@ def main():
     sensor_base_addr, sensors = read_sensor_list_table(sensor_list_table)
     sensor_data = read_sensor_data_table(sensor_data_table)
     pump_base_addr, pumps = read_var_table(pump_data_table)
+    io_data = read_io_mapping_table(io_mapping_table)
     hmi_base_addr, hmi_internal = read_hmi_internal_table(hmi_data_table)
 
     # define common properties
@@ -205,6 +207,12 @@ def main():
             addr_offset += 1
 
     
+    # parse io_data and write into global_var_table
+    for io_name in io_data:
+        io = io_data[io_name]
+        write_rec_glob_var_table(global_var_table, io_name, io['addr'], io['type'], io['init_value'])
+
+
     # parse hmi_internal and write into hmi_tag_table
     hmi_curr_addr =  hmi_base_addr
     for var_name in hmi_internal:
@@ -286,6 +294,28 @@ def read_sensor_list_table(sl_table: dict) -> dict:
     sl_dict['other_sensors'] = other_sensors
 
     return sl_base_addr, sl_dict
+
+
+def read_io_mapping_table(io_table: dict) -> dict:
+    io_dict = {}
+    var_names = io_table['variable_name'].tolist()
+    var_addrs = io_table['addr'].tolist()
+    var_types = io_table['type'].tolist()
+    var_init_values = io_table['init_value'].tolist()
+    var_hmi_tags = io_table['hmi_tag'].tolist()
+
+    # inject name, addr_offset, type, init_value
+    for io_name, io_addr, io_type, io_init_value, io_hmi_tag \
+        in zip (var_names, var_addrs, var_types, var_init_values, var_hmi_tags):
+
+        io_dict[io_name] = {
+            'addr': io_addr,
+            'type': io_type,
+            'init_value': io_init_value,
+            'hmi_tag': True if not pd.isna(io_hmi_tag) else False
+            }
+
+    return io_dict
 
 
 def read_hmi_internal_table(h_table: dict) -> dict:
