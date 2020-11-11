@@ -16,6 +16,12 @@ pump_h_ValveOnArr0,BIT,{EtherLink1}1@D11011.0
 pump_h_ValveOnArr1,BIT,{EtherLink1}1@D11011.1
 pump_h_ValveOnArr2,BIT,{EtherLink1}1@D11011.2
 pump_h_ValveOnArr3,BIT,{EtherLink1}1@D11011.3
+pump_isRunningArr0,BIT,{EtherLink1}1@D11012.0
+pump_isRunningArr1,BIT,{EtherLink1}1@D11012.1
+pump_isRunningArr2,BIT,{EtherLink1}1@D11012.2
+pump_modeArr0,WORD,{EtherLink1}1@D11013
+pump_modeArr1,WORD,{EtherLink1}1@D11014
+pump_modeArr2,WORD,{EtherLink1}1@D11015
 s0_mode,WORD,{EtherLink1}1@D10000
 s0_a_waterOn,BIT,{EtherLink1}1@D10001.0
 s0_a_lightOn,BIT,{EtherLink1}1@D10002.0

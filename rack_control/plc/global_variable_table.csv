@@ -15,6 +15,8 @@ VAR,pump_h_FlowSetArr,D11014,ARRAY [3] OF WORD,[3(0)]
 VAR,pump_h_RpmSetArr,D11017,ARRAY [3] OF WORD,[3(0)]
 VAR,pump_h_RpmValArr,D11020,ARRAY [3] OF WORD,[3(0)]
 VAR,pump_h_ValveOnArr,D11023.0,ARRAY [4] OF BOOL,[4(FALSE)]
+VAR,pump_isRunningArr,D11024.0,ARRAY [3] OF BOOL,[3(FALSE)]
+VAR,pump_modeArr,D11025,ARRAY [3] OF WORD,[3(0)]
 VAR,s0_Addr,D10000,WORD,0
 VAR,s0_lightIntensOut,D10001,WORD,0
 VAR,s0_lightOnOut,D10002.0,BOOL,FALSE
