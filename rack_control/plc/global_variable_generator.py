@@ -93,6 +93,7 @@ def main():
 
         # filter those that should go into hmi_tag
         if not pump_data['hmi_tag']:
+            pump_curr_addr += pump_data['addr_offset']
             continue
 
         # check if variable is an array
@@ -125,8 +126,8 @@ def main():
             addr = hmi_tag_plc_name + \
                    "D{}".format( round(float(pump_curr_addr), 1) if "BOOL" in shelf_data['type'] else int (pump_curr_addr))
 
-            pump_curr_addr += addr_offset
             write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr)
+            pump_curr_addr += addr_offset
         
     # parse shelfs and write into hmi_tag_table
     for i in range(shelf_no):
@@ -136,6 +137,7 @@ def main():
 
             # filter those that should go into hmi_tag
             if not shelf_data['hmi_tag']:
+                shelf_curr_addr += shelf_data['addr_offset']
                 continue
 
             # check if variable is an array
@@ -157,7 +159,7 @@ def main():
                     shelf_arr_addr += addr_offset
                     write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr)
 
-                pump_curr_addr += shelf_data['addr_offset']
+                shelf_curr_addr += shelf_data['addr_offset']
 
             # non-array variable
             else:
@@ -169,8 +171,8 @@ def main():
                 addr = hmi_tag_plc_name + \
                         "D{}".format( round(float(shelf_curr_addr), 1) if "BOOL" in shelf_data['type'] else int (shelf_curr_addr))
 
-                shelf_curr_addr += addr_offset
                 write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr)
+                shelf_curr_addr += addr_offset
 
     # parse sensors, sensor_data and write into global_var_table
     # parse sensors, sensor_data and write into hmi_tag_table
