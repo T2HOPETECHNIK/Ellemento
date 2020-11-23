@@ -209,10 +209,14 @@ def main():
             addr_offset += 1
 
     
-    # parse io_data and write into global_var_table
+    # parse io_data and write into global_var_table & hmi_tag_table
     for io_name in io_data:
         io = io_data[io_name]
         write_rec_glob_var_table(global_var_table, io_name, io['addr'], io['type'], io['init_value'])
+
+        if io['hmi_tag']:
+            addr = hmi_tag_plc_name + io['addr']
+            write_rec_hmi_tag_table(hmi_tag_table, io_name, io['type'], addr)
 
 
     # parse hmi_internal and write into hmi_tag_table

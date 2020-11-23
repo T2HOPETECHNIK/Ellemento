@@ -4,20 +4,17 @@ VAR,shelf_reg_size,D20002,INT,50
 VAR,snsr_no,D20003,INT,152
 VAR,snsr_data_reg_size,D20004,INT,6
 VAR,pump_e_OnArr,D11000.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,pump_e_FlowOrRpm,D11001,WORD,0
-VAR,pump_e_FlowSetArr,D11002,ARRAY [3] OF WORD,[3(0)]
-VAR,pump_e_RpmSetArr,D11005,ARRAY [3] OF WORD,[3(0)]
-VAR,pump_e_RpmValArr,D11008,ARRAY [3] OF WORD,[3(0)]
-VAR,pump_e_ValveOnArr,D11011.0,ARRAY [4] OF BOOL,[4(FALSE)]
-VAR,pump_h_Mode,D11012,WORD,0
-VAR,pump_h_OnArr,D11013.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,pump_h_FlowSetArr,D11014,ARRAY [2] OF WORD,[2(0)]
-VAR,pump_h_RpmSetArr,D11016,ARRAY [3] OF WORD,[3(0)]
-VAR,pump_h_RpmValArr,D11019,ARRAY [3] OF WORD,[3(0)]
-VAR,pump_h_ValveOnArr,D11022.0,ARRAY [4] OF BOOL,[4(FALSE)]
-VAR,pump_h_PumpSelect,D11023.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,pump_isRunningArr,D11024.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,pump_modeArr,D11025,ARRAY [3] OF WORD,[3(0)]
+VAR,pump_e_RpmValArr,D11001,ARRAY [3] OF WORD,[3(0)]
+VAR,pump_e_ValveOnArr,D11004.0,ARRAY [4] OF BOOL,[4(FALSE)]
+VAR,pump_e_FlowOrRpm,D11005,WORD,0
+VAR,pump_h_Mode,D11006,WORD,0
+VAR,pump_h_PumpSelect,D11007.0,ARRAY [3] OF BOOL,[3(FALSE)]
+VAR,pump_h_FlowSetArr,D11008,ARRAY [2] OF WORD,[2(0)]
+VAR,pump_h_RpmSetArr,D11010,ARRAY [3] OF WORD,[3(0)]
+VAR,pump_h_ValveOnArr,D11013.0,ARRAY [4] OF BOOL,[4(FALSE)]
+VAR,pump_h_RedundantPumpSelect,D11014,WORD,0
+VAR,pump_isRunningArr,D11015.0,ARRAY [3] OF BOOL,[3(FALSE)]
+VAR,pump_modeArr,D11016,ARRAY [3] OF WORD,[3(0)]
 VAR,s0_Addr,D10000,WORD,0
 VAR,s0_lightIntensOut,D10001,WORD,0
 VAR,s0_lightOnOut,D10002.0,BOOL,FALSE
