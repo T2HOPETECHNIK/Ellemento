@@ -30,6 +30,8 @@ pump_isRunningArr2,BIT,{EtherLink1}1@D11015.2
 pump_modeArr0,WORD,{EtherLink1}1@D11016
 pump_modeArr1,WORD,{EtherLink1}1@D11017
 pump_modeArr2,WORD,{EtherLink1}1@D11018
+pump_flowrateFeedback0,WORD,{EtherLink1}1@D11019
+pump_flowrateFeedback1,WORD,{EtherLink1}1@D11020
 s0_mode,WORD,{EtherLink1}1@D10012
 s0_a_waterOn,BIT,{EtherLink1}1@D10013.0
 s0_a_lightOn,BIT,{EtherLink1}1@D10014.0
