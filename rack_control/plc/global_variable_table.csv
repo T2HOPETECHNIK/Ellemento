@@ -15,6 +15,7 @@ VAR,pump_h_ValveOnArr,D11013.0,ARRAY [4] OF BOOL,[4(FALSE)]
 VAR,pump_h_RedundantPumpSelect,D11014,WORD,0
 VAR,pump_isRunningArr,D11015.0,ARRAY [3] OF BOOL,[3(FALSE)]
 VAR,pump_modeArr,D11016,ARRAY [3] OF WORD,[3(0)]
+VAR,pump_flowrateFeedback,D11019,ARRAY [2] OF WORD,[2(0)]
 VAR,s0_Addr,D10000,WORD,0
 VAR,s0_lightIntensOut,D10001,WORD,0
 VAR,s0_lightOnOut,D10002.0,BOOL,FALSE
