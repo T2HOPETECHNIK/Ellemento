@@ -1,5 +1,36 @@
 Define Name,Type,Address,Description
 shelf_no,WORD,{EtherLink1}1@D20000,total number of shelf
+PVLookup_1_Arr0,WORD,{EtherLink1}1@D20013,PV look-up values when only 1 valves are on
+PVLookup_1_Arr1,WORD,{EtherLink1}1@D20014,PV look-up values when only 1 valves are on
+PVLookup_1_Arr2,WORD,{EtherLink1}1@D20015,PV look-up values when only 1 valves are on
+PVLookup_1_Arr3,WORD,{EtherLink1}1@D20016,PV look-up values when only 1 valves are on
+PVLookup_2_Arr0,WORD,{EtherLink1}1@D20017,PV look-up values when only 2 valves are on
+PVLookup_2_Arr1,WORD,{EtherLink1}1@D20018,PV look-up values when only 2 valves are on
+PVLookup_2_Arr2,WORD,{EtherLink1}1@D20019,PV look-up values when only 2 valves are on
+PVLookup_2_Arr3,WORD,{EtherLink1}1@D20020,PV look-up values when only 2 valves are on
+PVLookup_3_Arr0,WORD,{EtherLink1}1@D20021,PV look-up values when only 3 valves are on
+PVLookup_3_Arr1,WORD,{EtherLink1}1@D20022,PV look-up values when only 3 valves are on
+PVLookup_3_Arr2,WORD,{EtherLink1}1@D20023,PV look-up values when only 3 valves are on
+PVLookup_3_Arr3,WORD,{EtherLink1}1@D20024,PV look-up values when only 3 valves are on
+PVLookup_4_Arr0,WORD,{EtherLink1}1@D20025,PV look-up values when only 4 valves are on
+PVLookup_4_Arr1,WORD,{EtherLink1}1@D20026,PV look-up values when only 4 valves are on
+PVLookup_4_Arr2,WORD,{EtherLink1}1@D20027,PV look-up values when only 4 valves are on
+PVLookup_4_Arr3,WORD,{EtherLink1}1@D20028,PV look-up values when only 4 valves are on
+ShelfSectionMapping_0_Arr0,WORD,{EtherLink1}1@D20029,configure which shelves should belong to sec0
+ShelfSectionMapping_0_Arr1,WORD,{EtherLink1}1@D20030,configure which shelves should belong to sec0
+ShelfSectionMapping_0_Arr2,WORD,{EtherLink1}1@D20031,configure which shelves should belong to sec0
+ShelfSectionMapping_0_Arr3,WORD,{EtherLink1}1@D20032,configure which shelves should belong to sec0
+ShelfSectionMapping_1_Arr0,WORD,{EtherLink1}1@D20033,configure which shelves should belong to sec1
+ShelfSectionMapping_1_Arr1,WORD,{EtherLink1}1@D20034,configure which shelves should belong to sec1
+ShelfSectionMapping_1_Arr2,WORD,{EtherLink1}1@D20035,configure which shelves should belong to sec1
+ShelfSectionMapping_1_Arr3,WORD,{EtherLink1}1@D20036,configure which shelves should belong to sec1
+ShelfSectionMapping_2_Arr0,WORD,{EtherLink1}1@D20037,configure which shelves should belong to sec2
+ShelfSectionMapping_2_Arr1,WORD,{EtherLink1}1@D20038,configure which shelves should belong to sec2
+ShelfSectionMapping_2_Arr2,WORD,{EtherLink1}1@D20039,configure which shelves should belong to sec2
+ShelfSectionMapping_2_Arr3,WORD,{EtherLink1}1@D20040,configure which shelves should belong to sec2
+secModeArr0,WORD,{EtherLink1}1@D20041,secMode[0] : section 0 mode etc.
+secModeArr1,WORD,{EtherLink1}1@D20042,secMode[0] : section 0 mode etc.
+secModeArr2,WORD,{EtherLink1}1@D20043,secMode[0] : section 0 mode etc.
 pump_e_OnArr0,BIT,{EtherLink1}1@D11000.0
 pump_e_OnArr1,BIT,{EtherLink1}1@D11000.1
 pump_e_OnArr2,BIT,{EtherLink1}1@D11000.2
@@ -39,7 +70,7 @@ s0_autoLightOn,BIT,{EtherLink1}1@D10002.0
 s0_autoLightIntensity,WORD,{EtherLink1}1@D10003
 s0_semiPVOn,BIT,{EtherLink1}1@D10004.0
 s0_semiLightOn,BIT,{EtherLink1}1@D10005.0
-s0_semiLightIntensity,WORD,{EtherLink1}1@D10006
+s0_manuLightIntensity,WORD,{EtherLink1}1@D10006
 s0_manuPVPos,WORD,{EtherLink1}1@D10007
 s1_mode,WORD,{EtherLink1}1@D10011,"shelf_x mode auto-1, semi-2, manual-3"
 s1_autoWaterOn,BIT,{EtherLink1}1@D10012.0
@@ -47,7 +78,7 @@ s1_autoLightOn,BIT,{EtherLink1}1@D10013.0
 s1_autoLightIntensity,WORD,{EtherLink1}1@D10014
 s1_semiPVOn,BIT,{EtherLink1}1@D10015.0
 s1_semiLightOn,BIT,{EtherLink1}1@D10016.0
-s1_semiLightIntensity,WORD,{EtherLink1}1@D10017
+s1_manuLightIntensity,WORD,{EtherLink1}1@D10017
 s1_manuPVPos,WORD,{EtherLink1}1@D10018
 s2_mode,WORD,{EtherLink1}1@D10022,"shelf_x mode auto-1, semi-2, manual-3"
 s2_autoWaterOn,BIT,{EtherLink1}1@D10023.0
@@ -55,7 +86,7 @@ s2_autoLightOn,BIT,{EtherLink1}1@D10024.0
 s2_autoLightIntensity,WORD,{EtherLink1}1@D10025
 s2_semiPVOn,BIT,{EtherLink1}1@D10026.0
 s2_semiLightOn,BIT,{EtherLink1}1@D10027.0
-s2_semiLightIntensity,WORD,{EtherLink1}1@D10028
+s2_manuLightIntensity,WORD,{EtherLink1}1@D10028
 s2_manuPVPos,WORD,{EtherLink1}1@D10029
 s3_mode,WORD,{EtherLink1}1@D10033,"shelf_x mode auto-1, semi-2, manual-3"
 s3_autoWaterOn,BIT,{EtherLink1}1@D10034.0
@@ -63,7 +94,7 @@ s3_autoLightOn,BIT,{EtherLink1}1@D10035.0
 s3_autoLightIntensity,WORD,{EtherLink1}1@D10036
 s3_semiPVOn,BIT,{EtherLink1}1@D10037.0
 s3_semiLightOn,BIT,{EtherLink1}1@D10038.0
-s3_semiLightIntensity,WORD,{EtherLink1}1@D10039
+s3_manuLightIntensity,WORD,{EtherLink1}1@D10039
 s3_manuPVPos,WORD,{EtherLink1}1@D10040
 s4_mode,WORD,{EtherLink1}1@D10044,"shelf_x mode auto-1, semi-2, manual-3"
 s4_autoWaterOn,BIT,{EtherLink1}1@D10045.0
@@ -71,7 +102,7 @@ s4_autoLightOn,BIT,{EtherLink1}1@D10046.0
 s4_autoLightIntensity,WORD,{EtherLink1}1@D10047
 s4_semiPVOn,BIT,{EtherLink1}1@D10048.0
 s4_semiLightOn,BIT,{EtherLink1}1@D10049.0
-s4_semiLightIntensity,WORD,{EtherLink1}1@D10050
+s4_manuLightIntensity,WORD,{EtherLink1}1@D10050
 s4_manuPVPos,WORD,{EtherLink1}1@D10051
 s5_mode,WORD,{EtherLink1}1@D10055,"shelf_x mode auto-1, semi-2, manual-3"
 s5_autoWaterOn,BIT,{EtherLink1}1@D10056.0
@@ -79,7 +110,7 @@ s5_autoLightOn,BIT,{EtherLink1}1@D10057.0
 s5_autoLightIntensity,WORD,{EtherLink1}1@D10058
 s5_semiPVOn,BIT,{EtherLink1}1@D10059.0
 s5_semiLightOn,BIT,{EtherLink1}1@D10060.0
-s5_semiLightIntensity,WORD,{EtherLink1}1@D10061
+s5_manuLightIntensity,WORD,{EtherLink1}1@D10061
 s5_manuPVPos,WORD,{EtherLink1}1@D10062
 s6_mode,WORD,{EtherLink1}1@D10066,"shelf_x mode auto-1, semi-2, manual-3"
 s6_autoWaterOn,BIT,{EtherLink1}1@D10067.0
@@ -87,7 +118,7 @@ s6_autoLightOn,BIT,{EtherLink1}1@D10068.0
 s6_autoLightIntensity,WORD,{EtherLink1}1@D10069
 s6_semiPVOn,BIT,{EtherLink1}1@D10070.0
 s6_semiLightOn,BIT,{EtherLink1}1@D10071.0
-s6_semiLightIntensity,WORD,{EtherLink1}1@D10072
+s6_manuLightIntensity,WORD,{EtherLink1}1@D10072
 s6_manuPVPos,WORD,{EtherLink1}1@D10073
 s7_mode,WORD,{EtherLink1}1@D10077,"shelf_x mode auto-1, semi-2, manual-3"
 s7_autoWaterOn,BIT,{EtherLink1}1@D10078.0
@@ -95,7 +126,7 @@ s7_autoLightOn,BIT,{EtherLink1}1@D10079.0
 s7_autoLightIntensity,WORD,{EtherLink1}1@D10080
 s7_semiPVOn,BIT,{EtherLink1}1@D10081.0
 s7_semiLightOn,BIT,{EtherLink1}1@D10082.0
-s7_semiLightIntensity,WORD,{EtherLink1}1@D10083
+s7_manuLightIntensity,WORD,{EtherLink1}1@D10083
 s7_manuPVPos,WORD,{EtherLink1}1@D10084
 s8_mode,WORD,{EtherLink1}1@D10088,"shelf_x mode auto-1, semi-2, manual-3"
 s8_autoWaterOn,BIT,{EtherLink1}1@D10089.0
@@ -103,7 +134,7 @@ s8_autoLightOn,BIT,{EtherLink1}1@D10090.0
 s8_autoLightIntensity,WORD,{EtherLink1}1@D10091
 s8_semiPVOn,BIT,{EtherLink1}1@D10092.0
 s8_semiLightOn,BIT,{EtherLink1}1@D10093.0
-s8_semiLightIntensity,WORD,{EtherLink1}1@D10094
+s8_manuLightIntensity,WORD,{EtherLink1}1@D10094
 s8_manuPVPos,WORD,{EtherLink1}1@D10095
 s9_mode,WORD,{EtherLink1}1@D10099,"shelf_x mode auto-1, semi-2, manual-3"
 s9_autoWaterOn,BIT,{EtherLink1}1@D10100.0
@@ -111,7 +142,7 @@ s9_autoLightOn,BIT,{EtherLink1}1@D10101.0
 s9_autoLightIntensity,WORD,{EtherLink1}1@D10102
 s9_semiPVOn,BIT,{EtherLink1}1@D10103.0
 s9_semiLightOn,BIT,{EtherLink1}1@D10104.0
-s9_semiLightIntensity,WORD,{EtherLink1}1@D10105
+s9_manuLightIntensity,WORD,{EtherLink1}1@D10105
 s9_manuPVPos,WORD,{EtherLink1}1@D10106
 snsr_s0_wPres0_value,WORD,{EtherLink1}1@D12001
 snsr_s0_wPres0_state,WORD,{EtherLink1}1@D12002

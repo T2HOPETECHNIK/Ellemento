@@ -9,7 +9,7 @@ VAR,k_shelf_autoLightOnIndexOffset,D20006,WORD,2,offset from shelf_x_addr to get
 VAR,k_shelf_autoLightIntensOffset,D20007,WORD,3,offset from shelf_x_addr to get shelf_x_autoLightIntens
 VAR,k_shelf_semiPVOnIndexOffset,D20008,WORD,4,offset from shelf_x_addr to get shelf_x_semiPVOn
 VAR,k_shelf_semiLightOnIndexOffset,D20009,WORD,5,offset from shelf_x_addr to get shelf_x_semiLightOn
-VAR,k_shelf_semiLightIntensIndexOffset,D20010,WORD,6,offset from shelf_x_addr to get shelf_x_semiLightIntens
+VAR,k_shelf_manuLightIntensIndexOffset,D20010,WORD,6,offset from shelf_x_addr to get shelf_x_manuLightIntens
 VAR,k_shelf_manuPvPosIndexOffset,D20011,WORD,7,offset from shelf_x_addr to get shelf_x_manuPVPos
 VAR,k_shelf_baseAddr,D20012,WORD,10000,baseAddr of all shelves
 VAR,PVLookup_1_Arr,D20013,ARRAY [4] OF WORD,[4(0)],PV look-up values when only 1 valves are on
@@ -41,7 +41,7 @@ VAR,s0_autoLightOn,D10002.0,BOOL,FALSE
 VAR,s0_autoLightIntensity,D10003,WORD,0
 VAR,s0_semiPVOn,D10004.0,BOOL,0
 VAR,s0_semiLightOn,D10005.0,BOOL,0
-VAR,s0_semiLightIntensity,D10006,WORD,0
+VAR,s0_manuLightIntensity,D10006,WORD,0
 VAR,s0_manuPVPos,D10007,WORD,0
 VAR,s0_exePVPos,D10008,WORD,0
 VAR,s0_exeLightIntensity,D10009,WORD,0
@@ -52,7 +52,7 @@ VAR,s1_autoLightOn,D10013.0,BOOL,FALSE
 VAR,s1_autoLightIntensity,D10014,WORD,0
 VAR,s1_semiPVOn,D10015.0,BOOL,0
 VAR,s1_semiLightOn,D10016.0,BOOL,0
-VAR,s1_semiLightIntensity,D10017,WORD,0
+VAR,s1_manuLightIntensity,D10017,WORD,0
 VAR,s1_manuPVPos,D10018,WORD,0
 VAR,s1_exePVPos,D10019,WORD,0
 VAR,s1_exeLightIntensity,D10020,WORD,0
@@ -63,7 +63,7 @@ VAR,s2_autoLightOn,D10024.0,BOOL,FALSE
 VAR,s2_autoLightIntensity,D10025,WORD,0
 VAR,s2_semiPVOn,D10026.0,BOOL,0
 VAR,s2_semiLightOn,D10027.0,BOOL,0
-VAR,s2_semiLightIntensity,D10028,WORD,0
+VAR,s2_manuLightIntensity,D10028,WORD,0
 VAR,s2_manuPVPos,D10029,WORD,0
 VAR,s2_exePVPos,D10030,WORD,0
 VAR,s2_exeLightIntensity,D10031,WORD,0
@@ -74,7 +74,7 @@ VAR,s3_autoLightOn,D10035.0,BOOL,FALSE
 VAR,s3_autoLightIntensity,D10036,WORD,0
 VAR,s3_semiPVOn,D10037.0,BOOL,0
 VAR,s3_semiLightOn,D10038.0,BOOL,0
-VAR,s3_semiLightIntensity,D10039,WORD,0
+VAR,s3_manuLightIntensity,D10039,WORD,0
 VAR,s3_manuPVPos,D10040,WORD,0
 VAR,s3_exePVPos,D10041,WORD,0
 VAR,s3_exeLightIntensity,D10042,WORD,0
@@ -85,7 +85,7 @@ VAR,s4_autoLightOn,D10046.0,BOOL,FALSE
 VAR,s4_autoLightIntensity,D10047,WORD,0
 VAR,s4_semiPVOn,D10048.0,BOOL,0
 VAR,s4_semiLightOn,D10049.0,BOOL,0
-VAR,s4_semiLightIntensity,D10050,WORD,0
+VAR,s4_manuLightIntensity,D10050,WORD,0
 VAR,s4_manuPVPos,D10051,WORD,0
 VAR,s4_exePVPos,D10052,WORD,0
 VAR,s4_exeLightIntensity,D10053,WORD,0
@@ -96,7 +96,7 @@ VAR,s5_autoLightOn,D10057.0,BOOL,FALSE
 VAR,s5_autoLightIntensity,D10058,WORD,0
 VAR,s5_semiPVOn,D10059.0,BOOL,0
 VAR,s5_semiLightOn,D10060.0,BOOL,0
-VAR,s5_semiLightIntensity,D10061,WORD,0
+VAR,s5_manuLightIntensity,D10061,WORD,0
 VAR,s5_manuPVPos,D10062,WORD,0
 VAR,s5_exePVPos,D10063,WORD,0
 VAR,s5_exeLightIntensity,D10064,WORD,0
@@ -107,7 +107,7 @@ VAR,s6_autoLightOn,D10068.0,BOOL,FALSE
 VAR,s6_autoLightIntensity,D10069,WORD,0
 VAR,s6_semiPVOn,D10070.0,BOOL,0
 VAR,s6_semiLightOn,D10071.0,BOOL,0
-VAR,s6_semiLightIntensity,D10072,WORD,0
+VAR,s6_manuLightIntensity,D10072,WORD,0
 VAR,s6_manuPVPos,D10073,WORD,0
 VAR,s6_exePVPos,D10074,WORD,0
 VAR,s6_exeLightIntensity,D10075,WORD,0
@@ -118,7 +118,7 @@ VAR,s7_autoLightOn,D10079.0,BOOL,FALSE
 VAR,s7_autoLightIntensity,D10080,WORD,0
 VAR,s7_semiPVOn,D10081.0,BOOL,0
 VAR,s7_semiLightOn,D10082.0,BOOL,0
-VAR,s7_semiLightIntensity,D10083,WORD,0
+VAR,s7_manuLightIntensity,D10083,WORD,0
 VAR,s7_manuPVPos,D10084,WORD,0
 VAR,s7_exePVPos,D10085,WORD,0
 VAR,s7_exeLightIntensity,D10086,WORD,0
@@ -129,7 +129,7 @@ VAR,s8_autoLightOn,D10090.0,BOOL,FALSE
 VAR,s8_autoLightIntensity,D10091,WORD,0
 VAR,s8_semiPVOn,D10092.0,BOOL,0
 VAR,s8_semiLightOn,D10093.0,BOOL,0
-VAR,s8_semiLightIntensity,D10094,WORD,0
+VAR,s8_manuLightIntensity,D10094,WORD,0
 VAR,s8_manuPVPos,D10095,WORD,0
 VAR,s8_exePVPos,D10096,WORD,0
 VAR,s8_exeLightIntensity,D10097,WORD,0
@@ -140,7 +140,7 @@ VAR,s9_autoLightOn,D10101.0,BOOL,FALSE
 VAR,s9_autoLightIntensity,D10102,WORD,0
 VAR,s9_semiPVOn,D10103.0,BOOL,0
 VAR,s9_semiLightOn,D10104.0,BOOL,0
-VAR,s9_semiLightIntensity,D10105,WORD,0
+VAR,s9_manuLightIntensity,D10105,WORD,0
 VAR,s9_manuPVPos,D10106,WORD,0
 VAR,s9_exePVPos,D10107,WORD,0
 VAR,s9_exeLightIntensity,D10108,WORD,0
