@@ -1,8 +1,27 @@
 Class,Identifiers,Address,Type,Initial Value,Comment
-VAR,shelf_no,D20001,INT,10
-VAR,shelf_reg_size,D20002,INT,50
-VAR,snsr_no,D20003,INT,152
-VAR,snsr_data_reg_size,D20004,INT,6
+VAR,shelf_no,D20000,WORD,10,total number of shelf
+VAR,snsr_no,D20001,WORD,152
+VAR,snsr_data_reg_size,D20002,WORD,6
+VAR,k_shelf_reg_size,D20003,WORD,11,how many register one shelf_data occupies
+VAR,k_shelf_modeIndexOffset,D20004,WORD,0,offset from shelf_x_addr to get shelf_x_mode
+VAR,k_shelf_autoWaterOnIndexOffset,D20005,WORD,1,offset from shelf_x_addr to get shelf_x_autoWaterOn
+VAR,k_shelf_autoLightOnIndexOffset,D20006,WORD,2,offset from shelf_x_addr to get shelf_x_autoLightOn
+VAR,k_shelf_autoLightIntensOffset,D20007,WORD,3,offset from shelf_x_addr to get shelf_x_autoLightIntens
+VAR,k_shelf_semiPVOnIndexOffset,D20008,WORD,4,offset from shelf_x_addr to get shelf_x_semiPVOn
+VAR,k_shelf_semiLightOnIndexOffset,D20009,WORD,5,offset from shelf_x_addr to get shelf_x_semiLightOn
+VAR,k_shelf_semiLightIntensIndexOffset,D20010,WORD,6,offset from shelf_x_addr to get shelf_x_semiLightIntens
+VAR,k_shelf_manuPvPosIndexOffset,D20011,WORD,7,offset from shelf_x_addr to get shelf_x_manuPVPos
+VAR,k_shelf_baseAddr,D20012,WORD,10000,baseAddr of all shelves
+VAR,PVLookup_1_Arr,D20013,ARRAY [4] OF WORD,[4(0)],PV look-up values when only 1 valves are on
+VAR,PVLookup_2_Arr,D20017,ARRAY [4] OF WORD,[4(0)],PV look-up values when only 2 valves are on
+VAR,PVLookup_3_Arr,D20021,ARRAY [4] OF WORD,[4(0)],PV look-up values when only 3 valves are on
+VAR,PVLookup_4_Arr,D20025,ARRAY [4] OF WORD,[4(0)],PV look-up values when only 4 valves are on
+VAR,ShelfSectionMapping_0_Arr,D20029,ARRAY [4] OF WORD,[4(0)],configure which shelves should belong to sec0
+VAR,ShelfSectionMapping_1_Arr,D20033,ARRAY [4] OF WORD,[4(0)],configure which shelves should belong to sec1
+VAR,ShelfSectionMapping_2_Arr,D20037,ARRAY [4] OF WORD,[4(0)],configure which shelves should belong to sec2
+VAR,secModeArr,D20041,ARRAY [3] OF WORD,[3(0)],secMode[0] : section 0 mode etc.
+VAR,k_sectionNo,D20044,WORD,3,total number of sections
+VAR,k_sectionMaxShelfNo,D20045,WORD,4,maximum number of shelves per section
 VAR,pump_e_OnArr,D11000.0,ARRAY [3] OF BOOL,[3(FALSE)]
 VAR,pump_e_RpmValArr,D11001,ARRAY [3] OF WORD,[3(0)]
 VAR,pump_e_ValveOnArr,D11004.0,ARRAY [4] OF BOOL,[4(FALSE)]
@@ -16,520 +35,410 @@ VAR,pump_h_RedundantPumpSelect,D11014,WORD,0
 VAR,pump_isRunningArr,D11015.0,ARRAY [3] OF BOOL,[3(FALSE)]
 VAR,pump_modeArr,D11016,ARRAY [3] OF WORD,[3(0)]
 VAR,pump_flowrateFeedback,D11019,ARRAY [2] OF WORD,[2(0)]
-VAR,s0_Addr,D10000,WORD,0
-VAR,s0_lightIntensOut,D10001,WORD,0
-VAR,s0_lightOnOut,D10002.0,BOOL,FALSE
-VAR,s0_PV_PosArr,D10003,ARRAY [3] OF WORD,[3(0)]
-VAR,s0_e_PV_OnArr,D10006.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s0_e_PV_PresArr,D10007,ARRAY [3] OF WORD,[3(0)]
-VAR,s0_e_lightIntensity,D10010,WORD,0
-VAR,s0_e_lightOn,D10011.0,BOOL,FALSE
-VAR,s0_mode,D10012,WORD,2
-VAR,s0_a_waterOn,D10013.0,BOOL,FALSE
-VAR,s0_a_lightOn,D10014.0,BOOL,FALSE
-VAR,s0_a_PV_EnableArr,D10015.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s0_a_PV_PresArr,D10016,ARRAY [3] OF WORD,[3(0)]
-VAR,s0_a_lightIntensity,D10019,WORD,0
-VAR,s0_m_PV_OnArr,D10020.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s0_m_PV_PresArr,D10021,ARRAY [3] OF WORD,[3(0)]
-VAR,s0_m_lightIntensity,D10024,WORD,0
-VAR,s0_m_lightOn,D10025.0,BOOL,FALSE
-VAR,s0_m_PV_PosArr,D10026,ARRAY [3] OF WORD,[3(0)]
-VAR,s0_o_lightIntensity,D10029,WORD,0
-VAR,s0_o_lightOn,D10030.0,BOOL,FALSE
-VAR,s0_o_PV_PosArr,D10031,ARRAY [3] OF WORD,[3(0)]
-VAR,s1_Addr,D10050,WORD,0
-VAR,s1_lightIntensOut,D10051,WORD,0
-VAR,s1_lightOnOut,D10052.0,BOOL,FALSE
-VAR,s1_PV_PosArr,D10053,ARRAY [3] OF WORD,[3(0)]
-VAR,s1_e_PV_OnArr,D10056.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s1_e_PV_PresArr,D10057,ARRAY [3] OF WORD,[3(0)]
-VAR,s1_e_lightIntensity,D10060,WORD,0
-VAR,s1_e_lightOn,D10061.0,BOOL,FALSE
-VAR,s1_mode,D10062,WORD,2
-VAR,s1_a_waterOn,D10063.0,BOOL,FALSE
-VAR,s1_a_lightOn,D10064.0,BOOL,FALSE
-VAR,s1_a_PV_EnableArr,D10065.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s1_a_PV_PresArr,D10066,ARRAY [3] OF WORD,[3(0)]
-VAR,s1_a_lightIntensity,D10069,WORD,0
-VAR,s1_m_PV_OnArr,D10070.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s1_m_PV_PresArr,D10071,ARRAY [3] OF WORD,[3(0)]
-VAR,s1_m_lightIntensity,D10074,WORD,0
-VAR,s1_m_lightOn,D10075.0,BOOL,FALSE
-VAR,s1_m_PV_PosArr,D10076,ARRAY [3] OF WORD,[3(0)]
-VAR,s1_o_lightIntensity,D10079,WORD,0
-VAR,s1_o_lightOn,D10080.0,BOOL,FALSE
-VAR,s1_o_PV_PosArr,D10081,ARRAY [3] OF WORD,[3(0)]
-VAR,s2_Addr,D10100,WORD,0
-VAR,s2_lightIntensOut,D10101,WORD,0
-VAR,s2_lightOnOut,D10102.0,BOOL,FALSE
-VAR,s2_PV_PosArr,D10103,ARRAY [3] OF WORD,[3(0)]
-VAR,s2_e_PV_OnArr,D10106.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s2_e_PV_PresArr,D10107,ARRAY [3] OF WORD,[3(0)]
-VAR,s2_e_lightIntensity,D10110,WORD,0
-VAR,s2_e_lightOn,D10111.0,BOOL,FALSE
-VAR,s2_mode,D10112,WORD,2
-VAR,s2_a_waterOn,D10113.0,BOOL,FALSE
-VAR,s2_a_lightOn,D10114.0,BOOL,FALSE
-VAR,s2_a_PV_EnableArr,D10115.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s2_a_PV_PresArr,D10116,ARRAY [3] OF WORD,[3(0)]
-VAR,s2_a_lightIntensity,D10119,WORD,0
-VAR,s2_m_PV_OnArr,D10120.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s2_m_PV_PresArr,D10121,ARRAY [3] OF WORD,[3(0)]
-VAR,s2_m_lightIntensity,D10124,WORD,0
-VAR,s2_m_lightOn,D10125.0,BOOL,FALSE
-VAR,s2_m_PV_PosArr,D10126,ARRAY [3] OF WORD,[3(0)]
-VAR,s2_o_lightIntensity,D10129,WORD,0
-VAR,s2_o_lightOn,D10130.0,BOOL,FALSE
-VAR,s2_o_PV_PosArr,D10131,ARRAY [3] OF WORD,[3(0)]
-VAR,s3_Addr,D10150,WORD,0
-VAR,s3_lightIntensOut,D10151,WORD,0
-VAR,s3_lightOnOut,D10152.0,BOOL,FALSE
-VAR,s3_PV_PosArr,D10153,ARRAY [3] OF WORD,[3(0)]
-VAR,s3_e_PV_OnArr,D10156.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s3_e_PV_PresArr,D10157,ARRAY [3] OF WORD,[3(0)]
-VAR,s3_e_lightIntensity,D10160,WORD,0
-VAR,s3_e_lightOn,D10161.0,BOOL,FALSE
-VAR,s3_mode,D10162,WORD,2
-VAR,s3_a_waterOn,D10163.0,BOOL,FALSE
-VAR,s3_a_lightOn,D10164.0,BOOL,FALSE
-VAR,s3_a_PV_EnableArr,D10165.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s3_a_PV_PresArr,D10166,ARRAY [3] OF WORD,[3(0)]
-VAR,s3_a_lightIntensity,D10169,WORD,0
-VAR,s3_m_PV_OnArr,D10170.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s3_m_PV_PresArr,D10171,ARRAY [3] OF WORD,[3(0)]
-VAR,s3_m_lightIntensity,D10174,WORD,0
-VAR,s3_m_lightOn,D10175.0,BOOL,FALSE
-VAR,s3_m_PV_PosArr,D10176,ARRAY [3] OF WORD,[3(0)]
-VAR,s3_o_lightIntensity,D10179,WORD,0
-VAR,s3_o_lightOn,D10180.0,BOOL,FALSE
-VAR,s3_o_PV_PosArr,D10181,ARRAY [3] OF WORD,[3(0)]
-VAR,s4_Addr,D10200,WORD,0
-VAR,s4_lightIntensOut,D10201,WORD,0
-VAR,s4_lightOnOut,D10202.0,BOOL,FALSE
-VAR,s4_PV_PosArr,D10203,ARRAY [3] OF WORD,[3(0)]
-VAR,s4_e_PV_OnArr,D10206.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s4_e_PV_PresArr,D10207,ARRAY [3] OF WORD,[3(0)]
-VAR,s4_e_lightIntensity,D10210,WORD,0
-VAR,s4_e_lightOn,D10211.0,BOOL,FALSE
-VAR,s4_mode,D10212,WORD,2
-VAR,s4_a_waterOn,D10213.0,BOOL,FALSE
-VAR,s4_a_lightOn,D10214.0,BOOL,FALSE
-VAR,s4_a_PV_EnableArr,D10215.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s4_a_PV_PresArr,D10216,ARRAY [3] OF WORD,[3(0)]
-VAR,s4_a_lightIntensity,D10219,WORD,0
-VAR,s4_m_PV_OnArr,D10220.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s4_m_PV_PresArr,D10221,ARRAY [3] OF WORD,[3(0)]
-VAR,s4_m_lightIntensity,D10224,WORD,0
-VAR,s4_m_lightOn,D10225.0,BOOL,FALSE
-VAR,s4_m_PV_PosArr,D10226,ARRAY [3] OF WORD,[3(0)]
-VAR,s4_o_lightIntensity,D10229,WORD,0
-VAR,s4_o_lightOn,D10230.0,BOOL,FALSE
-VAR,s4_o_PV_PosArr,D10231,ARRAY [3] OF WORD,[3(0)]
-VAR,s5_Addr,D10250,WORD,0
-VAR,s5_lightIntensOut,D10251,WORD,0
-VAR,s5_lightOnOut,D10252.0,BOOL,FALSE
-VAR,s5_PV_PosArr,D10253,ARRAY [3] OF WORD,[3(0)]
-VAR,s5_e_PV_OnArr,D10256.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s5_e_PV_PresArr,D10257,ARRAY [3] OF WORD,[3(0)]
-VAR,s5_e_lightIntensity,D10260,WORD,0
-VAR,s5_e_lightOn,D10261.0,BOOL,FALSE
-VAR,s5_mode,D10262,WORD,2
-VAR,s5_a_waterOn,D10263.0,BOOL,FALSE
-VAR,s5_a_lightOn,D10264.0,BOOL,FALSE
-VAR,s5_a_PV_EnableArr,D10265.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s5_a_PV_PresArr,D10266,ARRAY [3] OF WORD,[3(0)]
-VAR,s5_a_lightIntensity,D10269,WORD,0
-VAR,s5_m_PV_OnArr,D10270.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s5_m_PV_PresArr,D10271,ARRAY [3] OF WORD,[3(0)]
-VAR,s5_m_lightIntensity,D10274,WORD,0
-VAR,s5_m_lightOn,D10275.0,BOOL,FALSE
-VAR,s5_m_PV_PosArr,D10276,ARRAY [3] OF WORD,[3(0)]
-VAR,s5_o_lightIntensity,D10279,WORD,0
-VAR,s5_o_lightOn,D10280.0,BOOL,FALSE
-VAR,s5_o_PV_PosArr,D10281,ARRAY [3] OF WORD,[3(0)]
-VAR,s6_Addr,D10300,WORD,0
-VAR,s6_lightIntensOut,D10301,WORD,0
-VAR,s6_lightOnOut,D10302.0,BOOL,FALSE
-VAR,s6_PV_PosArr,D10303,ARRAY [3] OF WORD,[3(0)]
-VAR,s6_e_PV_OnArr,D10306.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s6_e_PV_PresArr,D10307,ARRAY [3] OF WORD,[3(0)]
-VAR,s6_e_lightIntensity,D10310,WORD,0
-VAR,s6_e_lightOn,D10311.0,BOOL,FALSE
-VAR,s6_mode,D10312,WORD,2
-VAR,s6_a_waterOn,D10313.0,BOOL,FALSE
-VAR,s6_a_lightOn,D10314.0,BOOL,FALSE
-VAR,s6_a_PV_EnableArr,D10315.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s6_a_PV_PresArr,D10316,ARRAY [3] OF WORD,[3(0)]
-VAR,s6_a_lightIntensity,D10319,WORD,0
-VAR,s6_m_PV_OnArr,D10320.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s6_m_PV_PresArr,D10321,ARRAY [3] OF WORD,[3(0)]
-VAR,s6_m_lightIntensity,D10324,WORD,0
-VAR,s6_m_lightOn,D10325.0,BOOL,FALSE
-VAR,s6_m_PV_PosArr,D10326,ARRAY [3] OF WORD,[3(0)]
-VAR,s6_o_lightIntensity,D10329,WORD,0
-VAR,s6_o_lightOn,D10330.0,BOOL,FALSE
-VAR,s6_o_PV_PosArr,D10331,ARRAY [3] OF WORD,[3(0)]
-VAR,s7_Addr,D10350,WORD,0
-VAR,s7_lightIntensOut,D10351,WORD,0
-VAR,s7_lightOnOut,D10352.0,BOOL,FALSE
-VAR,s7_PV_PosArr,D10353,ARRAY [3] OF WORD,[3(0)]
-VAR,s7_e_PV_OnArr,D10356.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s7_e_PV_PresArr,D10357,ARRAY [3] OF WORD,[3(0)]
-VAR,s7_e_lightIntensity,D10360,WORD,0
-VAR,s7_e_lightOn,D10361.0,BOOL,FALSE
-VAR,s7_mode,D10362,WORD,2
-VAR,s7_a_waterOn,D10363.0,BOOL,FALSE
-VAR,s7_a_lightOn,D10364.0,BOOL,FALSE
-VAR,s7_a_PV_EnableArr,D10365.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s7_a_PV_PresArr,D10366,ARRAY [3] OF WORD,[3(0)]
-VAR,s7_a_lightIntensity,D10369,WORD,0
-VAR,s7_m_PV_OnArr,D10370.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s7_m_PV_PresArr,D10371,ARRAY [3] OF WORD,[3(0)]
-VAR,s7_m_lightIntensity,D10374,WORD,0
-VAR,s7_m_lightOn,D10375.0,BOOL,FALSE
-VAR,s7_m_PV_PosArr,D10376,ARRAY [3] OF WORD,[3(0)]
-VAR,s7_o_lightIntensity,D10379,WORD,0
-VAR,s7_o_lightOn,D10380.0,BOOL,FALSE
-VAR,s7_o_PV_PosArr,D10381,ARRAY [3] OF WORD,[3(0)]
-VAR,s8_Addr,D10400,WORD,0
-VAR,s8_lightIntensOut,D10401,WORD,0
-VAR,s8_lightOnOut,D10402.0,BOOL,FALSE
-VAR,s8_PV_PosArr,D10403,ARRAY [3] OF WORD,[3(0)]
-VAR,s8_e_PV_OnArr,D10406.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s8_e_PV_PresArr,D10407,ARRAY [3] OF WORD,[3(0)]
-VAR,s8_e_lightIntensity,D10410,WORD,0
-VAR,s8_e_lightOn,D10411.0,BOOL,FALSE
-VAR,s8_mode,D10412,WORD,2
-VAR,s8_a_waterOn,D10413.0,BOOL,FALSE
-VAR,s8_a_lightOn,D10414.0,BOOL,FALSE
-VAR,s8_a_PV_EnableArr,D10415.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s8_a_PV_PresArr,D10416,ARRAY [3] OF WORD,[3(0)]
-VAR,s8_a_lightIntensity,D10419,WORD,0
-VAR,s8_m_PV_OnArr,D10420.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s8_m_PV_PresArr,D10421,ARRAY [3] OF WORD,[3(0)]
-VAR,s8_m_lightIntensity,D10424,WORD,0
-VAR,s8_m_lightOn,D10425.0,BOOL,FALSE
-VAR,s8_m_PV_PosArr,D10426,ARRAY [3] OF WORD,[3(0)]
-VAR,s8_o_lightIntensity,D10429,WORD,0
-VAR,s8_o_lightOn,D10430.0,BOOL,FALSE
-VAR,s8_o_PV_PosArr,D10431,ARRAY [3] OF WORD,[3(0)]
-VAR,s9_Addr,D10450,WORD,0
-VAR,s9_lightIntensOut,D10451,WORD,0
-VAR,s9_lightOnOut,D10452.0,BOOL,FALSE
-VAR,s9_PV_PosArr,D10453,ARRAY [3] OF WORD,[3(0)]
-VAR,s9_e_PV_OnArr,D10456.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s9_e_PV_PresArr,D10457,ARRAY [3] OF WORD,[3(0)]
-VAR,s9_e_lightIntensity,D10460,WORD,0
-VAR,s9_e_lightOn,D10461.0,BOOL,FALSE
-VAR,s9_mode,D10462,WORD,2
-VAR,s9_a_waterOn,D10463.0,BOOL,FALSE
-VAR,s9_a_lightOn,D10464.0,BOOL,FALSE
-VAR,s9_a_PV_EnableArr,D10465.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s9_a_PV_PresArr,D10466,ARRAY [3] OF WORD,[3(0)]
-VAR,s9_a_lightIntensity,D10469,WORD,0
-VAR,s9_m_PV_OnArr,D10470.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,s9_m_PV_PresArr,D10471,ARRAY [3] OF WORD,[3(0)]
-VAR,s9_m_lightIntensity,D10474,WORD,0
-VAR,s9_m_lightOn,D10475.0,BOOL,FALSE
-VAR,s9_m_PV_PosArr,D10476,ARRAY [3] OF WORD,[3(0)]
-VAR,s9_o_lightIntensity,D10479,WORD,0
-VAR,s9_o_lightOn,D10480.0,BOOL,FALSE
-VAR,s9_o_PV_PosArr,D10481,ARRAY [3] OF WORD,[3(0)]
+VAR,s0_mode,D10000,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
+VAR,s0_autoWaterOn,D10001.0,BOOL,FALSE
+VAR,s0_autoLightOn,D10002.0,BOOL,FALSE
+VAR,s0_autoLightIntensity,D10003,WORD,0
+VAR,s0_semiPVOn,D10004.0,BOOL,0
+VAR,s0_semiLightOn,D10005.0,BOOL,0
+VAR,s0_semiLightIntensity,D10006,WORD,0
+VAR,s0_manuPVPos,D10007,WORD,0
+VAR,s0_exePVPos,D10008,WORD,0
+VAR,s0_exeLightIntensity,D10009,WORD,0
+VAR,s0_exeLightOn,D10010,WORD,0
+VAR,s1_mode,D10011,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
+VAR,s1_autoWaterOn,D10012.0,BOOL,FALSE
+VAR,s1_autoLightOn,D10013.0,BOOL,FALSE
+VAR,s1_autoLightIntensity,D10014,WORD,0
+VAR,s1_semiPVOn,D10015.0,BOOL,0
+VAR,s1_semiLightOn,D10016.0,BOOL,0
+VAR,s1_semiLightIntensity,D10017,WORD,0
+VAR,s1_manuPVPos,D10018,WORD,0
+VAR,s1_exePVPos,D10019,WORD,0
+VAR,s1_exeLightIntensity,D10020,WORD,0
+VAR,s1_exeLightOn,D10021,WORD,0
+VAR,s2_mode,D10022,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
+VAR,s2_autoWaterOn,D10023.0,BOOL,FALSE
+VAR,s2_autoLightOn,D10024.0,BOOL,FALSE
+VAR,s2_autoLightIntensity,D10025,WORD,0
+VAR,s2_semiPVOn,D10026.0,BOOL,0
+VAR,s2_semiLightOn,D10027.0,BOOL,0
+VAR,s2_semiLightIntensity,D10028,WORD,0
+VAR,s2_manuPVPos,D10029,WORD,0
+VAR,s2_exePVPos,D10030,WORD,0
+VAR,s2_exeLightIntensity,D10031,WORD,0
+VAR,s2_exeLightOn,D10032,WORD,0
+VAR,s3_mode,D10033,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
+VAR,s3_autoWaterOn,D10034.0,BOOL,FALSE
+VAR,s3_autoLightOn,D10035.0,BOOL,FALSE
+VAR,s3_autoLightIntensity,D10036,WORD,0
+VAR,s3_semiPVOn,D10037.0,BOOL,0
+VAR,s3_semiLightOn,D10038.0,BOOL,0
+VAR,s3_semiLightIntensity,D10039,WORD,0
+VAR,s3_manuPVPos,D10040,WORD,0
+VAR,s3_exePVPos,D10041,WORD,0
+VAR,s3_exeLightIntensity,D10042,WORD,0
+VAR,s3_exeLightOn,D10043,WORD,0
+VAR,s4_mode,D10044,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
+VAR,s4_autoWaterOn,D10045.0,BOOL,FALSE
+VAR,s4_autoLightOn,D10046.0,BOOL,FALSE
+VAR,s4_autoLightIntensity,D10047,WORD,0
+VAR,s4_semiPVOn,D10048.0,BOOL,0
+VAR,s4_semiLightOn,D10049.0,BOOL,0
+VAR,s4_semiLightIntensity,D10050,WORD,0
+VAR,s4_manuPVPos,D10051,WORD,0
+VAR,s4_exePVPos,D10052,WORD,0
+VAR,s4_exeLightIntensity,D10053,WORD,0
+VAR,s4_exeLightOn,D10054,WORD,0
+VAR,s5_mode,D10055,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
+VAR,s5_autoWaterOn,D10056.0,BOOL,FALSE
+VAR,s5_autoLightOn,D10057.0,BOOL,FALSE
+VAR,s5_autoLightIntensity,D10058,WORD,0
+VAR,s5_semiPVOn,D10059.0,BOOL,0
+VAR,s5_semiLightOn,D10060.0,BOOL,0
+VAR,s5_semiLightIntensity,D10061,WORD,0
+VAR,s5_manuPVPos,D10062,WORD,0
+VAR,s5_exePVPos,D10063,WORD,0
+VAR,s5_exeLightIntensity,D10064,WORD,0
+VAR,s5_exeLightOn,D10065,WORD,0
+VAR,s6_mode,D10066,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
+VAR,s6_autoWaterOn,D10067.0,BOOL,FALSE
+VAR,s6_autoLightOn,D10068.0,BOOL,FALSE
+VAR,s6_autoLightIntensity,D10069,WORD,0
+VAR,s6_semiPVOn,D10070.0,BOOL,0
+VAR,s6_semiLightOn,D10071.0,BOOL,0
+VAR,s6_semiLightIntensity,D10072,WORD,0
+VAR,s6_manuPVPos,D10073,WORD,0
+VAR,s6_exePVPos,D10074,WORD,0
+VAR,s6_exeLightIntensity,D10075,WORD,0
+VAR,s6_exeLightOn,D10076,WORD,0
+VAR,s7_mode,D10077,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
+VAR,s7_autoWaterOn,D10078.0,BOOL,FALSE
+VAR,s7_autoLightOn,D10079.0,BOOL,FALSE
+VAR,s7_autoLightIntensity,D10080,WORD,0
+VAR,s7_semiPVOn,D10081.0,BOOL,0
+VAR,s7_semiLightOn,D10082.0,BOOL,0
+VAR,s7_semiLightIntensity,D10083,WORD,0
+VAR,s7_manuPVPos,D10084,WORD,0
+VAR,s7_exePVPos,D10085,WORD,0
+VAR,s7_exeLightIntensity,D10086,WORD,0
+VAR,s7_exeLightOn,D10087,WORD,0
+VAR,s8_mode,D10088,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
+VAR,s8_autoWaterOn,D10089.0,BOOL,FALSE
+VAR,s8_autoLightOn,D10090.0,BOOL,FALSE
+VAR,s8_autoLightIntensity,D10091,WORD,0
+VAR,s8_semiPVOn,D10092.0,BOOL,0
+VAR,s8_semiLightOn,D10093.0,BOOL,0
+VAR,s8_semiLightIntensity,D10094,WORD,0
+VAR,s8_manuPVPos,D10095,WORD,0
+VAR,s8_exePVPos,D10096,WORD,0
+VAR,s8_exeLightIntensity,D10097,WORD,0
+VAR,s8_exeLightOn,D10098,WORD,0
+VAR,s9_mode,D10099,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
+VAR,s9_autoWaterOn,D10100.0,BOOL,FALSE
+VAR,s9_autoLightOn,D10101.0,BOOL,FALSE
+VAR,s9_autoLightIntensity,D10102,WORD,0
+VAR,s9_semiPVOn,D10103.0,BOOL,0
+VAR,s9_semiLightOn,D10104.0,BOOL,0
+VAR,s9_semiLightIntensity,D10105,WORD,0
+VAR,s9_manuPVPos,D10106,WORD,0
+VAR,s9_exePVPos,D10107,WORD,0
+VAR,s9_exeLightIntensity,D10108,WORD,0
+VAR,s9_exeLightOn,D10109,WORD,0
 VAR,snsr_s0_wPres0_value,D12001,WORD,0
 VAR,snsr_s0_wPres0_state,D12002,WORD,0
 VAR,snsr_s0_wPres0_err_u,D12003,WORD,0
 VAR,snsr_s0_wPres0_warn_u,D12004,WORD,0
 VAR,snsr_s0_wPres0_warn_l,D12005,WORD,0
 VAR,snsr_s0_wPres0_err_l,D12006,WORD,0
-VAR,snsr_s1_wPres0_value,D12007,WORD,0
-VAR,snsr_s1_wPres0_state,D12008,WORD,0
-VAR,snsr_s1_wPres0_err_u,D12009,WORD,0
-VAR,snsr_s1_wPres0_warn_u,D12010,WORD,0
-VAR,snsr_s1_wPres0_warn_l,D12011,WORD,0
-VAR,snsr_s1_wPres0_err_l,D12012,WORD,0
-VAR,snsr_s2_wPres0_value,D12013,WORD,0
-VAR,snsr_s2_wPres0_state,D12014,WORD,0
-VAR,snsr_s2_wPres0_err_u,D12015,WORD,0
-VAR,snsr_s2_wPres0_warn_u,D12016,WORD,0
-VAR,snsr_s2_wPres0_warn_l,D12017,WORD,0
-VAR,snsr_s2_wPres0_err_l,D12018,WORD,0
-VAR,snsr_s3_wPres0_value,D12019,WORD,0
-VAR,snsr_s3_wPres0_state,D12020,WORD,0
-VAR,snsr_s3_wPres0_err_u,D12021,WORD,0
-VAR,snsr_s3_wPres0_warn_u,D12022,WORD,0
-VAR,snsr_s3_wPres0_warn_l,D12023,WORD,0
-VAR,snsr_s3_wPres0_err_l,D12024,WORD,0
-VAR,snsr_s4_wPres0_value,D12025,WORD,0
-VAR,snsr_s4_wPres0_state,D12026,WORD,0
-VAR,snsr_s4_wPres0_err_u,D12027,WORD,0
-VAR,snsr_s4_wPres0_warn_u,D12028,WORD,0
-VAR,snsr_s4_wPres0_warn_l,D12029,WORD,0
-VAR,snsr_s4_wPres0_err_l,D12030,WORD,0
-VAR,snsr_s5_wPres0_value,D12031,WORD,0
-VAR,snsr_s5_wPres0_state,D12032,WORD,0
-VAR,snsr_s5_wPres0_err_u,D12033,WORD,0
-VAR,snsr_s5_wPres0_warn_u,D12034,WORD,0
-VAR,snsr_s5_wPres0_warn_l,D12035,WORD,0
-VAR,snsr_s5_wPres0_err_l,D12036,WORD,0
-VAR,snsr_s6_wPres0_value,D12037,WORD,0
-VAR,snsr_s6_wPres0_state,D12038,WORD,0
-VAR,snsr_s6_wPres0_err_u,D12039,WORD,0
-VAR,snsr_s6_wPres0_warn_u,D12040,WORD,0
-VAR,snsr_s6_wPres0_warn_l,D12041,WORD,0
-VAR,snsr_s6_wPres0_err_l,D12042,WORD,0
-VAR,snsr_s7_wPres0_value,D12043,WORD,0
-VAR,snsr_s7_wPres0_state,D12044,WORD,0
-VAR,snsr_s7_wPres0_err_u,D12045,WORD,0
-VAR,snsr_s7_wPres0_warn_u,D12046,WORD,0
-VAR,snsr_s7_wPres0_warn_l,D12047,WORD,0
-VAR,snsr_s7_wPres0_err_l,D12048,WORD,0
-VAR,snsr_s8_wPres0_value,D12049,WORD,0
-VAR,snsr_s8_wPres0_state,D12050,WORD,0
-VAR,snsr_s8_wPres0_err_u,D12051,WORD,0
-VAR,snsr_s8_wPres0_warn_u,D12052,WORD,0
-VAR,snsr_s8_wPres0_warn_l,D12053,WORD,0
-VAR,snsr_s8_wPres0_err_l,D12054,WORD,0
-VAR,snsr_s9_wPres0_value,D12055,WORD,0
-VAR,snsr_s9_wPres0_state,D12056,WORD,0
-VAR,snsr_s9_wPres0_err_u,D12057,WORD,0
-VAR,snsr_s9_wPres0_warn_u,D12058,WORD,0
-VAR,snsr_s9_wPres0_warn_l,D12059,WORD,0
-VAR,snsr_s9_wPres0_err_l,D12060,WORD,0
-VAR,snsr_s0_wPres1_value,D12061,WORD,0
-VAR,snsr_s0_wPres1_state,D12062,WORD,0
-VAR,snsr_s0_wPres1_err_u,D12063,WORD,0
-VAR,snsr_s0_wPres1_warn_u,D12064,WORD,0
-VAR,snsr_s0_wPres1_warn_l,D12065,WORD,0
-VAR,snsr_s0_wPres1_err_l,D12066,WORD,0
-VAR,snsr_s1_wPres1_value,D12067,WORD,0
-VAR,snsr_s1_wPres1_state,D12068,WORD,0
-VAR,snsr_s1_wPres1_err_u,D12069,WORD,0
-VAR,snsr_s1_wPres1_warn_u,D12070,WORD,0
-VAR,snsr_s1_wPres1_warn_l,D12071,WORD,0
-VAR,snsr_s1_wPres1_err_l,D12072,WORD,0
-VAR,snsr_s2_wPres1_value,D12073,WORD,0
-VAR,snsr_s2_wPres1_state,D12074,WORD,0
-VAR,snsr_s2_wPres1_err_u,D12075,WORD,0
-VAR,snsr_s2_wPres1_warn_u,D12076,WORD,0
-VAR,snsr_s2_wPres1_warn_l,D12077,WORD,0
-VAR,snsr_s2_wPres1_err_l,D12078,WORD,0
-VAR,snsr_s3_wPres1_value,D12079,WORD,0
-VAR,snsr_s3_wPres1_state,D12080,WORD,0
-VAR,snsr_s3_wPres1_err_u,D12081,WORD,0
-VAR,snsr_s3_wPres1_warn_u,D12082,WORD,0
-VAR,snsr_s3_wPres1_warn_l,D12083,WORD,0
-VAR,snsr_s3_wPres1_err_l,D12084,WORD,0
-VAR,snsr_s4_wPres1_value,D12085,WORD,0
-VAR,snsr_s4_wPres1_state,D12086,WORD,0
-VAR,snsr_s4_wPres1_err_u,D12087,WORD,0
-VAR,snsr_s4_wPres1_warn_u,D12088,WORD,0
-VAR,snsr_s4_wPres1_warn_l,D12089,WORD,0
-VAR,snsr_s4_wPres1_err_l,D12090,WORD,0
-VAR,snsr_s5_wPres1_value,D12091,WORD,0
-VAR,snsr_s5_wPres1_state,D12092,WORD,0
-VAR,snsr_s5_wPres1_err_u,D12093,WORD,0
-VAR,snsr_s5_wPres1_warn_u,D12094,WORD,0
-VAR,snsr_s5_wPres1_warn_l,D12095,WORD,0
-VAR,snsr_s5_wPres1_err_l,D12096,WORD,0
-VAR,snsr_s6_wPres1_value,D12097,WORD,0
-VAR,snsr_s6_wPres1_state,D12098,WORD,0
-VAR,snsr_s6_wPres1_err_u,D12099,WORD,0
-VAR,snsr_s6_wPres1_warn_u,D12100,WORD,0
-VAR,snsr_s6_wPres1_warn_l,D12101,WORD,0
-VAR,snsr_s6_wPres1_err_l,D12102,WORD,0
-VAR,snsr_s7_wPres1_value,D12103,WORD,0
-VAR,snsr_s7_wPres1_state,D12104,WORD,0
-VAR,snsr_s7_wPres1_err_u,D12105,WORD,0
-VAR,snsr_s7_wPres1_warn_u,D12106,WORD,0
-VAR,snsr_s7_wPres1_warn_l,D12107,WORD,0
-VAR,snsr_s7_wPres1_err_l,D12108,WORD,0
-VAR,snsr_s8_wPres1_value,D12109,WORD,0
-VAR,snsr_s8_wPres1_state,D12110,WORD,0
-VAR,snsr_s8_wPres1_err_u,D12111,WORD,0
-VAR,snsr_s8_wPres1_warn_u,D12112,WORD,0
-VAR,snsr_s8_wPres1_warn_l,D12113,WORD,0
-VAR,snsr_s8_wPres1_err_l,D12114,WORD,0
-VAR,snsr_s9_wPres1_value,D12115,WORD,0
-VAR,snsr_s9_wPres1_state,D12116,WORD,0
-VAR,snsr_s9_wPres1_err_u,D12117,WORD,0
-VAR,snsr_s9_wPres1_warn_u,D12118,WORD,0
-VAR,snsr_s9_wPres1_warn_l,D12119,WORD,0
-VAR,snsr_s9_wPres1_err_l,D12120,WORD,0
-VAR,snsr_s0_wPres2_value,D12121,WORD,0
-VAR,snsr_s0_wPres2_state,D12122,WORD,0
-VAR,snsr_s0_wPres2_err_u,D12123,WORD,0
-VAR,snsr_s0_wPres2_warn_u,D12124,WORD,0
-VAR,snsr_s0_wPres2_warn_l,D12125,WORD,0
-VAR,snsr_s0_wPres2_err_l,D12126,WORD,0
-VAR,snsr_s1_wPres2_value,D12127,WORD,0
-VAR,snsr_s1_wPres2_state,D12128,WORD,0
-VAR,snsr_s1_wPres2_err_u,D12129,WORD,0
-VAR,snsr_s1_wPres2_warn_u,D12130,WORD,0
-VAR,snsr_s1_wPres2_warn_l,D12131,WORD,0
-VAR,snsr_s1_wPres2_err_l,D12132,WORD,0
-VAR,snsr_s2_wPres2_value,D12133,WORD,0
-VAR,snsr_s2_wPres2_state,D12134,WORD,0
-VAR,snsr_s2_wPres2_err_u,D12135,WORD,0
-VAR,snsr_s2_wPres2_warn_u,D12136,WORD,0
-VAR,snsr_s2_wPres2_warn_l,D12137,WORD,0
-VAR,snsr_s2_wPres2_err_l,D12138,WORD,0
-VAR,snsr_s3_wPres2_value,D12139,WORD,0
-VAR,snsr_s3_wPres2_state,D12140,WORD,0
-VAR,snsr_s3_wPres2_err_u,D12141,WORD,0
-VAR,snsr_s3_wPres2_warn_u,D12142,WORD,0
-VAR,snsr_s3_wPres2_warn_l,D12143,WORD,0
-VAR,snsr_s3_wPres2_err_l,D12144,WORD,0
-VAR,snsr_s4_wPres2_value,D12145,WORD,0
-VAR,snsr_s4_wPres2_state,D12146,WORD,0
-VAR,snsr_s4_wPres2_err_u,D12147,WORD,0
-VAR,snsr_s4_wPres2_warn_u,D12148,WORD,0
-VAR,snsr_s4_wPres2_warn_l,D12149,WORD,0
-VAR,snsr_s4_wPres2_err_l,D12150,WORD,0
-VAR,snsr_s5_wPres2_value,D12151,WORD,0
-VAR,snsr_s5_wPres2_state,D12152,WORD,0
-VAR,snsr_s5_wPres2_err_u,D12153,WORD,0
-VAR,snsr_s5_wPres2_warn_u,D12154,WORD,0
-VAR,snsr_s5_wPres2_warn_l,D12155,WORD,0
-VAR,snsr_s5_wPres2_err_l,D12156,WORD,0
-VAR,snsr_s6_wPres2_value,D12157,WORD,0
-VAR,snsr_s6_wPres2_state,D12158,WORD,0
-VAR,snsr_s6_wPres2_err_u,D12159,WORD,0
-VAR,snsr_s6_wPres2_warn_u,D12160,WORD,0
-VAR,snsr_s6_wPres2_warn_l,D12161,WORD,0
-VAR,snsr_s6_wPres2_err_l,D12162,WORD,0
-VAR,snsr_s7_wPres2_value,D12163,WORD,0
-VAR,snsr_s7_wPres2_state,D12164,WORD,0
-VAR,snsr_s7_wPres2_err_u,D12165,WORD,0
-VAR,snsr_s7_wPres2_warn_u,D12166,WORD,0
-VAR,snsr_s7_wPres2_warn_l,D12167,WORD,0
-VAR,snsr_s7_wPres2_err_l,D12168,WORD,0
-VAR,snsr_s8_wPres2_value,D12169,WORD,0
-VAR,snsr_s8_wPres2_state,D12170,WORD,0
-VAR,snsr_s8_wPres2_err_u,D12171,WORD,0
-VAR,snsr_s8_wPres2_warn_u,D12172,WORD,0
-VAR,snsr_s8_wPres2_warn_l,D12173,WORD,0
-VAR,snsr_s8_wPres2_err_l,D12174,WORD,0
-VAR,snsr_s9_wPres2_value,D12175,WORD,0
-VAR,snsr_s9_wPres2_state,D12176,WORD,0
-VAR,snsr_s9_wPres2_err_u,D12177,WORD,0
-VAR,snsr_s9_wPres2_warn_u,D12178,WORD,0
-VAR,snsr_s9_wPres2_warn_l,D12179,WORD,0
-VAR,snsr_s9_wPres2_err_l,D12180,WORD,0
-VAR,snsr_s0_wTemp0_value,D12181,WORD,0
-VAR,snsr_s0_wTemp0_state,D12182,WORD,0
-VAR,snsr_s0_wTemp0_err_u,D12183,WORD,0
-VAR,snsr_s0_wTemp0_warn_u,D12184,WORD,0
-VAR,snsr_s0_wTemp0_warn_l,D12185,WORD,0
-VAR,snsr_s0_wTemp0_err_l,D12186,WORD,0
-VAR,snsr_s1_wTemp0_value,D12187,WORD,0
-VAR,snsr_s1_wTemp0_state,D12188,WORD,0
-VAR,snsr_s1_wTemp0_err_u,D12189,WORD,0
-VAR,snsr_s1_wTemp0_warn_u,D12190,WORD,0
-VAR,snsr_s1_wTemp0_warn_l,D12191,WORD,0
-VAR,snsr_s1_wTemp0_err_l,D12192,WORD,0
-VAR,snsr_s2_wTemp0_value,D12193,WORD,0
-VAR,snsr_s2_wTemp0_state,D12194,WORD,0
-VAR,snsr_s2_wTemp0_err_u,D12195,WORD,0
-VAR,snsr_s2_wTemp0_warn_u,D12196,WORD,0
-VAR,snsr_s2_wTemp0_warn_l,D12197,WORD,0
-VAR,snsr_s2_wTemp0_err_l,D12198,WORD,0
-VAR,snsr_s3_wTemp0_value,D12199,WORD,0
-VAR,snsr_s3_wTemp0_state,D12200,WORD,0
-VAR,snsr_s3_wTemp0_err_u,D12201,WORD,0
-VAR,snsr_s3_wTemp0_warn_u,D12202,WORD,0
-VAR,snsr_s3_wTemp0_warn_l,D12203,WORD,0
-VAR,snsr_s3_wTemp0_err_l,D12204,WORD,0
-VAR,snsr_s4_wTemp0_value,D12205,WORD,0
-VAR,snsr_s4_wTemp0_state,D12206,WORD,0
-VAR,snsr_s4_wTemp0_err_u,D12207,WORD,0
-VAR,snsr_s4_wTemp0_warn_u,D12208,WORD,0
-VAR,snsr_s4_wTemp0_warn_l,D12209,WORD,0
-VAR,snsr_s4_wTemp0_err_l,D12210,WORD,0
-VAR,snsr_s5_wTemp0_value,D12211,WORD,0
-VAR,snsr_s5_wTemp0_state,D12212,WORD,0
-VAR,snsr_s5_wTemp0_err_u,D12213,WORD,0
-VAR,snsr_s5_wTemp0_warn_u,D12214,WORD,0
-VAR,snsr_s5_wTemp0_warn_l,D12215,WORD,0
-VAR,snsr_s5_wTemp0_err_l,D12216,WORD,0
-VAR,snsr_s6_wTemp0_value,D12217,WORD,0
-VAR,snsr_s6_wTemp0_state,D12218,WORD,0
-VAR,snsr_s6_wTemp0_err_u,D12219,WORD,0
-VAR,snsr_s6_wTemp0_warn_u,D12220,WORD,0
-VAR,snsr_s6_wTemp0_warn_l,D12221,WORD,0
-VAR,snsr_s6_wTemp0_err_l,D12222,WORD,0
-VAR,snsr_s7_wTemp0_value,D12223,WORD,0
-VAR,snsr_s7_wTemp0_state,D12224,WORD,0
-VAR,snsr_s7_wTemp0_err_u,D12225,WORD,0
-VAR,snsr_s7_wTemp0_warn_u,D12226,WORD,0
-VAR,snsr_s7_wTemp0_warn_l,D12227,WORD,0
-VAR,snsr_s7_wTemp0_err_l,D12228,WORD,0
-VAR,snsr_s8_wTemp0_value,D12229,WORD,0
-VAR,snsr_s8_wTemp0_state,D12230,WORD,0
-VAR,snsr_s8_wTemp0_err_u,D12231,WORD,0
-VAR,snsr_s8_wTemp0_warn_u,D12232,WORD,0
-VAR,snsr_s8_wTemp0_warn_l,D12233,WORD,0
-VAR,snsr_s8_wTemp0_err_l,D12234,WORD,0
-VAR,snsr_s9_wTemp0_value,D12235,WORD,0
-VAR,snsr_s9_wTemp0_state,D12236,WORD,0
-VAR,snsr_s9_wTemp0_err_u,D12237,WORD,0
-VAR,snsr_s9_wTemp0_warn_u,D12238,WORD,0
-VAR,snsr_s9_wTemp0_warn_l,D12239,WORD,0
-VAR,snsr_s9_wTemp0_err_l,D12240,WORD,0
-VAR,snsr_s0_wTemp1_value,D12241,WORD,0
-VAR,snsr_s0_wTemp1_state,D12242,WORD,0
-VAR,snsr_s0_wTemp1_err_u,D12243,WORD,0
-VAR,snsr_s0_wTemp1_warn_u,D12244,WORD,0
-VAR,snsr_s0_wTemp1_warn_l,D12245,WORD,0
-VAR,snsr_s0_wTemp1_err_l,D12246,WORD,0
-VAR,snsr_s1_wTemp1_value,D12247,WORD,0
-VAR,snsr_s1_wTemp1_state,D12248,WORD,0
-VAR,snsr_s1_wTemp1_err_u,D12249,WORD,0
-VAR,snsr_s1_wTemp1_warn_u,D12250,WORD,0
-VAR,snsr_s1_wTemp1_warn_l,D12251,WORD,0
-VAR,snsr_s1_wTemp1_err_l,D12252,WORD,0
-VAR,snsr_s2_wTemp1_value,D12253,WORD,0
-VAR,snsr_s2_wTemp1_state,D12254,WORD,0
-VAR,snsr_s2_wTemp1_err_u,D12255,WORD,0
-VAR,snsr_s2_wTemp1_warn_u,D12256,WORD,0
-VAR,snsr_s2_wTemp1_warn_l,D12257,WORD,0
-VAR,snsr_s2_wTemp1_err_l,D12258,WORD,0
-VAR,snsr_s3_wTemp1_value,D12259,WORD,0
-VAR,snsr_s3_wTemp1_state,D12260,WORD,0
-VAR,snsr_s3_wTemp1_err_u,D12261,WORD,0
-VAR,snsr_s3_wTemp1_warn_u,D12262,WORD,0
-VAR,snsr_s3_wTemp1_warn_l,D12263,WORD,0
-VAR,snsr_s3_wTemp1_err_l,D12264,WORD,0
-VAR,snsr_s4_wTemp1_value,D12265,WORD,0
-VAR,snsr_s4_wTemp1_state,D12266,WORD,0
-VAR,snsr_s4_wTemp1_err_u,D12267,WORD,0
-VAR,snsr_s4_wTemp1_warn_u,D12268,WORD,0
-VAR,snsr_s4_wTemp1_warn_l,D12269,WORD,0
-VAR,snsr_s4_wTemp1_err_l,D12270,WORD,0
-VAR,snsr_s5_wTemp1_value,D12271,WORD,0
-VAR,snsr_s5_wTemp1_state,D12272,WORD,0
-VAR,snsr_s5_wTemp1_err_u,D12273,WORD,0
-VAR,snsr_s5_wTemp1_warn_u,D12274,WORD,0
-VAR,snsr_s5_wTemp1_warn_l,D12275,WORD,0
-VAR,snsr_s5_wTemp1_err_l,D12276,WORD,0
-VAR,snsr_s6_wTemp1_value,D12277,WORD,0
-VAR,snsr_s6_wTemp1_state,D12278,WORD,0
-VAR,snsr_s6_wTemp1_err_u,D12279,WORD,0
-VAR,snsr_s6_wTemp1_warn_u,D12280,WORD,0
-VAR,snsr_s6_wTemp1_warn_l,D12281,WORD,0
-VAR,snsr_s6_wTemp1_err_l,D12282,WORD,0
-VAR,snsr_s7_wTemp1_value,D12283,WORD,0
-VAR,snsr_s7_wTemp1_state,D12284,WORD,0
-VAR,snsr_s7_wTemp1_err_u,D12285,WORD,0
-VAR,snsr_s7_wTemp1_warn_u,D12286,WORD,0
-VAR,snsr_s7_wTemp1_warn_l,D12287,WORD,0
-VAR,snsr_s7_wTemp1_err_l,D12288,WORD,0
-VAR,snsr_s8_wTemp1_value,D12289,WORD,0
-VAR,snsr_s8_wTemp1_state,D12290,WORD,0
-VAR,snsr_s8_wTemp1_err_u,D12291,WORD,0
-VAR,snsr_s8_wTemp1_warn_u,D12292,WORD,0
-VAR,snsr_s8_wTemp1_warn_l,D12293,WORD,0
-VAR,snsr_s8_wTemp1_err_l,D12294,WORD,0
+VAR,snsr_s0_wPres1_value,D12007,WORD,0
+VAR,snsr_s0_wPres1_state,D12008,WORD,0
+VAR,snsr_s0_wPres1_err_u,D12009,WORD,0
+VAR,snsr_s0_wPres1_warn_u,D12010,WORD,0
+VAR,snsr_s0_wPres1_warn_l,D12011,WORD,0
+VAR,snsr_s0_wPres1_err_l,D12012,WORD,0
+VAR,snsr_s0_wPres2_value,D12013,WORD,0
+VAR,snsr_s0_wPres2_state,D12014,WORD,0
+VAR,snsr_s0_wPres2_err_u,D12015,WORD,0
+VAR,snsr_s0_wPres2_warn_u,D12016,WORD,0
+VAR,snsr_s0_wPres2_warn_l,D12017,WORD,0
+VAR,snsr_s0_wPres2_err_l,D12018,WORD,0
+VAR,snsr_s0_wTemp0_value,D12019,WORD,0
+VAR,snsr_s0_wTemp0_state,D12020,WORD,0
+VAR,snsr_s0_wTemp0_err_u,D12021,WORD,0
+VAR,snsr_s0_wTemp0_warn_u,D12022,WORD,0
+VAR,snsr_s0_wTemp0_warn_l,D12023,WORD,0
+VAR,snsr_s0_wTemp0_err_l,D12024,WORD,0
+VAR,snsr_s0_wTemp1_value,D12025,WORD,0
+VAR,snsr_s0_wTemp1_state,D12026,WORD,0
+VAR,snsr_s0_wTemp1_err_u,D12027,WORD,0
+VAR,snsr_s0_wTemp1_warn_u,D12028,WORD,0
+VAR,snsr_s0_wTemp1_warn_l,D12029,WORD,0
+VAR,snsr_s0_wTemp1_err_l,D12030,WORD,0
+VAR,snsr_s1_wPres0_value,D12031,WORD,0
+VAR,snsr_s1_wPres0_state,D12032,WORD,0
+VAR,snsr_s1_wPres0_err_u,D12033,WORD,0
+VAR,snsr_s1_wPres0_warn_u,D12034,WORD,0
+VAR,snsr_s1_wPres0_warn_l,D12035,WORD,0
+VAR,snsr_s1_wPres0_err_l,D12036,WORD,0
+VAR,snsr_s1_wPres1_value,D12037,WORD,0
+VAR,snsr_s1_wPres1_state,D12038,WORD,0
+VAR,snsr_s1_wPres1_err_u,D12039,WORD,0
+VAR,snsr_s1_wPres1_warn_u,D12040,WORD,0
+VAR,snsr_s1_wPres1_warn_l,D12041,WORD,0
+VAR,snsr_s1_wPres1_err_l,D12042,WORD,0
+VAR,snsr_s1_wPres2_value,D12043,WORD,0
+VAR,snsr_s1_wPres2_state,D12044,WORD,0
+VAR,snsr_s1_wPres2_err_u,D12045,WORD,0
+VAR,snsr_s1_wPres2_warn_u,D12046,WORD,0
+VAR,snsr_s1_wPres2_warn_l,D12047,WORD,0
+VAR,snsr_s1_wPres2_err_l,D12048,WORD,0
+VAR,snsr_s1_wTemp0_value,D12049,WORD,0
+VAR,snsr_s1_wTemp0_state,D12050,WORD,0
+VAR,snsr_s1_wTemp0_err_u,D12051,WORD,0
+VAR,snsr_s1_wTemp0_warn_u,D12052,WORD,0
+VAR,snsr_s1_wTemp0_warn_l,D12053,WORD,0
+VAR,snsr_s1_wTemp0_err_l,D12054,WORD,0
+VAR,snsr_s1_wTemp1_value,D12055,WORD,0
+VAR,snsr_s1_wTemp1_state,D12056,WORD,0
+VAR,snsr_s1_wTemp1_err_u,D12057,WORD,0
+VAR,snsr_s1_wTemp1_warn_u,D12058,WORD,0
+VAR,snsr_s1_wTemp1_warn_l,D12059,WORD,0
+VAR,snsr_s1_wTemp1_err_l,D12060,WORD,0
+VAR,snsr_s2_wPres0_value,D12061,WORD,0
+VAR,snsr_s2_wPres0_state,D12062,WORD,0
+VAR,snsr_s2_wPres0_err_u,D12063,WORD,0
+VAR,snsr_s2_wPres0_warn_u,D12064,WORD,0
+VAR,snsr_s2_wPres0_warn_l,D12065,WORD,0
+VAR,snsr_s2_wPres0_err_l,D12066,WORD,0
+VAR,snsr_s2_wPres1_value,D12067,WORD,0
+VAR,snsr_s2_wPres1_state,D12068,WORD,0
+VAR,snsr_s2_wPres1_err_u,D12069,WORD,0
+VAR,snsr_s2_wPres1_warn_u,D12070,WORD,0
+VAR,snsr_s2_wPres1_warn_l,D12071,WORD,0
+VAR,snsr_s2_wPres1_err_l,D12072,WORD,0
+VAR,snsr_s2_wPres2_value,D12073,WORD,0
+VAR,snsr_s2_wPres2_state,D12074,WORD,0
+VAR,snsr_s2_wPres2_err_u,D12075,WORD,0
+VAR,snsr_s2_wPres2_warn_u,D12076,WORD,0
+VAR,snsr_s2_wPres2_warn_l,D12077,WORD,0
+VAR,snsr_s2_wPres2_err_l,D12078,WORD,0
+VAR,snsr_s2_wTemp0_value,D12079,WORD,0
+VAR,snsr_s2_wTemp0_state,D12080,WORD,0
+VAR,snsr_s2_wTemp0_err_u,D12081,WORD,0
+VAR,snsr_s2_wTemp0_warn_u,D12082,WORD,0
+VAR,snsr_s2_wTemp0_warn_l,D12083,WORD,0
+VAR,snsr_s2_wTemp0_err_l,D12084,WORD,0
+VAR,snsr_s2_wTemp1_value,D12085,WORD,0
+VAR,snsr_s2_wTemp1_state,D12086,WORD,0
+VAR,snsr_s2_wTemp1_err_u,D12087,WORD,0
+VAR,snsr_s2_wTemp1_warn_u,D12088,WORD,0
+VAR,snsr_s2_wTemp1_warn_l,D12089,WORD,0
+VAR,snsr_s2_wTemp1_err_l,D12090,WORD,0
+VAR,snsr_s3_wPres0_value,D12091,WORD,0
+VAR,snsr_s3_wPres0_state,D12092,WORD,0
+VAR,snsr_s3_wPres0_err_u,D12093,WORD,0
+VAR,snsr_s3_wPres0_warn_u,D12094,WORD,0
+VAR,snsr_s3_wPres0_warn_l,D12095,WORD,0
+VAR,snsr_s3_wPres0_err_l,D12096,WORD,0
+VAR,snsr_s3_wPres1_value,D12097,WORD,0
+VAR,snsr_s3_wPres1_state,D12098,WORD,0
+VAR,snsr_s3_wPres1_err_u,D12099,WORD,0
+VAR,snsr_s3_wPres1_warn_u,D12100,WORD,0
+VAR,snsr_s3_wPres1_warn_l,D12101,WORD,0
+VAR,snsr_s3_wPres1_err_l,D12102,WORD,0
+VAR,snsr_s3_wPres2_value,D12103,WORD,0
+VAR,snsr_s3_wPres2_state,D12104,WORD,0
+VAR,snsr_s3_wPres2_err_u,D12105,WORD,0
+VAR,snsr_s3_wPres2_warn_u,D12106,WORD,0
+VAR,snsr_s3_wPres2_warn_l,D12107,WORD,0
+VAR,snsr_s3_wPres2_err_l,D12108,WORD,0
+VAR,snsr_s3_wTemp0_value,D12109,WORD,0
+VAR,snsr_s3_wTemp0_state,D12110,WORD,0
+VAR,snsr_s3_wTemp0_err_u,D12111,WORD,0
+VAR,snsr_s3_wTemp0_warn_u,D12112,WORD,0
+VAR,snsr_s3_wTemp0_warn_l,D12113,WORD,0
+VAR,snsr_s3_wTemp0_err_l,D12114,WORD,0
+VAR,snsr_s3_wTemp1_value,D12115,WORD,0
+VAR,snsr_s3_wTemp1_state,D12116,WORD,0
+VAR,snsr_s3_wTemp1_err_u,D12117,WORD,0
+VAR,snsr_s3_wTemp1_warn_u,D12118,WORD,0
+VAR,snsr_s3_wTemp1_warn_l,D12119,WORD,0
+VAR,snsr_s3_wTemp1_err_l,D12120,WORD,0
+VAR,snsr_s4_wPres0_value,D12121,WORD,0
+VAR,snsr_s4_wPres0_state,D12122,WORD,0
+VAR,snsr_s4_wPres0_err_u,D12123,WORD,0
+VAR,snsr_s4_wPres0_warn_u,D12124,WORD,0
+VAR,snsr_s4_wPres0_warn_l,D12125,WORD,0
+VAR,snsr_s4_wPres0_err_l,D12126,WORD,0
+VAR,snsr_s4_wPres1_value,D12127,WORD,0
+VAR,snsr_s4_wPres1_state,D12128,WORD,0
+VAR,snsr_s4_wPres1_err_u,D12129,WORD,0
+VAR,snsr_s4_wPres1_warn_u,D12130,WORD,0
+VAR,snsr_s4_wPres1_warn_l,D12131,WORD,0
+VAR,snsr_s4_wPres1_err_l,D12132,WORD,0
+VAR,snsr_s4_wPres2_value,D12133,WORD,0
+VAR,snsr_s4_wPres2_state,D12134,WORD,0
+VAR,snsr_s4_wPres2_err_u,D12135,WORD,0
+VAR,snsr_s4_wPres2_warn_u,D12136,WORD,0
+VAR,snsr_s4_wPres2_warn_l,D12137,WORD,0
+VAR,snsr_s4_wPres2_err_l,D12138,WORD,0
+VAR,snsr_s4_wTemp0_value,D12139,WORD,0
+VAR,snsr_s4_wTemp0_state,D12140,WORD,0
+VAR,snsr_s4_wTemp0_err_u,D12141,WORD,0
+VAR,snsr_s4_wTemp0_warn_u,D12142,WORD,0
+VAR,snsr_s4_wTemp0_warn_l,D12143,WORD,0
+VAR,snsr_s4_wTemp0_err_l,D12144,WORD,0
+VAR,snsr_s4_wTemp1_value,D12145,WORD,0
+VAR,snsr_s4_wTemp1_state,D12146,WORD,0
+VAR,snsr_s4_wTemp1_err_u,D12147,WORD,0
+VAR,snsr_s4_wTemp1_warn_u,D12148,WORD,0
+VAR,snsr_s4_wTemp1_warn_l,D12149,WORD,0
+VAR,snsr_s4_wTemp1_err_l,D12150,WORD,0
+VAR,snsr_s5_wPres0_value,D12151,WORD,0
+VAR,snsr_s5_wPres0_state,D12152,WORD,0
+VAR,snsr_s5_wPres0_err_u,D12153,WORD,0
+VAR,snsr_s5_wPres0_warn_u,D12154,WORD,0
+VAR,snsr_s5_wPres0_warn_l,D12155,WORD,0
+VAR,snsr_s5_wPres0_err_l,D12156,WORD,0
+VAR,snsr_s5_wPres1_value,D12157,WORD,0
+VAR,snsr_s5_wPres1_state,D12158,WORD,0
+VAR,snsr_s5_wPres1_err_u,D12159,WORD,0
+VAR,snsr_s5_wPres1_warn_u,D12160,WORD,0
+VAR,snsr_s5_wPres1_warn_l,D12161,WORD,0
+VAR,snsr_s5_wPres1_err_l,D12162,WORD,0
+VAR,snsr_s5_wPres2_value,D12163,WORD,0
+VAR,snsr_s5_wPres2_state,D12164,WORD,0
+VAR,snsr_s5_wPres2_err_u,D12165,WORD,0
+VAR,snsr_s5_wPres2_warn_u,D12166,WORD,0
+VAR,snsr_s5_wPres2_warn_l,D12167,WORD,0
+VAR,snsr_s5_wPres2_err_l,D12168,WORD,0
+VAR,snsr_s5_wTemp0_value,D12169,WORD,0
+VAR,snsr_s5_wTemp0_state,D12170,WORD,0
+VAR,snsr_s5_wTemp0_err_u,D12171,WORD,0
+VAR,snsr_s5_wTemp0_warn_u,D12172,WORD,0
+VAR,snsr_s5_wTemp0_warn_l,D12173,WORD,0
+VAR,snsr_s5_wTemp0_err_l,D12174,WORD,0
+VAR,snsr_s5_wTemp1_value,D12175,WORD,0
+VAR,snsr_s5_wTemp1_state,D12176,WORD,0
+VAR,snsr_s5_wTemp1_err_u,D12177,WORD,0
+VAR,snsr_s5_wTemp1_warn_u,D12178,WORD,0
+VAR,snsr_s5_wTemp1_warn_l,D12179,WORD,0
+VAR,snsr_s5_wTemp1_err_l,D12180,WORD,0
+VAR,snsr_s6_wPres0_value,D12181,WORD,0
+VAR,snsr_s6_wPres0_state,D12182,WORD,0
+VAR,snsr_s6_wPres0_err_u,D12183,WORD,0
+VAR,snsr_s6_wPres0_warn_u,D12184,WORD,0
+VAR,snsr_s6_wPres0_warn_l,D12185,WORD,0
+VAR,snsr_s6_wPres0_err_l,D12186,WORD,0
+VAR,snsr_s6_wPres1_value,D12187,WORD,0
+VAR,snsr_s6_wPres1_state,D12188,WORD,0
+VAR,snsr_s6_wPres1_err_u,D12189,WORD,0
+VAR,snsr_s6_wPres1_warn_u,D12190,WORD,0
+VAR,snsr_s6_wPres1_warn_l,D12191,WORD,0
+VAR,snsr_s6_wPres1_err_l,D12192,WORD,0
+VAR,snsr_s6_wPres2_value,D12193,WORD,0
+VAR,snsr_s6_wPres2_state,D12194,WORD,0
+VAR,snsr_s6_wPres2_err_u,D12195,WORD,0
+VAR,snsr_s6_wPres2_warn_u,D12196,WORD,0
+VAR,snsr_s6_wPres2_warn_l,D12197,WORD,0
+VAR,snsr_s6_wPres2_err_l,D12198,WORD,0
+VAR,snsr_s6_wTemp0_value,D12199,WORD,0
+VAR,snsr_s6_wTemp0_state,D12200,WORD,0
+VAR,snsr_s6_wTemp0_err_u,D12201,WORD,0
+VAR,snsr_s6_wTemp0_warn_u,D12202,WORD,0
+VAR,snsr_s6_wTemp0_warn_l,D12203,WORD,0
+VAR,snsr_s6_wTemp0_err_l,D12204,WORD,0
+VAR,snsr_s6_wTemp1_value,D12205,WORD,0
+VAR,snsr_s6_wTemp1_state,D12206,WORD,0
+VAR,snsr_s6_wTemp1_err_u,D12207,WORD,0
+VAR,snsr_s6_wTemp1_warn_u,D12208,WORD,0
+VAR,snsr_s6_wTemp1_warn_l,D12209,WORD,0
+VAR,snsr_s6_wTemp1_err_l,D12210,WORD,0
+VAR,snsr_s7_wPres0_value,D12211,WORD,0
+VAR,snsr_s7_wPres0_state,D12212,WORD,0
+VAR,snsr_s7_wPres0_err_u,D12213,WORD,0
+VAR,snsr_s7_wPres0_warn_u,D12214,WORD,0
+VAR,snsr_s7_wPres0_warn_l,D12215,WORD,0
+VAR,snsr_s7_wPres0_err_l,D12216,WORD,0
+VAR,snsr_s7_wPres1_value,D12217,WORD,0
+VAR,snsr_s7_wPres1_state,D12218,WORD,0
+VAR,snsr_s7_wPres1_err_u,D12219,WORD,0
+VAR,snsr_s7_wPres1_warn_u,D12220,WORD,0
+VAR,snsr_s7_wPres1_warn_l,D12221,WORD,0
+VAR,snsr_s7_wPres1_err_l,D12222,WORD,0
+VAR,snsr_s7_wPres2_value,D12223,WORD,0
+VAR,snsr_s7_wPres2_state,D12224,WORD,0
+VAR,snsr_s7_wPres2_err_u,D12225,WORD,0
+VAR,snsr_s7_wPres2_warn_u,D12226,WORD,0
+VAR,snsr_s7_wPres2_warn_l,D12227,WORD,0
+VAR,snsr_s7_wPres2_err_l,D12228,WORD,0
+VAR,snsr_s7_wTemp0_value,D12229,WORD,0
+VAR,snsr_s7_wTemp0_state,D12230,WORD,0
+VAR,snsr_s7_wTemp0_err_u,D12231,WORD,0
+VAR,snsr_s7_wTemp0_warn_u,D12232,WORD,0
+VAR,snsr_s7_wTemp0_warn_l,D12233,WORD,0
+VAR,snsr_s7_wTemp0_err_l,D12234,WORD,0
+VAR,snsr_s7_wTemp1_value,D12235,WORD,0
+VAR,snsr_s7_wTemp1_state,D12236,WORD,0
+VAR,snsr_s7_wTemp1_err_u,D12237,WORD,0
+VAR,snsr_s7_wTemp1_warn_u,D12238,WORD,0
+VAR,snsr_s7_wTemp1_warn_l,D12239,WORD,0
+VAR,snsr_s7_wTemp1_err_l,D12240,WORD,0
+VAR,snsr_s8_wPres0_value,D12241,WORD,0
+VAR,snsr_s8_wPres0_state,D12242,WORD,0
+VAR,snsr_s8_wPres0_err_u,D12243,WORD,0
+VAR,snsr_s8_wPres0_warn_u,D12244,WORD,0
+VAR,snsr_s8_wPres0_warn_l,D12245,WORD,0
+VAR,snsr_s8_wPres0_err_l,D12246,WORD,0
+VAR,snsr_s8_wPres1_value,D12247,WORD,0
+VAR,snsr_s8_wPres1_state,D12248,WORD,0
+VAR,snsr_s8_wPres1_err_u,D12249,WORD,0
+VAR,snsr_s8_wPres1_warn_u,D12250,WORD,0
+VAR,snsr_s8_wPres1_warn_l,D12251,WORD,0
+VAR,snsr_s8_wPres1_err_l,D12252,WORD,0
+VAR,snsr_s8_wPres2_value,D12253,WORD,0
+VAR,snsr_s8_wPres2_state,D12254,WORD,0
+VAR,snsr_s8_wPres2_err_u,D12255,WORD,0
+VAR,snsr_s8_wPres2_warn_u,D12256,WORD,0
+VAR,snsr_s8_wPres2_warn_l,D12257,WORD,0
+VAR,snsr_s8_wPres2_err_l,D12258,WORD,0
+VAR,snsr_s8_wTemp0_value,D12259,WORD,0
+VAR,snsr_s8_wTemp0_state,D12260,WORD,0
+VAR,snsr_s8_wTemp0_err_u,D12261,WORD,0
+VAR,snsr_s8_wTemp0_warn_u,D12262,WORD,0
+VAR,snsr_s8_wTemp0_warn_l,D12263,WORD,0
+VAR,snsr_s8_wTemp0_err_l,D12264,WORD,0
+VAR,snsr_s8_wTemp1_value,D12265,WORD,0
+VAR,snsr_s8_wTemp1_state,D12266,WORD,0
+VAR,snsr_s8_wTemp1_err_u,D12267,WORD,0
+VAR,snsr_s8_wTemp1_warn_u,D12268,WORD,0
+VAR,snsr_s8_wTemp1_warn_l,D12269,WORD,0
+VAR,snsr_s8_wTemp1_err_l,D12270,WORD,0
+VAR,snsr_s9_wPres0_value,D12271,WORD,0
+VAR,snsr_s9_wPres0_state,D12272,WORD,0
+VAR,snsr_s9_wPres0_err_u,D12273,WORD,0
+VAR,snsr_s9_wPres0_warn_u,D12274,WORD,0
+VAR,snsr_s9_wPres0_warn_l,D12275,WORD,0
+VAR,snsr_s9_wPres0_err_l,D12276,WORD,0
+VAR,snsr_s9_wPres1_value,D12277,WORD,0
+VAR,snsr_s9_wPres1_state,D12278,WORD,0
+VAR,snsr_s9_wPres1_err_u,D12279,WORD,0
+VAR,snsr_s9_wPres1_warn_u,D12280,WORD,0
+VAR,snsr_s9_wPres1_warn_l,D12281,WORD,0
+VAR,snsr_s9_wPres1_err_l,D12282,WORD,0
+VAR,snsr_s9_wPres2_value,D12283,WORD,0
+VAR,snsr_s9_wPres2_state,D12284,WORD,0
+VAR,snsr_s9_wPres2_err_u,D12285,WORD,0
+VAR,snsr_s9_wPres2_warn_u,D12286,WORD,0
+VAR,snsr_s9_wPres2_warn_l,D12287,WORD,0
+VAR,snsr_s9_wPres2_err_l,D12288,WORD,0
+VAR,snsr_s9_wTemp0_value,D12289,WORD,0
+VAR,snsr_s9_wTemp0_state,D12290,WORD,0
+VAR,snsr_s9_wTemp0_err_u,D12291,WORD,0
+VAR,snsr_s9_wTemp0_warn_u,D12292,WORD,0
+VAR,snsr_s9_wTemp0_warn_l,D12293,WORD,0
+VAR,snsr_s9_wTemp0_err_l,D12294,WORD,0
 VAR,snsr_s9_wTemp1_value,D12295,WORD,0
 VAR,snsr_s9_wTemp1_state,D12296,WORD,0
 VAR,snsr_s9_wTemp1_err_u,D12297,WORD,0
