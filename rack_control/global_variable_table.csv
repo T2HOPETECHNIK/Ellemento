@@ -9,19 +9,20 @@ VAR,k_shelf_autoLightOnIndexOffset,D20006,WORD,2,offset from shelf_x_addr to get
 VAR,k_shelf_autoLightIntensOffset,D20007,WORD,3,offset from shelf_x_addr to get shelf_x_autoLightIntens
 VAR,k_shelf_semiPVOnIndexOffset,D20008,WORD,4,offset from shelf_x_addr to get shelf_x_semiPVOn
 VAR,k_shelf_semiLightOnIndexOffset,D20009,WORD,5,offset from shelf_x_addr to get shelf_x_semiLightOn
-VAR,k_shelf_manuLightIntensIndexOffset,D20010,WORD,6,offset from shelf_x_addr to get shelf_x_manuLightIntens
-VAR,k_shelf_manuPvPosIndexOffset,D20011,WORD,7,offset from shelf_x_addr to get shelf_x_manuPVPos
-VAR,k_shelf_baseAddr,D20012,WORD,10000,baseAddr of all shelves
-VAR,PVLookup_1_Arr,D20013,ARRAY [4] OF WORD,[4(0)],PV look-up values when only 1 valves are on
-VAR,PVLookup_2_Arr,D20017,ARRAY [4] OF WORD,[4(0)],PV look-up values when only 2 valves are on
-VAR,PVLookup_3_Arr,D20021,ARRAY [4] OF WORD,[4(0)],PV look-up values when only 3 valves are on
-VAR,PVLookup_4_Arr,D20025,ARRAY [4] OF WORD,[4(0)],PV look-up values when only 4 valves are on
-VAR,ShelfSectionMapping_0_Arr,D20029,ARRAY [4] OF WORD,[4(0)],configure which shelves should belong to sec0
-VAR,ShelfSectionMapping_1_Arr,D20033,ARRAY [4] OF WORD,[4(0)],configure which shelves should belong to sec1
-VAR,ShelfSectionMapping_2_Arr,D20037,ARRAY [4] OF WORD,[4(0)],configure which shelves should belong to sec2
-VAR,secModeArr,D20041,ARRAY [3] OF WORD,[3(0)],secMode[0] : section 0 mode etc.
-VAR,k_sectionNo,D20044,WORD,3,total number of sections
-VAR,k_sectionMaxShelfNo,D20045,WORD,4,maximum number of shelves per section
+VAR,k_shelf_manuLightOnIndexOffset,D20010,WORD,6,offset from shelf_x_addr to get shelf_x_manuLightOn
+VAR,k_shelf_manuLightIntensIndexOffset,D20011,WORD,7,offset from shelf_x_addr to get shelf_x_manuLightIntens
+VAR,k_shelf_manuPvPosIndexOffset,D20012,WORD,8,offset from shelf_x_addr to get shelf_x_manuPVPos
+VAR,k_shelf_baseAddr,D20013,WORD,10000,baseAddr of all shelves
+VAR,PVLookup_1_Arr,D20014,ARRAY [4] OF WORD,[4(0)],PV look-up values when only 1 valves are on
+VAR,PVLookup_2_Arr,D20018,ARRAY [4] OF WORD,[4(0)],PV look-up values when only 2 valves are on
+VAR,PVLookup_3_Arr,D20022,ARRAY [4] OF WORD,[4(0)],PV look-up values when only 3 valves are on
+VAR,PVLookup_4_Arr,D20026,ARRAY [4] OF WORD,[4(0)],PV look-up values when only 4 valves are on
+VAR,ShelfSectionMapping_0_Arr,D20030,ARRAY [4] OF WORD,[4(0)],configure which shelves should belong to sec0
+VAR,ShelfSectionMapping_1_Arr,D20034,ARRAY [4] OF WORD,[4(0)],configure which shelves should belong to sec1
+VAR,ShelfSectionMapping_2_Arr,D20038,ARRAY [4] OF WORD,[4(0)],configure which shelves should belong to sec2
+VAR,secModeArr,D20042,ARRAY [3] OF WORD,[3(0)],secMode[0] : section 0 mode etc.
+VAR,k_sectionNo,D20045,WORD,3,total number of sections
+VAR,k_sectionMaxShelfNo,D20046,WORD,4,maximum number of shelves per section
 VAR,pump_e_OnArr,D11000.0,ARRAY [3] OF BOOL,[3(FALSE)]
 VAR,pump_e_RpmValArr,D11001,ARRAY [3] OF WORD,[3(0)]
 VAR,pump_e_ValveOnArr,D11004.0,ARRAY [4] OF BOOL,[4(FALSE)]
@@ -41,110 +42,120 @@ VAR,s0_autoLightOn,D10002.0,BOOL,FALSE
 VAR,s0_autoLightIntensity,D10003,WORD,0
 VAR,s0_semiPVOn,D10004.0,BOOL,0
 VAR,s0_semiLightOn,D10005.0,BOOL,0
-VAR,s0_manuLightIntensity,D10006,WORD,0
-VAR,s0_manuPVPos,D10007,WORD,0
-VAR,s0_exePVPos,D10008,WORD,0
-VAR,s0_exeLightIntensity,D10009,WORD,0
-VAR,s0_exeLightOn,D10010,WORD,0
-VAR,s1_mode,D10011,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
-VAR,s1_autoWaterOn,D10012.0,BOOL,FALSE
-VAR,s1_autoLightOn,D10013.0,BOOL,FALSE
-VAR,s1_autoLightIntensity,D10014,WORD,0
-VAR,s1_semiPVOn,D10015.0,BOOL,0
-VAR,s1_semiLightOn,D10016.0,BOOL,0
-VAR,s1_manuLightIntensity,D10017,WORD,0
-VAR,s1_manuPVPos,D10018,WORD,0
-VAR,s1_exePVPos,D10019,WORD,0
-VAR,s1_exeLightIntensity,D10020,WORD,0
-VAR,s1_exeLightOn,D10021,WORD,0
-VAR,s2_mode,D10022,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
-VAR,s2_autoWaterOn,D10023.0,BOOL,FALSE
-VAR,s2_autoLightOn,D10024.0,BOOL,FALSE
-VAR,s2_autoLightIntensity,D10025,WORD,0
-VAR,s2_semiPVOn,D10026.0,BOOL,0
-VAR,s2_semiLightOn,D10027.0,BOOL,0
-VAR,s2_manuLightIntensity,D10028,WORD,0
-VAR,s2_manuPVPos,D10029,WORD,0
-VAR,s2_exePVPos,D10030,WORD,0
-VAR,s2_exeLightIntensity,D10031,WORD,0
-VAR,s2_exeLightOn,D10032,WORD,0
-VAR,s3_mode,D10033,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
-VAR,s3_autoWaterOn,D10034.0,BOOL,FALSE
-VAR,s3_autoLightOn,D10035.0,BOOL,FALSE
-VAR,s3_autoLightIntensity,D10036,WORD,0
-VAR,s3_semiPVOn,D10037.0,BOOL,0
-VAR,s3_semiLightOn,D10038.0,BOOL,0
-VAR,s3_manuLightIntensity,D10039,WORD,0
-VAR,s3_manuPVPos,D10040,WORD,0
-VAR,s3_exePVPos,D10041,WORD,0
-VAR,s3_exeLightIntensity,D10042,WORD,0
-VAR,s3_exeLightOn,D10043,WORD,0
-VAR,s4_mode,D10044,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
-VAR,s4_autoWaterOn,D10045.0,BOOL,FALSE
-VAR,s4_autoLightOn,D10046.0,BOOL,FALSE
-VAR,s4_autoLightIntensity,D10047,WORD,0
-VAR,s4_semiPVOn,D10048.0,BOOL,0
-VAR,s4_semiLightOn,D10049.0,BOOL,0
-VAR,s4_manuLightIntensity,D10050,WORD,0
-VAR,s4_manuPVPos,D10051,WORD,0
-VAR,s4_exePVPos,D10052,WORD,0
-VAR,s4_exeLightIntensity,D10053,WORD,0
-VAR,s4_exeLightOn,D10054,WORD,0
-VAR,s5_mode,D10055,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
-VAR,s5_autoWaterOn,D10056.0,BOOL,FALSE
-VAR,s5_autoLightOn,D10057.0,BOOL,FALSE
-VAR,s5_autoLightIntensity,D10058,WORD,0
-VAR,s5_semiPVOn,D10059.0,BOOL,0
-VAR,s5_semiLightOn,D10060.0,BOOL,0
-VAR,s5_manuLightIntensity,D10061,WORD,0
-VAR,s5_manuPVPos,D10062,WORD,0
-VAR,s5_exePVPos,D10063,WORD,0
-VAR,s5_exeLightIntensity,D10064,WORD,0
-VAR,s5_exeLightOn,D10065,WORD,0
-VAR,s6_mode,D10066,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
-VAR,s6_autoWaterOn,D10067.0,BOOL,FALSE
-VAR,s6_autoLightOn,D10068.0,BOOL,FALSE
-VAR,s6_autoLightIntensity,D10069,WORD,0
-VAR,s6_semiPVOn,D10070.0,BOOL,0
-VAR,s6_semiLightOn,D10071.0,BOOL,0
-VAR,s6_manuLightIntensity,D10072,WORD,0
-VAR,s6_manuPVPos,D10073,WORD,0
-VAR,s6_exePVPos,D10074,WORD,0
-VAR,s6_exeLightIntensity,D10075,WORD,0
-VAR,s6_exeLightOn,D10076,WORD,0
-VAR,s7_mode,D10077,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
-VAR,s7_autoWaterOn,D10078.0,BOOL,FALSE
-VAR,s7_autoLightOn,D10079.0,BOOL,FALSE
-VAR,s7_autoLightIntensity,D10080,WORD,0
-VAR,s7_semiPVOn,D10081.0,BOOL,0
-VAR,s7_semiLightOn,D10082.0,BOOL,0
-VAR,s7_manuLightIntensity,D10083,WORD,0
-VAR,s7_manuPVPos,D10084,WORD,0
-VAR,s7_exePVPos,D10085,WORD,0
-VAR,s7_exeLightIntensity,D10086,WORD,0
-VAR,s7_exeLightOn,D10087,WORD,0
-VAR,s8_mode,D10088,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
-VAR,s8_autoWaterOn,D10089.0,BOOL,FALSE
-VAR,s8_autoLightOn,D10090.0,BOOL,FALSE
-VAR,s8_autoLightIntensity,D10091,WORD,0
-VAR,s8_semiPVOn,D10092.0,BOOL,0
-VAR,s8_semiLightOn,D10093.0,BOOL,0
-VAR,s8_manuLightIntensity,D10094,WORD,0
-VAR,s8_manuPVPos,D10095,WORD,0
-VAR,s8_exePVPos,D10096,WORD,0
-VAR,s8_exeLightIntensity,D10097,WORD,0
-VAR,s8_exeLightOn,D10098,WORD,0
-VAR,s9_mode,D10099,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
-VAR,s9_autoWaterOn,D10100.0,BOOL,FALSE
-VAR,s9_autoLightOn,D10101.0,BOOL,FALSE
-VAR,s9_autoLightIntensity,D10102,WORD,0
-VAR,s9_semiPVOn,D10103.0,BOOL,0
-VAR,s9_semiLightOn,D10104.0,BOOL,0
-VAR,s9_manuLightIntensity,D10105,WORD,0
-VAR,s9_manuPVPos,D10106,WORD,0
-VAR,s9_exePVPos,D10107,WORD,0
-VAR,s9_exeLightIntensity,D10108,WORD,0
-VAR,s9_exeLightOn,D10109,WORD,0
+VAR,s0_manuLightOn,D10006.0,BOOL,0
+VAR,s0_manuLightIntensity,D10007,WORD,0
+VAR,s0_manuPVPos,D10008,WORD,0
+VAR,s0_exePVPos,D10009,WORD,0
+VAR,s0_exeLightIntensity,D10010,WORD,0
+VAR,s0_exeLightOn,D10011,WORD,0
+VAR,s1_mode,D10012,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
+VAR,s1_autoWaterOn,D10013.0,BOOL,FALSE
+VAR,s1_autoLightOn,D10014.0,BOOL,FALSE
+VAR,s1_autoLightIntensity,D10015,WORD,0
+VAR,s1_semiPVOn,D10016.0,BOOL,0
+VAR,s1_semiLightOn,D10017.0,BOOL,0
+VAR,s1_manuLightOn,D10018.0,BOOL,0
+VAR,s1_manuLightIntensity,D10019,WORD,0
+VAR,s1_manuPVPos,D10020,WORD,0
+VAR,s1_exePVPos,D10021,WORD,0
+VAR,s1_exeLightIntensity,D10022,WORD,0
+VAR,s1_exeLightOn,D10023,WORD,0
+VAR,s2_mode,D10024,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
+VAR,s2_autoWaterOn,D10025.0,BOOL,FALSE
+VAR,s2_autoLightOn,D10026.0,BOOL,FALSE
+VAR,s2_autoLightIntensity,D10027,WORD,0
+VAR,s2_semiPVOn,D10028.0,BOOL,0
+VAR,s2_semiLightOn,D10029.0,BOOL,0
+VAR,s2_manuLightOn,D10030.0,BOOL,0
+VAR,s2_manuLightIntensity,D10031,WORD,0
+VAR,s2_manuPVPos,D10032,WORD,0
+VAR,s2_exePVPos,D10033,WORD,0
+VAR,s2_exeLightIntensity,D10034,WORD,0
+VAR,s2_exeLightOn,D10035,WORD,0
+VAR,s3_mode,D10036,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
+VAR,s3_autoWaterOn,D10037.0,BOOL,FALSE
+VAR,s3_autoLightOn,D10038.0,BOOL,FALSE
+VAR,s3_autoLightIntensity,D10039,WORD,0
+VAR,s3_semiPVOn,D10040.0,BOOL,0
+VAR,s3_semiLightOn,D10041.0,BOOL,0
+VAR,s3_manuLightOn,D10042.0,BOOL,0
+VAR,s3_manuLightIntensity,D10043,WORD,0
+VAR,s3_manuPVPos,D10044,WORD,0
+VAR,s3_exePVPos,D10045,WORD,0
+VAR,s3_exeLightIntensity,D10046,WORD,0
+VAR,s3_exeLightOn,D10047,WORD,0
+VAR,s4_mode,D10048,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
+VAR,s4_autoWaterOn,D10049.0,BOOL,FALSE
+VAR,s4_autoLightOn,D10050.0,BOOL,FALSE
+VAR,s4_autoLightIntensity,D10051,WORD,0
+VAR,s4_semiPVOn,D10052.0,BOOL,0
+VAR,s4_semiLightOn,D10053.0,BOOL,0
+VAR,s4_manuLightOn,D10054.0,BOOL,0
+VAR,s4_manuLightIntensity,D10055,WORD,0
+VAR,s4_manuPVPos,D10056,WORD,0
+VAR,s4_exePVPos,D10057,WORD,0
+VAR,s4_exeLightIntensity,D10058,WORD,0
+VAR,s4_exeLightOn,D10059,WORD,0
+VAR,s5_mode,D10060,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
+VAR,s5_autoWaterOn,D10061.0,BOOL,FALSE
+VAR,s5_autoLightOn,D10062.0,BOOL,FALSE
+VAR,s5_autoLightIntensity,D10063,WORD,0
+VAR,s5_semiPVOn,D10064.0,BOOL,0
+VAR,s5_semiLightOn,D10065.0,BOOL,0
+VAR,s5_manuLightOn,D10066.0,BOOL,0
+VAR,s5_manuLightIntensity,D10067,WORD,0
+VAR,s5_manuPVPos,D10068,WORD,0
+VAR,s5_exePVPos,D10069,WORD,0
+VAR,s5_exeLightIntensity,D10070,WORD,0
+VAR,s5_exeLightOn,D10071,WORD,0
+VAR,s6_mode,D10072,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
+VAR,s6_autoWaterOn,D10073.0,BOOL,FALSE
+VAR,s6_autoLightOn,D10074.0,BOOL,FALSE
+VAR,s6_autoLightIntensity,D10075,WORD,0
+VAR,s6_semiPVOn,D10076.0,BOOL,0
+VAR,s6_semiLightOn,D10077.0,BOOL,0
+VAR,s6_manuLightOn,D10078.0,BOOL,0
+VAR,s6_manuLightIntensity,D10079,WORD,0
+VAR,s6_manuPVPos,D10080,WORD,0
+VAR,s6_exePVPos,D10081,WORD,0
+VAR,s6_exeLightIntensity,D10082,WORD,0
+VAR,s6_exeLightOn,D10083,WORD,0
+VAR,s7_mode,D10084,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
+VAR,s7_autoWaterOn,D10085.0,BOOL,FALSE
+VAR,s7_autoLightOn,D10086.0,BOOL,FALSE
+VAR,s7_autoLightIntensity,D10087,WORD,0
+VAR,s7_semiPVOn,D10088.0,BOOL,0
+VAR,s7_semiLightOn,D10089.0,BOOL,0
+VAR,s7_manuLightOn,D10090.0,BOOL,0
+VAR,s7_manuLightIntensity,D10091,WORD,0
+VAR,s7_manuPVPos,D10092,WORD,0
+VAR,s7_exePVPos,D10093,WORD,0
+VAR,s7_exeLightIntensity,D10094,WORD,0
+VAR,s7_exeLightOn,D10095,WORD,0
+VAR,s8_mode,D10096,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
+VAR,s8_autoWaterOn,D10097.0,BOOL,FALSE
+VAR,s8_autoLightOn,D10098.0,BOOL,FALSE
+VAR,s8_autoLightIntensity,D10099,WORD,0
+VAR,s8_semiPVOn,D10100.0,BOOL,0
+VAR,s8_semiLightOn,D10101.0,BOOL,0
+VAR,s8_manuLightOn,D10102.0,BOOL,0
+VAR,s8_manuLightIntensity,D10103,WORD,0
+VAR,s8_manuPVPos,D10104,WORD,0
+VAR,s8_exePVPos,D10105,WORD,0
+VAR,s8_exeLightIntensity,D10106,WORD,0
+VAR,s8_exeLightOn,D10107,WORD,0
+VAR,s9_mode,D10108,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
+VAR,s9_autoWaterOn,D10109.0,BOOL,FALSE
+VAR,s9_autoLightOn,D10110.0,BOOL,FALSE
+VAR,s9_autoLightIntensity,D10111,WORD,0
+VAR,s9_semiPVOn,D10112.0,BOOL,0
+VAR,s9_semiLightOn,D10113.0,BOOL,0
+VAR,s9_manuLightOn,D10114.0,BOOL,0
+VAR,s9_manuLightIntensity,D10115,WORD,0
+VAR,s9_manuPVPos,D10116,WORD,0
+VAR,s9_exePVPos,D10117,WORD,0
+VAR,s9_exeLightIntensity,D10118,WORD,0
+VAR,s9_exeLightOn,D10119,WORD,0
 VAR,snsr_s0_wPres0_value,D12001,WORD,0
 VAR,snsr_s0_wPres0_state,D12002,WORD,0
 VAR,snsr_s0_wPres0_err_u,D12003,WORD,0
@@ -1134,6 +1145,46 @@ VAR,IO_solenoid_3,Y1.3,BOOL,FALSE
 VAR,IO_pumpContact_0,Y1.4,BOOL,FALSE
 VAR,IO_pumpContact_1,Y1.5,BOOL,FALSE
 VAR,IO_pumpContact_2,Y1.6,BOOL,FALSE
+VAR,IO_waterTemp_0,D28302,WORD,-1
+VAR,IO_waterTemp_1,D28304,WORD,-1
+VAR,IO_waterTemp_2,D28306,WORD,-1
+VAR,IO_waterTemp_3,D28308,WORD,-1
+VAR,IO_waterTemp_4,D28310,WORD,-1
+VAR,IO_waterTemp_5,D28312,WORD,-1
+VAR,IO_waterTemp_6,D28314,WORD,-1
+VAR,IO_waterTemp_7,D28316,WORD,-1
+VAR,IO_waterTemp_8,D28322,WORD,-1
+VAR,IO_waterTemp_9,D28324,WORD,-1
+VAR,IO_waterTemp_10,D28326,WORD,-1
+VAR,IO_waterTemp_11,D28328,WORD,-1
+VAR,IO_waterTemp_12,D28330,WORD,-1
+VAR,IO_waterTemp_13,D28332,WORD,-1
+VAR,IO_waterTemp_14,D28334,WORD,-1
+VAR,IO_waterTemp_15,D28336,WORD,-1
+VAR,IO_waterTemp_16,D28342,WORD,-1
+VAR,IO_waterTemp_17,D28344,WORD,-1
+VAR,IO_waterTemp_18,D28346,WORD,-1
+VAR,IO_waterTemp_19,D28348,WORD,-1
+VAR,IO_lightIntensity_0,D28362,WORD,-1
+VAR,IO_lightIntensity_1,D28364,WORD,-1
+VAR,IO_lightIntensity_2,D28366,WORD,-1
+VAR,IO_lightIntensity_3,D28368,WORD,-1
+VAR,IO_lightIntensity_4,D28382,WORD,-1
+VAR,IO_lightIntensity_5,D28384,WORD,-1
+VAR,IO_lightIntensity_6,D28386,WORD,-1
+VAR,IO_lightIntensity_7,D28388,WORD,-1
+VAR,IO_lightIntensity_8,D28402,WORD,-1
+VAR,IO_lightIntensity_9,D28404,WORD,-1
+VAR,IO_lightOnOff_0,D28420.0,BOOL,FALSE
+VAR,IO_lightOnOff_1,D28420.1,BOOL,FALSE
+VAR,IO_lightOnOff_2,D28420.2,BOOL,FALSE
+VAR,IO_lightOnOff_3,D28420.3,BOOL,FALSE
+VAR,IO_lightOnOff_4,D28420.4,BOOL,FALSE
+VAR,IO_lightOnOff_5,D28420.5,BOOL,FALSE
+VAR,IO_lightOnOff_6,D28420.6,BOOL,FALSE
+VAR,IO_lightOnOff_7,D28420.7,BOOL,FALSE
+VAR,IO_lightOnOff_8,D28421.0,BOOL,FALSE
+VAR,IO_lightOnOff_9,D28421.1,BOOL,FALSE
 VAR,MB_pump0_wStartStop,D26000,WORD,-1
 VAR,MB_pump0_wFreqCmd,D26001,WORD,-1
 VAR,MB_pump0_wInputSrc,D26005,WORD,-1
