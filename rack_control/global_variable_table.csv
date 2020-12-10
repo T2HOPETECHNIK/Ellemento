@@ -2,7 +2,7 @@ Class,Identifiers,Address,Type,Initial Value,Comment
 VAR,shelf_no,D20000,WORD,10,total number of shelf
 VAR,snsr_no,D20001,WORD,152
 VAR,snsr_data_reg_size,D20002,WORD,6
-VAR,k_shelf_reg_size,D20003,WORD,11,how many register one shelf_data occupies
+VAR,k_shelf_reg_size,D20003,WORD,12,how many register one shelf_data occupies
 VAR,k_shelf_modeIndexOffset,D20004,WORD,0,offset from shelf_x_addr to get shelf_x_mode
 VAR,k_shelf_autoWaterOnIndexOffset,D20005,WORD,1,offset from shelf_x_addr to get shelf_x_autoWaterOn
 VAR,k_shelf_autoLightOnIndexOffset,D20006,WORD,2,offset from shelf_x_addr to get shelf_x_autoLightOn
