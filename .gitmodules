@@ -1,0 +1,3 @@
+[submodule "rack_control/variable_generator"]
+	path = rack_control/variable_generator
+	url = https://github.com/clairetanhj/EllementoVariable.git
