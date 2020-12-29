@@ -53,15 +53,18 @@ pump_h_FlowSetArr2,WORD,{EtherLink1}1@D11010
 pump_h_RpmSetArr0,WORD,{EtherLink1}1@D11011
 pump_h_RpmSetArr1,WORD,{EtherLink1}1@D11012
 pump_h_RpmSetArr2,WORD,{EtherLink1}1@D11013
-pump_ctrlModeFbk0,WORD,{EtherLink1}1@D11014
-pump_ctrlModeFbk1,WORD,{EtherLink1}1@D11015
-pump_ctrlModeFbk2,WORD,{EtherLink1}1@D11016
-pump_runningFbk0,BIT,{EtherLink1}1@D11017.0
-pump_runningFbk1,BIT,{EtherLink1}1@D11017.1
-pump_runningFbk2,BIT,{EtherLink1}1@D11017.2
-pump_flowrateFbk0,WORD,{EtherLink1}1@D11018
-pump_flowrateFbk1,WORD,{EtherLink1}1@D11019
-pump_flowrateFbk2,WORD,{EtherLink1}1@D11020
+pump_ctrlModeFbkArr0,WORD,{EtherLink1}1@D11014
+pump_ctrlModeFbkArr1,WORD,{EtherLink1}1@D11015
+pump_ctrlModeFbkArr2,WORD,{EtherLink1}1@D11016
+pump_runningFbkArr0,BIT,{EtherLink1}1@D11017.0
+pump_runningFbkArr1,BIT,{EtherLink1}1@D11017.1
+pump_runningFbkArr2,BIT,{EtherLink1}1@D11017.2
+pump_flowrateFbkArr0,WORD,{EtherLink1}1@D11018
+pump_flowrateFbkArr1,WORD,{EtherLink1}1@D11019
+pump_flowrateFbkArr2,WORD,{EtherLink1}1@D11020
+pump_rpmFbkArr0,WORD,{EtherLink1}1@D11021
+pump_rpmFbkArr1,WORD,{EtherLink1}1@D11022
+pump_rpmFbkArr2,WORD,{EtherLink1}1@D11023
 s0_mode,WORD,{EtherLink1}1@D10000,"shelf_x mode auto-1, semi-2, manual-3"
 s0_autoWaterOn,BIT,{EtherLink1}1@D10001.0
 s0_autoLightOn,BIT,{EtherLink1}1@D10002.0
