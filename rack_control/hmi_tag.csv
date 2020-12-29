@@ -32,6 +32,7 @@ ShelfSectionMapping_2_Arr3,WORD,{EtherLink1}1@D20041,configure which shelves sho
 secModeArr0,WORD,{EtherLink1}1@D20042,secMode[0] : section 0 mode etc.
 secModeArr1,WORD,{EtherLink1}1@D20043,secMode[0] : section 0 mode etc.
 secModeArr2,WORD,{EtherLink1}1@D20044,secMode[0] : section 0 mode etc.
+flowratePerShelf,WORD,{EtherLink1}1@D20050,flowrate per shelf in lpm
 pump_e_OnArr0,BIT,{EtherLink1}1@D11000.0
 pump_e_OnArr1,BIT,{EtherLink1}1@D11000.1
 pump_e_OnArr2,BIT,{EtherLink1}1@D11000.2

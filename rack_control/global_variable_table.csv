@@ -24,7 +24,7 @@ VAR,secModeArr,D20042,ARRAY [3] OF WORD,[3(0)],secMode[0] : section 0 mode etc.
 VAR,sectionPvOnCountArr,D20045,ARRAY [3] OF WORD,[3(0)],secPvCountArr[0]: number of PV to turn on in section 0
 VAR,k_sectionNo,D20048,WORD,3,total number of sections
 VAR,k_sectionMaxShelfNo,D20049,WORD,4,maximum number of shelves per section
-VAR,k_flowratePerShelf,D20050,WORD,32,flowrate per shelf in lpm
+VAR,flowratePerShelf,D20050,WORD,32,flowrate per shelf in lpm
 VAR,k_enablePumpRedundancy,D20051.0,BOOL,0,whether to enable pump redundancy
 VAR,pump_e_OnArr,D11000.0,ARRAY [3] OF BOOL,[3(FALSE)]
 VAR,pump_e_ValveOnArr,D11001.0,ARRAY [4] OF BOOL,[4(FALSE)]
