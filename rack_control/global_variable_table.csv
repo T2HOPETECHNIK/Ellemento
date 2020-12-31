@@ -21,21 +21,23 @@ VAR,ShelfSectionMapping_0_Arr,D20030,ARRAY [4] OF WORD,[4(0)],configure which sh
 VAR,ShelfSectionMapping_1_Arr,D20034,ARRAY [4] OF WORD,[4(0)],configure which shelves should belong to sec1
 VAR,ShelfSectionMapping_2_Arr,D20038,ARRAY [4] OF WORD,[4(0)],configure which shelves should belong to sec2
 VAR,secModeArr,D20042,ARRAY [3] OF WORD,[3(0)],secMode[0] : section 0 mode etc.
-VAR,k_sectionNo,D20045,WORD,3,total number of sections
-VAR,k_sectionMaxShelfNo,D20046,WORD,4,maximum number of shelves per section
+VAR,sectionPvOnCountArr,D20045,ARRAY [3] OF WORD,[3(0)],secPvCountArr[0]: number of PV to turn on in section 0
+VAR,k_sectionNo,D20048,WORD,3,total number of sections
+VAR,k_sectionMaxShelfNo,D20049,WORD,4,maximum number of shelves per section
+VAR,flowratePerShelf,D20050,WORD,32,flowrate per shelf in lpm
+VAR,k_enablePumpRedundancy,D20051.0,BOOL,0,whether to enable pump redundancy
 VAR,pump_e_OnArr,D11000.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,pump_e_RpmValArr,D11001,ARRAY [3] OF WORD,[3(0)]
-VAR,pump_e_ValveOnArr,D11004.0,ARRAY [4] OF BOOL,[4(FALSE)]
-VAR,pump_e_FlowOrRpm,D11005,WORD,0
+VAR,pump_e_ValveOnArr,D11001.0,ARRAY [4] OF BOOL,[4(FALSE)]
+VAR,pump_e_FlowOrRpm,D11002,WORD,0,"1 - Flow, 2 - RPM"
+VAR,pump_e_SetpointArr,D11003,ARRAY [3] OF WORD,[3(0)]
 VAR,pump_h_Mode,D11006,WORD,0
 VAR,pump_h_PumpSelect,D11007.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,pump_h_FlowSetArr,D11008,ARRAY [2] OF WORD,[2(0)]
-VAR,pump_h_RpmSetArr,D11010,ARRAY [3] OF WORD,[3(0)]
-VAR,pump_h_ValveOnArr,D11013.0,ARRAY [4] OF BOOL,[4(FALSE)]
-VAR,pump_h_RedundantPumpSelect,D11014,WORD,0
-VAR,pump_isRunningArr,D11015.0,ARRAY [3] OF BOOL,[3(FALSE)]
-VAR,pump_modeArr,D11016,ARRAY [3] OF WORD,[3(0)]
-VAR,pump_flowrateFeedback,D11019,ARRAY [2] OF WORD,[2(0)]
+VAR,pump_h_FlowSetArr,D11008,ARRAY [3] OF WORD,[3(0)]
+VAR,pump_h_RpmSetArr,D11011,ARRAY [3] OF WORD,[3(0)]
+VAR,pump_ctrlModeFbkArr,D11014,ARRAY [3] OF WORD,[3(0)]
+VAR,pump_runningFbkArr,D11017.0,ARRAY [3] OF BOOL,[3(FALSE)]
+VAR,pump_flowrateFbkArr,D11018,ARRAY [3] OF WORD,[3(0)]
+VAR,pump_rpmFbkArr,D11021,ARRAY [3] OF WORD,[3(0)]
 VAR,s0_mode,D10000,WORD,2,"shelf_x mode auto-1, semi-2, manual-3"
 VAR,s0_autoWaterOn,D10001.0,BOOL,FALSE
 VAR,s0_autoLightOn,D10002.0,BOOL,FALSE

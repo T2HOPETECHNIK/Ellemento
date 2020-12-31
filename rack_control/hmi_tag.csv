@@ -32,39 +32,40 @@ ShelfSectionMapping_2_Arr3,WORD,{EtherLink1}1@D20041,configure which shelves sho
 secModeArr0,WORD,{EtherLink1}1@D20042,secMode[0] : section 0 mode etc.
 secModeArr1,WORD,{EtherLink1}1@D20043,secMode[0] : section 0 mode etc.
 secModeArr2,WORD,{EtherLink1}1@D20044,secMode[0] : section 0 mode etc.
+flowratePerShelf,WORD,{EtherLink1}1@D20050,flowrate per shelf in lpm
 pump_e_OnArr0,BIT,{EtherLink1}1@D11000.0
 pump_e_OnArr1,BIT,{EtherLink1}1@D11000.1
 pump_e_OnArr2,BIT,{EtherLink1}1@D11000.2
-pump_e_RpmValArr0,WORD,{EtherLink1}1@D11001
-pump_e_RpmValArr1,WORD,{EtherLink1}1@D11002
-pump_e_RpmValArr2,WORD,{EtherLink1}1@D11003
-pump_e_ValveOnArr0,BIT,{EtherLink1}1@D11004.0
-pump_e_ValveOnArr1,BIT,{EtherLink1}1@D11004.1
-pump_e_ValveOnArr2,BIT,{EtherLink1}1@D11004.2
-pump_e_ValveOnArr3,BIT,{EtherLink1}1@D11004.3
-pump_e_FlowOrRpm,WORD,{EtherLink1}1@D11005
+pump_e_ValveOnArr0,BIT,{EtherLink1}1@D11001.0
+pump_e_ValveOnArr1,BIT,{EtherLink1}1@D11001.1
+pump_e_ValveOnArr2,BIT,{EtherLink1}1@D11001.2
+pump_e_ValveOnArr3,BIT,{EtherLink1}1@D11001.3
+pump_e_FlowOrRpm,WORD,{EtherLink1}1@D11002,"1 - Flow, 2 - RPM"
+pump_e_SetpointArr0,WORD,{EtherLink1}1@D11003
+pump_e_SetpointArr1,WORD,{EtherLink1}1@D11004
+pump_e_SetpointArr2,WORD,{EtherLink1}1@D11005
 pump_h_Mode,WORD,{EtherLink1}1@D11006
 pump_h_PumpSelect0,BIT,{EtherLink1}1@D11007.0
 pump_h_PumpSelect1,BIT,{EtherLink1}1@D11007.1
 pump_h_PumpSelect2,BIT,{EtherLink1}1@D11007.2
 pump_h_FlowSetArr0,WORD,{EtherLink1}1@D11008
 pump_h_FlowSetArr1,WORD,{EtherLink1}1@D11009
-pump_h_RpmSetArr0,WORD,{EtherLink1}1@D11010
-pump_h_RpmSetArr1,WORD,{EtherLink1}1@D11011
-pump_h_RpmSetArr2,WORD,{EtherLink1}1@D11012
-pump_h_ValveOnArr0,BIT,{EtherLink1}1@D11013.0
-pump_h_ValveOnArr1,BIT,{EtherLink1}1@D11013.1
-pump_h_ValveOnArr2,BIT,{EtherLink1}1@D11013.2
-pump_h_ValveOnArr3,BIT,{EtherLink1}1@D11013.3
-pump_h_RedundantPumpSelect,WORD,{EtherLink1}1@D11014
-pump_isRunningArr0,BIT,{EtherLink1}1@D11015.0
-pump_isRunningArr1,BIT,{EtherLink1}1@D11015.1
-pump_isRunningArr2,BIT,{EtherLink1}1@D11015.2
-pump_modeArr0,WORD,{EtherLink1}1@D11016
-pump_modeArr1,WORD,{EtherLink1}1@D11017
-pump_modeArr2,WORD,{EtherLink1}1@D11018
-pump_flowrateFeedback0,WORD,{EtherLink1}1@D11019
-pump_flowrateFeedback1,WORD,{EtherLink1}1@D11020
+pump_h_FlowSetArr2,WORD,{EtherLink1}1@D11010
+pump_h_RpmSetArr0,WORD,{EtherLink1}1@D11011
+pump_h_RpmSetArr1,WORD,{EtherLink1}1@D11012
+pump_h_RpmSetArr2,WORD,{EtherLink1}1@D11013
+pump_ctrlModeFbkArr0,WORD,{EtherLink1}1@D11014
+pump_ctrlModeFbkArr1,WORD,{EtherLink1}1@D11015
+pump_ctrlModeFbkArr2,WORD,{EtherLink1}1@D11016
+pump_runningFbkArr0,BIT,{EtherLink1}1@D11017.0
+pump_runningFbkArr1,BIT,{EtherLink1}1@D11017.1
+pump_runningFbkArr2,BIT,{EtherLink1}1@D11017.2
+pump_flowrateFbkArr0,WORD,{EtherLink1}1@D11018
+pump_flowrateFbkArr1,WORD,{EtherLink1}1@D11019
+pump_flowrateFbkArr2,WORD,{EtherLink1}1@D11020
+pump_rpmFbkArr0,WORD,{EtherLink1}1@D11021
+pump_rpmFbkArr1,WORD,{EtherLink1}1@D11022
+pump_rpmFbkArr2,WORD,{EtherLink1}1@D11023
 s0_mode,WORD,{EtherLink1}1@D10000,"shelf_x mode auto-1, semi-2, manual-3"
 s0_autoWaterOn,BIT,{EtherLink1}1@D10001.0
 s0_autoLightOn,BIT,{EtherLink1}1@D10002.0
