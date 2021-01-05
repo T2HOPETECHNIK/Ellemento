@@ -274,7 +274,7 @@ def main():
         hmi_data = hmi_internal[var_name]
         if hmi_data['type'] == "BIT":
             addr += str(round(float(hmi_curr_addr), 1))
-        elif hmi_data['type'] == "WORD":
+        elif hmi_data['type'] == "WORD" or hmi_data['type'] == "INT":
             addr += str(hmi_curr_addr)
         else:
             raise RuntimeError("Invalid type")
@@ -435,7 +435,7 @@ def write_hmi_tag_table_to_csv(filename, hmi_tag_table):
 def calc_addr_offset_hmi_tag(is_array: bool, var_type: str, offset: str) -> Union[int, float]:
     if var_type == "BOOL":
         return (0.1) if is_array else float(offset)
-    elif var_type == "WORD":
+    elif var_type == "WORD" or var_type == "INT":
         return (1) if is_array else int(offset)
     else:
         raise RuntimeError("Invalid type")
@@ -445,6 +445,8 @@ def translate_var_type_hmi_tag(var_type: str) -> str:
         return "BIT"
     elif var_type == "WORD":
         return "WORD"
+	elif var_type == "INT":
+        return "INT"
     else:
         raise RuntimeError("Invalid type")
 
