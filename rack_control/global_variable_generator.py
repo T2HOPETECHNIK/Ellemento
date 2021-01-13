@@ -445,7 +445,7 @@ def translate_var_type_hmi_tag(var_type: str) -> str:
         return "BIT"
     elif var_type == "WORD":
         return "WORD"
-	elif var_type == "INT":
+    elif var_type == "INT":
         return "INT"
     else:
         raise RuntimeError("Invalid type")
