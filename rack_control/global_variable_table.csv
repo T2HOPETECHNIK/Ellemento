@@ -26,6 +26,18 @@ VAR,k_sectionNo,D20048,WORD,3,total number of sections
 VAR,k_sectionMaxShelfNo,D20049,WORD,4,maximum number of shelves per section
 VAR,flowratePerShelf,D20050,WORD,32,flowrate per shelf in lpm
 VAR,k_enablePumpRedundancy,D20051.0,BOOL,0,whether to enable pump redundancy
+VAR,main_current_state,D20052,ARRAY [4] OF INT,[4(0)],Main state machine current state (for each instance)
+VAR,main_next_state,D20056,ARRAY [4] OF INT,[4(0)],Main state machine next state (for each instance)
+VAR,transition_current_state,D20060,ARRAY [4] OF INT,[4(0)],PV transition state machine current state (for each instance)
+VAR,transition_next_state,D20064,ARRAY [4] OF INT,[4(0)],PV transition state machine next state (for each instance)
+VAR,PVChangeMode,D20068,INT,0
+VAR,delay_counter,D20069,ARRAY [4] OF WORD,[4(0)],Counter for delays
+VAR,lastPVvalue,D20073,ARRAY [10] OF WORD,[10(0)],Store last PV value for comparison whether to run PV change sequence or not
+VAR,pump_rampup_current_state,D20083,ARRAY [3] OF INT,[3(0)],Pump ramp up state machine state
+VAR,pump_rampup_next_state,D20086,ARRAY [3] OF INT,[3(0)],Pump ramp up state machine next state
+VAR,pump_rampup_current_value,D20089,ARRAY [3] OF WORD,[3(0)],Pump ramp up value
+VAR,lastPumpTargetValue,D20092,ARRAY [3] OF WORD,[3(0)],Pump ramp up previous value
+VAR,bRunPumpRampup,D20095.0,ARRAY [3] OF BOOL,[3(FALSE)],Flag for each pump
 VAR,pump_e_OnArr,D11000.0,ARRAY [3] OF BOOL,[3(FALSE)]
 VAR,pump_e_ValveOnArr,D11001.0,ARRAY [4] OF BOOL,[4(FALSE)]
 VAR,pump_e_FlowOrRpm,D11002,WORD,0,"1 - Flow, 2 - RPM"
@@ -1185,8 +1197,8 @@ VAR,IO_lightOnOff_4,D28420.4,BOOL,FALSE
 VAR,IO_lightOnOff_5,D28420.5,BOOL,FALSE
 VAR,IO_lightOnOff_6,D28420.6,BOOL,FALSE
 VAR,IO_lightOnOff_7,D28420.7,BOOL,FALSE
-VAR,IO_lightOnOff_8,D28421.0,BOOL,FALSE
-VAR,IO_lightOnOff_9,D28421.1,BOOL,FALSE
+VAR,IO_lightOnOff_8,D28422.0,BOOL,FALSE
+VAR,IO_lightOnOff_9,D28422.1,BOOL,FALSE
 VAR,MB_pump0_wStartStop,D25150,WORD,-1
 VAR,MB_pump0_wFreqCmd,D25151,WORD,-1
 VAR,MB_pump0_wInputSrc,D25152,WORD,-1
