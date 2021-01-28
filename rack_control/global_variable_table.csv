@@ -38,6 +38,28 @@ VAR,pump_rampup_next_state,D20086,ARRAY [3] OF INT,[3(0)],Pump ramp up state mac
 VAR,pump_rampup_current_value,D20089,ARRAY [3] OF WORD,[3(0)],Pump ramp up value
 VAR,lastPumpTargetValue,D20092,ARRAY [3] OF WORD,[3(0)],Pump ramp up previous value
 VAR,bRunPumpRampup,D20095.0,ARRAY [3] OF BOOL,[3(FALSE)],Flag for each pump
+VAR,stat_water_vfd_power1,D20098.0,BOOL,1,Status for VFD power
+VAR,stat_water_vfd_comm1,D20099.0,BOOL,1,Status for VFD Comm
+VAR,stat_water_vfd_motor1,D20100.0,BOOL,1,Status for water system
+VAR,stat_water_vfd_pid1,D20101.0,BOOL,1,Status for water system
+VAR,stat_water_vfd_overload1,D20102.0,BOOL,1,Status for water system
+VAR,stat_water_shelf_valvefault1,D20103.0,BOOL,1,Status for water system
+VAR,stat_water_shelf_overflow1,D20104.0,BOOL,1,Status for water system
+VAR,stat_water_temp_range1,D20105.0,BOOL,1,Status for water system
+VAR,stat_water_tank_levellow1,D20106.0,BOOL,1,Status for water system
+VAR,stat_water_tank_levelhigh1,D20107.0,BOOL,1,Status for water system
+VAR,stat_water_tank_sensor_unison1,D20108.0,BOOL,1,Status for water system
+VAR,stat_light_burned1,D20109.0,BOOL,1,Status for lighting system
+VAR,stat_light_powertrip1,D20110.0,BOOL,1,Status for lighting system
+VAR,stat_vent_vfd_comm1,D20111.0,BOOL,1,Status for ventilation system
+VAR,stat_vent_vfd_power1,D20112.0,BOOL,1,Status for ventilation system
+VAR,stat_vent_vfd_motor1,D20113.0,BOOL,1,Status for ventilation system
+VAR,stat_vent_vfd_overload1,D20114.0,BOOL,1,Status for ventilation system
+VAR,stat_vent_air_offline1,D20115.0,BOOL,1,Status for ventilation system
+VAR,stat_vent_air_deviation1,D20116.0,BOOL,1,Status for ventilation system
+VAR,stat_vent_air_humidity1,D20117.0,BOOL,1,Status for ventilation system
+VAR,stat_vent_air_co2,D20118.0,BOOL,1,Status for ventilation system
+VAR,stat_vent_air_temp1,D20119.0,BOOL,1,Status for ventilation system
 VAR,pump_e_OnArr,D11000.0,ARRAY [3] OF BOOL,[3(FALSE)]
 VAR,pump_e_ValveOnArr,D11001.0,ARRAY [4] OF BOOL,[4(FALSE)]
 VAR,pump_e_FlowOrRpm,D11002,WORD,0,"1 - Flow, 2 - RPM"
