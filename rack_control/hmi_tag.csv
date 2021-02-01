@@ -33,6 +33,28 @@ secModeArr0,WORD,{EtherLink1}1@D20042,secMode[0] : section 0 mode etc.
 secModeArr1,WORD,{EtherLink1}1@D20043,secMode[0] : section 0 mode etc.
 secModeArr2,WORD,{EtherLink1}1@D20044,secMode[0] : section 0 mode etc.
 flowratePerShelf,WORD,{EtherLink1}1@D20050,flowrate per shelf in lpm
+stat_water_vfd_power1,BIT,{EtherLink1}1@D20098.0,Status for VFD power
+stat_water_vfd_comm1,BIT,{EtherLink1}1@D20099.0,Status for VFD Comm
+stat_water_vfd_motor1,BIT,{EtherLink1}1@D20100.0,Status for water system
+stat_water_vfd_pid1,BIT,{EtherLink1}1@D20101.0,Status for water system
+stat_water_vfd_overload1,BIT,{EtherLink1}1@D20102.0,Status for water system
+stat_water_shelf_valvefault1,BIT,{EtherLink1}1@D20103.0,Status for water system
+stat_water_shelf_overflow1,BIT,{EtherLink1}1@D20104.0,Status for water system
+stat_water_temp_range1,BIT,{EtherLink1}1@D20105.0,Status for water system
+stat_water_tank_levellow1,BIT,{EtherLink1}1@D20106.0,Status for water system
+stat_water_tank_levelhigh1,BIT,{EtherLink1}1@D20107.0,Status for water system
+stat_water_tank_sensor_unison1,BIT,{EtherLink1}1@D20108.0,Status for water system
+stat_light_burned1,BIT,{EtherLink1}1@D20109.0,Status for lighting system
+stat_light_powertrip1,BIT,{EtherLink1}1@D20110.0,Status for lighting system
+stat_vent_vfd_comm1,BIT,{EtherLink1}1@D20111.0,Status for ventilation system
+stat_vent_vfd_power1,BIT,{EtherLink1}1@D20112.0,Status for ventilation system
+stat_vent_vfd_motor1,BIT,{EtherLink1}1@D20113.0,Status for ventilation system
+stat_vent_vfd_overload1,BIT,{EtherLink1}1@D20114.0,Status for ventilation system
+stat_vent_air_offline1,BIT,{EtherLink1}1@D20115.0,Status for ventilation system
+stat_vent_air_deviation1,BIT,{EtherLink1}1@D20116.0,Status for ventilation system
+stat_vent_air_humidity1,BIT,{EtherLink1}1@D20117.0,Status for ventilation system
+stat_vent_air_co2,BIT,{EtherLink1}1@D20118.0,Status for ventilation system
+stat_vent_air_temp1,BIT,{EtherLink1}1@D20119.0,Status for ventilation system
 pump_e_OnArr0,BIT,{EtherLink1}1@D11000.0
 pump_e_OnArr1,BIT,{EtherLink1}1@D11000.1
 pump_e_OnArr2,BIT,{EtherLink1}1@D11000.2

@@ -63,7 +63,7 @@ def main():
     constant_curr_addr = constant_base_addr
     for var_name in constants:
         var_data = constants[var_name]
-        
+		
         addr = "D{}".format(round(float(constant_curr_addr), 1) if "BOOL" in var_data['type'] else int (constant_curr_addr) )
         constant_curr_addr += int(var_data['addr_offset'])
         
@@ -76,7 +76,6 @@ def main():
 
         addr = "D{}".format( round(float(pump_curr_addr), 1) if "BOOL" in pump_data['type'] else int (pump_curr_addr) )
         pump_curr_addr += int(pump_data['addr_offset'])
-
         write_rec_glob_var_table(global_var_table, var_name, addr, pump_data['type'], pump_data['init_value'], pump_data['comment'])
         
     # parse shelfs and write into global_var_table
@@ -95,7 +94,7 @@ def main():
     constant_curr_addr = constant_base_addr
     for var_name in constants:
         var_data = constants[var_name]
-
+		
         # filter those that should go into hmi_tag
         if not var_data['hmi_tag']:
             constant_curr_addr += var_data['addr_offset']
@@ -115,7 +114,7 @@ def main():
 
                 addr = hmi_tag_plc_name + \
                        "D{}".format( round(float(constant_arr_addr), 1) if "BOOL" in var_data['type'] else int (constant_arr_addr) )
-                
+					   
                 constant_arr_addr += addr_offset
                 write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr, var_data['comment'])
 
@@ -128,8 +127,8 @@ def main():
                                                 offset=var_data['addr_offset'])
             var_type = translate_var_type_hmi_tag(var_type=var_data['type'])
             addr = hmi_tag_plc_name + \
-                "D{}".format( round(float(constant_curr_addr), 1) if "BOOL" in shelf_data['type'] else int (constant_curr_addr))
-
+                "D{}".format( round(float(constant_curr_addr), 1) if "BOOL" in var_data['type'] else int (constant_curr_addr))
+				
             write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr, var_data['comment'])
             constant_curr_addr += addr_offset
     
@@ -380,6 +379,8 @@ def write_rec_glob_var_table(
         "init_value": var_init_value,
         "comment": var_comment
     }
+	
+    #print("=> " + var_name + " " + var_addr)
 
     return
 
