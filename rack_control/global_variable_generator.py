@@ -260,9 +260,15 @@ def main():
         io = io_data[io_name]
         write_rec_glob_var_table(global_var_table, io_name, io['addr'], io['type'], io['init_value'], io['comment'])
 
+        if io['type'] == "BOOL":
+            io_var_type = "BIT"
+        else:
+            io_var_type = io['type']
+
         if io['hmi_tag']:
             addr = hmi_tag_plc_name + io['addr']
-            write_rec_hmi_tag_table(hmi_tag_table, io_name, io['type'], addr, io['comment'])
+            write_rec_hmi_tag_table(hmi_tag_table, io_name, io_var_type, addr, io['comment'])
+            #write_rec_hmi_tag_table(hmi_tag_table, io_name, io['type'], addr, io['comment'])
 
 
     # parse hmi_internal and write into hmi_tag_table
@@ -442,7 +448,7 @@ def calc_addr_offset_hmi_tag(is_array: bool, var_type: str, offset: str) -> Unio
         raise RuntimeError("Invalid type")
 
 def translate_var_type_hmi_tag(var_type: str) -> str:
-    if var_type == "BOOL":
+    if var_type == "BOOL" or var_type == "BIT":
         return "BIT"
     elif var_type == "WORD":
         return "WORD"

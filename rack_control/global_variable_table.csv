@@ -60,6 +60,15 @@ VAR,stat_vent_air_deviation1,D20116.0,BOOL,1,Status for ventilation system
 VAR,stat_vent_air_humidity1,D20117.0,BOOL,1,Status for ventilation system
 VAR,stat_vent_air_co2,D20118.0,BOOL,1,Status for ventilation system
 VAR,stat_vent_air_temp1,D20119.0,BOOL,1,Status for ventilation system
+VAR,errAnemometer,D20120,ARRAY [30] OF WORD,[30(0)],Anemometer error (0 = no error)
+VAR,errAQM,D20150,ARRAY [30] OF WORD,[30(0)],AQM sensor error (0 = no error)
+VAR,sensorWindSpeed,D20180,ARRAY [30] OF WORD,[30(0)],Anemometer reading
+VAR,aqmSensorHumidity,D20210,ARRAY [30] OF WORD,[30(0)],Humdity reading
+VAR,aqmSensorCO2,D20240,ARRAY [30] OF WORD,[30(0)],CO2 reading
+VAR,aqmSensorTemperature,D20270,ARRAY [30] OF WORD,[30(0)],Temperature reading
+VAR,tmpCounter,D20300,INT,0
+VAR,ventilationCheckCounter,D20301,WORD,0,How frequent we read the sensors
+VAR,tmpReal,D20302,REAL,0
 VAR,pump_e_OnArr,D11000.0,ARRAY [3] OF BOOL,[3(FALSE)]
 VAR,pump_e_ValveOnArr,D11001.0,ARRAY [4] OF BOOL,[4(FALSE)]
 VAR,pump_e_FlowOrRpm,D11002,WORD,0,"1 - Flow, 2 - RPM"
@@ -1166,12 +1175,12 @@ VAR,IO_propValve_s8_2,D28226,WORD,-1
 VAR,IO_propValve_s9_0,D28228,WORD,-1
 VAR,IO_propValve_s9_1,D28242,WORD,-1
 VAR,IO_propValve_s9_2,D28244,WORD,-1
-VAR,IO_waterLevel_0,X1.0,BOOL,FALSE
-VAR,IO_waterLevel_1,X1.1,BOOL,FALSE
-VAR,IO_waterLevel_2,X1.2,BOOL,FALSE
-VAR,IO_waterLevel_3,X1.3,BOOL,FALSE
-VAR,IO_waterLevel_4,X1.4,BOOL,FALSE
-VAR,IO_waterLevel_5,X1.5,BOOL,FALSE
+VAR,IO_waterLevel_0,X1.0,BOOL,FALSE,Water level
+VAR,IO_waterLevel_1,X1.1,BOOL,FALSE,Water level
+VAR,IO_waterLevel_2,X1.2,BOOL,FALSE,Water level
+VAR,IO_waterLevel_3,X1.3,BOOL,FALSE,Water level
+VAR,IO_waterLevel_4,X1.4,BOOL,FALSE,Water level
+VAR,IO_waterLevel_5,X1.5,BOOL,FALSE,Water level
 VAR,IO_clogSensor_0,X1.6,BOOL,FALSE
 VAR,IO_clogSensor_1,X1.7,BOOL,FALSE
 VAR,IO_solenoid_0,Y1.0,BOOL,FALSE
@@ -1251,3 +1260,4 @@ VAR,MB_pump2_rOutputHz,D25502,WORD,-1
 VAR,MB_pump2_rAciVal,D25512,WORD,-1
 VAR,MB_pump2_rVfdStatus,D25501,WORD,-1
 VAR,MB_pump2_rVfdMode,D25535,WORD,-1
+VAR,tmpConversionFloat,D200,REAL,0
