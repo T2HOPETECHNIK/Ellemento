@@ -38,203 +38,213 @@ stat_water_vfd_comm1,BIT,{EtherLink1}1@D20099.0,Status for VFD Comm
 stat_water_vfd_motor1,BIT,{EtherLink1}1@D20100.0,Status for water system
 stat_water_vfd_pid1,BIT,{EtherLink1}1@D20101.0,Status for water system
 stat_water_vfd_overload1,BIT,{EtherLink1}1@D20102.0,Status for water system
-stat_water_shelf_valvefault1,BIT,{EtherLink1}1@D20103.0,Status for water system
-stat_water_shelf_overflow1,BIT,{EtherLink1}1@D20104.0,Status for water system
-stat_water_temp_range1,BIT,{EtherLink1}1@D20105.0,Status for water system
-stat_water_tank_levellow1,BIT,{EtherLink1}1@D20106.0,Status for water system
-stat_water_tank_levelhigh1,BIT,{EtherLink1}1@D20107.0,Status for water system
-stat_water_tank_sensor_unison1,BIT,{EtherLink1}1@D20108.0,Status for water system
-stat_light_burned1,BIT,{EtherLink1}1@D20109.0,Status for lighting system
-stat_light_powertrip1,BIT,{EtherLink1}1@D20110.0,Status for lighting system
-stat_vent_vfd_comm1,BIT,{EtherLink1}1@D20111.0,Status for ventilation system
-stat_vent_vfd_power1,BIT,{EtherLink1}1@D20112.0,Status for ventilation system
-stat_vent_vfd_motor1,BIT,{EtherLink1}1@D20113.0,Status for ventilation system
-stat_vent_vfd_overload1,BIT,{EtherLink1}1@D20114.0,Status for ventilation system
-stat_vent_air_offline1,BIT,{EtherLink1}1@D20115.0,Status for ventilation system
-stat_vent_air_deviation1,BIT,{EtherLink1}1@D20116.0,Status for ventilation system
-stat_vent_air_humidity1,BIT,{EtherLink1}1@D20117.0,Status for ventilation system
-stat_vent_air_co2,BIT,{EtherLink1}1@D20118.0,Status for ventilation system
-stat_vent_air_temp1,BIT,{EtherLink1}1@D20119.0,Status for ventilation system
-errAnemometer0,WORD,{EtherLink1}1@D20120,Anemometer error (0 = no error)
-errAnemometer1,WORD,{EtherLink1}1@D20121,Anemometer error (0 = no error)
-errAnemometer2,WORD,{EtherLink1}1@D20122,Anemometer error (0 = no error)
-errAnemometer3,WORD,{EtherLink1}1@D20123,Anemometer error (0 = no error)
-errAnemometer4,WORD,{EtherLink1}1@D20124,Anemometer error (0 = no error)
-errAnemometer5,WORD,{EtherLink1}1@D20125,Anemometer error (0 = no error)
-errAnemometer6,WORD,{EtherLink1}1@D20126,Anemometer error (0 = no error)
-errAnemometer7,WORD,{EtherLink1}1@D20127,Anemometer error (0 = no error)
-errAnemometer8,WORD,{EtherLink1}1@D20128,Anemometer error (0 = no error)
-errAnemometer9,WORD,{EtherLink1}1@D20129,Anemometer error (0 = no error)
-errAnemometer10,WORD,{EtherLink1}1@D20130,Anemometer error (0 = no error)
-errAnemometer11,WORD,{EtherLink1}1@D20131,Anemometer error (0 = no error)
-errAnemometer12,WORD,{EtherLink1}1@D20132,Anemometer error (0 = no error)
-errAnemometer13,WORD,{EtherLink1}1@D20133,Anemometer error (0 = no error)
-errAnemometer14,WORD,{EtherLink1}1@D20134,Anemometer error (0 = no error)
-errAnemometer15,WORD,{EtherLink1}1@D20135,Anemometer error (0 = no error)
-errAnemometer16,WORD,{EtherLink1}1@D20136,Anemometer error (0 = no error)
-errAnemometer17,WORD,{EtherLink1}1@D20137,Anemometer error (0 = no error)
-errAnemometer18,WORD,{EtherLink1}1@D20138,Anemometer error (0 = no error)
-errAnemometer19,WORD,{EtherLink1}1@D20139,Anemometer error (0 = no error)
-errAnemometer20,WORD,{EtherLink1}1@D20140,Anemometer error (0 = no error)
-errAnemometer21,WORD,{EtherLink1}1@D20141,Anemometer error (0 = no error)
-errAnemometer22,WORD,{EtherLink1}1@D20142,Anemometer error (0 = no error)
-errAnemometer23,WORD,{EtherLink1}1@D20143,Anemometer error (0 = no error)
-errAnemometer24,WORD,{EtherLink1}1@D20144,Anemometer error (0 = no error)
-errAnemometer25,WORD,{EtherLink1}1@D20145,Anemometer error (0 = no error)
-errAnemometer26,WORD,{EtherLink1}1@D20146,Anemometer error (0 = no error)
-errAnemometer27,WORD,{EtherLink1}1@D20147,Anemometer error (0 = no error)
-errAnemometer28,WORD,{EtherLink1}1@D20148,Anemometer error (0 = no error)
-errAnemometer29,WORD,{EtherLink1}1@D20149,Anemometer error (0 = no error)
-errAQM0,WORD,{EtherLink1}1@D20150,AQM sensor error (0 = no error)
-errAQM1,WORD,{EtherLink1}1@D20151,AQM sensor error (0 = no error)
-errAQM2,WORD,{EtherLink1}1@D20152,AQM sensor error (0 = no error)
-errAQM3,WORD,{EtherLink1}1@D20153,AQM sensor error (0 = no error)
-errAQM4,WORD,{EtherLink1}1@D20154,AQM sensor error (0 = no error)
-errAQM5,WORD,{EtherLink1}1@D20155,AQM sensor error (0 = no error)
-errAQM6,WORD,{EtherLink1}1@D20156,AQM sensor error (0 = no error)
-errAQM7,WORD,{EtherLink1}1@D20157,AQM sensor error (0 = no error)
-errAQM8,WORD,{EtherLink1}1@D20158,AQM sensor error (0 = no error)
-errAQM9,WORD,{EtherLink1}1@D20159,AQM sensor error (0 = no error)
-errAQM10,WORD,{EtherLink1}1@D20160,AQM sensor error (0 = no error)
-errAQM11,WORD,{EtherLink1}1@D20161,AQM sensor error (0 = no error)
-errAQM12,WORD,{EtherLink1}1@D20162,AQM sensor error (0 = no error)
-errAQM13,WORD,{EtherLink1}1@D20163,AQM sensor error (0 = no error)
-errAQM14,WORD,{EtherLink1}1@D20164,AQM sensor error (0 = no error)
-errAQM15,WORD,{EtherLink1}1@D20165,AQM sensor error (0 = no error)
-errAQM16,WORD,{EtherLink1}1@D20166,AQM sensor error (0 = no error)
-errAQM17,WORD,{EtherLink1}1@D20167,AQM sensor error (0 = no error)
-errAQM18,WORD,{EtherLink1}1@D20168,AQM sensor error (0 = no error)
-errAQM19,WORD,{EtherLink1}1@D20169,AQM sensor error (0 = no error)
-errAQM20,WORD,{EtherLink1}1@D20170,AQM sensor error (0 = no error)
-errAQM21,WORD,{EtherLink1}1@D20171,AQM sensor error (0 = no error)
-errAQM22,WORD,{EtherLink1}1@D20172,AQM sensor error (0 = no error)
-errAQM23,WORD,{EtherLink1}1@D20173,AQM sensor error (0 = no error)
-errAQM24,WORD,{EtherLink1}1@D20174,AQM sensor error (0 = no error)
-errAQM25,WORD,{EtherLink1}1@D20175,AQM sensor error (0 = no error)
-errAQM26,WORD,{EtherLink1}1@D20176,AQM sensor error (0 = no error)
-errAQM27,WORD,{EtherLink1}1@D20177,AQM sensor error (0 = no error)
-errAQM28,WORD,{EtherLink1}1@D20178,AQM sensor error (0 = no error)
-errAQM29,WORD,{EtherLink1}1@D20179,AQM sensor error (0 = no error)
-sensorWindSpeed0,WORD,{EtherLink1}1@D20180,Anemometer reading
-sensorWindSpeed1,WORD,{EtherLink1}1@D20181,Anemometer reading
-sensorWindSpeed2,WORD,{EtherLink1}1@D20182,Anemometer reading
-sensorWindSpeed3,WORD,{EtherLink1}1@D20183,Anemometer reading
-sensorWindSpeed4,WORD,{EtherLink1}1@D20184,Anemometer reading
-sensorWindSpeed5,WORD,{EtherLink1}1@D20185,Anemometer reading
-sensorWindSpeed6,WORD,{EtherLink1}1@D20186,Anemometer reading
-sensorWindSpeed7,WORD,{EtherLink1}1@D20187,Anemometer reading
-sensorWindSpeed8,WORD,{EtherLink1}1@D20188,Anemometer reading
-sensorWindSpeed9,WORD,{EtherLink1}1@D20189,Anemometer reading
-sensorWindSpeed10,WORD,{EtherLink1}1@D20190,Anemometer reading
-sensorWindSpeed11,WORD,{EtherLink1}1@D20191,Anemometer reading
-sensorWindSpeed12,WORD,{EtherLink1}1@D20192,Anemometer reading
-sensorWindSpeed13,WORD,{EtherLink1}1@D20193,Anemometer reading
-sensorWindSpeed14,WORD,{EtherLink1}1@D20194,Anemometer reading
-sensorWindSpeed15,WORD,{EtherLink1}1@D20195,Anemometer reading
-sensorWindSpeed16,WORD,{EtherLink1}1@D20196,Anemometer reading
-sensorWindSpeed17,WORD,{EtherLink1}1@D20197,Anemometer reading
-sensorWindSpeed18,WORD,{EtherLink1}1@D20198,Anemometer reading
-sensorWindSpeed19,WORD,{EtherLink1}1@D20199,Anemometer reading
-sensorWindSpeed20,WORD,{EtherLink1}1@D20200,Anemometer reading
-sensorWindSpeed21,WORD,{EtherLink1}1@D20201,Anemometer reading
-sensorWindSpeed22,WORD,{EtherLink1}1@D20202,Anemometer reading
-sensorWindSpeed23,WORD,{EtherLink1}1@D20203,Anemometer reading
-sensorWindSpeed24,WORD,{EtherLink1}1@D20204,Anemometer reading
-sensorWindSpeed25,WORD,{EtherLink1}1@D20205,Anemometer reading
-sensorWindSpeed26,WORD,{EtherLink1}1@D20206,Anemometer reading
-sensorWindSpeed27,WORD,{EtherLink1}1@D20207,Anemometer reading
-sensorWindSpeed28,WORD,{EtherLink1}1@D20208,Anemometer reading
-sensorWindSpeed29,WORD,{EtherLink1}1@D20209,Anemometer reading
-aqmSensorHumidity0,WORD,{EtherLink1}1@D20210,Humdity reading
-aqmSensorHumidity1,WORD,{EtherLink1}1@D20211,Humdity reading
-aqmSensorHumidity2,WORD,{EtherLink1}1@D20212,Humdity reading
-aqmSensorHumidity3,WORD,{EtherLink1}1@D20213,Humdity reading
-aqmSensorHumidity4,WORD,{EtherLink1}1@D20214,Humdity reading
-aqmSensorHumidity5,WORD,{EtherLink1}1@D20215,Humdity reading
-aqmSensorHumidity6,WORD,{EtherLink1}1@D20216,Humdity reading
-aqmSensorHumidity7,WORD,{EtherLink1}1@D20217,Humdity reading
-aqmSensorHumidity8,WORD,{EtherLink1}1@D20218,Humdity reading
-aqmSensorHumidity9,WORD,{EtherLink1}1@D20219,Humdity reading
-aqmSensorHumidity10,WORD,{EtherLink1}1@D20220,Humdity reading
-aqmSensorHumidity11,WORD,{EtherLink1}1@D20221,Humdity reading
-aqmSensorHumidity12,WORD,{EtherLink1}1@D20222,Humdity reading
-aqmSensorHumidity13,WORD,{EtherLink1}1@D20223,Humdity reading
-aqmSensorHumidity14,WORD,{EtherLink1}1@D20224,Humdity reading
-aqmSensorHumidity15,WORD,{EtherLink1}1@D20225,Humdity reading
-aqmSensorHumidity16,WORD,{EtherLink1}1@D20226,Humdity reading
-aqmSensorHumidity17,WORD,{EtherLink1}1@D20227,Humdity reading
-aqmSensorHumidity18,WORD,{EtherLink1}1@D20228,Humdity reading
-aqmSensorHumidity19,WORD,{EtherLink1}1@D20229,Humdity reading
-aqmSensorHumidity20,WORD,{EtherLink1}1@D20230,Humdity reading
-aqmSensorHumidity21,WORD,{EtherLink1}1@D20231,Humdity reading
-aqmSensorHumidity22,WORD,{EtherLink1}1@D20232,Humdity reading
-aqmSensorHumidity23,WORD,{EtherLink1}1@D20233,Humdity reading
-aqmSensorHumidity24,WORD,{EtherLink1}1@D20234,Humdity reading
-aqmSensorHumidity25,WORD,{EtherLink1}1@D20235,Humdity reading
-aqmSensorHumidity26,WORD,{EtherLink1}1@D20236,Humdity reading
-aqmSensorHumidity27,WORD,{EtherLink1}1@D20237,Humdity reading
-aqmSensorHumidity28,WORD,{EtherLink1}1@D20238,Humdity reading
-aqmSensorHumidity29,WORD,{EtherLink1}1@D20239,Humdity reading
-aqmSensorCO20,WORD,{EtherLink1}1@D20240,CO2 reading
-aqmSensorCO21,WORD,{EtherLink1}1@D20241,CO2 reading
-aqmSensorCO22,WORD,{EtherLink1}1@D20242,CO2 reading
-aqmSensorCO23,WORD,{EtherLink1}1@D20243,CO2 reading
-aqmSensorCO24,WORD,{EtherLink1}1@D20244,CO2 reading
-aqmSensorCO25,WORD,{EtherLink1}1@D20245,CO2 reading
-aqmSensorCO26,WORD,{EtherLink1}1@D20246,CO2 reading
-aqmSensorCO27,WORD,{EtherLink1}1@D20247,CO2 reading
-aqmSensorCO28,WORD,{EtherLink1}1@D20248,CO2 reading
-aqmSensorCO29,WORD,{EtherLink1}1@D20249,CO2 reading
-aqmSensorCO210,WORD,{EtherLink1}1@D20250,CO2 reading
-aqmSensorCO211,WORD,{EtherLink1}1@D20251,CO2 reading
-aqmSensorCO212,WORD,{EtherLink1}1@D20252,CO2 reading
-aqmSensorCO213,WORD,{EtherLink1}1@D20253,CO2 reading
-aqmSensorCO214,WORD,{EtherLink1}1@D20254,CO2 reading
-aqmSensorCO215,WORD,{EtherLink1}1@D20255,CO2 reading
-aqmSensorCO216,WORD,{EtherLink1}1@D20256,CO2 reading
-aqmSensorCO217,WORD,{EtherLink1}1@D20257,CO2 reading
-aqmSensorCO218,WORD,{EtherLink1}1@D20258,CO2 reading
-aqmSensorCO219,WORD,{EtherLink1}1@D20259,CO2 reading
-aqmSensorCO220,WORD,{EtherLink1}1@D20260,CO2 reading
-aqmSensorCO221,WORD,{EtherLink1}1@D20261,CO2 reading
-aqmSensorCO222,WORD,{EtherLink1}1@D20262,CO2 reading
-aqmSensorCO223,WORD,{EtherLink1}1@D20263,CO2 reading
-aqmSensorCO224,WORD,{EtherLink1}1@D20264,CO2 reading
-aqmSensorCO225,WORD,{EtherLink1}1@D20265,CO2 reading
-aqmSensorCO226,WORD,{EtherLink1}1@D20266,CO2 reading
-aqmSensorCO227,WORD,{EtherLink1}1@D20267,CO2 reading
-aqmSensorCO228,WORD,{EtherLink1}1@D20268,CO2 reading
-aqmSensorCO229,WORD,{EtherLink1}1@D20269,CO2 reading
-aqmSensorTemperature0,WORD,{EtherLink1}1@D20270,Temperature reading
-aqmSensorTemperature1,WORD,{EtherLink1}1@D20271,Temperature reading
-aqmSensorTemperature2,WORD,{EtherLink1}1@D20272,Temperature reading
-aqmSensorTemperature3,WORD,{EtherLink1}1@D20273,Temperature reading
-aqmSensorTemperature4,WORD,{EtherLink1}1@D20274,Temperature reading
-aqmSensorTemperature5,WORD,{EtherLink1}1@D20275,Temperature reading
-aqmSensorTemperature6,WORD,{EtherLink1}1@D20276,Temperature reading
-aqmSensorTemperature7,WORD,{EtherLink1}1@D20277,Temperature reading
-aqmSensorTemperature8,WORD,{EtherLink1}1@D20278,Temperature reading
-aqmSensorTemperature9,WORD,{EtherLink1}1@D20279,Temperature reading
-aqmSensorTemperature10,WORD,{EtherLink1}1@D20280,Temperature reading
-aqmSensorTemperature11,WORD,{EtherLink1}1@D20281,Temperature reading
-aqmSensorTemperature12,WORD,{EtherLink1}1@D20282,Temperature reading
-aqmSensorTemperature13,WORD,{EtherLink1}1@D20283,Temperature reading
-aqmSensorTemperature14,WORD,{EtherLink1}1@D20284,Temperature reading
-aqmSensorTemperature15,WORD,{EtherLink1}1@D20285,Temperature reading
-aqmSensorTemperature16,WORD,{EtherLink1}1@D20286,Temperature reading
-aqmSensorTemperature17,WORD,{EtherLink1}1@D20287,Temperature reading
-aqmSensorTemperature18,WORD,{EtherLink1}1@D20288,Temperature reading
-aqmSensorTemperature19,WORD,{EtherLink1}1@D20289,Temperature reading
-aqmSensorTemperature20,WORD,{EtherLink1}1@D20290,Temperature reading
-aqmSensorTemperature21,WORD,{EtherLink1}1@D20291,Temperature reading
-aqmSensorTemperature22,WORD,{EtherLink1}1@D20292,Temperature reading
-aqmSensorTemperature23,WORD,{EtherLink1}1@D20293,Temperature reading
-aqmSensorTemperature24,WORD,{EtherLink1}1@D20294,Temperature reading
-aqmSensorTemperature25,WORD,{EtherLink1}1@D20295,Temperature reading
-aqmSensorTemperature26,WORD,{EtherLink1}1@D20296,Temperature reading
-aqmSensorTemperature27,WORD,{EtherLink1}1@D20297,Temperature reading
-aqmSensorTemperature28,WORD,{EtherLink1}1@D20298,Temperature reading
-aqmSensorTemperature29,WORD,{EtherLink1}1@D20299,Temperature reading
+stat_water_vfd_other1,BIT,{EtherLink1}1@D20103.0,Other VFD error
+stat_water_shelf_valvefault1,BIT,{EtherLink1}1@D20104.0,Status for water system
+stat_water_shelf_overflow1,BIT,{EtherLink1}1@D20105.0,Status for water system
+stat_water_temp_range1,BIT,{EtherLink1}1@D20106.0,Status for water system
+stat_water_tank_levellow1,BIT,{EtherLink1}1@D20107.0,Status for water system
+stat_water_tank_levelhigh1,BIT,{EtherLink1}1@D20108.0,Status for water system
+stat_water_tank_sensor_unison1,BIT,{EtherLink1}1@D20109.0,Status for water system
+stat_light_burned1,BIT,{EtherLink1}1@D20110.0,Status for lighting system
+stat_light_powertrip1,BIT,{EtherLink1}1@D20111.0,Status for lighting system
+stat_vent_vfd_comm1,BIT,{EtherLink1}1@D20112.0,Status for ventilation system
+stat_vent_vfd_power1,BIT,{EtherLink1}1@D20113.0,Status for ventilation system
+stat_vent_vfd_motor1,BIT,{EtherLink1}1@D20114.0,Status for ventilation system
+stat_vent_vfd_overload1,BIT,{EtherLink1}1@D20115.0,Status for ventilation system
+stat_vent_air_offline1,BIT,{EtherLink1}1@D20116.0,Status for ventilation system
+stat_vent_air_deviation1,BIT,{EtherLink1}1@D20117.0,Status for ventilation system
+stat_vent_air_humidity1,BIT,{EtherLink1}1@D20118.0,Status for ventilation system
+stat_vent_air_co2,BIT,{EtherLink1}1@D20119.0,Status for ventilation system
+stat_vent_air_temp1,BIT,{EtherLink1}1@D20120.0,Status for ventilation system
+stat_alarm_clear,BIT,{EtherLink1}1@D20121.0,Global alarm indicator
+errAnemometer0,WORD,{EtherLink1}1@D20122,Anemometer error (0 = no error)
+errAnemometer1,WORD,{EtherLink1}1@D20123,Anemometer error (0 = no error)
+errAnemometer2,WORD,{EtherLink1}1@D20124,Anemometer error (0 = no error)
+errAnemometer3,WORD,{EtherLink1}1@D20125,Anemometer error (0 = no error)
+errAnemometer4,WORD,{EtherLink1}1@D20126,Anemometer error (0 = no error)
+errAnemometer5,WORD,{EtherLink1}1@D20127,Anemometer error (0 = no error)
+errAnemometer6,WORD,{EtherLink1}1@D20128,Anemometer error (0 = no error)
+errAnemometer7,WORD,{EtherLink1}1@D20129,Anemometer error (0 = no error)
+errAnemometer8,WORD,{EtherLink1}1@D20130,Anemometer error (0 = no error)
+errAnemometer9,WORD,{EtherLink1}1@D20131,Anemometer error (0 = no error)
+errAnemometer10,WORD,{EtherLink1}1@D20132,Anemometer error (0 = no error)
+errAnemometer11,WORD,{EtherLink1}1@D20133,Anemometer error (0 = no error)
+errAnemometer12,WORD,{EtherLink1}1@D20134,Anemometer error (0 = no error)
+errAnemometer13,WORD,{EtherLink1}1@D20135,Anemometer error (0 = no error)
+errAnemometer14,WORD,{EtherLink1}1@D20136,Anemometer error (0 = no error)
+errAnemometer15,WORD,{EtherLink1}1@D20137,Anemometer error (0 = no error)
+errAnemometer16,WORD,{EtherLink1}1@D20138,Anemometer error (0 = no error)
+errAnemometer17,WORD,{EtherLink1}1@D20139,Anemometer error (0 = no error)
+errAnemometer18,WORD,{EtherLink1}1@D20140,Anemometer error (0 = no error)
+errAnemometer19,WORD,{EtherLink1}1@D20141,Anemometer error (0 = no error)
+errAnemometer20,WORD,{EtherLink1}1@D20142,Anemometer error (0 = no error)
+errAnemometer21,WORD,{EtherLink1}1@D20143,Anemometer error (0 = no error)
+errAnemometer22,WORD,{EtherLink1}1@D20144,Anemometer error (0 = no error)
+errAnemometer23,WORD,{EtherLink1}1@D20145,Anemometer error (0 = no error)
+errAnemometer24,WORD,{EtherLink1}1@D20146,Anemometer error (0 = no error)
+errAnemometer25,WORD,{EtherLink1}1@D20147,Anemometer error (0 = no error)
+errAnemometer26,WORD,{EtherLink1}1@D20148,Anemometer error (0 = no error)
+errAnemometer27,WORD,{EtherLink1}1@D20149,Anemometer error (0 = no error)
+errAnemometer28,WORD,{EtherLink1}1@D20150,Anemometer error (0 = no error)
+errAnemometer29,WORD,{EtherLink1}1@D20151,Anemometer error (0 = no error)
+errAQM0,WORD,{EtherLink1}1@D20152,AQM sensor error (0 = no error)
+errAQM1,WORD,{EtherLink1}1@D20153,AQM sensor error (0 = no error)
+errAQM2,WORD,{EtherLink1}1@D20154,AQM sensor error (0 = no error)
+errAQM3,WORD,{EtherLink1}1@D20155,AQM sensor error (0 = no error)
+errAQM4,WORD,{EtherLink1}1@D20156,AQM sensor error (0 = no error)
+errAQM5,WORD,{EtherLink1}1@D20157,AQM sensor error (0 = no error)
+errAQM6,WORD,{EtherLink1}1@D20158,AQM sensor error (0 = no error)
+errAQM7,WORD,{EtherLink1}1@D20159,AQM sensor error (0 = no error)
+errAQM8,WORD,{EtherLink1}1@D20160,AQM sensor error (0 = no error)
+errAQM9,WORD,{EtherLink1}1@D20161,AQM sensor error (0 = no error)
+errAQM10,WORD,{EtherLink1}1@D20162,AQM sensor error (0 = no error)
+errAQM11,WORD,{EtherLink1}1@D20163,AQM sensor error (0 = no error)
+errAQM12,WORD,{EtherLink1}1@D20164,AQM sensor error (0 = no error)
+errAQM13,WORD,{EtherLink1}1@D20165,AQM sensor error (0 = no error)
+errAQM14,WORD,{EtherLink1}1@D20166,AQM sensor error (0 = no error)
+errAQM15,WORD,{EtherLink1}1@D20167,AQM sensor error (0 = no error)
+errAQM16,WORD,{EtherLink1}1@D20168,AQM sensor error (0 = no error)
+errAQM17,WORD,{EtherLink1}1@D20169,AQM sensor error (0 = no error)
+errAQM18,WORD,{EtherLink1}1@D20170,AQM sensor error (0 = no error)
+errAQM19,WORD,{EtherLink1}1@D20171,AQM sensor error (0 = no error)
+errAQM20,WORD,{EtherLink1}1@D20172,AQM sensor error (0 = no error)
+errAQM21,WORD,{EtherLink1}1@D20173,AQM sensor error (0 = no error)
+errAQM22,WORD,{EtherLink1}1@D20174,AQM sensor error (0 = no error)
+errAQM23,WORD,{EtherLink1}1@D20175,AQM sensor error (0 = no error)
+errAQM24,WORD,{EtherLink1}1@D20176,AQM sensor error (0 = no error)
+errAQM25,WORD,{EtherLink1}1@D20177,AQM sensor error (0 = no error)
+errAQM26,WORD,{EtherLink1}1@D20178,AQM sensor error (0 = no error)
+errAQM27,WORD,{EtherLink1}1@D20179,AQM sensor error (0 = no error)
+errAQM28,WORD,{EtherLink1}1@D20180,AQM sensor error (0 = no error)
+errAQM29,WORD,{EtherLink1}1@D20181,AQM sensor error (0 = no error)
+sensorWindSpeed0,WORD,{EtherLink1}1@D20182,Anemometer reading
+sensorWindSpeed1,WORD,{EtherLink1}1@D20183,Anemometer reading
+sensorWindSpeed2,WORD,{EtherLink1}1@D20184,Anemometer reading
+sensorWindSpeed3,WORD,{EtherLink1}1@D20185,Anemometer reading
+sensorWindSpeed4,WORD,{EtherLink1}1@D20186,Anemometer reading
+sensorWindSpeed5,WORD,{EtherLink1}1@D20187,Anemometer reading
+sensorWindSpeed6,WORD,{EtherLink1}1@D20188,Anemometer reading
+sensorWindSpeed7,WORD,{EtherLink1}1@D20189,Anemometer reading
+sensorWindSpeed8,WORD,{EtherLink1}1@D20190,Anemometer reading
+sensorWindSpeed9,WORD,{EtherLink1}1@D20191,Anemometer reading
+sensorWindSpeed10,WORD,{EtherLink1}1@D20192,Anemometer reading
+sensorWindSpeed11,WORD,{EtherLink1}1@D20193,Anemometer reading
+sensorWindSpeed12,WORD,{EtherLink1}1@D20194,Anemometer reading
+sensorWindSpeed13,WORD,{EtherLink1}1@D20195,Anemometer reading
+sensorWindSpeed14,WORD,{EtherLink1}1@D20196,Anemometer reading
+sensorWindSpeed15,WORD,{EtherLink1}1@D20197,Anemometer reading
+sensorWindSpeed16,WORD,{EtherLink1}1@D20198,Anemometer reading
+sensorWindSpeed17,WORD,{EtherLink1}1@D20199,Anemometer reading
+sensorWindSpeed18,WORD,{EtherLink1}1@D20200,Anemometer reading
+sensorWindSpeed19,WORD,{EtherLink1}1@D20201,Anemometer reading
+sensorWindSpeed20,WORD,{EtherLink1}1@D20202,Anemometer reading
+sensorWindSpeed21,WORD,{EtherLink1}1@D20203,Anemometer reading
+sensorWindSpeed22,WORD,{EtherLink1}1@D20204,Anemometer reading
+sensorWindSpeed23,WORD,{EtherLink1}1@D20205,Anemometer reading
+sensorWindSpeed24,WORD,{EtherLink1}1@D20206,Anemometer reading
+sensorWindSpeed25,WORD,{EtherLink1}1@D20207,Anemometer reading
+sensorWindSpeed26,WORD,{EtherLink1}1@D20208,Anemometer reading
+sensorWindSpeed27,WORD,{EtherLink1}1@D20209,Anemometer reading
+sensorWindSpeed28,WORD,{EtherLink1}1@D20210,Anemometer reading
+sensorWindSpeed29,WORD,{EtherLink1}1@D20211,Anemometer reading
+aqmSensorHumidity0,WORD,{EtherLink1}1@D20212,Humdity reading
+aqmSensorHumidity1,WORD,{EtherLink1}1@D20213,Humdity reading
+aqmSensorHumidity2,WORD,{EtherLink1}1@D20214,Humdity reading
+aqmSensorHumidity3,WORD,{EtherLink1}1@D20215,Humdity reading
+aqmSensorHumidity4,WORD,{EtherLink1}1@D20216,Humdity reading
+aqmSensorHumidity5,WORD,{EtherLink1}1@D20217,Humdity reading
+aqmSensorHumidity6,WORD,{EtherLink1}1@D20218,Humdity reading
+aqmSensorHumidity7,WORD,{EtherLink1}1@D20219,Humdity reading
+aqmSensorHumidity8,WORD,{EtherLink1}1@D20220,Humdity reading
+aqmSensorHumidity9,WORD,{EtherLink1}1@D20221,Humdity reading
+aqmSensorHumidity10,WORD,{EtherLink1}1@D20222,Humdity reading
+aqmSensorHumidity11,WORD,{EtherLink1}1@D20223,Humdity reading
+aqmSensorHumidity12,WORD,{EtherLink1}1@D20224,Humdity reading
+aqmSensorHumidity13,WORD,{EtherLink1}1@D20225,Humdity reading
+aqmSensorHumidity14,WORD,{EtherLink1}1@D20226,Humdity reading
+aqmSensorHumidity15,WORD,{EtherLink1}1@D20227,Humdity reading
+aqmSensorHumidity16,WORD,{EtherLink1}1@D20228,Humdity reading
+aqmSensorHumidity17,WORD,{EtherLink1}1@D20229,Humdity reading
+aqmSensorHumidity18,WORD,{EtherLink1}1@D20230,Humdity reading
+aqmSensorHumidity19,WORD,{EtherLink1}1@D20231,Humdity reading
+aqmSensorHumidity20,WORD,{EtherLink1}1@D20232,Humdity reading
+aqmSensorHumidity21,WORD,{EtherLink1}1@D20233,Humdity reading
+aqmSensorHumidity22,WORD,{EtherLink1}1@D20234,Humdity reading
+aqmSensorHumidity23,WORD,{EtherLink1}1@D20235,Humdity reading
+aqmSensorHumidity24,WORD,{EtherLink1}1@D20236,Humdity reading
+aqmSensorHumidity25,WORD,{EtherLink1}1@D20237,Humdity reading
+aqmSensorHumidity26,WORD,{EtherLink1}1@D20238,Humdity reading
+aqmSensorHumidity27,WORD,{EtherLink1}1@D20239,Humdity reading
+aqmSensorHumidity28,WORD,{EtherLink1}1@D20240,Humdity reading
+aqmSensorHumidity29,WORD,{EtherLink1}1@D20241,Humdity reading
+aqmSensorCO20,WORD,{EtherLink1}1@D20242,CO2 reading
+aqmSensorCO21,WORD,{EtherLink1}1@D20243,CO2 reading
+aqmSensorCO22,WORD,{EtherLink1}1@D20244,CO2 reading
+aqmSensorCO23,WORD,{EtherLink1}1@D20245,CO2 reading
+aqmSensorCO24,WORD,{EtherLink1}1@D20246,CO2 reading
+aqmSensorCO25,WORD,{EtherLink1}1@D20247,CO2 reading
+aqmSensorCO26,WORD,{EtherLink1}1@D20248,CO2 reading
+aqmSensorCO27,WORD,{EtherLink1}1@D20249,CO2 reading
+aqmSensorCO28,WORD,{EtherLink1}1@D20250,CO2 reading
+aqmSensorCO29,WORD,{EtherLink1}1@D20251,CO2 reading
+aqmSensorCO210,WORD,{EtherLink1}1@D20252,CO2 reading
+aqmSensorCO211,WORD,{EtherLink1}1@D20253,CO2 reading
+aqmSensorCO212,WORD,{EtherLink1}1@D20254,CO2 reading
+aqmSensorCO213,WORD,{EtherLink1}1@D20255,CO2 reading
+aqmSensorCO214,WORD,{EtherLink1}1@D20256,CO2 reading
+aqmSensorCO215,WORD,{EtherLink1}1@D20257,CO2 reading
+aqmSensorCO216,WORD,{EtherLink1}1@D20258,CO2 reading
+aqmSensorCO217,WORD,{EtherLink1}1@D20259,CO2 reading
+aqmSensorCO218,WORD,{EtherLink1}1@D20260,CO2 reading
+aqmSensorCO219,WORD,{EtherLink1}1@D20261,CO2 reading
+aqmSensorCO220,WORD,{EtherLink1}1@D20262,CO2 reading
+aqmSensorCO221,WORD,{EtherLink1}1@D20263,CO2 reading
+aqmSensorCO222,WORD,{EtherLink1}1@D20264,CO2 reading
+aqmSensorCO223,WORD,{EtherLink1}1@D20265,CO2 reading
+aqmSensorCO224,WORD,{EtherLink1}1@D20266,CO2 reading
+aqmSensorCO225,WORD,{EtherLink1}1@D20267,CO2 reading
+aqmSensorCO226,WORD,{EtherLink1}1@D20268,CO2 reading
+aqmSensorCO227,WORD,{EtherLink1}1@D20269,CO2 reading
+aqmSensorCO228,WORD,{EtherLink1}1@D20270,CO2 reading
+aqmSensorCO229,WORD,{EtherLink1}1@D20271,CO2 reading
+aqmSensorTemperature0,WORD,{EtherLink1}1@D20272,Temperature reading
+aqmSensorTemperature1,WORD,{EtherLink1}1@D20273,Temperature reading
+aqmSensorTemperature2,WORD,{EtherLink1}1@D20274,Temperature reading
+aqmSensorTemperature3,WORD,{EtherLink1}1@D20275,Temperature reading
+aqmSensorTemperature4,WORD,{EtherLink1}1@D20276,Temperature reading
+aqmSensorTemperature5,WORD,{EtherLink1}1@D20277,Temperature reading
+aqmSensorTemperature6,WORD,{EtherLink1}1@D20278,Temperature reading
+aqmSensorTemperature7,WORD,{EtherLink1}1@D20279,Temperature reading
+aqmSensorTemperature8,WORD,{EtherLink1}1@D20280,Temperature reading
+aqmSensorTemperature9,WORD,{EtherLink1}1@D20281,Temperature reading
+aqmSensorTemperature10,WORD,{EtherLink1}1@D20282,Temperature reading
+aqmSensorTemperature11,WORD,{EtherLink1}1@D20283,Temperature reading
+aqmSensorTemperature12,WORD,{EtherLink1}1@D20284,Temperature reading
+aqmSensorTemperature13,WORD,{EtherLink1}1@D20285,Temperature reading
+aqmSensorTemperature14,WORD,{EtherLink1}1@D20286,Temperature reading
+aqmSensorTemperature15,WORD,{EtherLink1}1@D20287,Temperature reading
+aqmSensorTemperature16,WORD,{EtherLink1}1@D20288,Temperature reading
+aqmSensorTemperature17,WORD,{EtherLink1}1@D20289,Temperature reading
+aqmSensorTemperature18,WORD,{EtherLink1}1@D20290,Temperature reading
+aqmSensorTemperature19,WORD,{EtherLink1}1@D20291,Temperature reading
+aqmSensorTemperature20,WORD,{EtherLink1}1@D20292,Temperature reading
+aqmSensorTemperature21,WORD,{EtherLink1}1@D20293,Temperature reading
+aqmSensorTemperature22,WORD,{EtherLink1}1@D20294,Temperature reading
+aqmSensorTemperature23,WORD,{EtherLink1}1@D20295,Temperature reading
+aqmSensorTemperature24,WORD,{EtherLink1}1@D20296,Temperature reading
+aqmSensorTemperature25,WORD,{EtherLink1}1@D20297,Temperature reading
+aqmSensorTemperature26,WORD,{EtherLink1}1@D20298,Temperature reading
+aqmSensorTemperature27,WORD,{EtherLink1}1@D20299,Temperature reading
+aqmSensorTemperature28,WORD,{EtherLink1}1@D20300,Temperature reading
+aqmSensorTemperature29,WORD,{EtherLink1}1@D20301,Temperature reading
+CONST_AIR_TEMPERATURE_MAX,WORD,{EtherLink1}1@D20304,For range checking
+CONST_AIR_TEMPERATURE_MIN,WORD,{EtherLink1}1@D20305,For range checking
+CONST_AIR_HUMIDITY_MAX,WORD,{EtherLink1}1@D20306,For range checking
+CONST_AIR_HUMIDITY_MIN,WORD,{EtherLink1}1@D20307,For range checking
+CONST_AIR_CO2_MAX,WORD,{EtherLink1}1@D20308,For range checking
+CONST_AIR_CO2_MIN,WORD,{EtherLink1}1@D20309,For range checking
+CONST_WATER_RANGE_MAX,WORD,{EtherLink1}1@D20310,Checking water temperature range
+CONST_WATER_RANGE_MIN,WORD,{EtherLink1}1@D20311,Checking water temperature range
 pump_e_OnArr0,BIT,{EtherLink1}1@D11000.0
 pump_e_OnArr1,BIT,{EtherLink1}1@D11000.1
 pump_e_OnArr2,BIT,{EtherLink1}1@D11000.2
@@ -1297,8 +1307,38 @@ IO_waterTemp_17,WORD,{EtherLink1}1@D28344
 IO_waterTemp_18,WORD,{EtherLink1}1@D28346
 IO_waterTemp_19,WORD,{EtherLink1}1@D28348
 MB_pump0_rOutputHz,WORD,{EtherLink1}1@D25102
+MB_pump0_faultRecord0,WORD,{EtherLink1}1@D25160
+MB_pump0_faultRecord1,WORD,{EtherLink1}1@D25161
+MB_pump0_faultRecord2,WORD,{EtherLink1}1@D25162
+MB_pump0_faultRecord3,WORD,{EtherLink1}1@D25163
+MB_pump0_faultRecord4,WORD,{EtherLink1}1@D25164
+MB_pump0_faultRecord5,WORD,{EtherLink1}1@D25165
+MB_pump0_faultRecord6,WORD,{EtherLink1}1@D25166
+MB_pump0_faultRecord7,WORD,{EtherLink1}1@D25167
+MB_pump0_faultRecord8,WORD,{EtherLink1}1@D25168
+MB_pump0_faultRecord9,WORD,{EtherLink1}1@D25169
 MB_pump1_rOutputHz,WORD,{EtherLink1}1@D25302
+MB_pump1_faultRecord0,WORD,{EtherLink1}1@D25360
+MB_pump1_faultRecord1,WORD,{EtherLink1}1@D25361
+MB_pump1_faultRecord2,WORD,{EtherLink1}1@D25362
+MB_pump1_faultRecord3,WORD,{EtherLink1}1@D25363
+MB_pump1_faultRecord4,WORD,{EtherLink1}1@D25364
+MB_pump1_faultRecord5,WORD,{EtherLink1}1@D25365
+MB_pump1_faultRecord6,WORD,{EtherLink1}1@D25366
+MB_pump1_faultRecord7,WORD,{EtherLink1}1@D25367
+MB_pump1_faultRecord8,WORD,{EtherLink1}1@D25368
+MB_pump1_faultRecord9,WORD,{EtherLink1}1@D25369
 MB_pump2_rOutputHz,WORD,{EtherLink1}1@D25502
+MB_pump2_faultRecord0,WORD,{EtherLink1}1@D25560
+MB_pump2_faultRecord1,WORD,{EtherLink1}1@D25561
+MB_pump2_faultRecord2,WORD,{EtherLink1}1@D25562
+MB_pump2_faultRecord3,WORD,{EtherLink1}1@D25563
+MB_pump2_faultRecord4,WORD,{EtherLink1}1@D25564
+MB_pump2_faultRecord5,WORD,{EtherLink1}1@D25565
+MB_pump2_faultRecord6,WORD,{EtherLink1}1@D25566
+MB_pump2_faultRecord7,WORD,{EtherLink1}1@D25567
+MB_pump2_faultRecord8,WORD,{EtherLink1}1@D25568
+MB_pump2_faultRecord9,WORD,{EtherLink1}1@D25569
 PUMP_0_SELECTED,BIT,$1000.0
 PUMP_1_SELECTED,BIT,$1001.0
 PUMP_2_SELECTED,BIT,$1002.0
