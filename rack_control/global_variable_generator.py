@@ -18,7 +18,7 @@ import os
 import csv
 import pandas as pd
 import numpy as np
-
+import re
 
 def main():
 
@@ -260,15 +260,36 @@ def main():
         io = io_data[io_name]
         write_rec_glob_var_table(global_var_table, io_name, io['addr'], io['type'], io['init_value'], io['comment'])
 
-        if io['type'] == "BOOL":
-            io_var_type = "BIT"
-        else:
-            io_var_type = io['type']
+        if "ARRAY" in io['type']:
+            array_size = get_array_size(io['type'])
+            array_type = get_array_type(io['type'])
+            constant_arr_addr = int(re.sub(r"\D", "", io['addr']))
 
-        if io['hmi_tag']:
-            addr = hmi_tag_plc_name + io['addr']
-            write_rec_hmi_tag_table(hmi_tag_table, io_name, io_var_type, addr, io['comment'])
-            #write_rec_hmi_tag_table(hmi_tag_table, io_name, io['type'], addr, io['comment'])
+            for j in range(array_size):
+                name = f"{io_name}{j}"
+                var_type = translate_var_type_hmi_tag(var_type=array_type)
+                if array_type == "BOOL":
+                    array_elem_size = 1
+                elif array_type == "WORD":
+                    array_elem_size = 1
+                elif array_type == "DWORD":
+                    array_elem_size = 2
+                else:
+                    array_elem_size = 1
+                addr = hmi_tag_plc_name + 'D' + str(constant_arr_addr + (j * array_elem_size))
+                write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr, io['comment'])
+
+            
+        else:
+            if io['type'] == "BOOL":
+                io_var_type = "BIT"
+            else:
+                io_var_type = io['type']
+
+            if io['hmi_tag']:
+                addr = hmi_tag_plc_name + io['addr']
+                write_rec_hmi_tag_table(hmi_tag_table, io_name, io_var_type, addr, io['comment'])
+                #write_rec_hmi_tag_table(hmi_tag_table, io_name, io['type'], addr, io['comment'])
 
 
     # parse hmi_internal and write into hmi_tag_table
