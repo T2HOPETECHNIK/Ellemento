@@ -28,6 +28,7 @@ def main():
     else:
         input_name = "global_variable_template.xlsx"
     global_var_table_name = "global_variable_table.csv"
+    plc2_global_var_table_name = "plc2_global_variable_table.csv"
     hmi_tag_table_name = "hmi_tag.csv"
     hmi_tag_plc_name = "{EtherLink1}1@"
 
@@ -42,6 +43,8 @@ def main():
     pump_data_table = pd.read_excel(dir_name, sheet_name="Pump")
     io_mapping_table = pd.read_excel(dir_name, sheet_name="IO Mapping")
     hmi_data_table = pd.read_excel(dir_name, sheet_name="HMI Internal")
+    # for second PLC
+    plc2_io_table = pd.read_excel(dir_name, sheet_name="PLC2 Global")
 
     # read data from tables
     constant_base_addr, constants = read_var_table(constant_table)
@@ -51,6 +54,8 @@ def main():
     pump_base_addr, pumps = read_var_table(pump_data_table)
     io_data = read_io_mapping_table(io_mapping_table)
     hmi_base_addr, hmi_internal = read_hmi_internal_table(hmi_data_table)
+	# PLC 2
+    plc2_io_data = read_plc2_mapping_table(plc2_io_table)
 
     # define common properties
     shelf_no = constants['shelf_no']['init_value']
@@ -58,6 +63,7 @@ def main():
 
     global_var_table = {}
     hmi_tag_table = {}
+    plc2_global_var_table = {}
 
     # parse constants and write into global_var_table
     constant_curr_addr = constant_base_addr
@@ -313,6 +319,17 @@ def main():
 
     # write hmi_tag_table into hmi_tag_table.csv
     write_hmi_tag_table_to_csv(hmi_tag_table_name, hmi_tag_table)
+	
+	
+	
+    # parse io_data and write into global_var_table & hmi_tag_table
+    for io_name in plc2_io_data:
+        io = plc2_io_data[io_name]
+        write_rec_glob_var_table(plc2_global_var_table, io_name, io['addr'], io['type'], io['init_value'], io['comment'])
+		
+    write_glob_var_table_to_csv(plc2_global_var_table_name, plc2_global_var_table)
+
+# ============================================================================
 
 def read_var_table(s_table: dict) -> dict:
     s_dict = {}
@@ -375,6 +392,29 @@ def read_io_mapping_table(io_table: dict) -> dict:
             }
 
     return io_dict
+	
+	
+def read_plc2_mapping_table(plc2_io_table: dict) -> dict:
+    plc2_io_dict = {}
+    plc2_var_names = plc2_io_table['variable_name'].tolist()
+    plc2_var_addrs = plc2_io_table['addr'].tolist()
+    plc2_var_types = plc2_io_table['type'].tolist()
+    plc2_var_init_values = plc2_io_table['init_value'].tolist()
+    plc2_var_comments = plc2_io_table['comment'].tolist()
+
+    # inject name, addr_offset, type, init_value
+    for io_name, io_addr, io_type, io_init_value, io_comment \
+        in zip (plc2_var_names, plc2_var_addrs, plc2_var_types, plc2_var_init_values, plc2_var_comments):
+
+        plc2_io_dict[io_name] = {
+            'addr': io_addr,
+            'type': io_type,
+            'init_value': io_init_value,
+            'comment': io_comment
+            }
+
+    return plc2_io_dict
+
 
 
 def read_hmi_internal_table(h_table: dict) -> dict:
@@ -412,6 +452,8 @@ def write_rec_glob_var_table(
     return
 
 
+
+
 def write_glob_var_table_to_csv(filename, global_var_table):
     header = ["Class", "Identifiers", "Address", "Type", "Initial Value", "Comment"]
     curr_dir = os.path.dirname(os.path.abspath(__file__))
@@ -427,7 +469,9 @@ def write_glob_var_table_to_csv(filename, global_var_table):
             else:
                 writer.writerow(['VAR', var_name, var_data['addr'], var_data['type'], var_data['init_value']])
 
-    print("completed: global_variable_table.csv")
+    print("completed: ", filename)
+
+
 
 
 def write_rec_hmi_tag_table(
@@ -457,7 +501,7 @@ def write_hmi_tag_table_to_csv(filename, hmi_tag_table):
             else:
                 writer.writerow([var_name, var_data['type'], var_data['addr']])
 
-    print("completed: hmi_tag_table.csv")
+    print("completed: ", filename)
 
 
 def calc_addr_offset_hmi_tag(is_array: bool, var_type: str, offset: str) -> Union[int, float]:
