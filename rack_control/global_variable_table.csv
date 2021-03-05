@@ -56,29 +56,32 @@ VAR,stat_vent_vfd_comm1,D20112.0,BOOL,1,Status for ventilation system
 VAR,stat_vent_vfd_power1,D20113.0,BOOL,1,Status for ventilation system
 VAR,stat_vent_vfd_motor1,D20114.0,BOOL,1,Status for ventilation system
 VAR,stat_vent_vfd_overload1,D20115.0,BOOL,1,Status for ventilation system
-VAR,stat_vent_air_offline1,D20116.0,BOOL,1,Status for ventilation system
-VAR,stat_vent_air_deviation1,D20117.0,BOOL,1,Status for ventilation system
-VAR,stat_vent_air_humidity1,D20118.0,BOOL,1,Status for ventilation system
-VAR,stat_vent_air_co2,D20119.0,BOOL,1,Status for ventilation system
-VAR,stat_vent_air_temp1,D20120.0,BOOL,1,Status for ventilation system
-VAR,stat_alarm_clear,D20121.0,BOOL,1,Global alarm indicator
-VAR,errAnemometer,D20122,ARRAY [30] OF WORD,[30(0)],Anemometer error (0 = no error)
-VAR,errAQM,D20152,ARRAY [30] OF WORD,[30(0)],AQM sensor error (0 = no error)
-VAR,sensorWindSpeed,D20182,ARRAY [30] OF WORD,[30(0)],Anemometer reading
-VAR,aqmSensorHumidity,D20212,ARRAY [30] OF WORD,[30(0)],Humdity reading
-VAR,aqmSensorCO2,D20242,ARRAY [30] OF WORD,[30(0)],CO2 reading
-VAR,aqmSensorTemperature,D20272,ARRAY [30] OF WORD,[30(0)],Temperature reading
-VAR,tmpCounter,D20302,INT,0
-VAR,ventilationCheckCounter,D20303,WORD,0,How frequent we read the sensors
-VAR,CONST_AIR_TEMPERATURE_MAX,D20304,WORD,0,For range checking
-VAR,CONST_AIR_TEMPERATURE_MIN,D20305,WORD,0,For range checking
-VAR,CONST_AIR_HUMIDITY_MAX,D20306,WORD,0,For range checking
-VAR,CONST_AIR_HUMIDITY_MIN,D20307,WORD,0,For range checking
-VAR,CONST_AIR_CO2_MAX,D20308,WORD,0,For range checking
-VAR,CONST_AIR_CO2_MIN,D20309,WORD,0,For range checking
-VAR,CONST_WATER_RANGE_MAX,D20310,WORD,0,Checking water temperature range
-VAR,CONST_WATER_RANGE_MIN,D20311,WORD,0,Checking water temperature range
-VAR,tmpReal,D20312,REAL,0
+VAR,stat_vent_vfd_status_code,D20116,WORD,0,Ventilation VFD status code
+VAR,stat_vent_air_offline1,D20117.0,BOOL,1,Status for ventilation system
+VAR,stat_vent_air_deviation1,D20118.0,BOOL,1,Status for ventilation system
+VAR,stat_vent_air_humidity1,D20119.0,BOOL,1,Status for ventilation system
+VAR,stat_vent_air_co2,D20120.0,BOOL,1,Status for ventilation system
+VAR,stat_vent_air_temp1,D20121.0,BOOL,1,Status for ventilation system
+VAR,stat_alarm_clear,D20122.0,BOOL,1,Global alarm indicator
+VAR,stat_plc1_system,D20123.0,BOOL,1,PLC1 system
+VAR,stat_plc2_system,D20124.0,BOOL,1,PLC2 system
+VAR,stat_plc1_io,D20125.0,BOOL,1,PLC1 IO
+VAR,stat_plc2_io,D20126.0,BOOL,1,PLC2 IO
+VAR,stat_plc_transfer,D20127.0,BOOL,1,Transfer between PLC1 and PLC2
+VAR,tmpCounter,D20128,INT,0
+VAR,ventilationCheckCounter,D20129,WORD,0,How frequent we read the sensors
+VAR,CONST_AIR_TEMPERATURE_MAX,D20130,WORD,0,For range checking
+VAR,CONST_AIR_TEMPERATURE_MIN,D20131,WORD,0,For range checking
+VAR,CONST_AIR_HUMIDITY_MAX,D20132,WORD,0,For range checking
+VAR,CONST_AIR_HUMIDITY_MIN,D20133,WORD,0,For range checking
+VAR,CONST_AIR_CO2_MAX,D20134,WORD,0,For range checking
+VAR,CONST_AIR_CO2_MIN,D20135,WORD,0,For range checking
+VAR,CONST_WATER_RANGE_MAX,D20136,WORD,0,Checking water temperature range
+VAR,CONST_WATER_RANGE_MIN,D20137,WORD,0,Checking water temperature range
+VAR,bRunAirflowController,D20138.0,BOOL,1,Temporary flag to avoid running the code everytime
+VAR,airflowVfdSetPoint,D20139,WORD,3000,Airflow target setting
+VAR,airflowVfdOnOff,D20140.0,BOOL,1,Airflow on/off
+VAR,tmpReal,D20141,REAL,0
 VAR,pump_e_OnArr,D11000.0,ARRAY [3] OF BOOL,[3(FALSE)]
 VAR,pump_e_ValveOnArr,D11001.0,ARRAY [4] OF BOOL,[4(FALSE)]
 VAR,pump_e_FlowOrRpm,D11002,WORD,0,"1 - Flow, 2 - RPM"
@@ -1240,37 +1243,50 @@ VAR,IO_lightOnOff_6,D28420.6,BOOL,FALSE
 VAR,IO_lightOnOff_7,D28420.7,BOOL,FALSE
 VAR,IO_lightOnOff_8,D28422.0,BOOL,FALSE
 VAR,IO_lightOnOff_9,D28422.1,BOOL,FALSE
-VAR,MB_pump0_wStartStop,D25150,WORD,-1
-VAR,MB_pump0_wFreqCmd,D25151,WORD,-1
-VAR,MB_pump0_wInputSrc,D25152,WORD,-1
-VAR,MB_pump0_wPidFbkTerm,D25153,WORD,-1
-VAR,MB_pump0_wPidTrgtSrc,D25154,WORD,-1
-VAR,MB_pump0_wPidTrgtVal,D25155,WORD,-1
-VAR,MB_pump0_rOutputHz,D25102,WORD,-1
-VAR,MB_pump0_rAciVal,D25112,WORD,-1
-VAR,MB_pump0_rVfdStatus,D25001,WORD,-1
+VAR,MB_pump0_wStartStop,D25150,WORD,-1,Start stop
+VAR,MB_pump0_wFreqCmd,D25151,WORD,-1,Frequency command
+VAR,MB_pump0_wInputSrc,D25152,WORD,-1,Freq command source
+VAR,MB_pump0_wPidFbkTerm,D25153,WORD,-1,Terminal session for PID feedback
+VAR,MB_pump0_wPidTrgtSrc,D25154,WORD,-1,PID target source
+VAR,MB_pump0_wPidTrgtVal,D25155,WORD,-1,PID target value
+VAR,MB_pump0_rOutputHz,D25102,WORD,-1,Actual output freq
+VAR,MB_pump0_rAciVal,D25112,WORD,-1,ACI val
+VAR,MB_pump0_rVfdStatus,D25001,WORD,-1,VFD status
 VAR,MB_pump0_rVfdMode,D25135,WORD,-1
-VAR,MB_pump0_faultRecord,D25160,ARRAY [10] OF WORD,[10(-1)]
-VAR,MB_pump1_wStartStop,D25350,WORD,-1
-VAR,MB_pump1_wFreqCmd,D25351,WORD,-1
-VAR,MB_pump1_wInputSrc,D25352,WORD,-1
-VAR,MB_pump1_wPidFbkTerm,D25353,WORD,-1
-VAR,MB_pump1_wPidTrgtSrc,D25354,WORD,-1
-VAR,MB_pump1_wPidTrgtVal,D25355,WORD,-1
-VAR,MB_pump1_rOutputHz,D25302,WORD,-1
-VAR,MB_pump1_rAciVal,D25312,WORD,-1
-VAR,MB_pump1_rVfdStatus,D25301,WORD,-1
+VAR,MB_pump0_faultRecord,D25160,ARRAY [10] OF WORD,[10(-1)],History of faults
+VAR,MB_pump1_wStartStop,D25350,WORD,-1,Start stop
+VAR,MB_pump1_wFreqCmd,D25351,WORD,-1,Frequency command
+VAR,MB_pump1_wInputSrc,D25352,WORD,-1,Freq command source
+VAR,MB_pump1_wPidFbkTerm,D25353,WORD,-1,Terminal session for PID feedback
+VAR,MB_pump1_wPidTrgtSrc,D25354,WORD,-1,PID target source
+VAR,MB_pump1_wPidTrgtVal,D25355,WORD,-1,PID target value
+VAR,MB_pump1_rOutputHz,D25302,WORD,-1,Actual output freq
+VAR,MB_pump1_rAciVal,D25312,WORD,-1,ACI val
+VAR,MB_pump1_rVfdStatus,D25201,WORD,-1,VFD status
 VAR,MB_pump1_rVfdMode,D25335,WORD,-1
-VAR,MB_pump1_faultRecord,D25360,ARRAY [10] OF WORD,[10(-1)]
-VAR,MB_pump2_wStartStop,D25550,WORD,-1
-VAR,MB_pump2_wFreqCmd,D25551,WORD,-1
-VAR,MB_pump2_wInputSrc,D25552,WORD,-1
-VAR,MB_pump2_wPidFbkTerm,D25553,WORD,-1
-VAR,MB_pump2_wPidTrgtSrc,D25554,WORD,-1
-VAR,MB_pump2_wPidTrgtVal,D25555,WORD,-1
-VAR,MB_pump2_rOutputHz,D25502,WORD,-1
-VAR,MB_pump2_rAciVal,D25512,WORD,-1
-VAR,MB_pump2_rVfdStatus,D25501,WORD,-1
+VAR,MB_pump1_faultRecord,D25360,ARRAY [10] OF WORD,[10(-1)],History of faults
+VAR,MB_pump2_wStartStop,D25550,WORD,-1,Start stop
+VAR,MB_pump2_wFreqCmd,D25551,WORD,-1,Frequency command
+VAR,MB_pump2_wInputSrc,D25552,WORD,-1,Freq command source
+VAR,MB_pump2_wPidFbkTerm,D25553,WORD,-1,Terminal session for PID feedback
+VAR,MB_pump2_wPidTrgtSrc,D25554,WORD,-1,PID target source
+VAR,MB_pump2_wPidTrgtVal,D25555,WORD,-1,PID target value
+VAR,MB_pump2_rOutputHz,D25502,WORD,-1,Actual output freq
+VAR,MB_pump2_rAciVal,D25512,WORD,-1,ACI val
+VAR,MB_pump2_rVfdStatus,D25401,WORD,-1,VFD status
 VAR,MB_pump2_rVfdMode,D25535,WORD,-1
-VAR,MB_pump2_faultRecord,D25560,ARRAY [10] OF WORD,[10(-1)]
+VAR,MB_pump2_faultRecord,D25560,ARRAY [10] OF WORD,[10(-1)],History of faults
+VAR,IO_airflowVfdStartStop,D29000,WORD,-1,Airflow VFD in PLC2
+VAR,IO_airflowVfdFreqCmd,D29001,WORD,-1,Airflow VFD in PLC2
+VAR,IO_airflowVfdInputSrc,D29002,WORD,-1,Airflow VFD in PLC2
+VAR,IO_airflowVfdStatusMonitor,D29003,ARRAY [23] OF WORD,[23(-1)],Status Airflow VFD in PLC2
 VAR,tmpConversionFloat,D200,REAL,0
+VAR,sensorWindSpeed,D26000,ARRAY [30] OF WORD,[30(0)],Anemometer reading
+VAR,aqmSensorTemperature,D26100,ARRAY [30] OF WORD,[30(0)],Temperature reading
+VAR,aqmSensorHumidity,D26200,ARRAY [30] OF WORD,[30(0)],Humdity reading
+VAR,aqmSensorCO2,D26300,ARRAY [30] OF WORD,[30(0)],CO2 reading
+VAR,errAnemometer,D26400,ARRAY [30] OF WORD,[30(0)],Anemometer error (0 = no error)
+VAR,errAQM,D26500,ARRAY [30] OF WORD,[30(0)],AQM sensor error (0 = no error)
+VAR,errorAirVFD,D27000,WORD,0,PLC2 VFD error
+VAR,errorPLC2system,D27001,WORD,0,PLC2 system error
+VAR,errorPLC2io,D27002,WORD,0,PLC2 IO error
