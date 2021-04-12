@@ -1,0 +1,18 @@
+Class,Identifiers,Address,Type,Initial Value,Comment
+VAR,tmpConversionFloat,D200,REAL,0,Used for real to word conversion
+VAR,tmpCounter,D205,INT,0,counter for delay
+VAR,windSpeed,D1000,ARRAY [30] OF WORD,[30(0)],Anemometer reading in cm/s
+VAR,airTemp,D1100,ARRAY [30] OF WORD,[30(0)],AQM reading
+VAR,airHumidity,D1200,ARRAY [30] OF WORD,[30(0)],AQM reading
+VAR,airCO2,D1300,ARRAY [30] OF WORD,[30(0)],AQM reading
+VAR,errAnemometer,D1400,ARRAY [30] OF WORD,[30(0)],Anemometer reading error
+VAR,errAQM,D1500,ARRAY [30] OF WORD,[30(0)],AQM reading error
+VAR,deviceReadState,D2000,INT,0
+VAR,gDeviceIndex,D2001,INT,0
+VAR,gDevice2Index,D2002,INT,0
+VAR,CONST_NUM_ANEMOMETER,D2003,INT,0
+VAR,CONST_NUM_AQM_SENSOR,D2004,INT,0
+VAR,errorVFD,D3000,WORD,0,Transfer VFD error flag to PLC1
+VAR,errorSystem,D3001,WORD,0,Transfer PLC system error to PLC1
+VAR,errorIO,D3002,WORD,0,Transfer PLC I/O error to PLC1
+VAR,errorCOM,D3003,WORD,0,Error in the COM port (ventilation sensors)

@@ -33,46 +33,67 @@ secModeArr0,WORD,{EtherLink1}1@D20042,secMode[0] : section 0 mode etc.
 secModeArr1,WORD,{EtherLink1}1@D20043,secMode[0] : section 0 mode etc.
 secModeArr2,WORD,{EtherLink1}1@D20044,secMode[0] : section 0 mode etc.
 flowratePerShelf,WORD,{EtherLink1}1@D20050,flowrate per shelf in lpm
-stat_water_vfd_power1,BIT,{EtherLink1}1@D20098.0,Status for VFD power
-stat_water_vfd_comm1,BIT,{EtherLink1}1@D20099.0,Status for VFD Comm
-stat_water_vfd_motor1,BIT,{EtherLink1}1@D20100.0,Status for water system
-stat_water_vfd_pid1,BIT,{EtherLink1}1@D20101.0,Status for water system
-stat_water_vfd_overload1,BIT,{EtherLink1}1@D20102.0,Status for water system
-stat_water_vfd_other1,BIT,{EtherLink1}1@D20103.0,Other VFD error
-stat_water_shelf_valvefault1,BIT,{EtherLink1}1@D20104.0,Status for water system
-stat_water_shelf_overflow1,BIT,{EtherLink1}1@D20105.0,Status for water system
-stat_water_temp_range1,BIT,{EtherLink1}1@D20106.0,Status for water system
-stat_water_tank_levellow1,BIT,{EtherLink1}1@D20107.0,Status for water system
-stat_water_tank_levelhigh1,BIT,{EtherLink1}1@D20108.0,Status for water system
-stat_water_tank_sensor_unison1,BIT,{EtherLink1}1@D20109.0,Status for water system
-stat_light_burned1,BIT,{EtherLink1}1@D20110.0,Status for lighting system
-stat_light_powertrip1,BIT,{EtherLink1}1@D20111.0,Status for lighting system
-stat_vent_vfd_comm1,BIT,{EtherLink1}1@D20112.0,Status for ventilation system
-stat_vent_vfd_power1,BIT,{EtherLink1}1@D20113.0,Status for ventilation system
-stat_vent_vfd_motor1,BIT,{EtherLink1}1@D20114.0,Status for ventilation system
-stat_vent_vfd_overload1,BIT,{EtherLink1}1@D20115.0,Status for ventilation system
-stat_vent_vfd_status_code,WORD,{EtherLink1}1@D20116,Ventilation VFD status code
-stat_vent_air_offline1,BIT,{EtherLink1}1@D20117.0,Status for ventilation system
-stat_vent_air_deviation1,BIT,{EtherLink1}1@D20118.0,Status for ventilation system
-stat_vent_air_humidity1,BIT,{EtherLink1}1@D20119.0,Status for ventilation system
-stat_vent_air_co2,BIT,{EtherLink1}1@D20120.0,Status for ventilation system
-stat_vent_air_temp1,BIT,{EtherLink1}1@D20121.0,Status for ventilation system
-stat_alarm_clear,BIT,{EtherLink1}1@D20122.0,Global alarm indicator
-stat_plc1_system,BIT,{EtherLink1}1@D20123.0,PLC1 system
-stat_plc2_system,BIT,{EtherLink1}1@D20124.0,PLC2 system
-stat_plc1_io,BIT,{EtherLink1}1@D20125.0,PLC1 IO
-stat_plc2_io,BIT,{EtherLink1}1@D20126.0,PLC2 IO
-stat_plc_transfer,BIT,{EtherLink1}1@D20127.0,Transfer between PLC1 and PLC2
-CONST_AIR_TEMPERATURE_MAX,WORD,{EtherLink1}1@D20130,For range checking
-CONST_AIR_TEMPERATURE_MIN,WORD,{EtherLink1}1@D20131,For range checking
-CONST_AIR_HUMIDITY_MAX,WORD,{EtherLink1}1@D20132,For range checking
-CONST_AIR_HUMIDITY_MIN,WORD,{EtherLink1}1@D20133,For range checking
-CONST_AIR_CO2_MAX,WORD,{EtherLink1}1@D20134,For range checking
-CONST_AIR_CO2_MIN,WORD,{EtherLink1}1@D20135,For range checking
-CONST_WATER_RANGE_MAX,WORD,{EtherLink1}1@D20136,Checking water temperature range
-CONST_WATER_RANGE_MIN,WORD,{EtherLink1}1@D20137,Checking water temperature range
-airflowVfdSetPoint,WORD,{EtherLink1}1@D20139,Airflow target setting
-airflowVfdOnOff,BIT,{EtherLink1}1@D20140.0,Airflow on/off
+stat_water_vfd_power1,BIT,{EtherLink1}1@D20108.0,Status for VFD power
+stat_water_vfd_comm1,BIT,{EtherLink1}1@D20109.0,Status for VFD Comm
+stat_water_vfd_motor1,BIT,{EtherLink1}1@D20110.0,Status for water system
+stat_water_vfd_pid1,BIT,{EtherLink1}1@D20111.0,Status for water system
+stat_water_vfd_overload1,BIT,{EtherLink1}1@D20112.0,Status for water system
+stat_water_vfd_other1,BIT,{EtherLink1}1@D20113.0,Other VFD error
+stat_water_shelf_valvefault1,BIT,{EtherLink1}1@D20114.0,Status for water system
+stat_water_shelf_overflow1,BIT,{EtherLink1}1@D20115.0,Status for water system
+stat_water_temp_range1,BIT,{EtherLink1}1@D20116.0,Status for water system
+stat_water_tank_levellow1,BIT,{EtherLink1}1@D20117.0,Status for water system
+stat_water_tank_levelhigh1,BIT,{EtherLink1}1@D20118.0,Status for water system
+stat_water_tank_sensor_unison1,BIT,{EtherLink1}1@D20119.0,Status for water system
+stat_light_burned1,BIT,{EtherLink1}1@D20120.0,Status for lighting system
+stat_light_powertrip1,BIT,{EtherLink1}1@D20121.0,Status for lighting system
+stat_vent_vfd_comm1,BIT,{EtherLink1}1@D20122.0,Status for ventilation system
+stat_vent_vfd_power1,BIT,{EtherLink1}1@D20123.0,Status for ventilation system
+stat_vent_vfd_motor1,BIT,{EtherLink1}1@D20124.0,Status for ventilation system
+stat_vent_vfd_overload1,BIT,{EtherLink1}1@D20125.0,Status for ventilation system
+stat_vent_vfd_status_code,WORD,{EtherLink1}1@D20126,Ventilation VFD status code
+stat_vent_air_offline1,BIT,{EtherLink1}1@D20127.0,Status for ventilation system
+stat_vent_air_deviation1,BIT,{EtherLink1}1@D20128.0,Status for ventilation system
+stat_vent_air_humidity1,BIT,{EtherLink1}1@D20129.0,Status for ventilation system
+stat_vent_air_co2,BIT,{EtherLink1}1@D20130.0,Status for ventilation system
+stat_vent_air_temp1,BIT,{EtherLink1}1@D20131.0,Status for ventilation system
+stat_alarm_clear,BIT,{EtherLink1}1@D20132.0,Global alarm indicator
+stat_plc1_system,BIT,{EtherLink1}1@D20133.0,PLC1 system
+stat_plc2_system,BIT,{EtherLink1}1@D20134.0,PLC2 system
+stat_plc1_io,BIT,{EtherLink1}1@D20135.0,PLC1 IO
+stat_plc2_io,BIT,{EtherLink1}1@D20136.0,PLC2 IO
+stat_plc_transfer,BIT,{EtherLink1}1@D20137.0,Transfer between PLC1 and PLC2
+CONST_AIR_TEMPERATURE_MAX,WORD,{EtherLink1}1@D20140,For range checking
+CONST_AIR_TEMPERATURE_MIN,WORD,{EtherLink1}1@D20141,For range checking
+CONST_AIR_HUMIDITY_MAX,WORD,{EtherLink1}1@D20142,For range checking
+CONST_AIR_HUMIDITY_MIN,WORD,{EtherLink1}1@D20143,For range checking
+CONST_AIR_CO2_MAX,WORD,{EtherLink1}1@D20144,For range checking
+CONST_AIR_CO2_MIN,WORD,{EtherLink1}1@D20145,For range checking
+CONST_WATER_RANGE_MAX,WORD,{EtherLink1}1@D20146,Checking water temperature range
+CONST_WATER_RANGE_MIN,WORD,{EtherLink1}1@D20147,Checking water temperature range
+airflowVfdSetPoint,WORD,{EtherLink1}1@D20149,Airflow target setting
+airflowVfdOnOff,BIT,{EtherLink1}1@D20150.0,Airflow on/off
+pumpFillDrainMode0,BIT,{EtherLink1}1@D20153.0,"Operation mode (FALSE - steady water supply, TRUE - on off mode)"
+pumpFillDrainMode1,BIT,{EtherLink1}1@D20153.1,"Operation mode (FALSE - steady water supply, TRUE - on off mode)"
+pumpFillDrainMode2,BIT,{EtherLink1}1@D20153.2,"Operation mode (FALSE - steady water supply, TRUE - on off mode)"
+pumpFillDrainModeOn0,BIT,{EtherLink1}1@D20156.0,Turn on or off fill-drain mode
+pumpFillDrainModeOn1,BIT,{EtherLink1}1@D20156.1,Turn on or off fill-drain mode
+pumpFillDrainModeOn2,BIT,{EtherLink1}1@D20156.2,Turn on or off fill-drain mode
+pumpFillValue0,WORD,{EtherLink1}1@D20159,Fill-Drain mode Fill values
+pumpFillValue1,WORD,{EtherLink1}1@D20160,Fill-Drain mode Fill values
+pumpFillValue2,WORD,{EtherLink1}1@D20161,Fill-Drain mode Fill values
+pumpDrainValue0,WORD,{EtherLink1}1@D20162,Fill-Drain mode Drain values
+pumpDrainValue1,WORD,{EtherLink1}1@D20163,Fill-Drain mode Drain values
+pumpDrainValue2,WORD,{EtherLink1}1@D20164,Fill-Drain mode Drain values
+pumpFillModeFlag0,BIT,{EtherLink1}1@D20165.0,Whether it's currently in Fill mode (0) or Drain mode (1)
+pumpFillModeFlag1,BIT,{EtherLink1}1@D20165.1,Whether it's currently in Fill mode (0) or Drain mode (1)
+pumpFillModeFlag2,BIT,{EtherLink1}1@D20165.2,Whether it's currently in Fill mode (0) or Drain mode (1)
+pumpFillDuration_s0,WORD,{EtherLink1}1@D20174,Fill duration in seconds
+pumpFillDuration_s1,WORD,{EtherLink1}1@D20175,Fill duration in seconds
+pumpFillDuration_s2,WORD,{EtherLink1}1@D20176,Fill duration in seconds
+pumpDrainDuration_s0,WORD,{EtherLink1}1@D20177,Drain duration in seconds
+pumpDrainDuration_s1,WORD,{EtherLink1}1@D20178,Drain duration in seconds
+pumpDrainDuration_s2,WORD,{EtherLink1}1@D20179,Drain duration in seconds
 pump_e_OnArr0,BIT,{EtherLink1}1@D11000.0
 pump_e_OnArr1,BIT,{EtherLink1}1@D11000.1
 pump_e_OnArr2,BIT,{EtherLink1}1@D11000.2
@@ -1167,29 +1188,29 @@ MB_pump2_faultRecord6,WORD,{EtherLink1}1@D25566,History of faults
 MB_pump2_faultRecord7,WORD,{EtherLink1}1@D25567,History of faults
 MB_pump2_faultRecord8,WORD,{EtherLink1}1@D25568,History of faults
 MB_pump2_faultRecord9,WORD,{EtherLink1}1@D25569,History of faults
-IO_airflowVfdStatusMonitor0,WORD,{EtherLink1}1@D29003,Status Airflow VFD in PLC2
-IO_airflowVfdStatusMonitor1,WORD,{EtherLink1}1@D29004,Status Airflow VFD in PLC2
-IO_airflowVfdStatusMonitor2,WORD,{EtherLink1}1@D29005,Status Airflow VFD in PLC2
-IO_airflowVfdStatusMonitor3,WORD,{EtherLink1}1@D29006,Status Airflow VFD in PLC2
-IO_airflowVfdStatusMonitor4,WORD,{EtherLink1}1@D29007,Status Airflow VFD in PLC2
-IO_airflowVfdStatusMonitor5,WORD,{EtherLink1}1@D29008,Status Airflow VFD in PLC2
-IO_airflowVfdStatusMonitor6,WORD,{EtherLink1}1@D29009,Status Airflow VFD in PLC2
-IO_airflowVfdStatusMonitor7,WORD,{EtherLink1}1@D29010,Status Airflow VFD in PLC2
-IO_airflowVfdStatusMonitor8,WORD,{EtherLink1}1@D29011,Status Airflow VFD in PLC2
-IO_airflowVfdStatusMonitor9,WORD,{EtherLink1}1@D29012,Status Airflow VFD in PLC2
-IO_airflowVfdStatusMonitor10,WORD,{EtherLink1}1@D29013,Status Airflow VFD in PLC2
-IO_airflowVfdStatusMonitor11,WORD,{EtherLink1}1@D29014,Status Airflow VFD in PLC2
-IO_airflowVfdStatusMonitor12,WORD,{EtherLink1}1@D29015,Status Airflow VFD in PLC2
-IO_airflowVfdStatusMonitor13,WORD,{EtherLink1}1@D29016,Status Airflow VFD in PLC2
-IO_airflowVfdStatusMonitor14,WORD,{EtherLink1}1@D29017,Status Airflow VFD in PLC2
-IO_airflowVfdStatusMonitor15,WORD,{EtherLink1}1@D29018,Status Airflow VFD in PLC2
-IO_airflowVfdStatusMonitor16,WORD,{EtherLink1}1@D29019,Status Airflow VFD in PLC2
-IO_airflowVfdStatusMonitor17,WORD,{EtherLink1}1@D29020,Status Airflow VFD in PLC2
-IO_airflowVfdStatusMonitor18,WORD,{EtherLink1}1@D29021,Status Airflow VFD in PLC2
-IO_airflowVfdStatusMonitor19,WORD,{EtherLink1}1@D29022,Status Airflow VFD in PLC2
-IO_airflowVfdStatusMonitor20,WORD,{EtherLink1}1@D29023,Status Airflow VFD in PLC2
-IO_airflowVfdStatusMonitor21,WORD,{EtherLink1}1@D29024,Status Airflow VFD in PLC2
-IO_airflowVfdStatusMonitor22,WORD,{EtherLink1}1@D29025,Status Airflow VFD in PLC2
+Xfer_airflowVfdStatusMonitor0,WORD,{EtherLink1}1@D29003,Status Airflow VFD in PLC2
+Xfer_airflowVfdStatusMonitor1,WORD,{EtherLink1}1@D29004,Status Airflow VFD in PLC2
+Xfer_airflowVfdStatusMonitor2,WORD,{EtherLink1}1@D29005,Status Airflow VFD in PLC2
+Xfer_airflowVfdStatusMonitor3,WORD,{EtherLink1}1@D29006,Status Airflow VFD in PLC2
+Xfer_airflowVfdStatusMonitor4,WORD,{EtherLink1}1@D29007,Status Airflow VFD in PLC2
+Xfer_airflowVfdStatusMonitor5,WORD,{EtherLink1}1@D29008,Status Airflow VFD in PLC2
+Xfer_airflowVfdStatusMonitor6,WORD,{EtherLink1}1@D29009,Status Airflow VFD in PLC2
+Xfer_airflowVfdStatusMonitor7,WORD,{EtherLink1}1@D29010,Status Airflow VFD in PLC2
+Xfer_airflowVfdStatusMonitor8,WORD,{EtherLink1}1@D29011,Status Airflow VFD in PLC2
+Xfer_airflowVfdStatusMonitor9,WORD,{EtherLink1}1@D29012,Status Airflow VFD in PLC2
+Xfer_airflowVfdStatusMonitor10,WORD,{EtherLink1}1@D29013,Status Airflow VFD in PLC2
+Xfer_airflowVfdStatusMonitor11,WORD,{EtherLink1}1@D29014,Status Airflow VFD in PLC2
+Xfer_airflowVfdStatusMonitor12,WORD,{EtherLink1}1@D29015,Status Airflow VFD in PLC2
+Xfer_airflowVfdStatusMonitor13,WORD,{EtherLink1}1@D29016,Status Airflow VFD in PLC2
+Xfer_airflowVfdStatusMonitor14,WORD,{EtherLink1}1@D29017,Status Airflow VFD in PLC2
+Xfer_airflowVfdStatusMonitor15,WORD,{EtherLink1}1@D29018,Status Airflow VFD in PLC2
+Xfer_airflowVfdStatusMonitor16,WORD,{EtherLink1}1@D29019,Status Airflow VFD in PLC2
+Xfer_airflowVfdStatusMonitor17,WORD,{EtherLink1}1@D29020,Status Airflow VFD in PLC2
+Xfer_airflowVfdStatusMonitor18,WORD,{EtherLink1}1@D29021,Status Airflow VFD in PLC2
+Xfer_airflowVfdStatusMonitor19,WORD,{EtherLink1}1@D29022,Status Airflow VFD in PLC2
+Xfer_airflowVfdStatusMonitor20,WORD,{EtherLink1}1@D29023,Status Airflow VFD in PLC2
+Xfer_airflowVfdStatusMonitor21,WORD,{EtherLink1}1@D29024,Status Airflow VFD in PLC2
+Xfer_airflowVfdStatusMonitor22,WORD,{EtherLink1}1@D29025,Status Airflow VFD in PLC2
 sensorWindSpeed0,WORD,{EtherLink1}1@D26000,Anemometer reading
 sensorWindSpeed1,WORD,{EtherLink1}1@D26001,Anemometer reading
 sensorWindSpeed2,WORD,{EtherLink1}1@D26002,Anemometer reading
@@ -1497,3 +1518,9 @@ S7_PLC_BIT_ADDR_OFFSET,WORD,$1149
 S8_PLC_BIT_ADDR_OFFSET,WORD,$1150
 S9_PLC_BIT_ADDR_OFFSET,WORD,$1151
 VENTILATION_VFD_STATUS_FLAG,BIT,$1152.0
+P0_START_TIME_HH,WORD,$1153
+P0_START_TIME_MM,WORD,$1154
+P0_END_TIME_HH,WORD,$1155
+P0_END_TIME_MM,WORD,$1156
+TMPWORD,WORD,$1157
+USE_P0_SCHEDULE,BIT,$1158.0
