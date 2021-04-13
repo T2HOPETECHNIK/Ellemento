@@ -99,6 +99,9 @@ flowratePerShelf2,WORD,{EtherLink1}1@D20182,flowrate per shelf in lpm
 pumpFillDrainCountDownTimer_s0,WORD,{EtherLink1}1@D20183,Countdown timer
 pumpFillDrainCountDownTimer_s1,WORD,{EtherLink1}1@D20184,Countdown timer
 pumpFillDrainCountDownTimer_s2,WORD,{EtherLink1}1@D20185,Countdown timer
+pumpAbnormalFlag0,BIT,{EtherLink1}1@D20186.0,Flag idicate something is abnormal
+pumpAbnormalFlag1,BIT,{EtherLink1}1@D20186.1,Flag idicate something is abnormal
+pumpAbnormalFlag2,BIT,{EtherLink1}1@D20186.2,Flag idicate something is abnormal
 pump_e_OnArr0,BIT,{EtherLink1}1@D11000.0
 pump_e_OnArr1,BIT,{EtherLink1}1@D11000.1
 pump_e_OnArr2,BIT,{EtherLink1}1@D11000.2
