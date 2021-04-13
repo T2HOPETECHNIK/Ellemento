@@ -24,7 +24,7 @@ VAR,secModeArr,D20042,ARRAY [3] OF WORD,[3(0)],secMode[0] : section 0 mode etc.
 VAR,sectionPvOnCountArr,D20045,ARRAY [3] OF WORD,[3(0)],secPvCountArr[0]: number of PV to turn on in section 0
 VAR,k_sectionNo,D20048,WORD,3,total number of sections
 VAR,k_sectionMaxShelfNo,D20049,WORD,4,maximum number of shelves per section
-VAR,flowratePerShelf,D20050,WORD,32,flowrate per shelf in lpm
+VAR,flowratePerShelf_local,D20050,WORD,32,flowrate per shelf in lpm
 VAR,k_enablePumpRedundancy,D20051.0,BOOL,0,whether to enable pump redundancy
 VAR,main_current_state,D20052,ARRAY [4] OF INT,[4(0)],Main state machine current state (for each instance)
 VAR,main_next_state,D20056,ARRAY [4] OF INT,[4(0)],Main state machine next state (for each instance)
@@ -92,6 +92,8 @@ VAR,pumpFillDrainTimer_s,D20168,ARRAY [3] OF WORD,[3(0)],Temporary counter in se
 VAR,pumpFillDrainSecondCounter,D20171,ARRAY [3] OF WORD,[3(0)],Temporary counter to get a duration in seconds
 VAR,pumpFillDuration_s,D20174,ARRAY [3] OF WORD,[3(0)],Fill duration in seconds
 VAR,pumpDrainDuration_s,D20177,ARRAY [3] OF WORD,[3(0)],Drain duration in seconds
+VAR,flowratePerShelf,D20180,ARRAY [3] OF WORD,[3(32)],flowrate per shelf in lpm
+VAR,pumpFillDrainCountDownTimer_s,D20183,ARRAY [3] OF WORD,[3(0)],Countdown timer
 VAR,pump_e_OnArr,D11000.0,ARRAY [3] OF BOOL,[3(FALSE)]
 VAR,pump_e_ValveOnArr,D11001.0,ARRAY [4] OF BOOL,[4(FALSE)]
 VAR,pump_e_FlowOrRpm,D11002,WORD,0,"1 - Flow, 2 - RPM"

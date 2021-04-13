@@ -32,7 +32,6 @@ ShelfSectionMapping_2_Arr3,WORD,{EtherLink1}1@D20041,configure which shelves sho
 secModeArr0,WORD,{EtherLink1}1@D20042,secMode[0] : section 0 mode etc.
 secModeArr1,WORD,{EtherLink1}1@D20043,secMode[0] : section 0 mode etc.
 secModeArr2,WORD,{EtherLink1}1@D20044,secMode[0] : section 0 mode etc.
-flowratePerShelf,WORD,{EtherLink1}1@D20050,flowrate per shelf in lpm
 stat_water_vfd_power1,BIT,{EtherLink1}1@D20108.0,Status for VFD power
 stat_water_vfd_comm1,BIT,{EtherLink1}1@D20109.0,Status for VFD Comm
 stat_water_vfd_motor1,BIT,{EtherLink1}1@D20110.0,Status for water system
@@ -94,6 +93,12 @@ pumpFillDuration_s2,WORD,{EtherLink1}1@D20176,Fill duration in seconds
 pumpDrainDuration_s0,WORD,{EtherLink1}1@D20177,Drain duration in seconds
 pumpDrainDuration_s1,WORD,{EtherLink1}1@D20178,Drain duration in seconds
 pumpDrainDuration_s2,WORD,{EtherLink1}1@D20179,Drain duration in seconds
+flowratePerShelf0,WORD,{EtherLink1}1@D20180,flowrate per shelf in lpm
+flowratePerShelf1,WORD,{EtherLink1}1@D20181,flowrate per shelf in lpm
+flowratePerShelf2,WORD,{EtherLink1}1@D20182,flowrate per shelf in lpm
+pumpFillDrainCountDownTimer_s0,WORD,{EtherLink1}1@D20183,Countdown timer
+pumpFillDrainCountDownTimer_s1,WORD,{EtherLink1}1@D20184,Countdown timer
+pumpFillDrainCountDownTimer_s2,WORD,{EtherLink1}1@D20185,Countdown timer
 pump_e_OnArr0,BIT,{EtherLink1}1@D11000.0
 pump_e_OnArr1,BIT,{EtherLink1}1@D11000.1
 pump_e_OnArr2,BIT,{EtherLink1}1@D11000.2
