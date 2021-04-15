@@ -38,6 +38,10 @@ export class LightHistory extends Entity {
   })
   date_time: string;
 
+  @property({
+    type: 'number',
+  })
+  locationId?: number;
   // Define well-known properties here
 
   // Indexer property to allow additional data

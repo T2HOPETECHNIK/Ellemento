@@ -1,4 +1,6 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {History} from './history.model';
+import {State} from './state.model';
 
 @model({settings: {strict: false}})
 export class Batch extends Entity {
@@ -38,6 +40,11 @@ export class Batch extends Entity {
   })
   date_time_end: string;
 
+  @hasMany(() => History)
+  histories: History[];
+
+  @hasMany(() => State)
+  states: State[];
   // Define well-known properties here
 
   // Indexer property to allow additional data

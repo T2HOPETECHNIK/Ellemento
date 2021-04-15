@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {Stage} from './stage.model';
 
 @model({settings: {strict: false}})
 export class TrayType extends Entity {
@@ -24,6 +25,8 @@ export class TrayType extends Entity {
   })
   description?: string;
 
+  @hasMany(() => Stage)
+  stages: Stage[];
   // Define well-known properties here
 
   // Indexer property to allow additional data

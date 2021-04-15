@@ -1,4 +1,10 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {LocationStageAssignment} from './location-stage-assignment.model';
+import {TrayMovement} from './tray-movement.model';
+import {Tray} from './tray.model';
+import {LightHistory} from './light-history.model';
+import {VentilationHistory} from './ventilation-history.model';
+import {WaterHistory} from './water-history.model';
 
 @model({settings: {strict: false}})
 export class Location extends Entity {
@@ -38,6 +44,23 @@ export class Location extends Entity {
   })
   comment?: string;
 
+  @hasMany(() => LocationStageAssignment)
+  locationStageAssignments: LocationStageAssignment[];
+
+  @hasMany(() => TrayMovement)
+  trayMovements: TrayMovement[];
+
+  @hasMany(() => Tray)
+  trays: Tray[];
+
+  @hasMany(() => LightHistory)
+  lightHistories: LightHistory[];
+
+  @hasMany(() => VentilationHistory)
+  ventilationHistories: VentilationHistory[];
+
+  @hasMany(() => WaterHistory)
+  waterHistories: WaterHistory[];
   // Define well-known properties here
 
   // Indexer property to allow additional data

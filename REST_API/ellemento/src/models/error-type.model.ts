@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {History} from './history.model';
 
 @model({settings: {strict: false}})
 export class ErrorType extends Entity {
@@ -20,6 +21,8 @@ export class ErrorType extends Entity {
   })
   description?: string;
 
+  @hasMany(() => History)
+  histories: History[];
   // Define well-known properties here
 
   // Indexer property to allow additional data

@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {StateWorkflow} from './state-workflow.model';
 
 @model({settings: {strict: false}})
 export class ActionType extends Entity {
@@ -21,6 +22,8 @@ export class ActionType extends Entity {
   })
   description: string;
 
+  @hasMany(() => StateWorkflow)
+  stateWorkflows: StateWorkflow[];
   // Define well-known properties here
 
   // Indexer property to allow additional data

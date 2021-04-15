@@ -68,6 +68,20 @@ export class History extends Entity {
   })
   comment?: string;
 
+  @property({
+    type: 'number',
+  })
+  batchId?: number;
+
+  @property({
+    type: 'number',
+  })
+  trayMovementId?: number;
+
+  @property({
+    type: 'number',
+  })
+  errorTypeId?: number;
   // Define well-known properties here
 
   // Indexer property to allow additional data

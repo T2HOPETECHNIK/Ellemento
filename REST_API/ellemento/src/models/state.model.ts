@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {TrayMovement} from './tray-movement.model';
 
 @model({settings: {strict: false}})
 export class State extends Entity {
@@ -21,6 +22,13 @@ export class State extends Entity {
   })
   batch_id: number;
 
+  @property({
+    type: 'number',
+  })
+  batchId?: number;
+
+  @hasMany(() => TrayMovement)
+  trayMovements: TrayMovement[];
   // Define well-known properties here
 
   // Indexer property to allow additional data

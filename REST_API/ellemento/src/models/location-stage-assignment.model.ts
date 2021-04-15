@@ -39,6 +39,10 @@ export class LocationStageAssignment extends Entity {
   })
   capacity: number;
 
+  @property({
+    type: 'number',
+  })
+  locationId?: number;
   // Define well-known properties here
 
   // Indexer property to allow additional data

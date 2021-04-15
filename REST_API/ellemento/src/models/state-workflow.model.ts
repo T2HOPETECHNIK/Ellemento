@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {State} from './state.model';
 
 @model({settings: {strict: false}})
 export class StateWorkflow extends Entity {
@@ -45,6 +46,18 @@ export class StateWorkflow extends Entity {
   })
   duration_s: number;
 
+  @hasMany(() => State, {keyTo: 'state_type_id'})
+  states: State[];
+
+  @property({
+    type: 'number',
+  })
+  stageId?: number;
+
+  @property({
+    type: 'number',
+  })
+  actionTypeId?: number;
   // Define well-known properties here
 
   // Indexer property to allow additional data

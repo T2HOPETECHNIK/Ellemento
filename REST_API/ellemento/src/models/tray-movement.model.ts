@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {History} from './history.model';
 
 @model({settings: {strict: false}})
 export class TrayMovement extends Entity {
@@ -33,6 +34,18 @@ export class TrayMovement extends Entity {
   })
   destination_location_id: number;
 
+  @property({
+    type: 'number',
+  })
+  stateId?: number;
+
+  @hasMany(() => History)
+  histories: History[];
+
+  @property({
+    type: 'number',
+  })
+  locationId?: number;
   // Define well-known properties here
 
   // Indexer property to allow additional data
