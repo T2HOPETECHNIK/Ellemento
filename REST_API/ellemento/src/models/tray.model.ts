@@ -8,6 +8,12 @@ export class Tray extends Entity {
     generated: true,
   })
   tray_id?: number;
+  
+  @property({
+    type: 'string',
+    required: true,
+  })
+  tray_name: string;
 
   @property({
     type: 'number',
