@@ -13,3 +13,4 @@ export * from './tray-type.repository';
 export * from './tray.repository';
 export * from './ventilation-history.repository';
 export * from './water-history.repository';
+export * from './shelf.repository';

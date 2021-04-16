@@ -13,3 +13,4 @@ export * from './location-stage-assignment.model';
 export * from './light-history.model';
 export * from './ventilation-history.model';
 export * from './water-history.model';
+export * from './shelf.model';

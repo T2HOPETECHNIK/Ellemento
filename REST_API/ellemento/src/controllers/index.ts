@@ -30,3 +30,4 @@ export * from './location-tray.controller';
 export * from './location-light-history.controller';
 export * from './location-ventilation-history.controller';
 export * from './location-water-history.controller';
+export * from './shelf-location.controller';

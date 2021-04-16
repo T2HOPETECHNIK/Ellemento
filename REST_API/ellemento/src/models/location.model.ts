@@ -37,7 +37,7 @@ export class Location extends Entity {
     type: 'number',
     required: true,
   })
-  num_slots: number;
+  slot_num: number;
 
   @property({
     type: 'string',
@@ -61,6 +61,11 @@ export class Location extends Entity {
 
   @hasMany(() => WaterHistory)
   waterHistories: WaterHistory[];
+
+  @property({
+    type: 'number',
+  })
+  shelfId?: number;
   // Define well-known properties here
 
   // Indexer property to allow additional data
