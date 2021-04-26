@@ -19,6 +19,14 @@ import csv
 import pandas as pd
 import numpy as np
 import re
+import struct
+
+import json
+
+# Add filters as necessary
+SCADA_filter_names = ['pumpFillDrainMode0','pumpFillValue0']
+server_filter_names = ['pumpFillDrainMode0','pumpFillValue0']
+server_labels = ['PumpFillDrain', 'PumpFillValue']
 
 def main():
 
@@ -29,6 +37,8 @@ def main():
         input_name = "global_variable_template.xlsx"
     global_var_table_name = "global_variable_table.csv"
     plc2_global_var_table_name = "plc2_global_variable_table.csv"
+    SCADA_var_table_name = "SCADA_import.csv"
+    server_var_table_name = "server_import.csv"
     hmi_tag_table_name = "hmi_tag.csv"
     hmi_tag_plc_name = "{EtherLink1}1@"
 
@@ -54,7 +64,7 @@ def main():
     pump_base_addr, pumps = read_var_table(pump_data_table)
     io_data = read_io_mapping_table(io_mapping_table)
     hmi_base_addr, hmi_internal = read_hmi_internal_table(hmi_data_table)
-	# PLC 2
+    # PLC 2
     plc2_io_data = read_plc2_mapping_table(plc2_io_table)
 
     # define common properties
@@ -64,6 +74,7 @@ def main():
     global_var_table = {}
     hmi_tag_table = {}
     plc2_global_var_table = {}
+    SCADA_tag_table = {}
 
     # parse constants and write into global_var_table
     constant_curr_addr = constant_base_addr
@@ -120,9 +131,11 @@ def main():
 
                 addr = hmi_tag_plc_name + \
                        "D{}".format( round(float(constant_arr_addr), 1) if "BOOL" in var_data['type'] else int (constant_arr_addr) )
+
+                raw_addr = "D{}".format( round(float(constant_arr_addr), 1) if "BOOL" in var_data['type'] else int (constant_arr_addr) )
 					   
                 constant_arr_addr += addr_offset
-                write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr, var_data['comment'])
+                write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr, raw_addr, var_data['comment'])
 
             constant_curr_addr += var_data['addr_offset']
 
@@ -134,8 +147,10 @@ def main():
             var_type = translate_var_type_hmi_tag(var_type=var_data['type'])
             addr = hmi_tag_plc_name + \
                 "D{}".format( round(float(constant_curr_addr), 1) if "BOOL" in var_data['type'] else int (constant_curr_addr))
+
+            raw_addr = "D{}".format( round(float(constant_curr_addr), 1) if "BOOL" in var_data['type'] else int (constant_curr_addr) )
 				
-            write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr, var_data['comment'])
+            write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr, raw_addr, var_data['comment'])
             constant_curr_addr += addr_offset
     
     # parse pump_data and write into hmi_tag_table
@@ -162,9 +177,12 @@ def main():
 
                 addr = hmi_tag_plc_name + \
                        "D{}".format( round(float(pump_arr_addr), 1) if "BOOL" in pump_data['type'] else int (pump_arr_addr) )
+
+                raw_addr = "D{}".format( round(float(pump_arr_addr), 1) if "BOOL" in var_data['type'] else int (pump_arr_addr) )
                 
                 pump_arr_addr += addr_offset
-                write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr, pump_data['comment'])
+
+                write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr, raw_addr, pump_data['comment'])
 
             pump_curr_addr += pump_data['addr_offset']
 
@@ -178,7 +196,10 @@ def main():
             addr = hmi_tag_plc_name + \
                    "D{}".format( round(float(pump_curr_addr), 1) if "BOOL" in shelf_data['type'] else int (pump_curr_addr))
 
-            write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr, pump_data['comment'])
+            raw_addr = "D{}".format( round(float(pump_curr_addr), 1) if "BOOL" in shelf_data['type'] else int (pump_curr_addr))
+
+            write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr, raw_addr, pump_data['comment'])
+			
             pump_curr_addr += addr_offset
         
     # parse shelfs and write into hmi_tag_table
@@ -207,9 +228,11 @@ def main():
 
                     addr = hmi_tag_plc_name + \
                            "D{}".format( round(float(shelf_arr_addr),1) if "BOOL" in shelf_data['type'] else int (shelf_arr_addr))
+
+                    raw_addr = "D{}".format( round(float(shelf_arr_addr),1) if "BOOL" in shelf_data['type'] else int (shelf_arr_addr))
                     
                     shelf_arr_addr += addr_offset
-                    write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr, shelf_data['comment'])
+                    write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr, raw_addr, shelf_data['comment'])
 
                 shelf_curr_addr += shelf_data['addr_offset']
 
@@ -223,7 +246,10 @@ def main():
                 addr = hmi_tag_plc_name + \
                         "D{}".format( round(float(shelf_curr_addr), 1) if "BOOL" in shelf_data['type'] else int (shelf_curr_addr))
 
-                write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr, shelf_data['comment'])
+                raw_addr = "D{}".format( round(float(shelf_curr_addr), 1) if "BOOL" in shelf_data['type'] else int (shelf_curr_addr))
+
+                write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr, raw_addr, shelf_data['comment'])
+				
                 shelf_curr_addr += addr_offset
 
     # parse sensors, sensor_data and write into global_var_table
@@ -241,7 +267,10 @@ def main():
 
                 # for hmi_tag_table
                 addr = hmi_tag_plc_name + "D{}".format(sensor_base_addr + addr_offset)
-                write_rec_hmi_tag_table(hmi_tag_table, name, data['type'], addr, data['comment'])
+
+                raw_addr = "D{}".format(sensor_base_addr + addr_offset)
+
+                write_rec_hmi_tag_table(hmi_tag_table, name, data['type'], addr, raw_addr, data['comment'])
 
                 addr_offset += 1
 
@@ -256,7 +285,8 @@ def main():
             
             # for hmi_tag_table
             addr = hmi_tag_plc_name + "D{}".format(sensor_base_addr + addr_offset)
-            write_rec_hmi_tag_table(hmi_tag_table, name, data['type'], addr, data['comment'])
+            raw_addr = "D{}".format(sensor_base_addr + addr_offset)
+            write_rec_hmi_tag_table(hmi_tag_table, name, data['type'], addr, raw_addr, data['comment'])
             
             addr_offset += 1
 
@@ -283,7 +313,10 @@ def main():
                 else:
                     array_elem_size = 1
                 addr = hmi_tag_plc_name + 'D' + str(constant_arr_addr + (j * array_elem_size))
-                write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr, io['comment'])
+
+                raw_addr = 'D' + str(constant_arr_addr + (j * array_elem_size))
+
+                write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr, raw_addr, io['comment'])
 
             
         else:
@@ -294,7 +327,9 @@ def main():
 
             if io['hmi_tag']:
                 addr = hmi_tag_plc_name + io['addr']
-                write_rec_hmi_tag_table(hmi_tag_table, io_name, io_var_type, addr, io['comment'])
+
+                raw_addr = io['addr']
+                write_rec_hmi_tag_table(hmi_tag_table, io_name, io_var_type, addr, raw_addr, io['comment'])
                 #write_rec_hmi_tag_table(hmi_tag_table, io_name, io['type'], addr, io['comment'])
 
 
@@ -311,7 +346,10 @@ def main():
         else:
             raise RuntimeError("Invalid type")
 
-        write_rec_hmi_tag_table(hmi_tag_table, var_name, hmi_data['type'], addr, hmi_data['comment'])
+        raw_addr = str(hmi_curr_addr)
+
+        write_rec_hmi_tag_table(hmi_tag_table, var_name, hmi_data['type'], addr, raw_addr, hmi_data['comment'])
+		
         hmi_curr_addr += int(hmi_data['addr_offset'])
 
     # write global_var_table into global_variable_table.csv
@@ -320,8 +358,12 @@ def main():
     # write hmi_tag_table into hmi_tag_table.csv
     write_hmi_tag_table_to_csv(hmi_tag_table_name, hmi_tag_table)
 	
-	
-	
+    # write hmi_tag_table to SCADA file.csv (with extra filters of course)
+    write_SCADA_tag_table_to_csv(SCADA_var_table_name, hmi_tag_table)
+
+    # for server import
+    write_server_tag_table_to_csv(server_var_table_name, hmi_tag_table)
+    
     # parse io_data and write into global_var_table & hmi_tag_table
     for io_name in plc2_io_data:
         io = plc2_io_data[io_name]
@@ -470,16 +512,26 @@ def write_glob_var_table_to_csv(filename, global_var_table):
                 writer.writerow(['VAR', var_name, var_data['addr'], var_data['type'], var_data['init_value']])
 
     print("completed: ", filename)
+	
+	
+def Check_filter(varname, filter_array):
+    accepted = False
+    for varn in filter_array:
+        if varname == varn:
+            accepted = True
+		
+    return accepted
 
 
 
 
 def write_rec_hmi_tag_table(
-    table: dict, var_name: str, var_type: str, var_addr: str, var_comment: str) -> None:
+    table: dict, var_name: str, var_type: str, var_addr: str, var_raw_addr: str, var_comment: str) -> None:
 
     table[var_name] = {
         "type": var_type,
         "addr": var_addr,
+        "raw_addr": var_raw_addr,
         "desc": var_comment
     }
 
@@ -502,6 +554,81 @@ def write_hmi_tag_table_to_csv(filename, hmi_tag_table):
                 writer.writerow([var_name, var_data['type'], var_data['addr']])
 
     print("completed: ", filename)
+
+
+def write_SCADA_tag_table_to_csv(filename, io_tag_table):
+    header = ['Define Name', 'Type', 'Address', 'Description']
+    curr_dir = os.path.dirname(os.path.abspath(__file__))
+
+    with open(os.path.join(curr_dir, filename), mode='w', newline='') as file:
+        writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        writer.writerow(header)
+
+        for var_name in io_tag_table:
+            var_data = io_tag_table[var_name]
+
+            if Check_filter(var_name, SCADA_filter_names) == True:
+                if isinstance(var_data['desc'], str):
+                    writer.writerow([var_name, var_data['type'], var_data['addr'], var_data['desc']])
+                else:
+                    writer.writerow([var_name, var_data['type'], var_data['addr']])
+
+    print("completed: ", filename)
+
+
+'''
+# write address definition as CSV file
+def write_server_tag_table_to_csv(filename, io_tag_table):
+    #header = ['Label', 'Define Name', 'Type', 'Address', 'Description']
+    curr_dir = os.path.dirname(os.path.abspath(__file__))
+
+    index = 0
+
+    with open(os.path.join(curr_dir, filename), mode='w', newline='') as file:
+        writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        #writer.writerow(header)
+
+        for var_name in io_tag_table:
+            var_data = io_tag_table[var_name]
+
+            if Check_filter(var_name, server_filter_names) == True:
+
+                srv_label = server_labels[index]
+
+                if isinstance(var_data['desc'], str):
+                    writer.writerow([srv_label, var_name, var_data['type'], var_data['raw_addr'], var_data['desc']])
+                else:
+                    writer.writerow([srv_label, var_name, var_data['type'], var_data['raw_addr']])
+
+                index = index + 1
+
+    print("completed: ", filename)
+'''
+
+# write address definition as json file
+def write_server_tag_table_to_csv(filename, io_tag_table):
+    curr_dir = os.path.dirname(os.path.abspath(__file__))
+
+    index = 0
+    json_decoded = {}
+    json_decoded['addresses'] = []
+
+    for var_name in io_tag_table:
+        var_data = io_tag_table[var_name]
+
+        if Check_filter(var_name, server_filter_names) == True:
+            srv_label = server_labels[index]
+            json_decoded['addresses'].append({
+                    srv_label: var_data['raw_addr']
+                    })
+
+            index = index + 1
+
+    with open(filename, 'w') as outfile:
+        json.dump(json_decoded, outfile)
+
+    print("completed: ", filename)
+
 
 
 def calc_addr_offset_hmi_tag(is_array: bool, var_type: str, offset: str) -> Union[int, float]:
@@ -533,4 +660,5 @@ def get_array_type(data: str) -> int:
 
 
 if __name__ == "__main__":
+    print(struct.calcsize("P") * 8, "- bit Python")
     main()
