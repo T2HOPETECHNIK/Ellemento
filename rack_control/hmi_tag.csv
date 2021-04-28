@@ -105,6 +105,67 @@ pumpAbnormalFlag2,BIT,{EtherLink1}1@D20186.2,Flag indicate something is abnormal
 pumpAbnormalTermination0,BIT,{EtherLink1}1@D20192.0,Pump stopped due to prolonged abnormality
 pumpAbnormalTermination1,BIT,{EtherLink1}1@D20192.1,Pump stopped due to prolonged abnormality
 pumpAbnormalTermination2,BIT,{EtherLink1}1@D20192.2,Pump stopped due to prolonged abnormality
+pumpTerminationThreshold_hz,WORD,{EtherLink1}1@D20195,Pump threshold in hz before termination
+waterTempOffset0,WORD,{EtherLink1}1@D20216,Offset to water temperature
+waterTempOffset1,WORD,{EtherLink1}1@D20217,Offset to water temperature
+waterTempOffset2,WORD,{EtherLink1}1@D20218,Offset to water temperature
+waterTempOffset3,WORD,{EtherLink1}1@D20219,Offset to water temperature
+waterTempOffset4,WORD,{EtherLink1}1@D20220,Offset to water temperature
+waterTempOffset5,WORD,{EtherLink1}1@D20221,Offset to water temperature
+waterTempOffset6,WORD,{EtherLink1}1@D20222,Offset to water temperature
+waterTempOffset7,WORD,{EtherLink1}1@D20223,Offset to water temperature
+waterTempOffset8,WORD,{EtherLink1}1@D20224,Offset to water temperature
+waterTempOffset9,WORD,{EtherLink1}1@D20225,Offset to water temperature
+waterTempOffset10,WORD,{EtherLink1}1@D20226,Offset to water temperature
+waterTempOffset11,WORD,{EtherLink1}1@D20227,Offset to water temperature
+waterTempOffset12,WORD,{EtherLink1}1@D20228,Offset to water temperature
+waterTempOffset13,WORD,{EtherLink1}1@D20229,Offset to water temperature
+waterTempOffset14,WORD,{EtherLink1}1@D20230,Offset to water temperature
+waterTempOffset15,WORD,{EtherLink1}1@D20231,Offset to water temperature
+waterTempOffset16,WORD,{EtherLink1}1@D20232,Offset to water temperature
+waterTempOffset17,WORD,{EtherLink1}1@D20233,Offset to water temperature
+waterTempOffset18,WORD,{EtherLink1}1@D20234,Offset to water temperature
+waterTempOffset19,WORD,{EtherLink1}1@D20235,Offset to water temperature
+waterTempOffsetNegative0,BIT,{EtherLink1}1@D20236.0,True if negative offset
+waterTempOffsetNegative1,BIT,{EtherLink1}1@D20236.1,True if negative offset
+waterTempOffsetNegative2,BIT,{EtherLink1}1@D20236.2,True if negative offset
+waterTempOffsetNegative3,BIT,{EtherLink1}1@D20236.3,True if negative offset
+waterTempOffsetNegative4,BIT,{EtherLink1}1@D20236.4,True if negative offset
+waterTempOffsetNegative5,BIT,{EtherLink1}1@D20236.5,True if negative offset
+waterTempOffsetNegative6,BIT,{EtherLink1}1@D20236.6,True if negative offset
+waterTempOffsetNegative7,BIT,{EtherLink1}1@D20236.7,True if negative offset
+waterTempOffsetNegative8,BIT,{EtherLink1}1@D20236.8,True if negative offset
+waterTempOffsetNegative9,BIT,{EtherLink1}1@D20236.9,True if negative offset
+waterTempOffsetNegative10,BIT,{EtherLink1}1@D20236.10,True if negative offset
+waterTempOffsetNegative11,BIT,{EtherLink1}1@D20236.11,True if negative offset
+waterTempOffsetNegative12,BIT,{EtherLink1}1@D20236.12,True if negative offset
+waterTempOffsetNegative13,BIT,{EtherLink1}1@D20236.13,True if negative offset
+waterTempOffsetNegative14,BIT,{EtherLink1}1@D20236.14,True if negative offset
+waterTempOffsetNegative15,BIT,{EtherLink1}1@D20236.15,True if negative offset
+waterTempOffsetNegative16,BIT,{EtherLink1}1@D20237.0,True if negative offset
+waterTempOffsetNegative17,BIT,{EtherLink1}1@D20237.1,True if negative offset
+waterTempOffsetNegative18,BIT,{EtherLink1}1@D20237.2,True if negative offset
+waterTempOffsetNegative19,BIT,{EtherLink1}1@D20237.3,True if negative offset
+waterTempFinal0,WORD,{EtherLink1}1@D20256,Water temp after offset is included
+waterTempFinal1,WORD,{EtherLink1}1@D20257,Water temp after offset is included
+waterTempFinal2,WORD,{EtherLink1}1@D20258,Water temp after offset is included
+waterTempFinal3,WORD,{EtherLink1}1@D20259,Water temp after offset is included
+waterTempFinal4,WORD,{EtherLink1}1@D20260,Water temp after offset is included
+waterTempFinal5,WORD,{EtherLink1}1@D20261,Water temp after offset is included
+waterTempFinal6,WORD,{EtherLink1}1@D20262,Water temp after offset is included
+waterTempFinal7,WORD,{EtherLink1}1@D20263,Water temp after offset is included
+waterTempFinal8,WORD,{EtherLink1}1@D20264,Water temp after offset is included
+waterTempFinal9,WORD,{EtherLink1}1@D20265,Water temp after offset is included
+waterTempFinal10,WORD,{EtherLink1}1@D20266,Water temp after offset is included
+waterTempFinal11,WORD,{EtherLink1}1@D20267,Water temp after offset is included
+waterTempFinal12,WORD,{EtherLink1}1@D20268,Water temp after offset is included
+waterTempFinal13,WORD,{EtherLink1}1@D20269,Water temp after offset is included
+waterTempFinal14,WORD,{EtherLink1}1@D20270,Water temp after offset is included
+waterTempFinal15,WORD,{EtherLink1}1@D20271,Water temp after offset is included
+waterTempFinal16,WORD,{EtherLink1}1@D20272,Water temp after offset is included
+waterTempFinal17,WORD,{EtherLink1}1@D20273,Water temp after offset is included
+waterTempFinal18,WORD,{EtherLink1}1@D20274,Water temp after offset is included
+waterTempFinal19,WORD,{EtherLink1}1@D20275,Water temp after offset is included
 pump_e_OnArr0,BIT,{EtherLink1}1@D11000.0
 pump_e_OnArr1,BIT,{EtherLink1}1@D11000.1
 pump_e_OnArr2,BIT,{EtherLink1}1@D11000.2
