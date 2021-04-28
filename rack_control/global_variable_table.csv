@@ -97,6 +97,12 @@ VAR,pumpFillDrainCountDownTimer_s,D20183,ARRAY [3] OF WORD,[3(0)],Countdown time
 VAR,pumpAbnormalFlag,D20186.0,ARRAY [3] OF BOOL,[3(FALSE)],Flag indicate something is abnormal
 VAR,pumpAbnormalityStartTime,D20189,ARRAY [3] OF WORD,[3(0)],Anormality start time
 VAR,pumpAbnormalTermination,D20192.0,ARRAY [3] OF BOOL,[3(FALSE)],Pump stopped due to prolonged abnormality
+VAR,pumpTerminationThreshold_hz,D20195,WORD,45,Pump threshold in hz before termination
+VAR,overflow_last_time,D20196,WORD,[10(0)],Overflow last reading of SR396 used to determine whether 1 second has elapsed
+VAR,overflow_counter,D20206,WORD,[10(0)],Overflow timer
+VAR,waterTempOffset,D20216,ARRAY [20] OF WORD,[20(0)],Offset to water temperature
+VAR,waterTempOffsetNegative,D20236.0,ARRAY [20] OF BOOL,[20(FALSE)],True if negative offset
+VAR,waterTempFinal,D20256,ARRAY [20] OF WORD,[20(0)],Water temp after offset is included
 VAR,pump_e_OnArr,D11000.0,ARRAY [3] OF BOOL,[3(FALSE)]
 VAR,pump_e_ValveOnArr,D11001.0,ARRAY [4] OF BOOL,[4(FALSE)]
 VAR,pump_e_FlowOrRpm,D11002,WORD,0,"1 - Flow, 2 - RPM"
