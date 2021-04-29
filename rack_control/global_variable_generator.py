@@ -23,7 +23,6 @@ import struct
 
 import json
 
-# Add filters as necessary
 SCADA_filter_names = ['pumpFillDrainMode0','pumpFillValue0']
 server_filter_names = ['pumpFillDrainMode0','pumpFillValue0']
 server_labels = ['PumpFillDrain', 'PumpFillValue']
@@ -84,7 +83,7 @@ def main():
         addr = "D{}".format(round(float(constant_curr_addr), 1) if "BOOL" in var_data['type'] else int (constant_curr_addr) )
         constant_curr_addr += int(var_data['addr_offset'])
         
-        write_rec_glob_var_table(global_var_table, var_name, addr, var_data['type'], var_data['init_value'], var_data['comment'])
+        write_rec_glob_var_table(global_var_table, var_name, addr, var_data['type'], var_data['init_value'], var_data['comment'], var_data['retain'])
 
     # parse pump_data and write into global_var_table
     pump_curr_addr = pump_base_addr
@@ -93,7 +92,7 @@ def main():
 
         addr = "D{}".format( round(float(pump_curr_addr), 1) if "BOOL" in pump_data['type'] else int (pump_curr_addr) )
         pump_curr_addr += int(pump_data['addr_offset'])
-        write_rec_glob_var_table(global_var_table, var_name, addr, pump_data['type'], pump_data['init_value'], pump_data['comment'])
+        write_rec_glob_var_table(global_var_table, var_name, addr, pump_data['type'], pump_data['init_value'], pump_data['comment'], var_data['retain'])
         
     # parse shelfs and write into global_var_table
     shelf_curr_addr = shelf_base_addr
@@ -105,7 +104,7 @@ def main():
             addr = "D{}".format( round(float(shelf_curr_addr), 1) if "BOOL" in shelf_data['type'] else int (shelf_curr_addr))
             shelf_curr_addr += int(shelf_data['addr_offset'])
 
-            write_rec_glob_var_table(global_var_table, name, addr, shelf_data['type'], shelf_data['init_value'], shelf_data['comment'])
+            write_rec_glob_var_table(global_var_table, name, addr, shelf_data['type'], shelf_data['init_value'], shelf_data['comment'], var_data['retain'])
     
     # parse constants and write into hmi_tag_table
     constant_curr_addr = constant_base_addr
@@ -123,17 +122,28 @@ def main():
             array_type = get_array_type(var_data['type'])
             constant_arr_addr = constant_curr_addr
 
+            int_addr = int(constant_arr_addr)
+
             for j in range(array_size):
                 name = f"{var_name}{j}"
+
                 addr_offset = calc_addr_offset_hmi_tag(is_array=True, var_type=array_type, 
                                                        offset=var_data['addr_offset'])
+
                 var_type = translate_var_type_hmi_tag(var_type=array_type)
 
-                addr = hmi_tag_plc_name + \
-                       "D{}".format( round(float(constant_arr_addr), 1) if "BOOL" in var_data['type'] else int (constant_arr_addr) )
+                # special case
+                if "BOOL" in var_data['type']:
+                    raw_addr = "D" + get_hmi_bit_address(offset=int_addr, size=array_size, index=j)
+                    addr = hmi_tag_plc_name + raw_addr
 
-                raw_addr = "D{}".format( round(float(constant_arr_addr), 1) if "BOOL" in var_data['type'] else int (constant_arr_addr) )
-					   
+                else:
+                    addr = hmi_tag_plc_name + \
+                        "D{}".format( round(float(constant_arr_addr), 1) if "BOOL" in var_data['type'] else int (constant_arr_addr) )
+
+                    #raw_addr is without the "{EtherLink1}1@" in "{EtherLink1}1@D20020", just D20020
+                    raw_addr = "D{}".format( round(float(constant_arr_addr), 1) if "BOOL" in var_data['type'] else int (constant_arr_addr) )
+
                 constant_arr_addr += addr_offset
                 write_rec_hmi_tag_table(hmi_tag_table, name, var_type, addr, raw_addr, var_data['comment'])
 
@@ -263,7 +273,7 @@ def main():
                 
                 # for global_var_table
                 addr = "D{}".format(sensor_base_addr + addr_offset)
-                write_rec_glob_var_table(global_var_table, name, addr, data['type'], data['init_value'], data['comment'])
+                write_rec_glob_var_table(global_var_table, name, addr, data['type'], data['init_value'], data['comment'], data['retain'])
 
                 # for hmi_tag_table
                 addr = hmi_tag_plc_name + "D{}".format(sensor_base_addr + addr_offset)
@@ -281,7 +291,7 @@ def main():
 
             # for global_var_table
             addr = "D{}".format(sensor_base_addr + addr_offset)
-            write_rec_glob_var_table(global_var_table, name, addr, data['type'], data['init_value'], data['comment'])
+            write_rec_glob_var_table(global_var_table, name, addr, data['type'], data['init_value'], data['comment'], data['retain'])
             
             # for hmi_tag_table
             addr = hmi_tag_plc_name + "D{}".format(sensor_base_addr + addr_offset)
@@ -294,7 +304,7 @@ def main():
     # parse io_data and write into global_var_table & hmi_tag_table
     for io_name in io_data:
         io = io_data[io_name]
-        write_rec_glob_var_table(global_var_table, io_name, io['addr'], io['type'], io['init_value'], io['comment'])
+        write_rec_glob_var_table(global_var_table, io_name, io['addr'], io['type'], io['init_value'], io['comment'], io['retain'])
 
         if "ARRAY" in io['type']:
             array_size = get_array_size(io['type'])
@@ -367,11 +377,20 @@ def main():
     # parse io_data and write into global_var_table & hmi_tag_table
     for io_name in plc2_io_data:
         io = plc2_io_data[io_name]
-        write_rec_glob_var_table(plc2_global_var_table, io_name, io['addr'], io['type'], io['init_value'], io['comment'])
+        write_rec_glob_var_table(plc2_global_var_table, io_name, io['addr'], io['type'], io['init_value'], io['comment'], io['retain'])
 		
     write_glob_var_table_to_csv(plc2_global_var_table_name, plc2_global_var_table)
 
 # ============================================================================
+
+# This function converts an array address to bit address
+def get_hmi_bit_address(offset:int, size: int, index: int):
+    
+	new_offset = offset + (index // 16)
+	addr = str(new_offset) + "." + str(index % 16)
+	return addr
+
+
 
 def read_var_table(s_table: dict) -> dict:
     s_dict = {}
@@ -385,16 +404,18 @@ def read_var_table(s_table: dict) -> dict:
     s_init_values = s_table['init_value'].tolist()
     s_hmi_tags = s_table['hmi_tag'].tolist()
     s_comments = s_table['comment'].tolist()
+    s_var_retain = s_table['retain'].tolist()
 
     # inject name, addr_offset, type, init_value
-    for s_name, s_addr_offset, s_type, s_init_value, s_hmi_tag, s_comment \
-        in zip (s_names, s_addr_offsets, s_types, s_init_values, s_hmi_tags, s_comments):
+    for s_name, s_addr_offset, s_type, s_init_value, s_hmi_tag, s_comment, s_var_retain \
+        in zip (s_names, s_addr_offsets, s_types, s_init_values, s_hmi_tags, s_comments, s_var_retain):
 
         s_dict[s_name] = {
             'addr_offset': s_addr_offset,
             'type': s_type,
             'init_value': s_init_value,
             'hmi_tag': True if not pd.isna(s_hmi_tag) else False,
+            'retain': True if not pd.isna(s_var_retain) else False,
             'comment' : s_comment
             }
 
@@ -420,22 +441,24 @@ def read_io_mapping_table(io_table: dict) -> dict:
     var_init_values = io_table['init_value'].tolist()
     var_hmi_tags = io_table['hmi_tag'].tolist()
     var_comments = io_table['comment'].tolist()
+    var_retain = io_table['retain'].tolist()
 
     # inject name, addr_offset, type, init_value
-    for io_name, io_addr, io_type, io_init_value, io_hmi_tag, io_comment \
-        in zip (var_names, var_addrs, var_types, var_init_values, var_hmi_tags, var_comments):
+    for io_name, io_addr, io_type, io_init_value, io_hmi_tag, io_comment, io_retain \
+        in zip (var_names, var_addrs, var_types, var_init_values, var_hmi_tags, var_comments, var_retain):
 
         io_dict[io_name] = {
             'addr': io_addr,
             'type': io_type,
             'init_value': io_init_value,
             'hmi_tag': True if not pd.isna(io_hmi_tag) else False,
+            'retain': True if not pd.isna(io_retain) else False,
             'comment': io_comment
             }
 
     return io_dict
-	
-	
+
+
 def read_plc2_mapping_table(plc2_io_table: dict) -> dict:
     plc2_io_dict = {}
     plc2_var_names = plc2_io_table['variable_name'].tolist()
@@ -443,16 +466,18 @@ def read_plc2_mapping_table(plc2_io_table: dict) -> dict:
     plc2_var_types = plc2_io_table['type'].tolist()
     plc2_var_init_values = plc2_io_table['init_value'].tolist()
     plc2_var_comments = plc2_io_table['comment'].tolist()
+    plc2_var_retain = plc2_io_table['retain'].tolist()
 
     # inject name, addr_offset, type, init_value
-    for io_name, io_addr, io_type, io_init_value, io_comment \
-        in zip (plc2_var_names, plc2_var_addrs, plc2_var_types, plc2_var_init_values, plc2_var_comments):
+    for io_name, io_addr, io_type, io_init_value, io_comment, io_retain \
+        in zip (plc2_var_names, plc2_var_addrs, plc2_var_types, plc2_var_init_values, plc2_var_comments, plc2_var_retain):
 
         plc2_io_dict[io_name] = {
             'addr': io_addr,
             'type': io_type,
             'init_value': io_init_value,
-            'comment': io_comment
+            'comment': io_comment,
+            'retain' : True if not pd.isna(io_retain) else False
             }
 
     return plc2_io_dict
@@ -480,13 +505,14 @@ def read_hmi_internal_table(h_table: dict) -> dict:
 
 def write_rec_glob_var_table(
     global_var_table: dict, var_name: str, var_addr: str, \
-    var_type: str, var_init_value: str, var_comment: str) -> None:
+    var_type: str, var_init_value: str, var_comment: str, var_retain: str) -> None:
 
     global_var_table[var_name] = {
         "addr": var_addr,
         "type": var_type,
         "init_value": var_init_value,
-        "comment": var_comment
+        "comment": var_comment,
+        "retain": var_retain
     }
 	
     #print("=> " + var_name + " " + var_addr)
@@ -494,9 +520,8 @@ def write_rec_glob_var_table(
     return
 
 
-
-
 def write_glob_var_table_to_csv(filename, global_var_table):
+
     header = ["Class", "Identifiers", "Address", "Type", "Initial Value", "Comment"]
     curr_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -506,10 +531,21 @@ def write_glob_var_table_to_csv(filename, global_var_table):
 
         for var_name in global_var_table:
             var_data = global_var_table[var_name]
-            if isinstance(var_data['comment'], str):
-                writer.writerow(['VAR', var_name, var_data['addr'], var_data['type'], var_data['init_value'], var_data['comment']])
+
+            #var_retain = 'VAR'
+
+            if var_data['retain'] is None:
+                var_retain = 'VAR'
             else:
-                writer.writerow(['VAR', var_name, var_data['addr'], var_data['type'], var_data['init_value']])
+                if var_data['retain']: 
+                    var_retain = 'VAR_RETAIN'
+                else:
+                    var_retain = 'VAR'
+
+            if isinstance(var_data['comment'], str):
+                writer.writerow([var_retain, var_name, var_data['addr'], var_data['type'], var_data['init_value'], var_data['comment']])
+            else:
+                writer.writerow([var_retain, var_name, var_data['addr'], var_data['type'], var_data['init_value']])
 
     print("completed: ", filename)
 	
@@ -630,7 +666,6 @@ def write_server_tag_table_to_csv(filename, io_tag_table):
     print("completed: ", filename)
 
 
-
 def calc_addr_offset_hmi_tag(is_array: bool, var_type: str, offset: str) -> Union[int, float]:
     if var_type == "BOOL":
         return (0.1) if is_array else float(offset)
@@ -638,6 +673,7 @@ def calc_addr_offset_hmi_tag(is_array: bool, var_type: str, offset: str) -> Unio
         return (1) if is_array else int(offset)
     else:
         raise RuntimeError("Invalid type")
+
 
 def translate_var_type_hmi_tag(var_type: str) -> str:
     if var_type == "BOOL" or var_type == "BIT":
