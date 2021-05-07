@@ -166,6 +166,16 @@ waterTempFinal16,WORD,{EtherLink1}1@D20272,Water temp after offset is included
 waterTempFinal17,WORD,{EtherLink1}1@D20273,Water temp after offset is included
 waterTempFinal18,WORD,{EtherLink1}1@D20274,Water temp after offset is included
 waterTempFinal19,WORD,{EtherLink1}1@D20275,Water temp after offset is included
+overflowLocal0,BIT,{EtherLink1}1@D20276.0,Overflow sensor 
+overflowLocal1,BIT,{EtherLink1}1@D20276.1,Overflow sensor 
+overflowLocal2,BIT,{EtherLink1}1@D20276.2,Overflow sensor 
+overflowLocal3,BIT,{EtherLink1}1@D20276.3,Overflow sensor 
+overflowLocal4,BIT,{EtherLink1}1@D20276.4,Overflow sensor 
+overflowLocal5,BIT,{EtherLink1}1@D20276.5,Overflow sensor 
+overflowLocal6,BIT,{EtherLink1}1@D20276.6,Overflow sensor 
+overflowLocal7,BIT,{EtherLink1}1@D20276.7,Overflow sensor 
+overflowLocal8,BIT,{EtherLink1}1@D20276.8,Overflow sensor 
+overflowLocal9,BIT,{EtherLink1}1@D20276.9,Overflow sensor 
 pump_e_OnArr0,BIT,{EtherLink1}1@D11000.0
 pump_e_OnArr1,BIT,{EtherLink1}1@D11000.1
 pump_e_OnArr2,BIT,{EtherLink1}1@D11000.2
@@ -1201,12 +1211,16 @@ snsr_aRH_24_err_u,WORD,{EtherLink1}1@D12909
 snsr_aRH_24_warn_u,WORD,{EtherLink1}1@D12910
 snsr_aRH_24_warn_l,WORD,{EtherLink1}1@D12911
 snsr_aRH_24_err_l,WORD,{EtherLink1}1@D12912
-IO_waterLevel_0,BIT,{EtherLink1}1@X1.0,Water level
-IO_waterLevel_1,BIT,{EtherLink1}1@X1.1,Water level
-IO_waterLevel_2,BIT,{EtherLink1}1@X1.2,Water level
-IO_waterLevel_3,BIT,{EtherLink1}1@X1.3,Water level
-IO_waterLevel_4,BIT,{EtherLink1}1@X1.4,Water level
-IO_waterLevel_5,BIT,{EtherLink1}1@X1.5,Water level
+IO_Overflow_0,BIT,{EtherLink1}1@X1.0,Overflow sensor
+IO_Overflow_1,BIT,{EtherLink1}1@X1.1,Overflow sensor
+IO_Overflow_2,BIT,{EtherLink1}1@X1.2,Overflow sensor
+IO_Overflow_3,BIT,{EtherLink1}1@X1.3,Overflow sensor
+IO_Overflow_4,BIT,{EtherLink1}1@X1.4,Overflow sensor
+IO_Overflow_5,BIT,{EtherLink1}1@X1.5,Overflow sensor
+IO_Overflow_6,BIT,{EtherLink1}1@X1.6,Overflow sensor
+IO_Overflow_7,BIT,{EtherLink1}1@X1.7,Overflow sensor
+IO_Overflow_8,BIT,{EtherLink1}1@X1.8,Overflow sensor
+IO_Overflow_9,BIT,{EtherLink1}1@X1.9,Overflow sensor
 IO_waterTemp_0,WORD,{EtherLink1}1@D28302
 IO_waterTemp_1,WORD,{EtherLink1}1@D28304
 IO_waterTemp_2,WORD,{EtherLink1}1@D28306
@@ -1636,3 +1650,13 @@ P0_END_TIME_HH,WORD,$1199
 P0_END_TIME_MM,WORD,$1200
 TMPWORD,WORD,$1201
 USE_P0_SCHEDULE,BIT,$1202.0
+OVERFLOW_LOCAL_0,BIT,$1203.0
+OVERFLOW_LOCAL_1,BIT,$1204.0
+OVERFLOW_LOCAL_2,BIT,$1205.0
+OVERFLOW_LOCAL_3,BIT,$1206.0
+OVERFLOW_LOCAL_4,BIT,$1207.0
+OVERFLOW_LOCAL_5,BIT,$1208.0
+OVERFLOW_LOCAL_6,BIT,$1209.0
+OVERFLOW_LOCAL_7,BIT,$1210.0
+OVERFLOW_LOCAL_8,BIT,$1211.0
+OVERFLOW_LOCAL_9,BIT,$1212.0
