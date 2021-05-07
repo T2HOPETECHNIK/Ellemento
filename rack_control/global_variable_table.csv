@@ -98,11 +98,12 @@ VAR,pumpAbnormalFlag,D20186.0,ARRAY [3] OF BOOL,[3(FALSE)],Flag indicate somethi
 VAR,pumpAbnormalityStartTime,D20189,ARRAY [3] OF WORD,[3(0)],Anormality start time
 VAR,pumpAbnormalTermination,D20192.0,ARRAY [3] OF BOOL,[3(FALSE)],Pump stopped due to prolonged abnormality
 VAR,pumpTerminationThreshold_hz,D20195,WORD,45,Pump threshold in hz before termination
-VAR,overflow_last_time,D20196,WORD,[10(0)],Overflow last reading of SR396 used to determine whether 1 second has elapsed
-VAR,overflow_counter,D20206,WORD,[10(0)],Overflow timer
+VAR,overflow_last_time,D20196,ARRAY [10] OF WORD,[10(0)],Overflow last reading of SR396 used to determine whether 1 second has elapsed
+VAR,overflow_counter,D20206,ARRAY [10] OF WORD,[10(0)],Overflow timer
 VAR,waterTempOffset,D20216,ARRAY [20] OF WORD,[20(0)],Offset to water temperature
 VAR,waterTempOffsetNegative,D20236.0,ARRAY [20] OF BOOL,[20(FALSE)],True if negative offset
 VAR,waterTempFinal,D20256,ARRAY [20] OF WORD,[20(0)],Water temp after offset is included
+VAR,overflowLocal,D20276.0,ARRAY [10] OF BOOL,[10(FALSE)],Overflow sensor 
 VAR,pump_e_OnArr,D11000.0,ARRAY [3] OF BOOL,[3(FALSE)]
 VAR,pump_e_ValveOnArr,D11001.0,ARRAY [4] OF BOOL,[4(FALSE)]
 VAR,pump_e_FlowOrRpm,D11002,WORD,0,"1 - Flow, 2 - RPM"
@@ -1209,14 +1210,16 @@ VAR,IO_propValve_s8_2,D28226,WORD,-1
 VAR,IO_propValve_s9_0,D28228,WORD,-1
 VAR,IO_propValve_s9_1,D28242,WORD,-1
 VAR,IO_propValve_s9_2,D28244,WORD,-1
-VAR,IO_waterLevel_0,X1.0,BOOL,FALSE,Water level
-VAR,IO_waterLevel_1,X1.1,BOOL,FALSE,Water level
-VAR,IO_waterLevel_2,X1.2,BOOL,FALSE,Water level
-VAR,IO_waterLevel_3,X1.3,BOOL,FALSE,Water level
-VAR,IO_waterLevel_4,X1.4,BOOL,FALSE,Water level
-VAR,IO_waterLevel_5,X1.5,BOOL,FALSE,Water level
-VAR,IO_clogSensor_0,X1.6,BOOL,FALSE
-VAR,IO_clogSensor_1,X1.7,BOOL,FALSE
+VAR,IO_Overflow_0,X1.0,BOOL,FALSE,Overflow sensor
+VAR,IO_Overflow_1,X1.1,BOOL,FALSE,Overflow sensor
+VAR,IO_Overflow_2,X1.2,BOOL,FALSE,Overflow sensor
+VAR,IO_Overflow_3,X1.3,BOOL,FALSE,Overflow sensor
+VAR,IO_Overflow_4,X1.4,BOOL,FALSE,Overflow sensor
+VAR,IO_Overflow_5,X1.5,BOOL,FALSE,Overflow sensor
+VAR,IO_Overflow_6,X1.6,BOOL,FALSE,Overflow sensor
+VAR,IO_Overflow_7,X1.7,BOOL,FALSE,Overflow sensor
+VAR,IO_Overflow_8,X1.8,BOOL,FALSE,Overflow sensor
+VAR,IO_Overflow_9,X1.9,BOOL,FALSE,Overflow sensor
 VAR,IO_solenoid_0,Y1.0,BOOL,FALSE
 VAR,IO_solenoid_1,Y1.1,BOOL,FALSE
 VAR,IO_solenoid_2,Y1.2,BOOL,FALSE
