@@ -22,16 +22,17 @@ class plc(object):
             self.client = ModbusTcpClient(ip)
         except:
             error = 1
-        
         return error
 
     def write_register(self, addr, data):
         error = 0
         try:
             res = self.client.write_registers(addr, data, unit=1)
+            assert(res.function_code < 0x80)     # test that we are not an error
         except:
             error = 1
         return res, error
+
 
     def read_register(self, addr, size):
         error = 0
@@ -40,7 +41,47 @@ class plc(object):
         except:
             error = 1
         return res, error
-    
-    
 
-   
+
+    def bitvalue(self, bitpos):
+        return (32768 >> (15-bitpos))
+
+
+    def write_coil(self, addr, bitpos, bdata):
+
+        error = 0
+        res = 0
+        try:
+            binvalue = self.bitvalue(bitpos)
+            res = self.client.read_holding_registers(addr, 1, unit=1)
+            data = res.registers[0] # read current value
+            if bdata == True:
+                data = data | binvalue
+            else:
+                data = data ^ binvalue
+
+            res = self.client.write_register(addr, data, unit=1)
+            assert(res.function_code < 0x80)     # test that we are not an error
+
+        except:
+            error = 1
+        return res, error
+
+
+    def read_coil(self, addr, bitpos):
+        error = 0
+        bres = False
+        try:
+            binvalue = self.bitvalue(bitpos)
+            res = self.client.read_holding_registers(addr, 1)
+            andresult = (res.registers[0] & binvalue)
+
+            if andresult == 0:
+                bres = False
+            else:
+                bres = True
+        except:
+            error = 1
+        return bres, error
+
+

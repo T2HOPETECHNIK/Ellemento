@@ -25,20 +25,21 @@ class ellemento_rack(object):
 
     def test(self):
         print ("Odin will cast his lightning bolts upon you.")
-        res,err = self.plc.write_register(1000, 1512)   #.write_registers(1000, 1512, unit=1)
-        res,err = self.plc.write_register(2000, False)
+        res,err = self.plc.write_register(1000, 1234)   #.write_registers(1000, 1512, unit=1)
+        res,err = self.plc.write_register(2000, 888)
 
         res,err = self.plc.read_register(1000, 1)
         print(res.registers[0])
 
-        #rr2 = self.client.read_holding_registers(2000, 1, unit=1)
-        #print(rr2.registers[0])
+        res,err = self.plc.write_coil(5000, 1, True)
 
-        #rr = self.client.read_holding_registers(1000, 1, unit=1)
-        #dassert(rq, lambda r: not r.isError())     # test for no error
-        #print (r.registers)
-        
-        #val2 = self.client.read_holding_registers(2000, 1, unit=1)
+        data,err = self.plc.read_coil(5000,6)
+
+        if data == True:
+            print ("Result: True")
+        else:
+            print ("Result: False")
+
 
 
     def changeMode(self, mode):
