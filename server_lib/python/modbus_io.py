@@ -26,6 +26,7 @@ class plc(object):
 
     def write_register(self, addr, data):
         error = 0
+        res = 0
         try:
             res = self.client.write_registers(addr, data, unit=1)
             assert(res.function_code < 0x80)     # test that we are not an error
@@ -36,6 +37,7 @@ class plc(object):
 
     def read_register(self, addr, size):
         error = 0
+        res = 0
         try:
             res = self.client.read_holding_registers(addr, size, unit=1)
         except:
@@ -47,6 +49,7 @@ class plc(object):
         return (32768 >> (15-bitpos))
 
 
+    # Self implemented coil
     def write_coil(self, addr, bitpos, bdata):
 
         error = 0
@@ -68,6 +71,7 @@ class plc(object):
         return res, error
 
 
+    # Self implemented coil
     def read_coil(self, addr, bitpos):
         error = 0
         bres = False
@@ -83,5 +87,37 @@ class plc(object):
         except:
             error = 1
         return bres, error
+
+
+    '''
+    def write_system_coil(self, addr, val):
+        error = 0
+        try:
+            res = self.client.write_coil(addr,val)
+        except:
+            print("write_coil error")
+            error = 1
+        return res,error
+
+
+    def read_system_coil(self, addr):
+        error = 0
+        try:
+            res = self.client.read_coils(addr, 1)
+        except:
+            print("read_coil error")
+            error = 1
+
+        return res, error
+    '''
+
+
+
+    
+
+
+
+
+
 
 
