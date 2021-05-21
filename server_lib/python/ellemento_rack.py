@@ -7,6 +7,7 @@ This class will handle the rack: shelf lighting, water, pump, etc.
 import address
 import utils
 import modbus_io
+import constants as const
 
 class ellemento_rack(object):
 
@@ -36,25 +37,42 @@ class ellemento_rack(object):
         else:
             print ("Result: False")
 
+    def test2(self):
+        print ("Change mode")
 
+        self.changeMode(const.AUTO_MODE)
+        self.toggleLED(2,True)
+        self.setLEDIntensity(2, 22)
+        self.togglePV(1,True)
+        self.setShelfPVPosition(1,50)
+        self.setPumpMode(1,const.PUMP_FLOW_MODE)
+        self.setPumpRPM(1, 100)
+        self.setPumpFlowRate(1, 20)
+        self.setPumpFlowRatePerShelf(1,23)
+        ps = self.getPumpRPMsetting(1)
+        print ("Pump setting:",ps)
+
+
+
+    #===============================================================
 
     def changeMode(self, mode):
 
         modeAddress = address.modeAddress
 
-        if mode == 1:
+        if mode == const.AUTO_MODE:
             # Auto mode
             values = 1
             res,err = self.plc.write_register(modeAddress, values)
             
-        elif mode == 2:
+        elif mode == const.SEMI_AUTO_MODE:
             # Semi auto mode
             values = 2
             res,err = self.plc.write_registers(modeAddress, values)
 
         else:
             # Manual mode
-            values = 3
+            values = const.MANUAL_MODE
             res,err = self.plc.write_registers(modeAddress, values)
 
     
@@ -68,12 +86,12 @@ class ellemento_rack(object):
     
 
     def toggleLED(self, ledNum, bOnOff):
-        ledOnAddress = getShelfLEDOnAddress(ledNum)
+        ledOnAddress = self.getShelfLEDOnAddress(ledNum)
         res,err = self.plc.write_coil(ledOnAddress, address.SHELF_LIGHT_ON_BITPOS[ledNum], bOnOff)
 
     
     def getLEDStatus(self, ledNum):
-        ledOnAddress = getShelfLEDOnAddress(ledNum)
+        ledOnAddress = self.getShelfLEDOnAddress(ledNum)
         res,err = self.plc.read_coil(ledOnAddress, address.SHELF_LIGHT_ON_BITPOS[ledNum])
         if res == True:
             return True
@@ -85,11 +103,11 @@ class ellemento_rack(object):
         return ledIntensityAddress
 
     def setLEDIntensity(self, ledNum, intensity):
-        ledIntensityAddress = getShelfLEDIntensityAddress(ledNum)
+        ledIntensityAddress = self.getShelfLEDIntensityAddress(ledNum)
         res,err = self.plc.write_register(ledIntensityAddress, intensity)
 
     def getLEDIntensity(self, ledNum):
-        ledIntensityAddress = getShelfLEDIntensityAddress(ledNum)
+        ledIntensityAddress = self.getShelfLEDIntensityAddress(ledNum)
         res,err = self.plc.read_register(ledIntensityAddress, 1)
         if res.registers[0] == 1:
             return True
@@ -105,6 +123,7 @@ class ellemento_rack(object):
         pvOnAddress = address.SHELF_PV_ON_ADDRESS[pvNum]
         res,err = self.plc.write_coil(pvOnAddress, address.SHELF_PV_ON_BITPOS[pvNum], bOnOff)
 
+    # Position is 0-100
     def setShelfPVPosition(self, pvNum, pvPos):
         pvPosAddress = address.SHELF_PV_POSITION_ADDRESS[pvNum]
         res,err = self.plc.write_register(pvPosAddress,pvPos)
