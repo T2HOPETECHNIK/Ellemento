@@ -14,3 +14,8 @@ export * from './tray.repository';
 export * from './ventilation-history.repository';
 export * from './water-history.repository';
 export * from './shelf.repository';
+export * from './tray-washing.repository';
+export * from './potting.repository';
+export * from './transplanting.repository';
+export * from './condition.repository';
+export * from './stage-error-action.repository';

@@ -21,30 +21,54 @@ export class StateWorkflow extends Entity {
     required: true,
   })
   action_type_id: number;
+  
+  @property({
+    type: 'number',
+    required: true,
+  })
+  condition_id: number;
 
   @property({
     type: 'number',
     required: true,
   })
   next_state_type_id: number;
+  
+  @property({
+    type: 'number',
+    required: true,
+  })
+  next_state_type_id_2: number;
 
   @property({
     type: 'number',
     required: true,
   })
-  source_location_id: number;
+  source_id: number;
 
   @property({
     type: 'number',
     required: true,
   })
-  destination_location_id: number;
+  destination_id: number;
 
   @property({
     type: 'number',
     required: true,
   })
   duration_s: number;
+  
+  @property({
+    type: 'date',
+    required: true,
+  })
+  validity_date_time_start: string;
+
+  @property({
+    type: 'date',
+    required: true,
+  })
+  validity_date_time_end: string;
 
   @hasMany(() => State, {keyTo: 'state_type_id'})
   states: State[];

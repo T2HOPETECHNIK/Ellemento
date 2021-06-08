@@ -14,3 +14,8 @@ export * from './light-history.model';
 export * from './ventilation-history.model';
 export * from './water-history.model';
 export * from './shelf.model';
+export * from './condition.model';
+export * from './stage-error-action.model';
+export * from './tray-washing.model';
+export * from './transplanting.model';
+export * from './potting.model';

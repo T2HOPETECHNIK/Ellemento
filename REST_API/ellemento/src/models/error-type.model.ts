@@ -23,6 +23,11 @@ export class ErrorType extends Entity {
 
   @hasMany(() => History)
   histories: History[];
+
+  @property({
+    type: 'number',
+  })
+  stageErrorActionId?: number;
   // Define well-known properties here
 
   // Indexer property to allow additional data

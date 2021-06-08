@@ -46,6 +46,11 @@ export class TrayMovement extends Entity {
     type: 'number',
   })
   locationId?: number;
+
+  @property({
+    type: 'number',
+  })
+  tray_action_table_id?: number;
   // Define well-known properties here
 
   // Indexer property to allow additional data
