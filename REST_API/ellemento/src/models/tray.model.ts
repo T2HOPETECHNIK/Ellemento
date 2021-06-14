@@ -39,10 +39,6 @@ export class Tray extends Entity {
   })
   date_time_end: string;
 
-  @property({
-    type: 'number',
-  })
-  locationId?: number;
   // Define well-known properties here
 
   // Indexer property to allow additional data

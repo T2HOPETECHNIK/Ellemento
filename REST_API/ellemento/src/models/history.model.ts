@@ -1,4 +1,4 @@
-import {Entity, model, property, hasOne} from '@loopback/repository';
+import {Entity, model, property, hasOne, belongsTo} from '@loopback/repository';
 import {TrayMovement} from './tray-movement.model';
 import {TrayWashing} from './tray-washing.model';
 import {Potting} from './potting.model';
@@ -26,17 +26,17 @@ export class History extends Entity {
   action_type_id: number;
 
   @property({
-    type: 'number',
+    type: 'string',
     required: true,
   })
-  tray_action_table: number;
+  tray_action_table: string;
   
   @property({
     type: 'number',
     required: true,
   })
   tray_action_table_id: number;
-
+  
   @property({
     type: 'number',
     required: true,
@@ -83,27 +83,13 @@ export class History extends Entity {
   })
   batchId?: number;
 
-  @property({
-    type: 'number',
-  })
-  trayMovementId?: number;
 
   @property({
     type: 'number',
   })
   errorTypeId?: number;
 
-  @hasOne(() => TrayMovement, {keyTo: 'tray_action_table_id'})
-  trayMovement: TrayMovement;
 
-  @hasOne(() => TrayWashing, {keyTo: 'tray_action_table_id'})
-  trayWashing: TrayWashing;
-
-  @hasOne(() => Potting, {keyTo: 'tray_action_table_id'})
-  potting: Potting;
-
-  @hasOne(() => Transplanting)
-  transplanting: Transplanting;
   // Define well-known properties here
 
   // Indexer property to allow additional data

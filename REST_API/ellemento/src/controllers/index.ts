@@ -37,3 +37,7 @@ export * from './history-potting.controller';
 export * from './history-transplanting.controller';
 export * from './stage-error-action-error-type.controller';
 export * from './condition-state-workflow.controller';
+export * from './location-shelf.controller';
+export * from './light-history-location.controller';
+export * from './ventilation-history-location.controller';
+export * from './water-history-location.controller';

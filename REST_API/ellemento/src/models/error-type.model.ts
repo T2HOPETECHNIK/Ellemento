@@ -23,6 +23,9 @@ export class ErrorType extends Entity {
 
   @hasMany(() => History)
   histories: History[];
+  
+  
+
 
   @property({
     type: 'number',

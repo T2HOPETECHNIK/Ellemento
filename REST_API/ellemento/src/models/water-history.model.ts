@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {Location} from './location.model';
 
 @model({settings: {strict: false}})
 export class WaterHistory extends Entity {
@@ -8,13 +9,6 @@ export class WaterHistory extends Entity {
     generated: true,
   })
   water_history_id?: number;
-
-  @property({
-    type: 'number',
-    required: true,
-  })
-  location_id: number;
-
   @property({
     type: 'number',
     required: true,
@@ -43,6 +37,9 @@ export class WaterHistory extends Entity {
     type: 'number',
   })
   locationId?: number;
+
+  @belongsTo(() => Location, {name: 'location'})
+  location_id: number;
   // Define well-known properties here
 
   // Indexer property to allow additional data

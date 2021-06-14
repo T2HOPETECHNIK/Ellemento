@@ -8,7 +8,7 @@ export class Shelf extends Entity {
     id: true,
     generated: true,
   })
-  shelf_id?: number;
+  shelf_id: number;
 
   @property({
     type: 'number',

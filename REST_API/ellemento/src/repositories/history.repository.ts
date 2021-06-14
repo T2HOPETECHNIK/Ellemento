@@ -1,5 +1,5 @@
 import {inject, Getter} from '@loopback/core';
-import {DefaultCrudRepository, repository, HasOneRepositoryFactory} from '@loopback/repository';
+import {DefaultCrudRepository, repository, HasOneRepositoryFactory, BelongsToAccessor} from '@loopback/repository';
 import {EllementoDbDataSource} from '../datasources';
 import {History, HistoryRelations, TrayMovement, TrayWashing, Potting, Transplanting} from '../models';
 import {TrayMovementRepository} from './tray-movement.repository';
@@ -21,10 +21,14 @@ export class HistoryRepository extends DefaultCrudRepository<
 
   public readonly transplanting: HasOneRepositoryFactory<Transplanting, typeof History.prototype.history_id>;
 
+  public readonly trayActionTableId: BelongsToAccessor<Potting, typeof History.prototype.history_id>;
+
   constructor(
     @inject('datasources.ellemento_db') dataSource: EllementoDbDataSource, @repository.getter('TrayMovementRepository') protected trayMovementRepositoryGetter: Getter<TrayMovementRepository>, @repository.getter('TrayWashingRepository') protected trayWashingRepositoryGetter: Getter<TrayWashingRepository>, @repository.getter('PottingRepository') protected pottingRepositoryGetter: Getter<PottingRepository>, @repository.getter('TransplantingRepository') protected transplantingRepositoryGetter: Getter<TransplantingRepository>,
   ) {
     super(History, dataSource);
+    this.trayActionTableId = this.createBelongsToAccessorFor('trayActionTableId', pottingRepositoryGetter,);
+    this.registerInclusionResolver('trayActionTableId', this.trayActionTableId.inclusionResolver);
     this.transplanting = this.createHasOneRepositoryFactoryFor('transplanting', transplantingRepositoryGetter);
     this.registerInclusionResolver('transplanting', this.transplanting.inclusionResolver);
     this.potting = this.createHasOneRepositoryFactoryFor('potting', pottingRepositoryGetter);

@@ -32,10 +32,6 @@ export class Transplanting extends Entity {
   })
   post_action: number;
 
-  @property({
-    type: 'number',
-  })
-  historyId?: number;
   // Define well-known properties here
 
   // Indexer property to allow additional data

@@ -1,20 +1,14 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
+import {Entity, model, property, hasMany, belongsTo} from '@loopback/repository';
 import {LocationStageAssignment} from './location-stage-assignment.model';
 import {TrayMovement} from './tray-movement.model';
 import {Tray} from './tray.model';
 import {LightHistory} from './light-history.model';
 import {VentilationHistory} from './ventilation-history.model';
 import {WaterHistory} from './water-history.model';
+import {Shelf} from './shelf.model';
 
 @model({settings: {strict: false}})
 export class Location extends Entity {
-  @property({
-    type: 'number',
-    id: true,
-    generated: true,
-  })
-  location_id?: number;
-
   @property({
     type: 'number',
     required: true,
@@ -26,13 +20,6 @@ export class Location extends Entity {
     required: true,
   })
   container_id: number;
-
-  @property({
-    type: 'number',
-    required: true,
-  })
-  shelf_id: number;
-
   @property({
     type: 'number',
     required: true,
@@ -47,9 +34,6 @@ export class Location extends Entity {
   @hasMany(() => LocationStageAssignment)
   locationStageAssignments: LocationStageAssignment[];
 
-  @hasMany(() => TrayMovement)
-  trayMovements: TrayMovement[];
-
   @hasMany(() => Tray)
   trays: Tray[];
 
@@ -62,10 +46,10 @@ export class Location extends Entity {
   @hasMany(() => WaterHistory)
   waterHistories: WaterHistory[];
 
-  @property({
-    type: 'number',
-  })
-  shelfId?: number;
+  @belongsTo(() => Shelf, {name: 'shelf'})
+  shelf_id: number;
+
+
   // Define well-known properties here
 
   // Indexer property to allow additional data

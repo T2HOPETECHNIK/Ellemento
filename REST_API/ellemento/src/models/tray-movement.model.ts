@@ -5,10 +5,9 @@ import {History} from './history.model';
 export class TrayMovement extends Entity {
   @property({
     type: 'number',
-    id: true,
-    generated: true,
+	required: true,
   })
-  tray_movement_id?: number;
+  tray_action_table_id?: number;
 
   @property({
     type: 'number',
@@ -34,23 +33,7 @@ export class TrayMovement extends Entity {
   })
   destination_location_id: number;
 
-  @property({
-    type: 'number',
-  })
-  stateId?: number;
 
-  @hasMany(() => History)
-  histories: History[];
-
-  @property({
-    type: 'number',
-  })
-  locationId?: number;
-
-  @property({
-    type: 'number',
-  })
-  tray_action_table_id?: number;
   // Define well-known properties here
 
   // Indexer property to allow additional data
