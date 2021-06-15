@@ -1,6 +1,13 @@
 
+import rest_api 
 import time
 import constants
+
+# Import PLC library
+import sys
+sys.path.append('../plc')
+import modbus_io as modbus
+
 
 class CTask:
 
@@ -65,84 +72,179 @@ class CTask:
 
         # Call PLC to do something
         return True
-        
+
+    
+    def errorCheck(self, errCode):
+        print ("Error:", errCode)
+    
+
+    # =====================================================
+    #  Task actions
+    # =====================================================
         
     def sower_to_rack_1_move(self):
-        time.sleep(5)
+
+        print (">> sower_to_rack_1_move")
+
+        '''
+        mb = modbus.plc()
+        mb.setIP(constants.ROBOT_IP)
+        
+        # Ready to collect tray
+        mb.write_coil(ADDR_TO_RC_L4_READY_TO_COLLECT, 0, True)
+        # How to know when done ????
+        # Tray collected
+        mb.write_coil(ADDR_TO_RC_L4_READY_TO_COLLECT, 1, True)
+        # How to know when done ???
+        bres = mb.read_coil(constants.ADDR_TO_RC_L4_START_FOAMING, 0)
+        if bres:
+            # Start foaming
+            mb.write_coil(ADDR_TO_RC_L4_START_FOAMING, 0, True)
+            # No. of trays that need to be foamed
+            mb.write_register(ADDR_TO_RC_L4_NUMBER_OF_TRAYS, 1)
+
+
+        # wait and check the response/result
+        res = False
+        while res == False:
+            res = (mb.read_register(addr, 1) == 1)  # addr, size
+
+        '''
+
+        # Insert entry in history 
+        # Insert entry in Tray_Movement table
+
+        #get tray id, source id, and destination id
+        tray_id = 0
+        source = 0
+        destination = 0
+
+        resp = rest_api.add_to_tray_moving(tray_id, source, destination)
+        self.errorCheck(resp)
+        #time.sleep(5)
+
 
     def rack_1_to_rack_2_move(self):
+
+        print(">> rack_1_to_rack_2_move")
+
+        '''
+        mb = modbus.plc()
+        mb.setIP(constants.ROBOT_IP)
+        
+        # Ready to collect tray
+        mb.write_coil(constants.ADDR_TO_RC_L1_READY_TO_RELEASE, 0, True)
+
+        bres = mb.read_coil(constants.ADDR_TO_SERVER_L1_READY_TO_RECEIVE, 0)
+        if bres:
+            mb.write_coil(ADDR_TO_RC_L2_READY_TO_COLLECT, 0, True)
+        '''
+
+        # Insert entry in history 
+        # Insert entry in Tray_Movement table
+
         time.sleep(5)
 
     def rack_2_to_rack_3_move(self):
+
+        print(">> rack_2_to_rack_3_move")
+
+        # Insert entry in history 
+        # Insert entry in Tray_Movement table
         time.sleep(5)
+
 
     def rack_3_to_3_4_move(self):
+        print(">> rack_3_to_3_4_move")
         time.sleep(5)
 
+
     def buffer_3_in(self):
+        print(">> buffer_3_in")
         time.sleep(5)
 
     def transplant_3_to_4(self):
+        print(">> transplant_3_to_4")
         time.sleep(5)
 
     def wash_3_tray(self):
+        print(">> wash_3_tray")
         time.sleep(3)
 
     def washer_to_sower(self):
+        print(">> washer_to_sower")
         time.sleep(5)
 
     def foam_inserter(self):
+        print(">> foam_inserter")
         time.sleep(5)
 
     def buffer_4_out(self):
+        print(">> buffer_4_out")
         time.sleep(5)    
 
     def rack_3_4_to_4_move(self):
+        print(">> rack_3_4_to_4_move")
         time.sleep(5)
 
     def rack_4_to_4_5_move(self):
+        print(">> rack_4_to_4_5_move")
         time.sleep(5)
 
     def buffer_4_in(self):
+        print(">> buffer_4_in")
         time.sleep(5)
 
     def transplant_4_to_5(self):
+        print(">> transplant_4_to_5")
         time.sleep(5)
 
     def wash_tray_4(self):
+        print(">> wash_tray_4")
         time.sleep(5)
 
     def lifter_4_to_tray(self):
+        print(">> lifter_4_to_tray")
         time.sleep(5)
 
     def potting(self):
+        print(">> potting")
         time.sleep(5)
 
     def lift_tray_pot(self):
+        print(">> lift_tray_pot")
         time.sleep(5)
     
     def buffer_4(self):
+        print(">> buffer_4")
         time.sleep(5)
 
     def rack_4_5_to_5_move(self):
+        print(">> rack_4_5_to_5_move")
         time.sleep(5)
 
     def rack_to_harvester_move(self):
+        print(">> rack_to_harvester_move")
         time.sleep(5)
 
     def harvester(self):
+        print(">> harvester")
         time.sleep(5)
 
     def wash_tray_5(self):
+        print(">> wash_tray_5")
         time.sleep(5)
 
     def washer_to_lifter(self):
+        print(">> washer_to_lifter")
         time.sleep(5)
 
     def buffer_5(self):
+        print(">> buffer_5")
         time.sleep(5)
 
     def wash_to_pot(self):
+        print(">> wash_to_pot")
         time.sleep(5)
 
 
