@@ -81,36 +81,68 @@ class CTask:
     # =====================================================
     #  Task actions
     # =====================================================
-        
+
+    def is_mover_done(self):
+        # To do: Check mover task completion
+        return True
+
+
+    def wait_for_mover_done(self, timeout_s):
+
+        time_cnt = timeout_s
+
+        while ((self.is_mover_done() == False) and (time_cnt > 0)):
+            sleep(1)
+            time_cnt = time_cnt - 1
+
+        if time_cnt == 0:
+            return False
+        else:
+            return True
+
+
+    def generic_mover(self, source_location, destination_location):
+        print(">> generic mover")
+
+        mb_RC = modbus.plc()
+        mb_RC.setIP(constants.ROBOT_IP)
+
+        mb_MB = modbus.plc()
+        mb_MB.setIP(constants.MEGABOT_IP)
+
+        # TO DO: Read from Megabot check whether it's ready to do stuffs
+
+        bres = mb_RC.read_coil(constants.ADDR_RC_L4_READY_TO_RELEASE, 0)
+        if (bres == False):
+            return constants.ERROR_READ_COIL
+
+        mb_RC.write_coil(constant.ADDR_RC_L4_READY_TO_COLLECT.0, True)
+
+        # TO DO: Update DB or logs to indicate that action is requested
+        # TO DO: Ask Megabot to collect tray
+
+        # Wait for megabot until task is done or error
+        if (self.wait_for_mover_done(constants.MOVE_TIMEOUT_S) == False):
+            return constant.ERROR_TIMEOUT
+
+        # TO DO: Update DB or logs to indicate that Megabot action is completed
+
+        bres = mb_RC.read_coil(constants.ADDR_RC_TRAY_RECEIVE, 0)
+        if (bres == False):
+            return constants.ERROR_READ_COIL
+
+        mb_RC.write_coil(constant.ADDR_RC_TRAY_COLLECTED, True)
+
+        return constant.ERROR_NONE
+
+
+
     def sower_to_rack_1_move(self):
 
         print (">> sower_to_rack_1_move")
 
-        '''
-        mb = modbus.plc()
-        mb.setIP(constants.ROBOT_IP)
+        self.generic_mover(constants.constants.LOCATION_SOWER, constants.constants.constants.LOCATION_RACK1)
         
-        # Ready to collect tray
-        mb.write_coil(ADDR_TO_RC_L4_READY_TO_COLLECT, 0, True)
-        # How to know when done ????
-        # Tray collected
-        mb.write_coil(ADDR_TO_RC_L4_READY_TO_COLLECT, 1, True)
-        # How to know when done ???
-        bres = mb.read_coil(constants.ADDR_TO_RC_L4_START_FOAMING, 0)
-        if bres:
-            # Start foaming
-            mb.write_coil(ADDR_TO_RC_L4_START_FOAMING, 0, True)
-            # No. of trays that need to be foamed
-            mb.write_register(ADDR_TO_RC_L4_NUMBER_OF_TRAYS, 1)
-
-
-        # wait and check the response/result
-        res = False
-        while res == False:
-            res = (mb.read_register(addr, 1) == 1)  # addr, size
-
-        '''
-
         # Insert entry in history 
         # Insert entry in Tray_Movement table
 
@@ -118,27 +150,17 @@ class CTask:
         tray_id = 0
         source = 0
         destination = 0
-
+        
         resp = rest_api.add_to_tray_moving(tray_id, source, destination)
         self.errorCheck(resp)
-        #time.sleep(5)
+        time.sleep(5)
 
 
     def rack_1_to_rack_2_move(self):
 
         print(">> rack_1_to_rack_2_move")
 
-        '''
-        mb = modbus.plc()
-        mb.setIP(constants.ROBOT_IP)
-        
-        # Ready to collect tray
-        mb.write_coil(constants.ADDR_TO_RC_L1_READY_TO_RELEASE, 0, True)
-
-        bres = mb.read_coil(constants.ADDR_TO_SERVER_L1_READY_TO_RECEIVE, 0)
-        if bres:
-            mb.write_coil(ADDR_TO_RC_L2_READY_TO_COLLECT, 0, True)
-        '''
+        self.generic_mover(constants.constants.LOCATION_RACK1, constants.constants.constants.LOCATION_RACK2)
 
         # Insert entry in history 
         # Insert entry in Tray_Movement table
@@ -148,6 +170,8 @@ class CTask:
     def rack_2_to_rack_3_move(self):
 
         print(">> rack_2_to_rack_3_move")
+
+        self.generic_mover(constants.constants.LOCATION_RACK2, constants.constants.constants.LOCATION_RACK3)
 
         # Insert entry in history 
         # Insert entry in Tray_Movement table
