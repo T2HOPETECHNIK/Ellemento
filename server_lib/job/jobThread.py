@@ -23,6 +23,8 @@ class CJobThread (threading.Thread):
 
         filteredSeq = self.filterSequence(self.seq)
 
+        opResult = True
+
         for op in filteredSeq:
             print("Task to perform: ", op)
 
@@ -30,16 +32,16 @@ class CJobThread (threading.Thread):
 
             if self.checkPreCondition(op) == False:
                 print("Precondition failed")
-                continue
+                break
 
             res = self.perform(op)
             if res == False:
                 print("Operation failed")
-                continue
+                break
 
             if self.checkPostCondition(op) == False:
                 print("Post condition failed")
-                continue
+                break
             
             opResult = True
 
@@ -47,7 +49,7 @@ class CJobThread (threading.Thread):
 
 
         self.unsetFlag()
-        print("<< run")
+        print("<< run. ", self.jobtype, " complete")
 
 
     # This function gets the action from DB

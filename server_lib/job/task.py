@@ -73,7 +73,7 @@ class CTask:
         # Call PLC to do something
         return True
 
-    
+
     def errorCheck(self, errCode):
         print ("Error:", errCode)
     
@@ -92,7 +92,7 @@ class CTask:
         time_cnt = timeout_s
 
         while ((self.is_mover_done() == False) and (time_cnt > 0)):
-            sleep(1)
+            time.sleep(1)
             time_cnt = time_cnt - 1
 
         if time_cnt == 0:
@@ -104,6 +104,10 @@ class CTask:
     def generic_mover(self, source_location, destination_location):
         print(">> generic mover")
 
+        if (constants.NO_MODBUS):
+            return constants.ERROR_NONE
+
+        # Connect to modbus
         mb_RC = modbus.plc()
         mb_RC.setIP(constants.ROBOT_IP)
 
@@ -114,26 +118,28 @@ class CTask:
 
         bres = mb_RC.read_coil(constants.ADDR_RC_L4_READY_TO_RELEASE, 0)
         if (bres == False):
-            return constants.ERROR_READ_COIL
+            return constants.ERROR_MODBUS_READ_COIL
 
-        mb_RC.write_coil(constant.ADDR_RC_L4_READY_TO_COLLECT.0, True)
+        bres = mb_RC.write_coil(constants.ADDR_RC_L4_READY_TO_COLLECT, 0, True)
+        if (bres == False):
+            return constants.ERROR_MODBUS_WRITE_COIL
 
         # TO DO: Update DB or logs to indicate that action is requested
         # TO DO: Ask Megabot to collect tray
 
         # Wait for megabot until task is done or error
         if (self.wait_for_mover_done(constants.MOVE_TIMEOUT_S) == False):
-            return constant.ERROR_TIMEOUT
+            return constants.ERROR_TIMEOUT
 
         # TO DO: Update DB or logs to indicate that Megabot action is completed
 
         bres = mb_RC.read_coil(constants.ADDR_RC_TRAY_RECEIVE, 0)
         if (bres == False):
-            return constants.ERROR_READ_COIL
+            return constants.ERROR_MODBUS_READ_COIL
 
-        mb_RC.write_coil(constant.ADDR_RC_TRAY_COLLECTED, True)
+        mb_RC.write_coil(constants.ADDR_RC_TRAY_COLLECTED, True)
 
-        return constant.ERROR_NONE
+        return constants.ERROR_NONE
 
 
 
@@ -141,12 +147,12 @@ class CTask:
 
         print (">> sower_to_rack_1_move")
 
-        self.generic_mover(constants.constants.LOCATION_SOWER, constants.constants.constants.LOCATION_RACK1)
+        self.generic_mover(constants.LOCATION_SOWER, constants.LOCATION_RACK1)
         
         # Insert entry in history 
         # Insert entry in Tray_Movement table
 
-        #get tray id, source id, and destination id
+        # Get tray id, source id, and destination id
         tray_id = 0
         source = 0
         destination = 0
@@ -160,7 +166,7 @@ class CTask:
 
         print(">> rack_1_to_rack_2_move")
 
-        self.generic_mover(constants.constants.LOCATION_RACK1, constants.constants.constants.LOCATION_RACK2)
+        self.generic_mover(constants.LOCATION_RACK1, constants.LOCATION_RACK2)
 
         # Insert entry in history 
         # Insert entry in Tray_Movement table
@@ -171,7 +177,7 @@ class CTask:
 
         print(">> rack_2_to_rack_3_move")
 
-        self.generic_mover(constants.constants.LOCATION_RACK2, constants.constants.constants.LOCATION_RACK3)
+        self.generic_mover(constants.LOCATION_RACK2, constants.LOCATION_RACK3)
 
         # Insert entry in history 
         # Insert entry in Tray_Movement table
