@@ -8,16 +8,21 @@ class CJobThread (threading.Thread):
 
     logging.basicConfig(level = logging.INFO)
 
-    def __init__(self, threadID, name, jobtype):
+
+    def __init__(self, threadID, name, jobtype, job_params, q):
         threading.Thread.__init__(self)
         self.threadID = threadID
         self.name = name
         self.jobtype = jobtype
+        self.job_params = job_params
+        self.q = q
+
         self.gRunning = True
+        
 
     # Run timer loop that triggers the update status
     def run(self):
-        print("Job name:", self.name, " jobtype: ", self.jobtype)
+        print("Job name:", self.name, " jobtype: ", self.jobtype)    #jobtype
         
         self.seq = self.getSequence(self.jobtype)
 
@@ -28,13 +33,16 @@ class CJobThread (threading.Thread):
         for op in filteredSeq:
             print("Task to perform: ", op)
 
+            # update status with op
+            self.q.put(op)
+
             opResult = False
 
             if self.checkPreCondition(op) == False:
                 print("Precondition failed")
                 break
 
-            res = self.perform(op)
+            res = self.perform(op, self.job_params)
             if res == False:
                 print("Operation failed")
                 break
@@ -44,6 +52,9 @@ class CJobThread (threading.Thread):
                 break
             
             opResult = True
+
+            # Clear running task
+            self.q.put("")
 
             print("Task: ", op, " Done Okay")
 
@@ -68,6 +79,8 @@ class CJobThread (threading.Thread):
             return ["transplanter_to_washer", "wash_tray", "washer_to_sower", "foam_inserter"]
         elif jobtype == constants.JOB_TRANSPLANT_1:
             return ["transplant_3_to_4"]
+        elif jobtype == constants.JOB_PLANTING:
+            return ["water_on","light_on"]
         else:
             return ["quit"]
 
@@ -107,14 +120,14 @@ class CJobThread (threading.Thread):
 
 
     # Perform specific operation
-    def perform(self, op):
+    def perform(self, op, params):
         #
         # TO DO: Perform the actual action
         #
         #print("Thread ID:", self.threadID, " Operation:",op)
 
         itask = task.CTask()
-        result = itask.performTask(op)
+        result = itask.performTask(op, params)
         
         # return status of job
         return result
@@ -127,5 +140,6 @@ class CJobThread (threading.Thread):
 
     def isRunning(self):
         return self.gRunning
+
 
 

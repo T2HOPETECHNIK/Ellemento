@@ -16,6 +16,8 @@ JOB_TRANSPLANT_2 =      7
 JOB_PHASE_5_1 =         8
 JOB_PHASE_5_2 =         9
 JOB_PHASE_5_3 =         10
+JOB_PLANTING =          20
+
 
 task_names = [ \
     "sower_to_1_rack_move",\
@@ -43,8 +45,25 @@ task_names = [ \
     "wash_tray_5",\
     "washer_to_lifter",\
     "buffer_5",\
-    "wash_to_pot"\
-    
+    "wash_to_pot",\
+    "",\
+    "",\
+    "",\
+    "",\
+    "",\
+    "",\
+    "",\
+    "",\
+    "",\
+    "",\
+    "",\
+    "",\
+    "",\
+    "",\
+    "water_on",\
+    "water_off",\
+    "light_on",\
+    "light_off"\
 ]
 
 STATUS_CHECK_INTERVAL_SEC = 1
