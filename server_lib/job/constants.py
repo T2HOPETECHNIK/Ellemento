@@ -1,4 +1,11 @@
 
+# For debugging
+NO_MODBUS =        True
+NO_REST =       True
+
+
+# Job definitions
+
 JOB_PHASE_1_1 =         1
 JOB_PHASE_1_2 =         2
 JOB_TRANSPLANT_1 =      3
@@ -9,6 +16,7 @@ JOB_TRANSPLANT_2 =      7
 JOB_PHASE_5_1 =         8
 JOB_PHASE_5_2 =         9
 JOB_PHASE_5_3 =         10
+JOB_PLANTING =          20
 
 
 task_names = [ \
@@ -37,22 +45,43 @@ task_names = [ \
     "wash_tray_5",\
     "washer_to_lifter",\
     "buffer_5",\
-    "wash_to_pot"\
-    
+    "wash_to_pot",\
+    "",\
+    "",\
+    "",\
+    "",\
+    "",\
+    "",\
+    "",\
+    "",\
+    "",\
+    "",\
+    "",\
+    "",\
+    "",\
+    "",\
+    "water_on",\
+    "water_off",\
+    "light_on",\
+    "light_off"\
 ]
 
 STATUS_CHECK_INTERVAL_SEC = 1
 
-#delay
+# Timeout period
 MOVE_TIMEOUT_S = 300    # 5 min
 
 #====================================
 # Errors
 #====================================
-ERROR_NONE =        0
-ERROR_READ_COIL =   1
-ERROR_WRITE_COIL =  2
-ERROR_TIMEOUT =     100
+ERROR_NONE =                0
+
+ERROR_MODBUS_READ_COIL =    1
+ERROR_MODBUS_WRITE_COIL =   2
+
+ERROR_REST_FAIL =           100
+
+ERROR_TIMEOUT =             1000
 
 
 
@@ -62,46 +91,46 @@ ERROR_TIMEOUT =     100
 
 REST_URL = "http://127.0.0.1:3000/"
 
-ROBOT_IP = "192.168.1.5"
+ROBOT_IP = "192.168.1.100"
 
-MEGABOT_IP = "192.168.1.4"
+MEGABOT_IP = "192.168.1.200"
 
-RACK1_IP = "192.168.1.5"
-RACK2_IP = "192.168.1.6"
-RACK3_IP = "192.168.1.7"
-RACK4_IP = "192.168.1.8"
-RACK5_IP = "192.168.1.9"
-RACK6_IP = "192.168.1.10"
-RACK7_IP = "192.168.1.11"
-RACK8_IP = "192.168.1.12"
-RACK9_IP = "192.168.1.13"
-RACK10_IP = "192.168.1.14"
-RACK11_IP = "192.168.1.15"
-RACK12_IP = "192.168.1.16"
-RACK13_IP = "192.168.1.17"
-RACK14_IP = "192.168.1.18"
+RACK_IP = [ "192.168.1.5",
+            "192.168.1.6",
+            "192.168.1.7",
+            "192.168.1.8",
+            "192.168.1.9",
+            "192.168.1.10",
+            "192.168.1.11",
+            "192.168.1.12",
+            "192.168.1.13",
+            "192.168.1.14",
+            "192.168.1.15",
+            "192.168.1.16",
+            "192.168.1.17",
+            "192.168.1.18" ]
 
 #====================================
 # Addresses
 #====================================
 
 # Server to RC
-ADDR_RC_WATCHDOG =   2000
-ADDR_RC_ERROR =      2001
-ADDR_RC_START =      2002
-ADDR_RC_PAUSE =      2003
-ADDR_RC_MEGABOT =    2004
-ADDR_RC_EXTRA1 =     2046
-ADDR_RC_EXTRA2 =     2048
-ADDR_RC_EXTRA3 =     2050
-ADDR_RC_L1_READY_TO_RELEASE =        2100
-ADDR_RC_L2_READY_TO_RELEASE =        2104
-ADDR_RC_L2_READY_TO_COLLECT =        2106
-ADDR_RC_L3_READY_TO_RELEASE =        2108
-ADDR_RC_L3_READY_TO_COLLECT =        2110
-ADDR_RC_L4_READY_TO_COLLECT =        2112
-ADDR_RC_L4_START_FOAMING =           2114
-ADDR_RC_L4_NUMBER_OF_TRAYS =         2116
+ADDR_RC_WATCHDOG =                      2000
+ADDR_RC_ERROR =                         2001
+ADDR_RC_START =                         2002
+ADDR_RC_PAUSE =                         2003
+ADDR_RC_MEGABOT =                       2004
+ADDR_RC_EXTRA1 =                        2046
+ADDR_RC_EXTRA2 =                        2048
+ADDR_RC_EXTRA3 =                        2050
+ADDR_RC_L1_READY_TO_RELEASE =           2100
+ADDR_RC_L2_READY_TO_RELEASE =           2104
+ADDR_RC_L2_READY_TO_COLLECT =           2106
+ADDR_RC_L3_READY_TO_RELEASE =           2108
+ADDR_RC_L3_READY_TO_COLLECT =           2110
+ADDR_RC_L4_READY_TO_COLLECT =           2112
+ADDR_RC_L4_START_FOAMING =              2114
+ADDR_RC_L4_NUMBER_OF_TRAYS =            2116
 
 # RC to Server
 ADDR_TO_SERVER_WATCHDOG =               1000
