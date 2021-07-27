@@ -1,7 +1,7 @@
 
 #!/bin/bash
 
-from ellemento_rack import ellemento_rack
+from ellemento.plc.ellemento_rack import ellemento_rack
 
 
 if __name__ == "__main__":

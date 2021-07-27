@@ -1,8 +1,9 @@
 import threading
-import constants
 import time
 import logging
-import task
+
+from ellemento.job import task
+from ellemento.job import constants
 
 class CJobThread (threading.Thread):
 

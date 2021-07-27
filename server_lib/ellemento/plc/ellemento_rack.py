@@ -4,10 +4,10 @@ This class will handle the rack: shelf lighting, water, pump, etc.
 
 '''
 
-import address
-import utils
-import modbus_io
-import constants as const
+from ellemento.plc import address
+from ellemento.plc import utils
+from ellemento.plc import constants as const
+from ellemento.plc import modbus_io
 
 class ellemento_rack(object):
 
