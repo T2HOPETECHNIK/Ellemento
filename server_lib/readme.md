@@ -12,6 +12,7 @@ python -m build
 To run the project
 ```
 python -m ellemento
+python -m ellemento.job
 ```
 
 # Test

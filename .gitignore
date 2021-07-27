@@ -10,3 +10,5 @@
 *.~isp
 rack_control/plc/project_file/logfile.txt
 *.log
+/server_lib/dist
+ellemento.egg-info

@@ -1,0 +1,13 @@
+    
+digraph {
+    sower -> rack1[label="sower_to_1_rack_move"];
+    rack1 -> rack2[label="1_rack_to_2_rack_move"];
+    rack2 -> rack3[label="2_rack_to_3_rack_move"];
+    rack3 -> tansplantor_3_4[label="3_rack_to_3_4_move"];
+    tansplantor_3_4 -> in_buffer_3[label="3_in_buffer"];
+    in_buffer_3 -> washer[label="wash_tray_3"]; 
+    washer-> tray_lifter[label = "washer_to_sower"];
+    tray_lifter->foam_inserter[label = "foam_inserter"]; 
+    foam_inserter->sower[label = "sowing"]; 
+   
+}
