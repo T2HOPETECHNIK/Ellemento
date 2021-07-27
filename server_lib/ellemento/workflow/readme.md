@@ -4,7 +4,7 @@ Ellemento High Level Workflow<a name="TOP"></a>
 # Phase 1-3 workflow 
 
 ![Alt text](./controllers_brief.svg)
-<img src="./phase1-3.png">
+<img src="./phase1-3.svg">
 
 # Phase 4 workflow 
 
