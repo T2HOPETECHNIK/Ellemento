@@ -1,3 +1,7 @@
+#*
+#  Tray class to define  the basic tray properties and operations 
+#* 
+
 from enum import Enum
 
 class TrayStatus(Enum):
@@ -12,9 +16,9 @@ class Tray:
         self._status = TrayStatus.IDLE
         self._has_veg = False   
         self._has_foam = False
-        self._row_pots = 0 
-        self._col_pots = 0
-        self._phase = "" # Initial location is not sure 
+        self._dimension = [2, 2]
+        self._pots= [[0,0], [0,0]]
+        self._location = "" # Initial location is not sure 
 
     @property
     def id(self): 
@@ -22,25 +26,63 @@ class Tray:
 
     @id.setter
     def id(self, value): 
-        self._id = value;  
+        self._id = value 
+
+    @property
+    def status(self):
+        return self._status
+    
+    @status.setter
+    def status(self, value): 
+        if (not isinstance(value, TrayStatus)):
+            raise(ValueError("Status is not in the predefined list"))
+        self._status = value 
+
+    @property
+    def has_veg(self): 
+        return self._has_veg 
+    
+    @has_veg.setter
+    def has_veg(self, value):
+        self._has_veg = value
+
+    @property
+    def has_foam(self):
+        return self._has_foam
+
+    @ property
+    def dimension(self): 
+        return self._dimension
+    
+    @dimension.setter
+    def dimension(self, row, col) : 
+        self._dimension = [row, col]
+
+    @property
+    def location(self):
+        return self._location
+    
+    @location.setter
+    def location(self, value) : 
+        self._location = value 
+
+    # transfer from current location to another location 
+    def transfer(self, destination):
+        self.location = destination    
 
     # Fill an empty tray with pots 
-    def fill_pots(self, row=10, col=12): 
-        pass
+    def fill_pots(self):
+        for row in self._pots:
+            for col in row:
+                self._pots[row][col] = 1
 
-    # fill an tray with pots foams 
-    def fill_foam(self): 
-        pass
+    def discard_pots(self):
+        for row in self._pots:
+            for col in row:
+                self._pots[row][col] = o
+  
     
-    # transfer an try to new location 
-    def transfer(self, destination): 
-        pass
 
-    def transplant(self):
-        pass 
-
-    def wash(self):
-        pass
     
     
 
