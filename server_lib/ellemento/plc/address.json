@@ -49,7 +49,7 @@
                 "PUMP_1_RECOVER_ADDRESS":  11083,             
                 "PUMP_1_RECOVER_BITPOS":  0,                 
                 "PUMP_1_SET_RPM_ADDRESS":  11084,             
-                "PUMP_1_CURRENT_RPM_ADDRESS":  11085,         
+                "PUMP_1_CURRENT_RPM_ADDRESS":  11085        
             }
         },
         {
@@ -99,7 +99,7 @@
                 "PUMP_1_RECOVER_ADDRESS":  11083,             
                 "PUMP_1_RECOVER_BITPOS":  0,                 
                 "PUMP_1_SET_RPM_ADDRESS":  11084,             
-                "PUMP_1_CURRENT_RPM_ADDRESS":  11085,         
+                "PUMP_1_CURRENT_RPM_ADDRESS":  11085        
             }
         }
     ]
