@@ -8,10 +8,12 @@ from pymodbus.register_read_message import ReadWriteMultipleRegistersResponse
 from pymodbus.bit_write_message import WriteSingleCoilResponse, WriteMultipleCoilsResponse
 from pymodbus.register_write_message import WriteSingleRegisterResponse, WriteMultipleRegistersResponse
 
-class plc(object):
+class PLCManager(object):
 
-    def __init__ (self):
+    def __init__ (self, name = "rack1", id = 1):
         super().__init__()
+        self.name = name 
+        self.id = id
 
     def __del__(self):
         print ("plc destructor")

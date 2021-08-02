@@ -12,8 +12,6 @@ class TrayPhase13(Tray):
         self.has_foam = True
 
     # Transfer from sower -> phase1 rack -> phase 2 rack -> phase 3 rack -> 3-4 transplantor 
-    def transfer(self, destination):
-        self.location = destination    
 
     # vegetabal is transplanted to phase 4 trays 
     def transplant_out(self): 
