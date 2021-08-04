@@ -6,7 +6,13 @@ class ValveStatus(Enum):
      
 # Other status could be added later 
 
-class LightControl:
+class WaterControl:
+    all_valves = {} 
+
+    @staticmethod 
+    def get_valve(id): 
+        return WaterControl.all_valves[id]
+
     def __init__(self, id):
         self._id = id
         self._percent = 0

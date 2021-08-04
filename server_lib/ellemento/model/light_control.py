@@ -7,6 +7,13 @@ class LightStatus(Enum):
 # Other status could be added later 
 
 class LightControl:
+    
+    all_lights = {} 
+
+    @staticmethod 
+    def get_light(id):
+        return LightControl.all_lights[id]
+
     def __init__(self, id):
         self._id = id
         self._percent = 0

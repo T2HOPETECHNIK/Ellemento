@@ -11,14 +11,22 @@ class TrayStatus(Enum):
 # Other status could be added later 
 
 class Tray:
+    all_trays = {} 
+    
+    @staticmethod
+    def get_tray(id):
+        return Tray.all_trays[id]
+    
     def __init__(self, id):
         self._id = id
         self._status = TrayStatus.IDLE
         self._has_veg = False   
         self._has_foam = False
-        self._dimension = [2, 2]
-        self._pots= [[0,0], [0,0]]
+        self._dimension = {}
+        self._pots= {}
         self._location = "" # Initial location is not sure 
+
+    
 
     @property
     def id(self): 

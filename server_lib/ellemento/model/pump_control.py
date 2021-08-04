@@ -15,12 +15,20 @@ class PumpMode(Enum):
 # Other status could be added later 
 
 class PumpControl:
+    all_pumps = {}
+
+    @staticmethod
+    def get_pump(id): 
+        return PumpControl.all_pumps[id]
+    
     def __init__(self, id):
         self._id = id
         self._flowrate = 0
         self._status = PumpValveStatus.OFF
         self._rpm = 0
         self._mode = PumpMode.PUMP_FLOW_MODE 
+
+    
 
     def on(self, flowrate = 100, rpm = 3600): 
         self._status = PumpValveStatus.ON

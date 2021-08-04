@@ -28,8 +28,8 @@ class EllementoLogger(object):
 
 
     @staticmethod
-    def initialize_logger(output_dir = os.path.dirname(__file__), log_file_name = "debug"):
-        """ Initialises the log to do the following:
+    def initialize_logger(log_file_name = "debug", log_lvl = logging.DEBUG, output_dir = os.path.dirname(__file__)):
+        """ Initialise the log to do the following:
             (1) Output all log levels (from DEBUG upwards) to stdout
             (2) Log ERROR and CRITICAL messages to file
         """
@@ -41,10 +41,10 @@ class EllementoLogger(object):
         LOG_DEBUG_FILE = log_file_name + "_" + str_date + ".log"
         logger = logging.getLogger()
         logger.propagate = False 
-        logger.setLevel(logging.DEBUG)
+        logger.setLevel(log_lvl)
         # create console handler and set level to debug
         handler = logging.StreamHandler()
-        handler.setLevel(logging.DEBUG)
+        handler.setLevel(log_lvl)
         formatter = logging.Formatter(LOG_FORMAT)
         handler.setFormatter(formatter)
         logger.addHandler(handler)
@@ -63,7 +63,7 @@ class EllementoLogger(object):
             interval=1,
             delay="true",
             backupCount=30)
-        handler.setLevel(logging.DEBUG)
+        handler.setLevel(log_lvl)
         formatter = logging.Formatter(LOG_FORMAT)
         handler.setFormatter(formatter)
 
