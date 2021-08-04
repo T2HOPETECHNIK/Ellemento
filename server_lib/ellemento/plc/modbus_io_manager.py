@@ -4,12 +4,14 @@ import sys
 from ellemento.plc.modbus_io import PLCManager
 from lib.logging.logger_initialiser import EllementoLogger
 
+logger = EllementoLogger.initialize_logger()
+
+
 
 # Used to hold all the modbus io 
 class ModbusIOManager(object):  
     modbus_io_dict = {}; 
-    logger = EllementoLogger.initialize_logger()
-
+    
     def __init__ (self):
         super().__init__()
 

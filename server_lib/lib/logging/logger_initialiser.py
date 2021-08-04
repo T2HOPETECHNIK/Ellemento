@@ -20,6 +20,7 @@ from logging.handlers import TimedRotatingFileHandler
 
 class EllementoLogger(object):  
     log_folder = os.path.join(os.path.dirname(__file__), "log")
+    logger = None 
 
     def __init__ (self):
         super().__init__()
@@ -32,10 +33,14 @@ class EllementoLogger(object):
             (1) Output all log levels (from DEBUG upwards) to stdout
             (2) Log ERROR and CRITICAL messages to file
         """
+        if EllementoLogger.logger is not None: 
+            return EllementoLogger.logger
+        print()
         LOG_FORMAT = "[%(levelname)s] - %(message)s - %(asctime)s"
         str_date = datetime.today().strftime('%Y-%m-%d')
         LOG_DEBUG_FILE = log_file_name + "_" + str_date + ".log"
         logger = logging.getLogger()
+        logger.propagate = False 
         logger.setLevel(logging.DEBUG)
         # create console handler and set level to debug
         handler = logging.StreamHandler()
@@ -61,6 +66,7 @@ class EllementoLogger(object):
         handler.setLevel(logging.DEBUG)
         formatter = logging.Formatter(LOG_FORMAT)
         handler.setFormatter(formatter)
-        logger.addHandler(handler)
 
-        return logger
+        logger.addHandler(handler)
+        EllementoLogger.logger = logger; 
+        return EllementoLogger.logger
