@@ -1,0 +1,12 @@
+{"include": [{
+        "relation": "cremationWorkflow",
+        "scope": {
+            "include": [{ 
+                "relation":"workflowInfo",
+                "scope": {
+                    "include": [{"relation": "deceased"}]
+                }  
+            }]
+        }
+    }], "where":{"status": "WTP"}
+}

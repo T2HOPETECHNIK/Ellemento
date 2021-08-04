@@ -1,3 +1,4 @@
+import json 
 from pymodbus.client.sync import ModbusTcpClient
 from pymodbus.constants import Defaults
 from pymodbus.exceptions import ModbusException
@@ -8,13 +9,81 @@ from pymodbus.register_read_message import ReadWriteMultipleRegistersResponse
 from pymodbus.bit_write_message import WriteSingleCoilResponse, WriteMultipleCoilsResponse
 from pymodbus.register_write_message import WriteSingleRegisterResponse, WriteMultipleRegistersResponse
 
-class plc(object):
-
-    def __init__ (self):
+class PLCManager(object):
+    # name = '', id = '', ip = '', cfg = cfg_json
+    def __init__ (self, **kwargs):
         super().__init__()
+        self.__name = ''
+        self.__id = -1
+        self.__ip = '0.0.0.0'
+        self.__parse_args(**kwargs)
+   
+    def __parse_args(self, **kwargs): 
+         for key, value in kwargs.items():
+             
+            if key == 'name': 
+                self.__name = value
+            if key == "id": 
+                self.__id == value
+            if key == 'ip':
+                self.__ip == value
+            if key == 'cfg':
+                self.__cfg = value
+                self.__parse_config(value)
+        
+    def __parse_config(self, cfg): 
+        self.__name = cfg['name']
+        self.__id = cfg['id']
+        self.__ip = cfg['ip']
+        self.__address = cfg['address']
+        self.__cfg = cfg; 
+        pass
+        # to do 
+            
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, value):
+        self.__name = value
+
+    @property 
+    def config(self):
+        return self.__cfg; 
+
+    @property
+    def id(self):
+        return self.__id
+
+    @id.setter
+    def id(self, value):
+        self.__id = value
+
+    @property
+    def ip(self):
+        return self.__ip
+
+    @ip.setter
+    def ip(self, value):
+        self.__ip = value
+    
+    def __print__(self):
+        return json.dumps(self.__cfg)
+        #return json.dump(self.__cfg)
+
+    def __repr__(self):
+        return json.dumps(self.__cfg)
+        #return "------"
+        
+        # print("id  : %d", self.__id)
+        # print("name: " + self.__name)
+        # print("ip  : " + self.__ip)
+
 
     def __del__(self):
-        print ("plc destructor")
+        pass
+        #print ("plc destructor")
 
     def setIP(self, ip):
         error = 0
@@ -51,7 +120,6 @@ class plc(object):
 
     # Self implemented coil
     def write_coil(self, addr, bitpos, bdata):
-
         error = 0
         res = 0
         try:

@@ -1,9 +1,9 @@
 
 import logging
-import constants
-import job_manager
+from ellemento.job import constants
+from ellemento.job import job_manager
 
-if __name__ == "__main__":
+def run(): 
     print("Started")
 
     # Example usage

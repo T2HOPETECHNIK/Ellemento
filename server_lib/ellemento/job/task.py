@@ -1,12 +1,13 @@
 
-import rest_api 
 import time
-import constants
-
 # Import PLC library
 import sys
+
 sys.path.append('../plc')
-import modbus_io as modbus
+import ellemento.plc.modbus_io as modbus
+
+from ellemento.job import constants
+from ellemento.job import rest_api 
 
 
 class CTask:

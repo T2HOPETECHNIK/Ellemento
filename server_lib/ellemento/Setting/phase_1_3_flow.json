@@ -1,0 +1,25 @@
+{
+    "init_flow":
+    [
+        {
+            "step_index": 0,
+            "step_name": "Ready", 
+            "Description": "The system is ready to execute the next workflow - sower"
+        }
+    ],
+    "happy_flow": [
+        {
+            "step_index": 0,
+            "step_name": "Ready", 
+            "Description": "The system is ready to execute the next workflow - sower"
+        },
+        {
+            "step_index": 11, 
+            "step_name": "Sowing",
+            "job_name": "",
+            "job_type": "PRINTER_JOB",
+            "job_status": "NONE",
+            "job_id": -1
+        }
+    ]
+}
