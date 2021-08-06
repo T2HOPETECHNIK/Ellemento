@@ -11,4 +11,4 @@ class ShelfFactory:
 
     @staticmethod 
     def print():
-        Shelf.print_shelf() 
+        Shelf.print() 

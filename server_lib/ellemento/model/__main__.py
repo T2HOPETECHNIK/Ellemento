@@ -31,20 +31,20 @@ def init_trays():
 
 def init_shelves(): 
     for i in range (1, phase_1_shelves + 1):
-         ShelfFactory.create_shelf(i, "Phase 1 Shelf")
+         ShelfFactory.create_shelf(id = i, type_name="Phase 1 Shelf")
 
 
     for i in range (1, phase_2_shelves + 1):
-         ShelfFactory.create_shelf(i + phase_1_shelves, "Phase 2 Shelf")
+         ShelfFactory.create_shelf(id = i + phase_1_shelves, type_name="Phase 2 Shelf")
 
     for i in range (1, phase_3_shelves + 1):
-         ShelfFactory.create_shelf(i + phase_1_shelves + phase_2_shelves, "Phase 3 Shelf")
+         ShelfFactory.create_shelf(id = i + phase_1_shelves + phase_2_shelves, type_name="Phase 3 Shelf")
 
     for i in range(1, phase_4_shelves + 1): 
-         ShelfFactory.create_shelf(i + phase_1_shelves + phase_2_shelves + phase_3_shelves, "Phase 4 Shelf")
+         ShelfFactory.create_shelf(id = i + phase_1_shelves + phase_2_shelves + phase_3_shelves, type_name="Phase 4 Shelf")
 
     for i in range(1, phase_5_shelves + 1): 
-        ShelfFactory.create_shelf(i + phase_1_shelves + phase_2_shelves + phase_3_shelves + phase_4_shelves, "Phase 5 Shelf")
+        ShelfFactory.create_shelf(id = i + phase_1_shelves + phase_2_shelves + phase_3_shelves + phase_4_shelves, type_name="Phase 5 Shelf")
 
 
     pass 
@@ -53,8 +53,9 @@ def init_shelves():
 if __name__ == '__main__':
     init_trays()
     init_shelves()
+    ShelfFactory.print()
     #tray_new = TrayFactory.create_tray(id = 1, name = "phase1-3")
-    #TrayFactory.print()
+    TrayFactory.print()
     pass
 
 

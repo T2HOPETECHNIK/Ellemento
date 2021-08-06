@@ -26,10 +26,9 @@ class Tray:
         Tray.all_trays[tray.id] = tray
     
     @staticmethod 
-    def print_tray(): 
+    def print(): 
         for tray_x in Tray.all_trays:
-            print("...............") 
-            print(tray_x.name)
+            print(Tray.all_trays[tray_x])
     
     def __init__(self, id = 0, dimensions = [12, 10], type_name="Unknown" ):
         self._id = id
@@ -54,10 +53,10 @@ class Tray:
         self._type_name = value 
     
     def __repr__(self):
-        return "<id:%d type:%s>" % (self._id, self._type_name)
+        return "<object:%s id:%d type:%s>" % (self.__class__.__name__, self._id, self._type_name)
 
     def __str__(self):
-        return "<id:%d type:%s>" % (self._id, self._type_name)
+        return "<object:%s, id:%d type:%s>" % (self.__class__.__name__, self._id, self._type_name)
 
     @property 
     def enable(self):

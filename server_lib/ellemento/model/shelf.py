@@ -23,7 +23,13 @@ class Shelf:
 
     @staticmethod
     def add_shelf(shelf): 
+        print(shelf)
         Shelf.all_shelves[shelf.id] = shelf
+    
+    @staticmethod 
+    def print(): 
+        for shelf_x in Shelf.all_shelves:
+            print(Shelf.all_shelves[shelf_x])
 
     def __init__(self, id = -1, type_name='default'):
         self._id = id
@@ -38,6 +44,12 @@ class Shelf:
         self._enable = True 
         self._type_name = type_name
 
+    def __repr__(self):
+        return "<object: %s, id:%d type:%s>" % (self.__class__.__name__, self._id, self._type_name)
+
+    def __str__(self):
+        return "<object: %s, id:%d type:%s>" % (self.__class__.__name__, self._id, self._type_name)
+    
     @property
     def id(self):
         return self._id

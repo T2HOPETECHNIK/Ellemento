@@ -20,4 +20,4 @@ class TrayFactory:
 
     @staticmethod 
     def print():
-        Tray.print_tray() 
+        Tray.print() 
