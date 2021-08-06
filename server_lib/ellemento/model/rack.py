@@ -22,6 +22,15 @@ class Rack:
         self._shelves = {} 
         # Set tray status of the rack. if has, it shall be tray number 
         self._pumps = {}
+        self._enable = True 
+
+    @property 
+    def enable(self):
+        return self._enable 
+
+    @enable.setter
+    def enable(self, value): 
+        self._enable = value   
 
     # Add a shelf to the rack 
     def add_shelf(self, shelf_id): 
@@ -31,7 +40,7 @@ class Rack:
     # Add a pump control to the rack 
     def add_pumps(self, pump_id): 
         if pump_id not in self._pumps: 
-            self._pumps[pump_id] = PumpControl.get_valve(pump_id)
+            self._pumps[pump_id] = PumpControl.get_pump(pump_id)
 
     def transfer_in(self, tray_id): 
         pass

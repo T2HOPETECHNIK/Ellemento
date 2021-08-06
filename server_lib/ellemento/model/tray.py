@@ -4,6 +4,10 @@
 
 from enum import Enum
 
+from lib.logging.logger_initialiser import EllementoLogger
+
+logger = EllementoLogger.initialize_logger(); 
+
 class TrayStatus(Enum):
     IDLE = 1        # clean and ready to use
     IN_USE = 2      # with plants 
@@ -17,16 +21,51 @@ class Tray:
     def get_tray(id):
         return Tray.all_trays[id]
     
-    def __init__(self, id):
+    @staticmethod 
+    def add_tray(tray): 
+        Tray.all_trays[tray.id] = tray
+    
+    @staticmethod 
+    def print_tray(): 
+        for tray_x in Tray.all_trays:
+            print("...............") 
+            print(tray_x.name)
+    
+    def __init__(self, id = 0, dimensions = [12, 10], type_name="Unknown" ):
         self._id = id
         self._status = TrayStatus.IDLE
         self._has_veg = False   
         self._has_foam = False
-        self._dimension = {}
+        self._dimensions = dimensions
         self._pots= {}
-        self._location = "" # Initial location is not sure 
+        self._location = None
+        self._type_name = type_name
+        # Initial location is not sure 
+        self._enable = True 
+        str_log = "Created object " + self._type_name + " " + str(self._id); 
+        #logger.info(str_log)
 
+    @property 
+    def type_name(self):
+        return self._type_name 
+
+    @type_name.setter
+    def type_name(self, value): 
+        self._type_name = value 
     
+    def __repr__(self):
+        return "<id:%d type:%s>" % (self._id, self._type_name)
+
+    def __str__(self):
+        return "<id:%d type:%s>" % (self._id, self._type_name)
+
+    @property 
+    def enable(self):
+        return self._enable 
+
+    @enable.setter
+    def enable(self, value): 
+        self._enable = value   
 
     @property
     def id(self): 
@@ -87,7 +126,13 @@ class Tray:
     def discard_pots(self):
         for row in self._pots:
             for col in row:
-                self._pots[row][col] = o
+                self._pots[row][col] = 0
+
+    # def fill_foams(self): 
+    #     self.has_foam = True
+
+    # def fill_seeds(self): 
+    #     self.has_veg = True 
   
     
 

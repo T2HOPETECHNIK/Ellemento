@@ -28,8 +28,6 @@ class PumpControl:
         self._rpm = 0
         self._mode = PumpMode.PUMP_FLOW_MODE 
 
-    
-
     def on(self, flowrate = 100, rpm = 3600): 
         self._status = PumpValveStatus.ON
         self._flowrate = flowrate
