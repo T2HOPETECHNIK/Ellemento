@@ -5,6 +5,7 @@ from ellemento.model.water_control_factory import WaterControlFactory
 from ellemento.model.pump_control_factory import PumpControlFactory 
 from ellemento.model.rack_factory import RackFactory
 from ellemento.model.ventilation_control_factory import VentilationControlFactory
+from ellemento.model.farm_factory import FarmFactory
 from lib.logging.logger_initialiser import EllementoLogger
 
 phase_1_shelves = 4
@@ -15,9 +16,15 @@ phase_5_shelves = 224
 total_pumps = 10
 total_racks = 16
 total_fans = 5 
+total_farms = 1
 
 logger = EllementoLogger.initialize_logger(); 
 
+def init_farms(): 
+    logger.info("Initialize Farms")
+    for i in range (1, total_farms + 1): 
+        FarmFactory.create_farm(id = i)
+    pass
 
 def init_fans():
     logger.info("Initialize racks")
@@ -106,6 +113,10 @@ if __name__ == '__main__':
     PumpControlFactory.print()
     RackFactory.print()
     VentilationControlFactory.print()
+
+    init_farms()
+    FarmFactory.print()
+
 
     pass
 

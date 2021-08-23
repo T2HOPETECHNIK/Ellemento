@@ -39,7 +39,15 @@ class PLCManager(object):
         self.__cfg = cfg; 
         pass
         # to do 
-            
+    
+    @property
+    def address(self):
+        return self.__address
+
+    @address.setter
+    def address(self, value):
+        self.__address = value  
+
     @property
     def name(self):
         return self.__name

@@ -16,8 +16,8 @@ class LightControl:
 
     @staticmethod 
     def print(): 
-        for shelf_x in LightControl.all_lights:
-            print(LightControl.all_lights[shelf_x])
+        for light_x in LightControl.all_lights:
+            print(LightControl.all_lights[light_x])
 
     @staticmethod 
     def add_light(light_new):

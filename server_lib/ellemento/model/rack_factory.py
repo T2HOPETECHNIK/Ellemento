@@ -6,6 +6,9 @@ class RackFactory:
         rack_new = None
         #Tray.add_tray(tray_new)
         rack_new = Rack(id = id, type_name = type_name)
+        # add shelves 
+        # add pumps 
+
         Rack.add_rack(rack_new)
         return Rack.get_rack(id)
 
