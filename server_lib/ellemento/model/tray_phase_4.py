@@ -7,9 +7,9 @@ class TrayPhase4(Tray):
     def transfer(self):
         self.has_veg = True 
 
-    def transplant_in(self):
+    def transplant_out(self):
         super().transplant()
         self.has_veg = False
 
     def transplant_in(self):
-        self.has_veg = False
+        self.has_veg = True

@@ -51,6 +51,12 @@ class Tray:
     @type_name.setter
     def type_name(self, value): 
         self._type_name = value 
+
+    def transplant_out(self): 
+        pass 
+
+    def transplant_in(self): 
+        pass 
     
     def __repr__(self):
         return "<object:%s id:%d type:%s>" % (self.__class__.__name__, self._id, self._type_name)
@@ -111,10 +117,6 @@ class Tray:
     @location.setter
     def location(self, value) : 
         self._location = value 
-
-    # transfer from current location to another location 
-    def transfer(self, destination):
-        self.location = destination    
 
     # Fill an empty tray with pots 
     def fill_pots(self):
