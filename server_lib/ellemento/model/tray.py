@@ -3,15 +3,30 @@
 #* 
 
 from enum import Enum
+import datetime
 
 from lib.logging.logger_initialiser import EllementoLogger
 
-logger = EllementoLogger.initialize_logger(); 
+logger = EllementoLogger.__call__().logger; 
 
 class TrayStatus(Enum):
-    IDLE = 1        # clean and ready to use
-    IN_USE = 2      # with plants 
-    DIRTY = 3       # empty but not clean 
+    CREATED             = 1
+    IDLE                = 2        # clean and ready to use
+    SOWER               = 3
+    SOWER_TO_PHASE1     = 4
+    PHASE1              = 5
+    PHASE1_TO_PHASE2    = 6 
+    PHASE2              = 7
+    PHASE2_TO_PHASE3    = 8
+    PHASE3              = 9
+    PHASE3_TO_TRANPLANT = 10
+    TRANSPLANT_TO_PHASE4        = 11
+    PHASE4                      = 12
+    PHASE4_TO_TRANSPLANT        = 13
+    TRANSPLANT_TO_PHASE5        = 14
+    PHASE5_TO_TRANSPLANT        = 15 
+    DIRTY                       = 16       # empty but not clean 
+
 # Other status could be added later 
 
 class Tray:
@@ -32,7 +47,6 @@ class Tray:
     
     def __init__(self, id = 0, dimensions = [12, 10], type_name="Unknown" ):
         self._id = id
-        self._status = TrayStatus.IDLE
         self._has_veg = False   
         self._has_foam = False
         self._dimensions = dimensions
@@ -41,8 +55,14 @@ class Tray:
         self._type_name = type_name
         # Initial location is not sure 
         self._enable = True 
-        str_log = "Created object " + self._type_name + " " + str(self._id); 
+        #str_log = "Created object " + self._type_name + " " + str(self._id); 
         #logger.info(str_log)
+        self._set_status(TrayStatus.CREATED)
+
+
+    def _set_status(self, status):
+        self._status = status 
+        self._status_time = datetime.datetime.now()
 
     @property 
     def type_name(self):
@@ -53,6 +73,7 @@ class Tray:
         self._type_name = value 
 
     def transplant_out(self): 
+        self._set_status(TrayStatus.DIRTY)
         pass 
 
     def transplant_in(self): 

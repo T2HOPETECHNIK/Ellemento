@@ -1,3 +1,4 @@
+from ellemento.model.tray import Tray
 from ellemento.model.tray_factory import TrayFactory
 from ellemento.model.shelf_factory import ShelfFactory
 from ellemento.model.light_factory import LightFactory
@@ -7,6 +8,7 @@ from ellemento.model.rack_factory import RackFactory
 from ellemento.model.ventilation_control_factory import VentilationControlFactory
 from ellemento.model.farm_factory import FarmFactory
 from lib.logging.logger_initialiser import EllementoLogger
+from ellemento.model.buffer import Buffer
 
 phase_1_shelves = 4
 phase_2_shelves = 10 
@@ -18,7 +20,7 @@ total_racks = 16
 total_fans = 5 
 total_farms = 1
 
-logger = EllementoLogger.initialize_logger(); 
+logger = EllementoLogger.__call__().logger 
 
 def init_farms(): 
     logger.info("Initialize Farms")
@@ -74,7 +76,6 @@ def init_water_controls():
         WaterControlFactory.create_valve(id = i)
     pass 
     
-
 def init_shelves(): 
     for i in range (1, phase_1_shelves + 1):
          ShelfFactory.create_shelf(id = i, type_name="Phase 1 Shelf")
@@ -92,11 +93,10 @@ def init_shelves():
         ShelfFactory.create_shelf(id = i + phase_1_shelves + phase_2_shelves + phase_3_shelves + phase_4_shelves, type_name="Phase 5 Shelf")
     pass 
 
-
 def init_ventilation(): 
     pass 
 
-if __name__ == '__main__':
+def init_model(): 
     init_trays()
     init_lights() 
     init_water_controls()
@@ -117,7 +117,25 @@ if __name__ == '__main__':
     init_farms()
     FarmFactory.print()
 
+def init_buffer(): 
+    buffer_obj = Buffer()
+    buffer_obj.print_trays()
+    for i in range (1, 20): 
+        tray_new = TrayFactory.create_tray(id = i, type_name = "phase1-3")
+    for i in range(1, 5): 
+        buffer_obj.load(Tray.get_tray(i))
+    
+    buffer_obj.unload()
+    buffer_obj.unload()
+    buffer_obj.unload()
+    buffer_obj.load(Tray.get_tray(8))
+    buffer_obj.load(Tray.get_tray(9))
+    buffer_obj.load(Tray.get_tray(10))
 
+    buffer_obj.print_trays()
+if __name__ == '__main__':
+    init_buffer()
+    #init_model() 
     pass
 
 

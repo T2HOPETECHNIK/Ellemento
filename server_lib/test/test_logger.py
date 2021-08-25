@@ -10,5 +10,9 @@ class TestStringMethods(unittest.TestCase):
     def test_upper(self):
         #log_folder = os.path.join(os.path.dirname(__file__) + "..\\..\\lib\\logging", "log")
         #logger = EllementoLogger.initialize_logger(os.path.dirname(__file__)); 
-        self.assertEqual(EllementoLogger.log_folder, EllementoLogger.log_folder)
+
+        logger = EllementoLogger.__call__().logger
+        al = EllementoLogger()
+        al.logger.info("test")
+        self.assertEqual(EllementoLogger.__call__().log_folder, EllementoLogger.__call__().log_folder)
         #self.assertEqual(EllementoLogger.log_folder, log_folder)
