@@ -1,4 +1,4 @@
-from ellemento.model.tray import Tray
+from ellemento.model.tray import Tray, TrayStatus
 from ellemento.model.tray_factory import TrayFactory
 from ellemento.model.shelf_factory import ShelfFactory
 from ellemento.model.light_factory import LightFactory
@@ -19,6 +19,8 @@ total_pumps = 10
 total_racks = 16
 total_fans = 5 
 total_farms = 1
+
+import time 
 
 logger = EllementoLogger.__call__().logger 
 
@@ -133,10 +135,21 @@ def init_buffer():
     buffer_obj.load(Tray.get_tray(10))
 
     buffer_obj.print_trays()
-if __name__ == '__main__':
-    init_buffer()
+
+def test_tray_duration(): 
+    #init_buffer()
     #init_model() 
+    for i in range (1, 20): 
+        tray_new = TrayFactory.create_tray(id = i, type_name = "phase1-3")
+        tray_new.status = TrayStatus.PHASE1
+    time.sleep(5)
+    ret_list = TrayFactory.check_duration(Tray.all_trays, unit='second')
+    for obj in ret_list: 
+        print(obj.transfer_status) 
     pass
+
+if __name__ == '__main__':
+    test_tray_duration()
 
 
 

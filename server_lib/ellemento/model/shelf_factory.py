@@ -1,4 +1,4 @@
-from ellemento.model.shelf import Shelf
+from ellemento.model.shelf import Shelf, Phase
 
 class ShelfFactory:
     @staticmethod  
@@ -16,3 +16,7 @@ class ShelfFactory:
     @staticmethod 
     def print():
         Shelf.print() 
+
+    @staticmethod
+    def get_empty_shelf(phase = Phase.PHASE1): 
+        pass 

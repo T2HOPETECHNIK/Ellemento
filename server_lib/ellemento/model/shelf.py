@@ -14,6 +14,20 @@ class ShelfStatus(Enum):
 # light control 
 # water control 
 
+class Phase(Enum):
+    NOT_PLANNED     = 0 
+    PHASE1          = 1
+    PHASE2          = 2
+    PHASE3          = 3
+    PHASE4          = 4
+    PHASE5          = 5 
+    PHASE1_BACK_UP  = 6
+    PHASE2_BACK_UP  = 7
+    PHASE3_BACK_UP  = 8
+    PHASE4_BACK_UP  = 9
+    PHASE5_BACK_UP  = 10
+
+
 class Shelf:
     all_shelves = {} 
     
@@ -36,7 +50,7 @@ class Shelf:
         self._status = ShelfStatus.IDLE
         self._rack =  -1
         # each shelf must be 1 of the phase, [1, 2, 3, 4, 5]
-        self._phase = None 
+        self._phase = Phase.NOT_PLANNED 
         # Set tray status of the rack. if has, it shall be tray number 
         self._trays = {}
         self._lights = {}

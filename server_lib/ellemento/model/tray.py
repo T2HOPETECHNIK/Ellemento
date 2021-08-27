@@ -24,18 +24,26 @@ class TrayStatus(Enum):
     PHASE4                      = 12
     PHASE4_TO_TRANSPLANT        = 13
     TRANSPLANT_TO_PHASE5        = 14
-    PHASE5_TO_TRANSPLANT        = 15 
-    DIRTY                       = 16       # empty but not clean 
+    PHASE5                      = 15
+    PHASE5_TO_TRANSPLANT        = 16 
+    DIRTY                       = 17       # empty but not clean 
+
+class TransferStatus(Enum):
+    IDLE                = 1
+    READY_TO_TRANSFER   = 2
+    TRANSFER_QUEUED     = 3
+    TRANSFERING         = 4 
+
 
 # Other status could be added later 
 
 class Tray:
     all_trays = {} 
-    
+    # Check whether the duration of tray staying in each phase 
     @staticmethod
     def get_tray(id):
         return Tray.all_trays[id]
-    
+
     @staticmethod 
     def add_tray(tray): 
         Tray.all_trays[tray.id] = tray
@@ -53,12 +61,31 @@ class Tray:
         self._pots= {}
         self._location = None
         self._type_name = type_name
+        self._transfer_status = TransferStatus.IDLE
         # Initial location is not sure 
         self._enable = True 
         #str_log = "Created object " + self._type_name + " " + str(self._id); 
         #logger.info(str_log)
         self._set_status(TrayStatus.CREATED)
 
+    @property
+    def status_time(self): 
+        return self._status_time  
+    
+    @property 
+    def status(self): 
+        return self._status
+    
+    @status.setter 
+    def status(self, value): 
+        self._status = value 
+
+    @property 
+    def transfer_status(self): 
+        return self._transfer_status 
+
+    def set_transfer_status(self, status): 
+        self._transfer_status = status
 
     def _set_status(self, status):
         self._status = status 
