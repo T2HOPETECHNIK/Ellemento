@@ -1,6 +1,8 @@
-from ellemento.model.shelf import Shelf, Phase
+from ellemento.model.shelf import Shelf, Phase, ShelfStatus
 
 class ShelfFactory:
+    tray_per_shelf = 9 
+
     @staticmethod  
     def create_shelf(type_name = "default", id = -1):
         shelf_new = None
@@ -18,5 +20,10 @@ class ShelfFactory:
         Shelf.print() 
 
     @staticmethod
-    def get_empty_shelf(phase = Phase.PHASE1): 
-        pass 
+    def get_empty_shelf_of_phase(phase = Phase.PHASE1): 
+        lst_empty_shelf = [] 
+        for shelf_x in Shelf.all_shelves:
+            shelf_of_idx = Shelf.all_shelves[shelf_x]; 
+            if shelf_of_idx.status == ShelfStatus.IDLE and shelf_of_idx.phase == phase: 
+                lst_empty_shelf.append(shelf_of_idx)
+        return lst_empty_shelf
