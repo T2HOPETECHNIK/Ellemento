@@ -26,7 +26,11 @@ class Phase(Enum):
     PHASE3_BACK_UP  = 8
     PHASE4_BACK_UP  = 9
     PHASE5_BACK_UP  = 10
-
+    SOWER_2_PHASE1  = 11
+    PHASE3_2_TRANSPLANT = 12
+    TRANSPLANT_2_PHASE4 = 13
+    PHASE4_2_TRANSPLANT = 14
+    TRANSPLANT_2_PHASE5 = 15 
 
 class Shelf:
     all_shelves = {} 

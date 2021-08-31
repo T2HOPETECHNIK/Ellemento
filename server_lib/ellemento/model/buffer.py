@@ -14,17 +14,9 @@ class BufferStatus(Enum):
     # light control 
     # water control 
 
+
+
 class Buffer:
-    
-
-    @staticmethod 
-    def get_farm(id): 
-        pass
-
-    @staticmethod 
-    def add_farm(farm_new): 
-        pass
-
     @staticmethod 
     def print():
         pass
@@ -39,20 +31,29 @@ class Buffer:
 
     @id.setter
     def id(self, value):
-        self._id = value 
+        self._id = value
+
+    def full(self): 
+        return len(self.trays) == 9
+
+    def empty(self): 
+        return len(self.trays) == 0 
 
     def load(self, tray):
         if len(self.trays) >= 9: 
             raise Exception("Not able to load, buffer is full")
+            return 
         if len(self.trays) < 3:
             self.trays.append(tray) 
             return 
         if len(self.trays) >= 3: 
             self.trays.insert(2, tray)
+            return 
 
     def unload(self):
         if len(self.trays) == 0: 
             raise Exception("Not able to unload,  buffer is empty")
+        self._reserved = self._reserved - 1
         return self.trays.pop()
     
     def print_trays(self):
