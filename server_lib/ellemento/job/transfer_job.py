@@ -8,12 +8,14 @@ from ellemento.model import bufffer_factory
 
 from lib.logging.logger_initialiser import EllementoLogger
 import ellemento.model.tray 
-from ellemento.model.shelf import Phase
+from ellemento.model.shelf import Phase, ShelfStatus
 from ellemento.model.tray_factory import TrayFactory
 from ellemento.model.shelf_factory import ShelfFactory
+from ellemento.model.shelf import Shelf 
 from ellemento.model.tray import Tray
 from ellemento.model.tray import TrayStatus, TransferStatus
 from ellemento.model.bufffer_factory import BufferFactory, BufferType
+from ellemento.model.harvestor import Harvestor
 
 
 logger = EllementoLogger.initialize_logger(); 
@@ -40,6 +42,11 @@ class TransferJob:
         get_list_phase(status = TrayStatus.PHASE4, list_key = Phase.PHASE4)
         get_list_phase(status = TrayStatus.PHASE5, list_key = Phase.PHASE5)
 
+    # prepare job for sower to phase 1 shelf 
+    @staticmethod 
+    def plan_destination_phase1_in():
+        pass 
+    
     @staticmethod 
     def plan_destination_phase1():
         # Get phase 2 emptry shelvies 
@@ -101,32 +108,46 @@ class TransferJob:
     
     @staticmethod
     def plan_destination_phase4_in(): 
+        def get_shelf_from_lst(lst_shelf_in): 
+            shelf_ret = None 
+            shelf = Shelf(lst_shelf_in[0])
+            if shelf.status  == ShelfStatus.FULL: 
+                lst_shelf_in.pop(0) 
+            shelf_ret = Shelf(lst_shelf_in[0])
+            return shelf_ret 
+            
         # if buffer 4-out has something, then can plan transfer 
         buffer_4_out =  BufferFactory.get_buffer(BufferType.BUFFER_4_OUT)
-        lst_shelf = ShelfFactory.get_empty_shelf_of_phase(phase = Phase.PHASE4) 
+        lst_shelf = ShelfFactory.get_empty_shelf_of_phase(phase = Phase.PHASE4)
         if not buffer_4_out.empty(): 
             new_job = TransferJob()
-            TransferJob.all_transfer_jobs[Phase.TRANSPLANT_2_PHASE4]
+            new_job.set_source(buffer_4_out)
+            shelf_dst = get_shelf_from_lst(lst_shelf)
+            new_job.set_destination(shelf_dst)
+            TransferJob.all_transfer_jobs[Phase.TRANSPLANT_2_PHASE4].append(new_job)
+
 
     @staticmethod
     def plan_destination_phase5_out(): 
         # only if the buffer still have places
-        # 4 in buffer
-        lst_jobs_phase4 = TransferJob.all_transfer_jobs[Phase.PHASE5]
-        # destincaiton shall be harvester 
-        # for job in lst_jobs_phase4:
-        #     job.set_destination(buffer_5_in) 
+        # if harvester is ready ..
+        lst_jobs_phase5  = TransferJob.all_transfer_jobs[Phase.PHASE5]
+        harvestor = Harvestor.get_harvestor()
+        for job in lst_jobs_phase5:
+            job_transfer = TransferJob(job) 
+            job_transfer.set_destination(harvestor)
         pass
-
 
     @staticmethod 
     def plan_destination_phase5_in(): 
         # only if the buffer still have places
         # 4 in buffer
-        lst_jobs_phase4 = TransferJob.all_transfer_jobs[Phase.PHASE5]
+        lst_jobs_phase5 = TransferJob.all_transfer_jobs[Phase.PHASE5]
+        harvestor = Harvestor.get_harvestor() 
+
         # destincaiton shall be harvester 
-        # for job in lst_jobs_phase4:
-        #     job.set_destination(buffer_5_in) 
+        for job in lst_jobs_phase5:
+            job.set_destination(harvestor) 
         pass
         
 

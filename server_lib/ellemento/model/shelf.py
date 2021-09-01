@@ -3,13 +3,14 @@
 from ellemento.model.water_control import WaterControl
 from enum import Enum
 
-from ellemento.model.tray import Tray
+from ellemento.model.tray import Tray, TrayStatus
 from ellemento.model.light_control import LightControl
 
 class ShelfStatus(Enum):
     IDLE = 1        # clean and ready to use
-    NOT_FULL = 2      # with plants 
-    FULL = 3       # empty but not clean 
+    LOADING = 2     # System is loading the shelf with plants
+    UNLOADING = 3   # System is unloading the shelf with plants 
+    FULL = 4       # empty but not clean 
 # Other status could be added later 
 # light control 
 # water control 
@@ -49,12 +50,13 @@ class Shelf:
         for shelf_x in Shelf.all_shelves:
             print(Shelf.all_shelves[shelf_x])
 
-    def __init__(self, id = -1, type_name='default'):
+    def __init__(self, id = -1, type_name='default', max_tray = 9):
         self._id = id
         self._status = ShelfStatus.IDLE
         self._rack =  -1
         # each shelf must be 1 of the phase, [1, 2, 3, 4, 5]
         self._phase = Phase.NOT_PLANNED 
+        self._max_tray = max_tray
         # Set tray status of the rack. if has, it shall be tray number 
         self._trays = {}
         self._lights = {}
@@ -75,6 +77,10 @@ class Shelf:
     @id.setter
     def id(self, value):
         self.id = value 
+
+    @property
+    def status(self): 
+        return self._status
 
     @property 
     def type_name(self): 
@@ -103,11 +109,21 @@ class Shelf:
     def add_tray(self, tray_id): 
         if tray_id not in self._trays: 
             self._trays[tray_id] = Tray.get_tray(tray_id)
+        if len(self._trays) == 1: 
+            self._status = ShelfStatus.LOADING
+        
+        if len(self._trays) == self._max_tray:
+            self._status = ShelfStatus.FULL
+     
 
     def remove_tray(self, tray_id): 
         if tray_id in self._trays: 
             del self._trays[tray_id]
-    
+        if len(self._trays) == self._max_tray - 1: 
+            self._status = ShelfStatus.UNLOADING
+        if len(self._trays) == 0: 
+            self._status = ShelfStatus.IDLE
+
     def add_light(self, light_id):
         if light_id not in self._lights: 
             self._lights[light_id] = LightControl.get_light(light_id)

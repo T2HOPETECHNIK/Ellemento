@@ -24,3 +24,15 @@ class Harvestor:
 
     def __str__(self):
         return "<object: %s, id:%d type:%s>" % (self.__class__.__name__, self._id, self._type_name)
+    
+
+    all_Harvestor = {}
+    
+    @staticmethod
+    def create_harvestor():
+        harvestor_new = Harvestor(id = 1, type_name= "harvestor")    
+        Harvestor.all_Harvestor[harvestor_new.id] = harvestor_new
+
+    @staticmethod
+    def get_harvestor():
+        return Harvestor.all_Harvestor[1] 

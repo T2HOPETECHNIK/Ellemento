@@ -7,7 +7,7 @@ class ShelfFactory:
     def create_shelf(type_name = "default", id = -1):
         shelf_new = None
         #Tray.add_tray(tray_new)
-        shelf_new = Shelf(id = id, type_name = type_name)
+        shelf_new = Shelf(id = id, type_name = type_name, max_tray = ShelfFactory.tray_per_shelf)
         # add trays, 
         # add water controls
         # add lights 
