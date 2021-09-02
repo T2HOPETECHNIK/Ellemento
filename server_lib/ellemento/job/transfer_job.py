@@ -16,6 +16,7 @@ from ellemento.model.tray import Tray
 from ellemento.model.tray import TrayStatus, TransferStatus
 from ellemento.model.bufffer_factory import BufferFactory, BufferType
 from ellemento.model.harvestor import Harvestor
+from ellemento.model.sower import Sower 
 
 
 logger = EllementoLogger.initialize_logger(); 
@@ -45,11 +46,25 @@ class TransferJob:
     # prepare job for sower to phase 1 shelf 
     @staticmethod 
     def plan_destination_phase1_in():
+        def get_shelf_from_lst(lst_shelf_in): 
+            shelf_ret = None 
+            shelf = Shelf(lst_shelf_in[0])
+            if shelf.status  == ShelfStatus.FULL: 
+                lst_shelf_in.pop(0) 
+            shelf_ret = Shelf(lst_shelf_in[0])
+            return shelf_ret 
+        lst_shelf = ShelfFactory.get_empty_shelf_of_phase(phase = Phase.PHASE1)
+        ret_shelf = get_shelf_from_lst(lst_shelf)
+        sower_one = Sower.get_sower() 
+        new_job = TransferJob()
+        new_job.set_source(sower_one)
+        new_job.set_destination(ret_shelf)
+        
         pass 
     
     @staticmethod 
     def plan_destination_phase1():
-        # Get phase 2 emptry shelvies 
+        # Get phase 2 empty shelves 
         lst_shelf = ShelfFactory.get_empty_shelf_of_phase(phase = Phase.PHASE2)
         if len(lst_shelf) == 0: 
             logger.info("No free tray available phase 1")

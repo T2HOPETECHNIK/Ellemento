@@ -5,6 +5,19 @@
 from enum import Enum
 
 class Sower:
+    all_sowers = {}
+
+    @staticmethod 
+    def create_sower(): 
+        sower_new = Sower(id = 1, type_name="Sower")
+        Sower.all_sowers[sower_new.id] = sower_new
+
+    @staticmethod 
+    def get_sower(): 
+        if len(Sower.all_sowers) == 0: 
+            raise Exception("Not able to get sower")
+        return Sower.all_sowers[1]
+
     def __init__(self, id = -1, type_name = "Default"):
         self._id = id
         self._type_name = type_name

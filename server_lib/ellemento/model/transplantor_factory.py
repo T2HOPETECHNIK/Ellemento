@@ -1,21 +1,23 @@
 from ellemento.model.transplantor import Transplantor
 
 class TransplantorFactory:
+    all_transplantors = {}
+
     @staticmethod  
-    def create_shelf(type_name = "default", id = -1):
+    def create_transplantors(type_name = "default", id = -1):
         shelf_new = None
         #Tray.add_tray(tray_new)
         shelf_new = Transplantor(id = id, type_name = type_name)
         # add trays, 
         # add water controls
         # add lights 
-        Shelf.add_shelf(shelf_new)
+        Transplantor.add_shelf(shelf_new)
         
-        return Shelf.get_shelf(id)
+        return Transplantor.get_shelf(id)
 
     @staticmethod 
     def print():
-        Shelf.print() 
+        Transplantor.print() 
 
     @staticmethod
     def get_empty_shelf_of_phase(phase = Phase.PHASE1): 

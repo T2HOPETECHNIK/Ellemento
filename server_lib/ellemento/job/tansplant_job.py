@@ -29,7 +29,11 @@ class TransplantJob:
     def __init__(self, id = -1, type_name = 'Default'):
         self._source_tray = None
         self._destination_trays = [] 
+        self._transplantor = None 
         pass
+
+    def set_tansplantor(self, transplantor): 
+        self._transplantor =  transplantor
 
     def set_source_tray(self, tray):
         self._source_tray = tray 
