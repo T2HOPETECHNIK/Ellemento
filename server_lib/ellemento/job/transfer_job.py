@@ -59,8 +59,7 @@ class TransferJob:
         new_job = TransferJob()
         new_job.set_source(sower_one)
         new_job.set_destination(ret_shelf)
-        
-        pass 
+        return new_job
     
     @staticmethod 
     def plan_destination_phase1():
@@ -119,7 +118,6 @@ class TransferJob:
         for job in lst_jobs_phase4:
             job.set_destination(buffer_4_in) 
         pass
-
     
     @staticmethod
     def plan_destination_phase4_in(): 
