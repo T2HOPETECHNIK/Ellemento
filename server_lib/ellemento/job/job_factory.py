@@ -21,9 +21,22 @@ class JobFactory:
         # create transplating jobs 
         # create transplator to sower jobs 
         #*********************************************************
-        # 1 Create sower to transplantor jobs 
+        # 1 Create transplantor jobs phase 1 
+        # 1.1 from sower to phase 1 shelf 
+        TransferJob.plan_destination_phase1_in() 
+        # 1.2 from phase 1 shelf to phase 2 shelf  
+        TransferJob.plan_destination_phase1()
+        # 1.3 from phase 2 shelf to phase 3 shelf 
+        TransferJob.plan_destination_phase2()
+        # 1.4 from phase 3 shelf to buffer
+        TransferJob.plan_destination_phase3()
 
-        
+        #2 create buffer to transplantor 
+
+        #3 create transplant jobs 
+
+        TransplantJob.create_transplant_jobs()
+
 
         pass
 

@@ -15,7 +15,6 @@ class SowerToTransplantor:
     @staticmethod 
     def create_job(): 
         sower  = Sower.create_sower()
-        TransplantorFactory.
         pass 
 
 

@@ -1,13 +1,19 @@
-# Interfacing with ASRS to execute transfer job
-from ellemento.model.tray import Tray
-from ellemento.model.tray_phase_1_3 import TrayPhase13
-from ellemento.model.tray_phase_4 import TrayPhase4
 import threading
 import time
 from multiprocessing import Process
 import os
+from ellemento.model import transplantor_factory
+
+# Interfacing with ASRS to execute transfer job
+from ellemento.model.tray import Tray
+from ellemento.model.tray_phase_1_3 import TrayPhase13
+from ellemento.model.tray_phase_4 import TrayPhase4
+from ellemento.model.transplantor_factory import TransplantorFactory
+from ellemento.model.transplantor import  Transplantor, TransplantorType
+
 
 class TransplantJob:
+    transplantor_job_list = {} 
     @staticmethod
     def execute_transplant(source, destinations):
         #
@@ -22,9 +28,32 @@ class TransplantJob:
             dest.transplant_in()
             tay_x = dest
             print(tay_x.has_veg)
-    
-
         print('Transplanting', destinations)
+
+    @staticmethod 
+    def create_transplant_jobs(): 
+        if len(TransplantJob.transplantor_job_list) == 0:
+            TransplantJob.create_transplant_job(trans_type = TransplantorType.PHASE_3_4_TRANSPLANTOR)
+            TransplantJob.create_transplant_job(trans_type = TransplantorType.PHASE_3_4_TRANSPLANTOR)
+        return TransplantJob.transplantor_job_list
+
+    @staticmethod 
+    def create_transplant_job(trans_type = TransplantorType.PHASE_3_4_TRANSPLANTOR):
+        transplantor_found = None  
+        if trans_type == TransplantorType.PHASE_3_4_TRANSPLANTOR: 
+            transplantor_found = TransplantorFactory.get_transplator_3_4()
+            trans_job_1 = TransplantJob(id = 1)
+            trans_job_1.set_tansplantor(transplantor_found) 
+            TransplantJob.transplantor_job_list[1] = trans_job_1
+        elif  trans_type == TransplantorType.PHASE_4_5_TRANSPLANTOR:
+            transplantor_found = TransplantorFactory.get_transplator_4_5()
+            trans_job_2 = TransplantJob(id = 2)
+            trans_job_2.set_tansplantor(transplantor_found) 
+            TransplantJob.transplantor_job_list[2] = trans_job_2
+        if transplantor_found == None: 
+            raise Exception("Invalid transplantor")
+       
+
     
     def __init__(self, id = -1, type_name = 'Default'):
         self._source_tray = None
