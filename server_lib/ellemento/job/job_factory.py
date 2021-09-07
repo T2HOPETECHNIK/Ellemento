@@ -3,7 +3,7 @@ from ellemento.job.haverstor_to_buffer import HarvestorToBuffer
 from ellemento.job.transplant_job import TransplantJob
 from ellemento.job.transplantor_to_buffer_job import TransplantorToBufferJob
 from ellemento.job.buffer_to_transplantor_job import BufferToTransplantorJob 
-from ellemento.job.sow_to_tranplantor_job import SowerToTransplantor
+from ellemento.job.transplantor_to_sower import TransplantorToSower
 
 
 class JobFactory:
@@ -17,7 +17,7 @@ class JobFactory:
         # Create phase 1 -> phase 2 transfer jobs
         # create phase 2 -> phase 3 transfer jobs
         # create phase 3 -> 3 buffer jobs
-        # create 3 buffer -> transplator jobs
+        # create 3 buffer -> transplantor jobs
         # create transplating jobs 
         # create transplator to sower jobs 
         #*********************************************************
@@ -32,11 +32,13 @@ class JobFactory:
         TransferJob.plan_destination_phase3()
 
         #2 create buffer to transplantor 
+        BufferToTransplantorJob.create_jobs() 
 
         #3 create transplant jobs 
-
         TransplantJob.create_transplant_jobs()
 
+        #4 create transplantor to sower jobs 
+        TransplantorToSower.create_job()
 
         pass
 
@@ -52,6 +54,15 @@ class JobFactory:
         # From tansplantor to 4 buffer 
         # From 4 buffer to transplantor 
         #*********************************************************
+        #5 create jobs from transplantor to buffer 
+        TransplantorToBufferJob.create_jobs()
+
+        #6 from 4 out buffer to phase 4 shelf
+        TransferJob.plan_destination_phase4_out() 
+        
+        #6 from phase 4 shelf to 4 in buffer 
+        TransferJob.plan_destination_phase4_in() 
+        
         pass
 
 
@@ -65,6 +76,12 @@ class JobFactory:
         # From tansplantor to 5 buffer 
         # From 5 buffer to tansplantor 
         #*********************************************************
+        TransferJob.plan_destination_phase5_in()
+        
+        TransferJob.plan_destination_phase5_out()
+
+        HarvestorToBuffer.create_job() 
+        
         pass 
 
     

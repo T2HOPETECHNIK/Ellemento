@@ -17,6 +17,7 @@ class BufferStatus(Enum):
 
 
 class Buffer:
+    BUFFER_AREA = 3
     @staticmethod 
     def print():
         pass
@@ -43,11 +44,11 @@ class Buffer:
         if len(self.trays) >= 9: 
             raise Exception("Not able to load, buffer is full")
             return 
-        if len(self.trays) < 3:
+        if len(self.trays) < self.BUFFER_AREA:
             self.trays.append(tray) 
             return 
-        if len(self.trays) >= 3: 
-            self.trays.insert(2, tray)
+        if len(self.trays) >= self.BUFFER_AREA: 
+            self.trays.insert(self.BUFFER_AREA - 1, tray)
             return 
 
     def unload(self):

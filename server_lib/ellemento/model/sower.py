@@ -3,6 +3,7 @@
 # each shelf has 9 trays maximum 
 # Each shelf has light and water control 
 from enum import Enum
+from ellemento.model.tray_phase_1_3 import TrayPhase13
 
 class Sower:
     all_sowers = {}
@@ -15,13 +16,13 @@ class Sower:
     @staticmethod 
     def get_sower(): 
         if len(Sower.all_sowers) == 0: 
-            raise Exception("Not able to get sower")
+            Sower.create_sower()
         return Sower.all_sowers[1]
 
     def __init__(self, id = -1, type_name = "Default"):
         self._id = id
         self._type_name = type_name
-        self._tray = None
+        self._trays = []
         
     @property
     def id(self): 
@@ -29,7 +30,25 @@ class Sower:
 
     @id.setter
     def id(self, value):
-        self._id = value 
+        self._id = value
+
+    def load_tray(self, tray): 
+        if len(self._trays) == 0: 
+            self._trays.append(TrayPhase13(tray)) 
+        else: 
+            raise Exception("Sower is not empty, not able to load tray ") 
+
+    def sow(self): 
+        if len(self._trays) == 0: 
+            raise Exception("No tray is available at lower")
+        self._trays[0].sow() 
+    
+    def unload_tray(self): 
+        if len(self._trays) == 0: 
+            raise Exception("No tray is available at lower")
+        if not self._trays[0].has_veg: 
+            raise Exception("Sowing is not done ")
+        return self._trays.pop(0) 
 
     def __repr__(self):
         return "<object: %s, id:%d type:%s>" % (self.__class__.__name__, self._id, self._type_name)
