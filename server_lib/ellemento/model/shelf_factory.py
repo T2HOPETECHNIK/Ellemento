@@ -1,7 +1,7 @@
 from ellemento.model.shelf import Shelf, Phase, ShelfStatus
 
 class ShelfFactory:
-    tray_per_shelf = 9 
+    
 
     @staticmethod  
     def create_shelf(type_name = "default", id = -1):
