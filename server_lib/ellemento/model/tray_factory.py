@@ -20,32 +20,47 @@ class TrayFactory:
 
     @staticmethod 
     def create_phase123_trays(): 
+        if len(TrayFactory.all_phase123_trays) != 0: 
+            return TrayFactory.all_phase123_trays 
+
         phase_1_2_3_trays = constants.TOTAL_PHASE123_SHELF * 9 
         logger.info("Initializing phase 1, 2, 3, trays: %d", phase_1_2_3_trays)
         for i in range (1, phase_1_2_3_trays + 1): 
             TrayFactory.max_tray_id = TrayFactory.max_tray_id + 1 
             tray_new = TrayFactory.create_tray(id = TrayFactory.max_tray_id, type_name = "phase1-3")
+            # set traw 
+            tray_new.has_foam = True
+            tray_new.has_veg = True 
             TrayFactory.all_phase123_trays[tray_new.id] = tray_new
-        pass 
+        return TrayFactory.all_phase123_trays
 
     @staticmethod
-    def create_phase4_trays(): 
+    def create_phase4_trays():
+        if len(TrayFactory.all_phase_4_trays) != 0: 
+            return TrayFactory.all_phase_4_trays  
         phase_4_trays = constants.TOTAL_PHASE4_SHELF * 9
         logger.info("Initializing phase 4 trays : %d" , phase_4_trays)
         for i in range (1, phase_4_trays + 1): 
             TrayFactory.max_tray_id = TrayFactory.max_tray_id + 1 
             tray_new =  TrayFactory.create_tray(id = TrayFactory.max_tray_id + i, type_name = "phase4")
+            tray_new.has_foam = True
+            tray_new.has_veg = True 
             TrayFactory.all_phase_4_trays[tray_new.id] = tray_new
+        return TrayFactory.all_phase_4_trays  
 
     @staticmethod 
     def create_phase5_trays(): 
+        if len(TrayFactory.all_phase_5_trays) != 0: 
+            return TrayFactory.all_phase_5_trays  
         phase_5_trays = constants.TOTAL_PHASE5_SHELF * 9
         logger.info("Initializing phase 5 trays : %d" , phase_5_trays)
         for i in range (1, phase_5_trays + 1): 
             TrayFactory.max_tray_id = TrayFactory.max_tray_id + 1 
             tray_new =  TrayFactory.create_tray(id = TrayFactory.max_tray_id + i, type_name = "phase4")
+            tray_new.has_foam = True
+            tray_new.has_veg = True 
             TrayFactory.all_phase_5_trays[tray_new.id] = tray_new
-        pass 
+        return TrayFactory.all_phase_5_trays
 
     @staticmethod  
     def create_tray(type_name = "Unknown", id = -1):

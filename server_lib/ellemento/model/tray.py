@@ -150,6 +150,10 @@ class Tray:
     def has_foam(self):
         return self._has_foam
 
+    @has_foam.setter
+    def has_foam(self, value): 
+        self._has_foam = value 
+
     @ property
     def dimension(self): 
         return self._dimension
