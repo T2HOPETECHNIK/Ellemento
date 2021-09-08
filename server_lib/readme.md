@@ -14,7 +14,16 @@ To run the project
 python -m ellemento
 python -m ellemento.job
 ```
+To run the main file for plc
+```
+python -m ellemento.plc 
+``` 
 
+
+To run the main file for the logging 
+```
+python -m lib.logging 
+```
 # Test
 To test the project
 ```
