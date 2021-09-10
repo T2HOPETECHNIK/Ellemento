@@ -27,10 +27,12 @@ class TrayFactory:
         logger.info("Initializing phase 1, 2, 3, trays: %d", phase_1_2_3_trays)
         for i in range (1, phase_1_2_3_trays + 1): 
             TrayFactory.max_tray_id = TrayFactory.max_tray_id + 1 
+            
             tray_new = TrayFactory.create_tray(id = TrayFactory.max_tray_id, type_name = "phase1-3")
             # set traw 
             tray_new.has_foam = True
             tray_new.has_veg = True 
+            
             TrayFactory.all_phase123_trays[tray_new.id] = tray_new
         return TrayFactory.all_phase123_trays
 

@@ -3,6 +3,11 @@
 # each shelf has 9 trays maximum 
 # Each shelf has light and water control 
 from enum import Enum
+from ellemento.model import tray_factory
+
+from ellemento.model.rack_factory import RackFactory
+from ellemento.model.shelf_factory import ShelfFactory
+from ellemento.model.tray_factory import TrayFactory
 
 class FarmStatus(Enum):
     IDLE = 1            # clean and ready to use
@@ -19,6 +24,28 @@ class Farm:
     @staticmethod 
     def get_farm(id): 
         return Farm.all_farms[id]
+
+    @staticmethod
+    def create_farm():
+        farm = Farm(id = 1)
+        RackFactory.create_rack_A1()
+        RackFactory.create_rack_A2()
+        RackFactory.create_rack_B2()
+        ShelfFactory.create_phase1_shelves()
+        ShelfFactory.create_phase2_shelves() 
+        ShelfFactory.create_phase3_shelves() 
+        ShelfFactory.create_phase4_shelves()
+        ShelfFactory.create_phase5_shelves() 
+        TrayFactory.create_phase123_trays()
+        TrayFactory.create_phase4_trays()
+        TrayFactory.create_phase5_trays()
+        
+        for rack in RackFactory.all_B2_racks: 
+            farm.add_rack(rack)
+        for rack in RackFactory.all_A1_racks: 
+            farm.add_rack(rack)
+        for rack in RackFactory.all_A2_racks: 
+            farm.add_rack(rack)
 
     @staticmethod 
     def add_farm(farm_new): 

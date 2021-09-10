@@ -53,7 +53,7 @@ class Shelf:
     def __init__(self, id = -1, type_name='default', max_tray = 9):
         self._id = id
         self._status = ShelfStatus.IDLE
-        self._rack =  -1
+        self._rack =  None
         # each shelf must be 1 of the phase, [1, 2, 3, 4, 5]
         self._phase = Phase.NOT_PLANNED 
         self._max_tray = max_tray
@@ -105,10 +105,20 @@ class Shelf:
     @phase.setter
     def phase(self, value): 
         self._phase - value; 
+    
+
+    @property 
+    def rack(self):
+        return self._rack 
+
+    @rack.setter
+    def rack(self, rack):
+        self._rack = rack 
         
-    def add_tray(self, tray_id): 
-        if tray_id not in self._trays: 
-            self._trays[tray_id] = Tray.get_tray(tray_id)
+    def add_tray(self, tray): 
+        if tray.id not in self._trays: 
+            self._trays[tray.id] = Tray.get_tray(tray.id)
+        tray.location = self; 
         if len(self._trays) == 1: 
             self._status = ShelfStatus.LOADING
         

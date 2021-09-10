@@ -149,7 +149,9 @@ def test_tray_duration():
     pass
 
 if __name__ == '__main__':
-    test_tray_duration()
+
+    pass 
+    #test_tray_duration()
 
 
 

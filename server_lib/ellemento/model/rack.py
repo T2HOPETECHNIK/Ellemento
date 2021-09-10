@@ -36,7 +36,7 @@ class Rack:
         self._id = id
         self._type_name = type_name
         self._status = RackStatus.IDLE
-        self._shelves = {} 
+        self._shelves = [] 
         # Set tray status of the rack. if has, it shall be tray number 
         self._pumps = {}
         self._enable = True 
@@ -58,9 +58,10 @@ class Rack:
         self._enable = value   
 
     # Add a shelf to the rack 
-    def add_shelf(self, shelf_id): 
-        if shelf_id not in self._shelves: 
-            self._shelves[shelf_id] = Shelf.get_shelf(shelf_id)
+    def add_shelf(self, shelf): 
+        self._shelves.append(shelf)
+        shelf.rack(self)
+        
 
     # Add a pump control to the rack 
     def add_pumps(self, pump_id): 

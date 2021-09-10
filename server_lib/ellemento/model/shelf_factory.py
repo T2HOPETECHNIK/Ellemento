@@ -1,6 +1,9 @@
 from ellemento.model.shelf import Shelf, Phase, ShelfStatus
 from ellemento.model import constants 
 from ellemento.model.tray_factory import TrayFactory
+from ellemento.model.tray_phase_1_3 import TrayPhase13
+from ellemento.model.tray_phase_4 import TrayPhase4
+from ellemento.model.tray_phase_5 import TrayPhase5
 
 class ShelfFactory:
     max_shelf_id = 0 
@@ -9,41 +12,64 @@ class ShelfFactory:
     stage_3_shelves = {} #7 
     stage_4_shelves = {} #28 
     stage_5_shelves = {} #112   
+    max_stage_1_used = 0 
+    max_stage_2_used = 0 
+    max_stage_3_used = 0
+    max_stage_4_used = 0
+    max_stage_5_used = 0
 
     @staticmethod 
     def create_phase1_shelves(): 
         if len(ShelfFactory.stage_1_shelves) != 0: 
             return ShelfFactory.stage_1_shelves 
+        TrayFactory.create_phase123_trays()
         for index in range (1, constants.TOTAL_PHASE1_SHELF + 1): 
             ShelfFactory.max_shelf_id = ShelfFactory.max_shelf_id + 1
+
             shelf_new = ShelfFactory.create_shelf(id = ShelfFactory.max_shelf_id)
+              # hard coded to add tray 
+            start_idx = (ShelfFactory.max_shelf_id - 1) * 9
+            end_idx = ShelfFactory.max_shelf_id * 9 + 1
+            for idx in range (start_idx, end_idx): 
+                tray = TrayPhase13(TrayFactory.all_phase123_trays[idx])
+                shelf_new.add_tray(tray)
             ShelfFactory.stage_1_shelves[shelf_new.id] = shelf_new
         # to do add trays inside the shelf 
-        total_phase_1_tray = constants.TOTAL_PHASE1_SHELF * constants.TRAY_PER_SHELF
-        for index in range(1, total_phase_1_tray+1): 
-            pass 
-        trays = TrayFactory.create_phase123_trays()
+ 
+     
 
         return ShelfFactory.stage_1_shelves
 
     @staticmethod
-    def create_phase2_shelves():   
+    def create_phase2_shelves():
+        TrayFactory.create_phase123_trays()   
         if len(ShelfFactory.stage_2_shelves) != 0: 
             return ShelfFactory.stage_2_shelves
         for index in range (1, constants.TOTAL_PHASE2_SHELF + 1): 
             ShelfFactory.max_shelf_id = ShelfFactory.max_shelf_id + 1
             shelf_new = ShelfFactory.create_shelf(id = ShelfFactory.max_shelf_id)
+            start_idx = (ShelfFactory.max_shelf_id - 1) * 9
+            end_idx = ShelfFactory.max_shelf_id * 9 + 1
+            for idx in range (start_idx, end_idx): 
+                tray = TrayPhase13(TrayFactory.all_phase123_trays[idx])
+                shelf_new.add_tray(tray)
             ShelfFactory.stage_2_shelves[shelf_new.id] = shelf_new
         # to do add trays inside the shelf 
         return ShelfFactory.stage_2_shelves       
 
     @staticmethod 
     def create_phase3_shelves():
+        TrayFactory.create_phase123_trays()
         if len(ShelfFactory.stage_3_shelves) != 0: 
             return ShelfFactory.stage_3_shelves 
         for index in range (1, constants.TOTAL_PHASE3_SHELF + 1): 
             ShelfFactory.max_shelf_id = ShelfFactory.max_shelf_id + 1
             shelf_new = ShelfFactory.create_shelf(id = ShelfFactory.max_shelf_id)
+            start_idx = (ShelfFactory.max_shelf_id - 1) * 9
+            end_idx = ShelfFactory.max_shelf_id * 9 + 1
+            for idx in range (start_idx, end_idx): 
+                tray = TrayPhase13(TrayFactory.all_phase123_trays[idx])
+                shelf_new.add_tray(tray)
             ShelfFactory.stage_3_shelves[shelf_new.id] = shelf_new
         # to do add trays inside the shelf 
         return ShelfFactory.stage_3_shelves        
@@ -51,23 +77,35 @@ class ShelfFactory:
 
     @staticmethod
     def create_phase4_shelves():   
+        TrayFactory.create_phase4_trays()
         if len(ShelfFactory.stage_4_shelves) != 0:
             return ShelfFactory.stage_4_shelves 
         for index in range (1, constants.TOTAL_PHASE4_SHELF + 1): 
             ShelfFactory.max_shelf_id = ShelfFactory.max_shelf_id + 1
             shelf_new = ShelfFactory.create_shelf(id = ShelfFactory.max_shelf_id)
+            start_idx = (ShelfFactory.max_shelf_id - 1) * 9
+            end_idx = ShelfFactory.max_shelf_id * 9 + 1
+            for idx in range (start_idx, end_idx): 
+                tray = TrayPhase4(TrayFactory.all_phase_4_trays[idx])
+                shelf_new.add_tray(tray)
             ShelfFactory.stage_4_shelves[shelf_new.id] = shelf_new
         # to do add trays inside the shelf 
         return ShelfFactory.stage_4_shelves       
 
     @staticmethod
     def create_phase5_shelves():  
+        TrayFactory.create_phase5_trays()
         if len(ShelfFactory.stage_5_shelves) != 0:
             return ShelfFactory.stage_5_shelves 
         for index in range (1, constants.TOTAL_PHASE4_SHELF + 1): 
             ShelfFactory.max_shelf_id = ShelfFactory.max_shelf_id + 1
             shelf_new = ShelfFactory.create_shelf(id = ShelfFactory.max_shelf_id)
-            ShelfFactory.stage_4_shelves[shelf_new.id] = shelf_new
+            start_idx = (ShelfFactory.max_shelf_id - 1) * 9
+            end_idx = ShelfFactory.max_shelf_id * 9 + 1
+            for idx in range (start_idx, end_idx): 
+                tray = TrayPhase5(TrayFactory.all_phase_5_trays[idx])
+                shelf_new.add_tray(tray)
+            ShelfFactory.stage_5_shelves[shelf_new.id] = shelf_new
         if len(ShelfFactory.stage_5_shelves) != 0:
             return ShelfFactory.stage_5_shelves 
         # to do add trays inside the shelf                   
@@ -81,7 +119,6 @@ class ShelfFactory:
         # add water controls
         # add lights 
         Shelf.add_shelf(shelf_new)
-        
         return Shelf.get_shelf(id)
 
     @staticmethod 
