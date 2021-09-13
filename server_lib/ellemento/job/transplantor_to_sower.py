@@ -33,7 +33,6 @@ class TransplantorToSower:
         TransplantorToSower.transplantor_to_sower_jobs[id] = job 
         pass 
 
-
     def __init__(self, id = -1, type_name = 'Default'):
         self._source_buffer = None
         self._id = id 

@@ -117,7 +117,7 @@ class Shelf:
         
     def add_tray(self, tray): 
         if tray.id not in self._trays: 
-            self._trays[tray.id] = Tray.get_tray(tray.id)
+            self._trays[tray.id] = tray
         tray.location = self; 
         if len(self._trays) == 1: 
             self._status = ShelfStatus.LOADING

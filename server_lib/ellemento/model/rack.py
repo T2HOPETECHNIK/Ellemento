@@ -59,8 +59,10 @@ class Rack:
 
     # Add a shelf to the rack 
     def add_shelf(self, shelf): 
+        if shelf == None: 
+            raise Exception("Shelf is None")
         self._shelves.append(shelf)
-        shelf.rack(self)
+        shelf.rack = self
         
 
     # Add a pump control to the rack 

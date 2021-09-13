@@ -27,7 +27,6 @@ class TrayFactory:
         logger.info("Initializing phase 1, 2, 3, trays: %d", phase_1_2_3_trays)
         for i in range (1, phase_1_2_3_trays + 1): 
             TrayFactory.max_tray_id = TrayFactory.max_tray_id + 1 
-            
             tray_new = TrayFactory.create_tray(id = TrayFactory.max_tray_id, type_name = "phase1-3")
             # set traw 
             tray_new.has_foam = True
@@ -42,9 +41,10 @@ class TrayFactory:
             return TrayFactory.all_phase_4_trays  
         phase_4_trays = constants.TOTAL_PHASE4_SHELF * 9
         logger.info("Initializing phase 4 trays : %d" , phase_4_trays)
-        for i in range (1, phase_4_trays + 1): 
+        for i in range (1, phase_4_trays + 1):
+            print(TrayFactory.max_tray_id)
             TrayFactory.max_tray_id = TrayFactory.max_tray_id + 1 
-            tray_new =  TrayFactory.create_tray(id = TrayFactory.max_tray_id + i, type_name = "phase4")
+            tray_new =  TrayFactory.create_tray(id = TrayFactory.max_tray_id, type_name = "phase4")
             tray_new.has_foam = True
             tray_new.has_veg = True 
             TrayFactory.all_phase_4_trays[tray_new.id] = tray_new
@@ -58,7 +58,7 @@ class TrayFactory:
         logger.info("Initializing phase 5 trays : %d" , phase_5_trays)
         for i in range (1, phase_5_trays + 1): 
             TrayFactory.max_tray_id = TrayFactory.max_tray_id + 1 
-            tray_new =  TrayFactory.create_tray(id = TrayFactory.max_tray_id + i, type_name = "phase4")
+            tray_new =  TrayFactory.create_tray(id = TrayFactory.max_tray_id, type_name = "phase4")
             tray_new.has_foam = True
             tray_new.has_veg = True 
             TrayFactory.all_phase_5_trays[tray_new.id] = tray_new

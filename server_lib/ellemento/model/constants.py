@@ -13,8 +13,8 @@ B2_RACKS_PH3            = 2
 B2_RACKS_PH5            = 8
 
 NO_A1_RACKS             = 7
-A1_RACKS_PH4            = 8
-A1_RACKS_PH5            = 4
+A1_RACKS_PH4            = 4
+A1_RACKS_PH5            = 8
 
 NO_A2_RACKS             = 4
 A2_RACKS_PH5            = 12
