@@ -126,11 +126,14 @@ class TransferJob:
     def plan_destination_phase4_out(): 
         # only if the buffer still have places
         # 4 in buffer
-        lst_jobs_phase4 = TransferJob.all_transfer_jobs[Phase.PHASE4]
-        buffer_4_in = BufferFactory.get_buffer(BufferType.BUFFER_4_IN)
-        for job in lst_jobs_phase4:
-            job.set_destination(buffer_4_in) 
-        pass
+        if Phase.PHASE4 in TransferJob.all_transfer_jobs:  
+            lst_jobs_phase4 = TransferJob.all_transfer_jobs[Phase.PHASE4]
+            buffer_4_in = BufferFactory.get_buffer(BufferType.BUFFER_4_IN)
+            for job in lst_jobs_phase4:
+                job.set_destination(buffer_4_in) 
+        else: 
+            logger.info("Not haveing any phase 4 transfer jobs")
+
     
     @staticmethod
     def plan_destination_phase4_in(): 
@@ -157,25 +160,29 @@ class TransferJob:
     def plan_destination_phase5_out(): 
         # only if the buffer still have places
         # if harvester is ready ..
-        lst_jobs_phase5  = TransferJob.all_transfer_jobs[Phase.PHASE5]
-        harvestor = Harvestor.get_harvestor()
-        for job in lst_jobs_phase5:
-            job_transfer = TransferJob(job) 
-            job_transfer.set_destination(harvestor)
+        if Phase.PHASE5 in TransferJob.all_transfer_jobs:  
+            lst_jobs_phase5  = TransferJob.all_transfer_jobs[Phase.PHASE5]
+            harvestor = Harvestor.get_harvestor()
+            for job in lst_jobs_phase5:
+                job_transfer = TransferJob(job) 
+                job_transfer.set_destination(harvestor)
+        else: 
+            logger.info("Not any phase 5 jobs avilale")
         pass
 
     @staticmethod 
     def plan_destination_phase5_in(): 
         # only if the buffer still have places
         # 4 in buffer
-        lst_jobs_phase5 = TransferJob.all_transfer_jobs[Phase.PHASE5]
-        harvestor = Harvestor.get_harvestor() 
+        if Phase.PHASE5 in TransferJob.all_transfer_jobs:  
+            lst_jobs_phase5 = TransferJob.all_transfer_jobs[Phase.PHASE5]
+            harvestor = Harvestor.get_harvestor() 
 
-        # destincaiton shall be harvester 
-        for job in lst_jobs_phase5:
-            job.set_destination(harvestor) 
-        pass
-        
+            # destincaiton shall be harvester 
+            for job in lst_jobs_phase5:
+                job.set_destination(harvestor) 
+        else: 
+            logger.info("No any phase 5 transfer jobs")
 
     @classmethod 
     def check_destination_available():

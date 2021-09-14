@@ -37,7 +37,6 @@ class BufferToTransplantorJob:
         BufferToTransplantorJob.buffer_to_transplantor_jobs[id] = job 
         pass 
 
-
     def __init__(self, id = -1, type_name = 'Default'):
         self._source_buffer = None
         self._id = id 

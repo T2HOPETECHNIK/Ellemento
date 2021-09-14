@@ -52,7 +52,6 @@ class Sower:
             return False 
         # if tray has veg planted, then ready to unload from the sower to empty shelf 
         return self._trays[0].has_veg 
-        
 
     def unload_tray(self): 
         if len(self._trays) == 0: 

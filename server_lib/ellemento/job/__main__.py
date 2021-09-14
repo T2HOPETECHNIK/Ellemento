@@ -33,3 +33,5 @@ if __name__ == '__main__':
     FarmFactory.create_farm()
     BufferFactory.create_all_buffers()
     JobFactory.create_jobs_phase123()
+    JobFactory.create_jobs_phase4()
+    JobFactory.create_jobs_phase5()

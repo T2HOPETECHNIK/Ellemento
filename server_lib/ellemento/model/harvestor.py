@@ -52,4 +52,6 @@ class Harvestor:
 
     @staticmethod
     def get_harvestor():
+        if len (Harvestor.all_Harvestor) == 0:
+            Harvestor.create_harvestor()
         return Harvestor.all_Harvestor[1] 
