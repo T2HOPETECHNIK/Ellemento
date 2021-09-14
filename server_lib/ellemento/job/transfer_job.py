@@ -19,7 +19,8 @@ from ellemento.model.harvestor import Harvestor
 from ellemento.model.sower import Sower 
 
 
-logger = EllementoLogger.initialize_logger(); 
+logger = EllementoLogger.__call__().logger
+
 
 class TransferJob:
     all_transfer_jobs = {}
@@ -54,8 +55,14 @@ class TransferJob:
             shelf_ret = Shelf(lst_shelf_in[0])
             return shelf_ret 
         lst_shelf = ShelfFactory.get_empty_shelf_of_phase(phase = Phase.PHASE1)
+        if len(lst_shelf) == 0: 
+            logger.info("Not any empty shelf avilable")
+            return 
         ret_shelf = get_shelf_from_lst(lst_shelf)
-        sower_one = Sower.get_sower() 
+        sower_one = Sower(Sower.get_sower()) 
+        if not sower_one.ready_to_unload(): 
+            logger.info("Sower is not ready to unload - plants not ready")
+
         new_job = TransferJob()
         new_job.set_source(sower_one)
         new_job.set_destination(ret_shelf)
@@ -83,7 +90,7 @@ class TransferJob:
         # Get phase 2 emptry shelves 
         lst_shelf = ShelfFactory.get_empty_shelf_of_phase(phase = Phase.PHASE3)
         if len(lst_shelf) == 0: 
-            logger.info("No free tray available phase 1")
+            logger.info("No free tray available phase 2")
             return 
 
         lst_jobs_phase2 = TransferJob.all_transfer_jobs[Phase.PHASE2]
@@ -100,10 +107,16 @@ class TransferJob:
         # Only if the buffer still have places 
         #  3 in buffer 
         # 
-        lst_jobs_phase3 = TransferJob.all_transfer_jobs[Phase.PHASE3]
-        buffer_3_in = BufferFactory.get_buffer(BufferType.BUFFER_3_IN)
-        for job in lst_jobs_phase3:
-            job.set_destination(buffer_3_in)
+        if Phase.PHASE3 in TransferJob.all_transfer_jobs:
+            lst_jobs_phase3 = TransferJob.all_transfer_jobs[Phase.PHASE3]
+            buffer_3_in =  BufferFactory.get_buffer(BufferType.BUFFER_3_IN)
+            if buffer_3_in.has_tray(): 
+                for job in lst_jobs_phase3:
+                    job.set_destination(buffer_3_in)
+            else:
+                logger.info("3-in buffer not having any trays")
+        else: 
+            logger.info("Not having any phase 3 jobs")
         
         # If buffer is available 
 

@@ -34,7 +34,10 @@ class BufferFactory:
 
     @staticmethod 
     def get_buffer(type = BufferType.BUFFER_3_IN): 
-        return BufferFactory.all_buffers[type]
+        if type in BufferFactory.all_buffers: 
+            return BufferFactory.all_buffers[type]
+        else: 
+            return None 
 
     @staticmethod 
     def print():

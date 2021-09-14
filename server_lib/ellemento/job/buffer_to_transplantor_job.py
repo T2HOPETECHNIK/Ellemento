@@ -11,6 +11,9 @@ from ellemento.model.tray_phase_1_3 import TrayPhase13
 from ellemento.model.tray_phase_4 import TrayPhase4
 from ellemento.model.bufffer_factory import BufferFactory, BufferType
 from ellemento.model.transplantor_factory import TransplantorFactory
+from lib.logging.logger_initialiser import EllementoLogger
+
+logger = EllementoLogger.__call__().logger
 
 
 class BufferToTransplantorJob:
@@ -25,6 +28,9 @@ class BufferToTransplantorJob:
 
     @staticmethod 
     def create_job(id = -1, src_buffer = None, dst_tranplantor = None ): 
+        if src_buffer == None or dst_tranplantor == None: 
+            logger.info("Source or destination not ready")
+            return None 
         job = BufferToTransplantorJob(id = id)
         job.set_source(src_buffer)
         job.set_destination(dst_tranplantor)

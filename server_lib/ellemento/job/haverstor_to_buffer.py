@@ -3,7 +3,6 @@ from ellemento.model.tray import Tray
 from ellemento.model.tray_phase_1_3 import TrayPhase13
 from ellemento.model.tray_phase_4 import TrayPhase4
 from ellemento.model.harvestor import Harvestor 
-from ellemento.job.haverstor_to_buffer import HarvestorToBuffer
 from ellemento.model.bufffer_factory import BufferFactory, BufferType
 import threading
 import time

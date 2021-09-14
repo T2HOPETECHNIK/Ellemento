@@ -1,12 +1,16 @@
+from datetime import date
+import datetime
+
+from ellemento.model.farm_factory import FarmFactory
 from ellemento.job import job_main
 from ellemento.job import light_job
 from ellemento.model.light_control import LightControl
 from ellemento.job.transfer_job import TransferJob
 from ellemento.model.tray_factory import Tray 
-
 from ellemento.job.test1 import Foo
-from datetime import date
-import datetime
+from ellemento.model.bufffer_factory import BufferFactory
+from ellemento.job.job_factory import JobFactory 
+
 
 
 if __name__ == '__main__':
@@ -26,6 +30,6 @@ if __name__ == '__main__':
     today = date.today()
     now = datetime.datetime.now()
     print("Today's date:", now)
-
-
-    Foo.factory_build_object()
+    FarmFactory.create_farm()
+    BufferFactory.create_all_buffers()
+    JobFactory.create_jobs_phase123()

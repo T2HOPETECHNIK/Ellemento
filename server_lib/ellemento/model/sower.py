@@ -4,6 +4,9 @@
 # Each shelf has light and water control 
 from enum import Enum
 from ellemento.model.tray_phase_1_3 import TrayPhase13
+from lib.logging.logger_initialiser import EllementoLogger
+
+logger = EllementoLogger.__call__().logger
 
 class Sower:
     all_sowers = {}
@@ -43,6 +46,14 @@ class Sower:
             raise Exception("No tray is available at lower")
         self._trays[0].sow() 
     
+    def ready_to_unload(self): 
+        if len(self._trays) == 0: 
+            logger.info("No trays in the sower")
+            return False 
+        # if tray has veg planted, then ready to unload from the sower to empty shelf 
+        return self._trays[0].has_veg 
+        
+
     def unload_tray(self): 
         if len(self._trays) == 0: 
             raise Exception("No tray is available at lower")

@@ -5,6 +5,9 @@ from ellemento.job.transplantor_to_buffer_job import TransplantorToBufferJob
 from ellemento.job.buffer_to_transplantor_job import BufferToTransplantorJob 
 from ellemento.job.transplantor_to_sower import TransplantorToSower
 
+from lib.logging.logger_initialiser import EllementoLogger
+
+logger = EllementoLogger.__call__().logger
 
 class JobFactory:
     lst_all_trans_jobs = {}
@@ -26,19 +29,25 @@ class JobFactory:
         TransferJob.plan_destination_phase1_in() 
         # 1.2 from phase 1 shelf to phase 2 shelf  
         TransferJob.plan_destination_phase1()
+        logger.info("TransferJob.plan_destination_phase1 is done")
         # 1.3 from phase 2 shelf to phase 3 shelf 
         TransferJob.plan_destination_phase2()
+        logger.info("TransferJob.plan_destination_phase2 is done")
         # 1.4 from phase 3 shelf to buffer
         TransferJob.plan_destination_phase3()
-
+        logger.info("TransferJob.plan_destination_phase3 is done")
         #2 create buffer to transplantor 
         BufferToTransplantorJob.create_jobs() 
+        logger.info("Buffer to transplantor job is done")
 
         #3 create transplant jobs 
         TransplantJob.create_transplant_jobs()
+        logger.info("Transplant jobs is done")
 
         #4 create transplantor to sower jobs 
-        TransplantorToSower.create_job()
+        TransplantorToSower.create_jobs()
+
+        logger.info("Transplantor to sower job is done")
 
         pass
 

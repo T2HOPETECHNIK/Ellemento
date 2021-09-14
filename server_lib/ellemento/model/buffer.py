@@ -33,6 +33,9 @@ class Buffer:
     @id.setter
     def id(self, value):
         self._id = value
+    
+    def has_tray(self): 
+        return len(self.trays) > 0 
 
     def full(self): 
         return len(self.trays) == 9

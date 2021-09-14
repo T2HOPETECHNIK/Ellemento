@@ -27,14 +27,15 @@ class TransplantorFactory:
 
     @staticmethod  
     def create_transplantor(type_name = "default", id = -1):
-        shelf_new = None
+        trans_new = None
         #Tray.add_tray(tray_new)
-        shelf_new = Transplantor(id = id, type_name = type_name)
+        trans_new = Transplantor(id = id, type_name = type_name)
+        TransplantorFactory.all_transplantors[id] = trans_new
         # add trays, 
         # add water controls
         # add lights 
         
-        return Transplantor.get_shelf(id)
+        return trans_new
 
     @staticmethod 
     def print():

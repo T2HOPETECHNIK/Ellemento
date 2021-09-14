@@ -13,6 +13,9 @@ from ellemento.model.bufffer_factory import BufferFactory, BufferType
 from ellemento.model.transplantor_factory import TransplantorFactory
 from ellemento.model.sower import Sower
 
+from lib.logging.logger_initialiser import EllementoLogger
+
+logger = EllementoLogger.__call__().logger
 
 class TransplantorToSower:
     transplantor_to_sower_jobs = {}   
@@ -21,12 +24,14 @@ class TransplantorToSower:
         # create jobs for 
         transplantor_3_4 = TransplantorFactory.get_transplator_3_4() 
         sower = Sower.get_sower()
-      
-        TransplantorToSower.create_job(id = 1, src =transplantor_3_4, dst_tranplantor=sower)
+        TransplantorToSower.create_job(id = 1, src =transplantor_3_4, dst=sower)
         pass 
 
     @staticmethod 
     def create_job(id = -1, src = None, dst = None ): 
+        if src == None or dst == None: 
+            logger.info("Created job failed, sorce or destination is None")
+            return None 
         job = TransplantorToSower(id = id)
         job.set_source(src)
         job.set_destination(dst)
