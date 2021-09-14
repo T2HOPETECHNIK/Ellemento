@@ -1,3 +1,7 @@
+import threading
+import time
+from ellemento.job import transfer_job 
+
 from ellemento.job.transfer_job import TransferJob
 from ellemento.job.haverstor_to_buffer import HarvestorToBuffer 
 from ellemento.job.transplant_job import TransplantJob
@@ -7,10 +11,25 @@ from ellemento.job.transplantor_to_sower import TransplantorToSower
 
 from lib.logging.logger_initialiser import EllementoLogger
 
+
 logger = EllementoLogger.__call__().logger
 
 class JobFactory:
     lst_all_trans_jobs = {}
+
+    @staticmethod 
+    def create_thead_jobs(): 
+        transfer_job_1_in = threading.Thread(target=TransferJob.plan_destination_phase1_in)
+        transfer_job_1_in.start()  
+        transfer_job_phase_1 = threading.Thread(target = TransferJob.plan_destination_phase1)
+        transfer_job_phase_1.start()
+        transfer_job_phase_2 = threading.Thread(target = TransferJob.plan_destination_phase2)
+        transfer_job_phase_2.start()
+
+
+    @staticmethod 
+    def terminate_jobs(): 
+         TransferJob.terminate_job = True; 
     
     @staticmethod
     def create_jobs_phase123(type_name = "Default", id = -1):

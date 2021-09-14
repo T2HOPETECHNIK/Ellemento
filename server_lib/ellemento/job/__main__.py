@@ -1,5 +1,6 @@
 from datetime import date
 import datetime
+import time 
 
 from ellemento.model.farm_factory import FarmFactory
 from ellemento.job import job_main
@@ -25,13 +26,20 @@ if __name__ == '__main__':
     # print("Tansfer job")
     # tr_job.transfer(tray, "sower", "shelf_10")  
     # print(tray.location)
-
-
-    today = date.today()
-    now = datetime.datetime.now()
-    print("Today's date:", now)
-    FarmFactory.create_farm()
-    BufferFactory.create_all_buffers()
-    JobFactory.create_jobs_phase123()
-    JobFactory.create_jobs_phase4()
-    JobFactory.create_jobs_phase5()
+    try:
+        today = date.today()
+        now = datetime.datetime.now()
+        print("Today's date:", now)
+        FarmFactory.create_farm()
+        BufferFactory.create_all_buffers()
+        JobFactory.create_thead_jobs()
+        while True: 
+            time.sleep(10); 
+            print("... waiting")
+    except KeyboardInterrupt:
+        JobFactory.terminate_jobs()
+        print("Bye bye ellemento")
+        
+    #JobFactory.create_jobs_phase123()
+    #JobFactory.create_jobs_phase4()
+    #JobFactory.create_jobs_phase5()

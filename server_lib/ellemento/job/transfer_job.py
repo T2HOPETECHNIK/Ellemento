@@ -25,6 +25,7 @@ logger = EllementoLogger.__call__().logger
 class TransferJob:
     all_transfer_jobs = {}
     id_cur = 0
+    terminate_job = False 
 
     # check all trays in the 5 phases shelf to determine which ones needs to be transferred  
     @staticmethod 
@@ -54,53 +55,73 @@ class TransferJob:
                 lst_shelf_in.pop(0) 
             shelf_ret = Shelf(lst_shelf_in[0])
             return shelf_ret 
-        lst_shelf = ShelfFactory.get_empty_shelf_of_phase(phase = Phase.PHASE1)
-        if len(lst_shelf) == 0: 
-            logger.info("Not any empty shelf avilable")
+        try:
+            while not TransferJob.terminate_job:  
+                lst_shelf = ShelfFactory.get_empty_shelf_of_phase(phase = Phase.PHASE1)
+                if len(lst_shelf) == 0: 
+                    logger.info("Not any empty shelf avilable")
+                    time.sleep(2)
+                    continue 
+                ret_shelf = get_shelf_from_lst(lst_shelf)
+                sower_one = Sower(Sower.get_sower()) 
+                if not sower_one.ready_to_unload(): 
+                    time.sleep(2)
+                    logger.info("Sower is not ready to unload - plants not ready")
+                    continue 
+                new_job = TransferJob()
+                new_job.set_source(sower_one)
+                new_job.set_destination(ret_shelf)
+                time.sleep(2)
+        except:
+            logger.error("plan_destination_phase1_in gets error")
             return 
-        ret_shelf = get_shelf_from_lst(lst_shelf)
-        sower_one = Sower(Sower.get_sower()) 
-        if not sower_one.ready_to_unload(): 
-            logger.info("Sower is not ready to unload - plants not ready")
-
-        new_job = TransferJob()
-        new_job.set_source(sower_one)
-        new_job.set_destination(ret_shelf)
-        return new_job
-    
+       
     @staticmethod 
     def plan_destination_phase1():
         # Get phase 2 empty shelves 
-        lst_shelf = ShelfFactory.get_empty_shelf_of_phase(phase = Phase.PHASE2)
-        if len(lst_shelf) == 0: 
-            logger.info("No free tray available phase 1")
-            return 
+        try: 
+            while not TransferJob.terminate_job: 
+                lst_shelf = ShelfFactory.get_empty_shelf_of_phase(phase = Phase.PHASE2)
+                if len(lst_shelf) == 0: 
+                    logger.info("No free tray available phase 1")
+                    time.sleep(2)
+                    continue 
 
-        lst_jobs_phase1 = TransferJob.all_transfer_jobs[Phase.PHASE1]
-        nIndex = 0; 
-        while len(lst_shelf) != 0:
-            shelf = lst_shelf.pop() 
-            # choose 9 trays and put it inside the shelf 
-            for i in range (0, ShelfFactory.tray_per_shelf): 
-                lst_jobs_phase1[nIndex].set_destination(shelf)
-            nIndex = nIndex + ShelfFactory.tray_per_shelf 
+                lst_jobs_phase1 = TransferJob.all_transfer_jobs[Phase.PHASE1]
+                nIndex = 0; 
+                while len(lst_shelf) != 0:
+                    shelf = lst_shelf.pop() 
+                    # choose 9 trays and put it inside the shelf 
+                    for i in range (0, ShelfFactory.tray_per_shelf): 
+                        lst_jobs_phase1[nIndex].set_destination(shelf)
+                    nIndex = nIndex + ShelfFactory.tray_per_shelf 
+                time.sleep(2)
+        except: 
+            logger.error("Error occured in plan_destination_phase1")
 
     @staticmethod 
     def plan_destination_phase2():
         # Get phase 2 emptry shelves 
-        lst_shelf = ShelfFactory.get_empty_shelf_of_phase(phase = Phase.PHASE3)
-        if len(lst_shelf) == 0: 
-            logger.info("No free tray available phase 2")
-            return 
+        try: 
+            while not TransferJob.terminate_job: 
+                lst_shelf = ShelfFactory.get_empty_shelf_of_phase(phase = Phase.PHASE3)
+                if len(lst_shelf) == 0: 
+                    logger.info("No free tray available phase 2")
+                    time.sleep(2)
+                    continue
 
-        lst_jobs_phase2 = TransferJob.all_transfer_jobs[Phase.PHASE2]
-        nIndex = 0; 
-        while len(lst_shelf) != 0:
-            shelf = lst_shelf.pop() 
-            # choose 9 trays and put it inside the shelf 
-            for i in range (0, ShelfFactory.tray_per_shelf): 
-                lst_jobs_phase2[nIndex].set_destination(shelf)
-            nIndex = nIndex + ShelfFactory.tray_per_shelf 
+                lst_jobs_phase2 = TransferJob.all_transfer_jobs[Phase.PHASE2]
+                nIndex = 0; 
+                while len(lst_shelf) != 0:
+                    shelf = lst_shelf.pop() 
+                    # choose 9 trays and put it inside the shelf 
+                    for i in range (0, ShelfFactory.tray_per_shelf): 
+                        lst_jobs_phase2[nIndex].set_destination(shelf)
+                    nIndex = nIndex + ShelfFactory.tray_per_shelf 
+                time.sleep(2)
+        except: 
+            logger.error("Exception in plan_destination_phase2")
+
     
     @staticmethod 
     def plan_destination_phase3():
@@ -167,7 +188,7 @@ class TransferJob:
                 job_transfer = TransferJob(job) 
                 job_transfer.set_destination(harvestor)
         else: 
-            logger.info("Not any phase 5 jobs avilale")
+            logger.info("Not any phase 5 jobs availale")
         pass
 
     @staticmethod 

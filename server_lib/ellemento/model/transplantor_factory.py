@@ -1,6 +1,7 @@
 from os import stat
 
 from ellemento.model.transplantor import Transplantor, TransplantorType
+from lib.logging.logger_initialiser import EllementoLogger
 
 class TransplantorFactory:
     all_transplantors = {}
@@ -33,7 +34,7 @@ class TransplantorFactory:
         TransplantorFactory.all_transplantors[id] = trans_new
         # add trays, 
         # add water controls
-        # add lights 
+        # add lights Z
         
         return trans_new
 
