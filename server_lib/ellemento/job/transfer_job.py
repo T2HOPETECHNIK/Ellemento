@@ -128,17 +128,21 @@ class TransferJob:
         # Only if the buffer still have places 
         #  3 in buffer 
         # 
-        if Phase.PHASE3 in TransferJob.all_transfer_jobs:
-            lst_jobs_phase3 = TransferJob.all_transfer_jobs[Phase.PHASE3]
-            buffer_3_in =  BufferFactory.get_buffer(BufferType.BUFFER_3_IN)
-            if buffer_3_in.has_tray(): 
-                for job in lst_jobs_phase3:
-                    job.set_destination(buffer_3_in)
-            else:
-                logger.info("3-in buffer not having any trays")
-        else: 
-            logger.info("Not having any phase 3 jobs")
-        
+        try: 
+            while not TransferJob.terminate_job: 
+                if Phase.PHASE3 in TransferJob.all_transfer_jobs:
+                    lst_jobs_phase3 = TransferJob.all_transfer_jobs[Phase.PHASE3]
+                    buffer_3_in =  BufferFactory.get_buffer(BufferType.BUFFER_3_IN)
+                    if buffer_3_in.has_tray(): 
+                        for job in lst_jobs_phase3:
+                            job.set_destination(buffer_3_in)
+                    else:
+                        logger.info("3-in buffer not having any trays")
+                else: 
+                    logger.info("Not having any phase 3 jobs")
+                time.sleep(2)
+        except: 
+            logger.error("Get exception at plan_destination_phase3")
         # If buffer is available 
 
         pass 

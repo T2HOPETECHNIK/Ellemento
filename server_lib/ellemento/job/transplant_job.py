@@ -1,8 +1,10 @@
+import logging
 import threading
 import time
 from multiprocessing import Process
 import os
 from ellemento.model import transplantor_factory
+from ellemento.model import transplantor
 
 # Interfacing with ASRS to execute transfer job
 from ellemento.model.tray import Tray
@@ -10,10 +12,15 @@ from ellemento.model.tray_phase_1_3 import TrayPhase13
 from ellemento.model.tray_phase_4 import TrayPhase4
 from ellemento.model.transplantor_factory import TransplantorFactory
 from ellemento.model.transplantor import  Transplantor, TransplantorType
+from lib.logging.logger_initialiser import EllementoLogger
+
+
+logger = EllementoLogger.__call__().logger
 
 
 class TransplantJob:
-    transplantor_job_list = {} 
+    transplant_job_list = []
+    terminate_job = False 
     @staticmethod
     def execute_transplant(source, destinations):
         #
@@ -32,24 +39,33 @@ class TransplantJob:
 
     @staticmethod 
     def create_transplant_jobs(): 
-        if len(TransplantJob.transplantor_job_list) == 0:
-            TransplantJob.create_transplant_job(trans_type = TransplantorType.PHASE_3_4_TRANSPLANTOR)
-            TransplantJob.create_transplant_job(trans_type = TransplantorType.PHASE_3_4_TRANSPLANTOR)
-        return TransplantJob.transplantor_job_list
+        while not TransplantJob.terminate_job: 
+            if len(TransplantJob.transplant_job_list) == 0:
+                TransplantJob.create_transplant_job(trans_type = TransplantorType.PHASE_3_4_TRANSPLANTOR)
+            else: 
+                logging.info("Already have 1 tranplant job ongoing")
+            time.sleep(2)
+            return 
 
     @staticmethod 
     def create_transplant_job(trans_type = TransplantorType.PHASE_3_4_TRANSPLANTOR):
         transplantor_found = None  
         if trans_type == TransplantorType.PHASE_3_4_TRANSPLANTOR: 
-            transplantor_found = TransplantorFactory.get_transplator_3_4()
-            trans_job_1 = TransplantJob(id = 1)
-            trans_job_1.set_tansplantor(transplantor_found) 
-            TransplantJob.transplantor_job_list[1] = trans_job_1
+            transplantor_found = Transplantor(TransplantorFactory.get_transplator_3_4()) 
+            if transplantor_found.ready_to_transplant(): 
+                trans_job_1 = TransplantJob(id = 1)
+                trans_job_1.set_tansplantor(transplantor_found) 
+                TransplantJob.transplant_job_list.append(trans_job_1) 
+            else: 
+                logger.info("Tranplantor is not ready")
         elif  trans_type == TransplantorType.PHASE_4_5_TRANSPLANTOR:
             transplantor_found = TransplantorFactory.get_transplator_4_5()
-            trans_job_2 = TransplantJob(id = 2)
-            trans_job_2.set_tansplantor(transplantor_found) 
-            TransplantJob.transplantor_job_list[2] = trans_job_2
+            if transplantor_found.ready_to_transplant(): 
+                trans_job_2 = TransplantJob(id = 2)
+                trans_job_2.set_tansplantor(transplantor_found) 
+                TransplantJob.transplantor_job_list[2] = trans_job_2
+            else: 
+                logger.info("PHASE_4_5_TRANSPLANTOR is not ready")
         if transplantor_found == None: 
             raise Exception("Invalid transplantor")
        
@@ -57,7 +73,7 @@ class TransplantJob:
     
     def __init__(self, id = -1, type_name = 'Default'):
         self._source_tray = None
-        self._destination_trays = [] 
+        self._destination_tray = None
         self._transplantor = None 
         pass
 
@@ -67,8 +83,10 @@ class TransplantJob:
     def set_source_tray(self, tray):
         self._source_tray = tray 
 
-    def set_destination_tray(self, trays): 
-        self._destination_trays = trays 
+    def set_destination_tray(self, tray): 
+        self._destination_trays = tray 
+
+
 
     def transplant(self): 
         if self._source_tray == None:

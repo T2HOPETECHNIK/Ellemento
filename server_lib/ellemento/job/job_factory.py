@@ -19,17 +19,29 @@ class JobFactory:
 
     @staticmethod 
     def create_thead_jobs(): 
+        # 1. xxx 
         transfer_job_1_in = threading.Thread(target=TransferJob.plan_destination_phase1_in)
         transfer_job_1_in.start()  
         transfer_job_phase_1 = threading.Thread(target = TransferJob.plan_destination_phase1)
         transfer_job_phase_1.start()
         transfer_job_phase_2 = threading.Thread(target = TransferJob.plan_destination_phase2)
         transfer_job_phase_2.start()
+        transfer_job_phase_3 = threading.Thread(target = TransferJob.plan_destination_phase3)
+        transfer_job_phase_3.start()
 
+        buffer_to_transplantor_job = threading.Thread(target = BufferToTransplantorJob.create_jobs)
+        buffer_to_transplantor_job.start() 
+
+        transplant_jobs = threading.Thread(target = TransplantJob.create_transplant_jobs)
+        transplant_jobs.start()
+
+        # transplantor_to_sower_job = threading.Thread(target = TransplantorToSower.create_jobs)
+        # transplantor_to_sower_job.start() 
 
     @staticmethod 
     def terminate_jobs(): 
-         TransferJob.terminate_job = True; 
+         TransferJob.terminate_job = True
+         BufferToTransplantorJob.terminate_job = True 
     
     @staticmethod
     def create_jobs_phase123(type_name = "Default", id = -1):
