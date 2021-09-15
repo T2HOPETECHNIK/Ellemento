@@ -7,13 +7,13 @@ class TransplantorFactory:
     all_transplantors = {}
 
     @staticmethod 
-    def get_transplator_3_4(): 
+    def get_transplantor_3_4(): 
         if len(TransplantorFactory.all_transplantors) == 0: 
             TransplantorFactory.create_transplantors()
         return TransplantorFactory.all_transplantors[1] 
      
     @staticmethod 
-    def get_transplator_4_5(): 
+    def get_transplantor_4_5(): 
         if len(TransplantorFactory.all_transplantors) == 0: 
             TransplantorFactory.create_transplantors()
         return TransplantorFactory.all_transplantors[2] 
@@ -31,7 +31,6 @@ class TransplantorFactory:
         trans_new = None
         #Tray.add_tray(tray_new)
         trans_new = Transplantor(id = id, type_name = type_name)
-        TransplantorFactory.all_transplantors[id] = trans_new
         # add trays, 
         # add water controls
         # add lights Z

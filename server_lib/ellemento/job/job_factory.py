@@ -19,7 +19,7 @@ class JobFactory:
 
     @staticmethod 
     def create_thead_jobs(): 
-        # 1. xxx 
+        # 1. Phase 1 jobs threads 
         transfer_job_1_in = threading.Thread(target=TransferJob.plan_destination_phase1_in)
         transfer_job_1_in.start()  
         transfer_job_phase_1 = threading.Thread(target = TransferJob.plan_destination_phase1)
@@ -29,19 +29,48 @@ class JobFactory:
         transfer_job_phase_3 = threading.Thread(target = TransferJob.plan_destination_phase3)
         transfer_job_phase_3.start()
 
-        buffer_to_transplantor_job = threading.Thread(target = BufferToTransplantorJob.create_jobs)
-        buffer_to_transplantor_job.start() 
+        buffer_2_transplantor_job = threading.Thread(target = BufferToTransplantorJob.create_jobs)
+        buffer_2_transplantor_job.start() 
 
         transplant_jobs = threading.Thread(target = TransplantJob.create_transplant_jobs)
         transplant_jobs.start()
 
-        # transplantor_to_sower_job = threading.Thread(target = TransplantorToSower.create_jobs)
-        # transplantor_to_sower_job.start() 
+        transplantor_2_sower_job = threading.Thread(target = TransplantorToSower.create_jobs)
+        transplantor_2_sower_job.start() 
+
+        #4. Phase 4 jobs threads 
+        # TransplantorToBufferJob.create_jobs()
+        transplantor_2_buffer_job = threading.Thread(target = TransplantorToBufferJob.create_jobs)
+        transplantor_2_buffer_job.start() 
+        # from 4 out buffer to phase 4 shelf
+        transfer_job_phase_4_out = threading.Thread(target= TransferJob.plan_destination_phase4_out)
+        transfer_job_phase_4_out.start()
+        # TransferJob.plan_destination_phase4_out() 
+        
+        # from phase 4 shelf to 4 in buffer 
+        transfer_job_phase_4_in = threading.Thread(target=TransferJob.plan_destination_phase4_in)
+        transfer_job_phase_4_in.start()
+        # TransferJob.plan_destination_phase4_in() 
+
+        #5. Phase 5 jobs threads
+        transfer_job_destination_phase5_in = threading.Thread(target=TransferJob.plan_destination_phase5_in)
+        transfer_job_destination_phase5_in.start()
+        
+        transfer_job_destination_phase5_out = threading.Thread(target=TransferJob.plan_destination_phase5_out)
+        transfer_job_destination_phase5_out.start()
+
+        #TransferJob.plan_destination_phase5_out()
+
+        #HarvestorToBuffer.create_job() 
+        
 
     @staticmethod 
     def terminate_jobs(): 
-         TransferJob.terminate_job = True
-         BufferToTransplantorJob.terminate_job = True 
+        TransferJob.terminate_job = True
+        BufferToTransplantorJob.terminate_job = True 
+        TransplantJob.terminate_job = True 
+        TransplantorToSower.termninate_job = True 
+        TransplantorToBufferJob.terminate_job = True 
     
     @staticmethod
     def create_jobs_phase123(type_name = "Default", id = -1):
@@ -82,7 +111,7 @@ class JobFactory:
 
         pass
 
-
+    @staticmethod
     def create_jobs_phase4(): 
         #*********************************************************
         # *** Create jobs for phase 4 loop 
@@ -105,7 +134,7 @@ class JobFactory:
         
         pass
 
-
+    @staticmethod
     def create_jobs_phase5(): 
         #*********************************************************
         # *** Create jobs for phase 5 loop 

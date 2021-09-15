@@ -53,9 +53,14 @@ class Sower:
         # if tray has veg planted, then ready to unload from the sower to empty shelf 
         return self._trays[0].has_veg 
 
+    def ready_to_load(self): 
+        if len(self._trays) == 0: 
+            return True 
+        return False
+
     def unload_tray(self): 
         if len(self._trays) == 0: 
-            raise Exception("No tray is available at lower")
+            raise Exception("No tray is available at sower")
         if not self._trays[0].has_veg: 
             raise Exception("Sowing is not done ")
         return self._trays.pop(0) 

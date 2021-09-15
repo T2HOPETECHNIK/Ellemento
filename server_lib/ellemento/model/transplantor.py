@@ -51,7 +51,11 @@ class Transplantor:
         return True 
 
     def ready_to_move_out_src_tray(self): 
-        return not self._tray_source.has_veg == False
+        if self._tray_source == None: 
+            return False 
+        if self._tray_source.has_veg == False: 
+            return True
+        return False  
 
     def ready_to_move_in_dst_tray(self): 
         if self._tray_destination == None: 
@@ -59,6 +63,8 @@ class Transplantor:
         return False 
 
     def ready_to_move_out_dst_tray(self): 
+        if self._tray_destination == None: 
+            return False
         return self._tray_destination.has_veg 
 
     def remove_src_tray(self): 

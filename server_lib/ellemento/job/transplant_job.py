@@ -51,7 +51,7 @@ class TransplantJob:
     def create_transplant_job(trans_type = TransplantorType.PHASE_3_4_TRANSPLANTOR):
         transplantor_found = None  
         if trans_type == TransplantorType.PHASE_3_4_TRANSPLANTOR: 
-            transplantor_found = Transplantor(TransplantorFactory.get_transplator_3_4()) 
+            transplantor_found = Transplantor(TransplantorFactory.get_transplantor_3_4()) 
             if transplantor_found.ready_to_transplant(): 
                 trans_job_1 = TransplantJob(id = 1)
                 trans_job_1.set_tansplantor(transplantor_found) 
@@ -85,8 +85,6 @@ class TransplantJob:
 
     def set_destination_tray(self, tray): 
         self._destination_trays = tray 
-
-
 
     def transplant(self): 
         if self._source_tray == None:

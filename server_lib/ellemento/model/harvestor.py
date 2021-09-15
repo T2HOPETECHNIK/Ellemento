@@ -30,6 +30,17 @@ class Harvestor:
         if len(self._trays == 0): 
             raise Exception("No trays available for unloading")  
         return self._trays.pop()   
+    
+    def ready_to_load(self):
+        if len(self._trays) == 0: 
+            return True
+        return False  
+
+    def ready_to_unload(self): 
+        tray_ph5 = TrayPhase5(self._trays(-1))
+        if tray_ph5.has_veg == False: 
+            return True 
+        return False  
 
     def harvest(self): 
         tray_ph5 = TrayPhase5(self._trays(-1))

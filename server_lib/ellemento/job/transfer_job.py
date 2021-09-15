@@ -1,11 +1,12 @@
 # Interfacing with ASRS to execute transfer job
+from ellemento.job.transplant_job import TransplantJob
+from ellemento.model.transplantor_factory import TransplantorFactory
 import time
 from multiprocessing import Process
 import os
 import threading
-from ellemento.model import bufffer_factory
 
-
+from ellemento.model import bufffer_factory, transplantor
 from lib.logging.logger_initialiser import EllementoLogger
 import ellemento.model.tray 
 from ellemento.model.shelf import Phase, ShelfStatus
@@ -16,11 +17,10 @@ from ellemento.model.tray import Tray
 from ellemento.model.tray import TrayStatus, TransferStatus
 from ellemento.model.bufffer_factory import BufferFactory, BufferType
 from ellemento.model.harvestor import Harvestor
-from ellemento.model.sower import Sower 
-
+from ellemento.model.sower import Sower
+from ellemento.model.buffer import Buffer 
 
 logger = EllementoLogger.__call__().logger
-
 
 class TransferJob:
     all_transfer_jobs = {}
@@ -151,15 +151,21 @@ class TransferJob:
     def plan_destination_phase4_out(): 
         # only if the buffer still have places
         # 4 in buffer
-        if Phase.PHASE4 in TransferJob.all_transfer_jobs:  
-            lst_jobs_phase4 = TransferJob.all_transfer_jobs[Phase.PHASE4]
-            buffer_4_in = BufferFactory.get_buffer(BufferType.BUFFER_4_IN)
-            for job in lst_jobs_phase4:
-                job.set_destination(buffer_4_in) 
-        else: 
-            logger.info("Not haveing any phase 4 transfer jobs")
+        while not TransferJob.terminate_job: 
+            buffer_4_in = Buffer(BufferFactory.get_buffer(BufferType.BUFFER_4_IN))
+            if buffer_4_in.full():
+                logger.info("Destination buffer is full")
+                time.sleep(2)
+                continue 
 
-    
+            if Phase.PHASE4 in TransferJob.all_transfer_jobs:  
+                lst_jobs_phase4 = TransferJob.all_transfer_jobs[Phase.PHASE4]
+                for job in lst_jobs_phase4:
+                    job.set_destination(buffer_4_in) 
+            else: 
+                logger.info("Not haveing any phase 4 transfer jobs")
+            time.sleep(2)
+
     @staticmethod
     def plan_destination_phase4_in(): 
         def get_shelf_from_lst(lst_shelf_in): 
@@ -169,45 +175,67 @@ class TransferJob:
                 lst_shelf_in.pop(0) 
             shelf_ret = Shelf(lst_shelf_in[0])
             return shelf_ret 
-            
-        # if buffer 4-out has something, then can plan transfer 
-        buffer_4_out =  BufferFactory.get_buffer(BufferType.BUFFER_4_OUT)
-        lst_shelf = ShelfFactory.get_empty_shelf_of_phase(phase = Phase.PHASE4)
-        if not buffer_4_out.empty(): 
-            new_job = TransferJob()
-            new_job.set_source(buffer_4_out)
-            shelf_dst = get_shelf_from_lst(lst_shelf)
-            new_job.set_destination(shelf_dst)
-            TransferJob.all_transfer_jobs[Phase.TRANSPLANT_2_PHASE4].append(new_job)
 
+        while not TransferJob.terminate_job: 
+            # if buffer 4-out has something, then can plan transfer 
+            buffer_4_out = Buffer (BufferFactory.get_buffer(BufferType.BUFFER_4_OUT))
+            lst_shelf = ShelfFactory.get_empty_shelf_of_phase(phase = Phase.PHASE4)
+            if len(lst_shelf) == 0: 
+                logger.info("Not any empty shelf in phase 4")
+                time.sleep(2)
+                continue 
+            if not buffer_4_out.empty(): 
+                new_job = TransferJob()
+                new_job.set_source(buffer_4_out)
+                shelf_dst = get_shelf_from_lst(lst_shelf)
+                new_job.set_destination(shelf_dst)
+                TransferJob.all_transfer_jobs[Phase.TRANSPLANT_2_PHASE4].append(new_job)
+            else: 
+                logger.info("Buffer 4 has no trays")
+            time.sleep(2)
 
     @staticmethod
-    def plan_destination_phase5_out(): 
-        # only if the buffer still have places
-        # if harvester is ready ..
-        if Phase.PHASE5 in TransferJob.all_transfer_jobs:  
-            lst_jobs_phase5  = TransferJob.all_transfer_jobs[Phase.PHASE5]
-            harvestor = Harvestor.get_harvestor()
-            for job in lst_jobs_phase5:
-                job_transfer = TransferJob(job) 
-                job_transfer.set_destination(harvestor)
-        else: 
-            logger.info("Not any phase 5 jobs availale")
-        pass
-
-    @staticmethod 
     def plan_destination_phase5_in(): 
         # only if the buffer still have places
-        # 4 in buffer
-        if Phase.PHASE5 in TransferJob.all_transfer_jobs:  
-            lst_jobs_phase5 = TransferJob.all_transfer_jobs[Phase.PHASE5]
-            harvestor = Harvestor.get_harvestor() 
+        # if harvester is ready ..
+        while not TransferJob.terminate_job: 
+            transplantor_4_5 =  transplantor.Transplantor( TransplantorFactory.get_transplantor_4_5())
+            lst_shelf = ShelfFactory.get_empty_shelf_of_phase(phase = Phase.PHASE5)
+            if not transplantor_4_5.ready_to_move_out_dst_tray():
+                logger.info("Transplantor is not ready")
+                time.sleep(2)
+                continue 
+            
+            shelf = lst_shelf.pop()
+            if len(lst_shelf) == 0: 
+                logger.info("Phase 5 shelf is not ready")
+                time.sleep(2)
+                continue 
 
-            # destincaiton shall be harvester 
-            for job in lst_jobs_phase5:
+            new_job = TransferJob()
+            new_job.set_source(transplantor_4_5)
+            new_job.set_destination(lst_shelf)
+            TransferJob.all_transfer_jobs[Phase.TRANSPLANT_2_PHASE5].append(new_job)
+            pass
+
+    @staticmethod 
+    def plan_destination_phase5_out(): 
+        # only if the buffer still have places
+        # 4 in buffer
+        while not TransferJob.terminate_job: 
+            if Phase.PHASE5 in TransferJob.all_transfer_jobs:  
+                lst_jobs_phase5 = TransferJob.all_transfer_jobs[Phase.PHASE5]
+                harvestor = Harvestor(Harvestor.get_harvestor()) 
+                if not harvestor.ready_to_load(): 
+                    logger.info("Harvestor is not ready")
+                    time.sleep(2)
+                    continue
+                # destincaiton shall be harvester
+                job = lst_jobs_phase5.pop(0)
                 job.set_destination(harvestor) 
-        else: 
-            logger.info("No any phase 5 transfer jobs")
+            else: 
+                logger.info("No any phase 5 transfer jobs")
+            time.sleep(2)
 
     @classmethod 
     def check_destination_available():

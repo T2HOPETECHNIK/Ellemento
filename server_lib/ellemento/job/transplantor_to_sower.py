@@ -12,6 +12,7 @@ from ellemento.model.tray_phase_4 import TrayPhase4
 from ellemento.model.bufffer_factory import BufferFactory, BufferType
 from ellemento.model.transplantor_factory import TransplantorFactory
 from ellemento.model.sower import Sower
+from ellemento.model.transplantor import Transplantor 
 
 from lib.logging.logger_initialiser import EllementoLogger
 
@@ -19,12 +20,23 @@ logger = EllementoLogger.__call__().logger
 
 class TransplantorToSower:
     transplantor_to_sower_jobs = {}   
+    termninate_job = False 
     @staticmethod 
     def create_jobs():
         # create jobs for 
-        transplantor_3_4 = TransplantorFactory.get_transplator_3_4() 
-        sower = Sower.get_sower()
-        TransplantorToSower.create_job(id = 1, src =transplantor_3_4, dst=sower)
+        while not TransplantorToSower.termninate_job: 
+            transplantor_3_4 = Transplantor(TransplantorFactory.get_transplantor_3_4()) 
+            sower = Sower(Sower.get_sower())
+            if not transplantor_3_4.ready_to_move_out_src_tray():
+                logger.info("Not able to move out since transplantor 3-4 not ready")
+                time.sleep(2)
+                continue  
+            if not sower.ready_to_unload():
+                logger.info("Not able to load since sower is not empty")
+                time.sleep(2)
+                continue 
+            TransplantorToSower.create_job(id = 1, src =transplantor_3_4, dst=sower)
+            time.sleep(2) 
         pass 
 
     @staticmethod 
