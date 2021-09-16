@@ -1,5 +1,7 @@
 from enum import Enum
 import datetime
+import time
+from ellemento.model import tray 
 
 from ellemento.model.tray import Tray, TransferStatus, TrayStatus
 from ellemento.model.tray_phase_1_3 import TrayPhase13
@@ -13,10 +15,10 @@ logger = EllementoLogger.__call__().logger;
 
 class TrayFactory:
     max_tray_id = 0
+    terminate_job = False 
     all_phase123_trays  = {}
     all_phase_4_trays   = {}
     all_phase_5_trays   = {}
-
 
     @staticmethod 
     def create_phase123_trays(): 
@@ -83,37 +85,42 @@ class TrayFactory:
         Tray.print() 
 
     @staticmethod
-    def check_duration(tray_list, status = TrayStatus.PHASE1, duration = 3 , unit = 'day'):
-        ret_list = [] 
-        print (unit)
-        for tray_idx in tray_list:
-            time_now    = datetime.datetime.now() 
-            diff        = time_now -  tray_list[tray_idx].status_time 
-            day         = diff.days 
-            hour        = diff.seconds / 3600 
-            minute      = diff.seconds / 60
-            
-            if (tray_list[tray_idx].status == status and tray_list[tray_idx].TransferStatus != TransferStatus.READY_TO_TRANSFER):
-                if unit == 'day': 
-                    if day > duration: 
-                        tray_list[tray_idx].set_transfer_status(TransferStatus.READY_TO_TRANSFER)
-                        ret_list.append(tray_list[tray_idx])
-                elif unit == 'hour': 
-                    hour = day * 24 + hour
-                    if hour > duration: 
-                        tray_list[tray_idx].set_transfer_status(TransferStatus.READY_TO_TRANSFER)
-                        ret_list.append(tray_list[tray_idx])
-                elif unit == 'minute': 
-                    minute = day * 24 * 60 + hour * 60 + minute
-                    if minute > duration: 
-                        tray_list[tray_idx].set_transfer_status(TransferStatus.READY_TO_TRANSFER)
-                        ret_list.append(tray_list[tray_idx])
-                elif unit == 'second': 
-                    second = diff.seconds 
-                    print("..............")
-                    if second > duration: 
-                        tray_list[tray_idx].set_transfer_status(TransferStatus.READY_TO_TRANSFER)
-                        ret_list.append(tray_list[tray_idx])
-                else:  
-                    raise Exception("Invalid unit provided")
-        return ret_list 
+    def check_duration(trays = [], status = TrayStatus.PHASE1, duration = 3 , unit = 'day'):
+        while not TrayFactory.terminate_job: 
+            ret_list = [] 
+            logger.info("Checking growing status %s", status)
+
+            for tray_idx in trays:
+                time_now    = datetime.datetime.now() 
+                diff        = time_now -  trays[tray_idx].status_time 
+                day         = diff.days 
+                hour        = diff.seconds / 3600 
+                minute      = diff.seconds / 60
+                #print(trays[tray_idx].status)
+                if (trays[tray_idx].status == status and trays[tray_idx].transfer_status != TransferStatus.READY_TO_TRANSFER):
+                    if unit == 'day': 
+                        if day > duration: 
+                            print("Found xxx")
+                            trays[tray_idx].set_transfer_status(TransferStatus.READY_TO_TRANSFER)
+                            ret_list.append(trays[tray_idx])
+                    elif unit == 'hour': 
+                        hour = day * 24 + hour
+                        if hour > duration: 
+                            print("Found xxx")
+                            trays[tray_idx].set_transfer_status(TransferStatus.READY_TO_TRANSFER)
+                            ret_list.append(trays[tray_idx])
+                    elif unit == 'minute': 
+                        minute = day * 24 * 60 + hour * 60 + minute
+                        if minute > duration: 
+                            print("Found xxx")
+                            trays[tray_idx].set_transfer_status(TransferStatus.READY_TO_TRANSFER)
+                            ret_list.append(trays[tray_idx])
+                    elif unit == 'second': 
+                        second = diff.seconds 
+                        if second > duration:
+                            logger.info("Greater than duration %d", duration) 
+                            trays[tray_idx].set_transfer_status(TransferStatus.READY_TO_TRANSFER)
+                            ret_list.append(trays[tray_idx])
+                    else:  
+                        raise Exception("Invalid unit provided")
+            time.sleep(2)

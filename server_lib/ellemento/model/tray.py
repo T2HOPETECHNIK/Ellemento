@@ -83,6 +83,8 @@ class Tray:
     @property 
     def transfer_status(self): 
         return self._transfer_status 
+    
+    
 
     def set_transfer_status(self, status): 
         self._transfer_status = status

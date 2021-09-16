@@ -8,15 +8,17 @@ from ellemento.job.transplant_job import TransplantJob
 from ellemento.job.transplantor_to_buffer_job import TransplantorToBufferJob
 from ellemento.job.buffer_to_transplantor_job import BufferToTransplantorJob 
 from ellemento.job.transplantor_to_sower import TransplantorToSower
+from ellemento.model.tray_factory import TrayFactory
+from ellemento.model.tray import Tray, TrayStatus
 
 from lib.logging.logger_initialiser import EllementoLogger
-
 
 logger = EllementoLogger.__call__().logger
 
 class JobFactory:
     lst_all_trans_jobs = {}
 
+    # jobs creation threads 
     @staticmethod 
     def create_thead_jobs(): 
         # 1. Phase 1 jobs threads 
@@ -61,8 +63,26 @@ class JobFactory:
 
         #TransferJob.plan_destination_phase5_out()
 
+        harvestor_to_buffer_job = threading.Thread(target=HarvestorToBuffer.create_job)
+        harvestor_to_buffer_job.start()
         #HarvestorToBuffer.create_job() 
         
+    @staticmethod
+    def grow_plants_jobs(): 
+        check_duration_phase1 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE1, 'unit':'second', 'duration': 3 })
+        check_duration_phase1.start()
+
+        check_duration_phase2 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE2, 'unit':'second', 'duration': 4 })
+        check_duration_phase2.start()
+
+        check_duration_phase3 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE3, 'unit':'second', 'duration': 7 })
+        check_duration_phase3.start()
+
+        check_duration_phase4 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE4, 'unit':'second', 'duration': 7 })
+        check_duration_phase4.start()
+
+        check_duration_phase5 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE5, 'unit':'second', 'duration': 7 })
+        check_duration_phase5.start()
 
     @staticmethod 
     def terminate_jobs(): 
@@ -71,6 +91,8 @@ class JobFactory:
         TransplantJob.terminate_job = True 
         TransplantorToSower.termninate_job = True 
         TransplantorToBufferJob.terminate_job = True 
+        HarvestorToBuffer.terminate_job = True 
+        TrayFactory.terminate_job = True 
     
     @staticmethod
     def create_jobs_phase123(type_name = "Default", id = -1):

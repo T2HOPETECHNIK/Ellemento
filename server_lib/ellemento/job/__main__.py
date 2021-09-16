@@ -33,6 +33,7 @@ if __name__ == '__main__':
         FarmFactory.create_farm()
         BufferFactory.create_all_buffers()
         JobFactory.create_thead_jobs()
+        JobFactory.grow_plants_jobs() 
         while True: 
             time.sleep(10); 
             print("... waiting")
