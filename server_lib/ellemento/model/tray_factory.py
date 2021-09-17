@@ -13,13 +13,22 @@ from ellemento.model import constants
 
 logger = EllementoLogger.__call__().logger; 
 
+
+
 class TrayFactory:
     max_tray_id = 0
     terminate_job = False 
     all_phase123_trays  = {}
     all_phase_4_trays   = {}
     all_phase_5_trays   = {}
-
+    full_grown_trays = {} 
+   
+    @staticmethod 
+    def get_full_grown_trays(status = TrayStatus.PHASE1):
+        if not status in TrayFactory.full_grown_trays: 
+            TrayFactory.full_grown_trays[status] = [] 
+        return  TrayFactory.full_grown_trays[status]
+    
     @staticmethod 
     def create_phase123_trays(): 
         if len(TrayFactory.all_phase123_trays) != 0: 
@@ -87,8 +96,8 @@ class TrayFactory:
     @staticmethod
     def check_duration(trays = [], status = TrayStatus.PHASE1, duration = 3 , unit = 'day'):
         while not TrayFactory.terminate_job: 
-            ret_list = [] 
-            logger.info("Checking growing status %s", status)
+            ret_list = TrayFactory.get_full_grown_trays(status)
+            logger.info("Checking growing status %s", str(status))
 
             for tray_idx in trays:
                 time_now    = datetime.datetime.now() 
@@ -97,7 +106,7 @@ class TrayFactory:
                 hour        = diff.seconds / 3600 
                 minute      = diff.seconds / 60
                 #print(trays[tray_idx].status)
-                if (trays[tray_idx].status == status and trays[tray_idx].transfer_status != TransferStatus.READY_TO_TRANSFER):
+                if (trays[tray_idx].status == status and trays[tray_idx].transfer_status == TransferStatus.IDLE):
                     if unit == 'day': 
                         if day > duration: 
                             print("Found xxx")

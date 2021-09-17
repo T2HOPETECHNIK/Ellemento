@@ -22,50 +22,50 @@ class JobFactory:
     @staticmethod 
     def create_thead_jobs(): 
         # 1. Phase 1 jobs threads 
-        transfer_job_1_in = threading.Thread(target=TransferJob.plan_destination_phase1_in)
-        transfer_job_1_in.start()  
-        transfer_job_phase_1 = threading.Thread(target = TransferJob.plan_destination_phase1)
+        # transfer_job_1_in = threading.Thread(target=TransferJob.plan_destination_phase1_in)
+        # transfer_job_1_in.start()  
+        transfer_job_phase_1 = threading.Thread(target = TransferJob.plan_phase1_move_out)
         transfer_job_phase_1.start()
-        transfer_job_phase_2 = threading.Thread(target = TransferJob.plan_destination_phase2)
-        transfer_job_phase_2.start()
-        transfer_job_phase_3 = threading.Thread(target = TransferJob.plan_destination_phase3)
-        transfer_job_phase_3.start()
+        # transfer_job_phase_2 = threading.Thread(target = TransferJob.plan_phase2_move_out)
+        # transfer_job_phase_2.start()
+        # transfer_job_phase_3 = threading.Thread(target = TransferJob.plan_phase3_move_out)
+        # transfer_job_phase_3.start()
 
-        buffer_2_transplantor_job = threading.Thread(target = BufferToTransplantorJob.create_jobs)
-        buffer_2_transplantor_job.start() 
+        # buffer_2_transplantor_job = threading.Thread(target = BufferToTransplantorJob.create_jobs)
+        # buffer_2_transplantor_job.start() 
 
-        transplant_jobs = threading.Thread(target = TransplantJob.create_transplant_jobs)
-        transplant_jobs.start()
+        # transplant_jobs = threading.Thread(target = TransplantJob.create_transplant_jobs)
+        # transplant_jobs.start()
 
-        transplantor_2_sower_job = threading.Thread(target = TransplantorToSower.create_jobs)
-        transplantor_2_sower_job.start() 
+        # transplantor_2_sower_job = threading.Thread(target = TransplantorToSower.create_jobs)
+        # transplantor_2_sower_job.start() 
 
-        #4. Phase 4 jobs threads 
-        # TransplantorToBufferJob.create_jobs()
-        transplantor_2_buffer_job = threading.Thread(target = TransplantorToBufferJob.create_jobs)
-        transplantor_2_buffer_job.start() 
-        # from 4 out buffer to phase 4 shelf
-        transfer_job_phase_4_out = threading.Thread(target= TransferJob.plan_destination_phase4_out)
-        transfer_job_phase_4_out.start()
-        # TransferJob.plan_destination_phase4_out() 
+        # #4. Phase 4 jobs threads 
+        # # TransplantorToBufferJob.create_jobs()
+        # transplantor_2_buffer_job = threading.Thread(target = TransplantorToBufferJob.create_jobs)
+        # transplantor_2_buffer_job.start() 
+        # # from 4 out buffer to phase 4 shelf
+        # transfer_job_phase_4_out = threading.Thread(target= TransferJob.plan_destination_phase4_out)
+        # transfer_job_phase_4_out.start()
+        # # TransferJob.plan_destination_phase4_out() 
         
-        # from phase 4 shelf to 4 in buffer 
-        transfer_job_phase_4_in = threading.Thread(target=TransferJob.plan_destination_phase4_in)
-        transfer_job_phase_4_in.start()
-        # TransferJob.plan_destination_phase4_in() 
+        # # from phase 4 shelf to 4 in buffer 
+        # transfer_job_phase_4_in = threading.Thread(target=TransferJob.plan_destination_phase4_in)
+        # transfer_job_phase_4_in.start()
+        # # TransferJob.plan_destination_phase4_in() 
 
-        #5. Phase 5 jobs threads
-        transfer_job_destination_phase5_in = threading.Thread(target=TransferJob.plan_destination_phase5_in)
-        transfer_job_destination_phase5_in.start()
+        # #5. Phase 5 jobs threads
+        # transfer_job_destination_phase5_in = threading.Thread(target=TransferJob.plan_destination_phase5_in)
+        # transfer_job_destination_phase5_in.start()
         
-        transfer_job_destination_phase5_out = threading.Thread(target=TransferJob.plan_destination_phase5_out)
-        transfer_job_destination_phase5_out.start()
+        # transfer_job_destination_phase5_out = threading.Thread(target=TransferJob.plan_destination_phase5_out)
+        # transfer_job_destination_phase5_out.start()
 
-        #TransferJob.plan_destination_phase5_out()
+        # #TransferJob.plan_destination_phase5_out()
 
-        harvestor_to_buffer_job = threading.Thread(target=HarvestorToBuffer.create_job)
-        harvestor_to_buffer_job.start()
-        #HarvestorToBuffer.create_job() 
+        # harvestor_to_buffer_job = threading.Thread(target=HarvestorToBuffer.create_job)
+        # harvestor_to_buffer_job.start()
+        # #HarvestorToBuffer.create_job() 
         
     @staticmethod
     def grow_plants_jobs(): 
@@ -75,14 +75,14 @@ class JobFactory:
         check_duration_phase2 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE2, 'unit':'second', 'duration': 4 })
         check_duration_phase2.start()
 
-        check_duration_phase3 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE3, 'unit':'second', 'duration': 7 })
-        check_duration_phase3.start()
+        # check_duration_phase3 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE3, 'unit':'second', 'duration': 7 })
+        # check_duration_phase3.start()
 
-        check_duration_phase4 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE4, 'unit':'second', 'duration': 7 })
-        check_duration_phase4.start()
+        # check_duration_phase4 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE4, 'unit':'second', 'duration': 7 })
+        # check_duration_phase4.start()
 
-        check_duration_phase5 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE5, 'unit':'second', 'duration': 7 })
-        check_duration_phase5.start()
+        # check_duration_phase5 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE5, 'unit':'second', 'duration': 7 })
+        # check_duration_phase5.start()
 
     @staticmethod 
     def terminate_jobs(): 

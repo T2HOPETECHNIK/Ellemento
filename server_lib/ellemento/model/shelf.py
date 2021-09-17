@@ -3,7 +3,7 @@
 from ellemento.model.water_control import WaterControl
 from enum import Enum
 
-from ellemento.model.tray import Tray, TrayStatus
+from ellemento.model.tray import TransferStatus, Tray, TrayStatus
 from ellemento.model.light_control import LightControl
 
 class ShelfStatus(Enum):
@@ -62,6 +62,7 @@ class Shelf:
         self._lights = {}
         self._valves = {}
         self._enable = True 
+        self._transfer_status = TransferStatus.IDLE
         self._type_name = type_name
 
     def __repr__(self):
@@ -114,7 +115,23 @@ class Shelf:
     @rack.setter
     def rack(self, rack):
         self._rack = rack 
+    
+    def set_transfer_status(self, trans_status): 
+        self._transfer_status = trans_status 
+
+    # Check if all trays is ready to transfer 
+    def ready_to_transfer(self): 
+        bRet = True 
+        for tray in self._trays: 
+            if (tray.transfer_status != TransferStatus.READY_TO_TRANSFER): 
+                bRet = False 
+                break
         
+        if bRet: 
+            self._transfer_status = TransferStatus.READY_TO_TRANSFER
+        return bRet 
+
+
     def add_tray(self, tray): 
         if tray.id not in self._trays: 
             self._trays[tray.id] = tray

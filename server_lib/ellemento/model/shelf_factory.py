@@ -21,7 +21,50 @@ class ShelfFactory:
     max_stage_3_used = 0
     max_stage_4_used = 0
     max_stage_5_used = 0
+
+    @staticmethod 
+    def phase1_shelf_to_transfer(): 
+        retList = [] 
+        for shelf in ShelfFactory.stage_1_shelves: 
+            if shelf.ready_to_transfer(): 
+                retList.append(shelf)
+        return retList
+
     
+    @staticmethod 
+    def phase2_shelf_to_transfer(): 
+        retList = [] 
+        for shelf in ShelfFactory.stage_2_shelves: 
+            if shelf.ready_to_transfer(): 
+                retList.append(shelf)
+        return retList
+    
+    @staticmethod 
+    def phase3_shelf_to_transfer(): 
+        retList = [] 
+        for shelf in ShelfFactory.stage_3_shelves: 
+            if shelf.ready_to_transfer(): 
+                retList.append(shelf)
+        return retList
+
+    @staticmethod 
+    def phase4_shelf_to_transfer(): 
+        retList = [] 
+        for shelf in ShelfFactory.stage_4_shelves: 
+            if shelf.ready_to_transfer(): 
+                retList.append(shelf)
+        return retList
+
+    @staticmethod 
+    def phase5_ready_to_transfer(): 
+        retList = [] 
+        for shelf in ShelfFactory.stage_5_shelves: 
+            if shelf.ready_to_transfer(): 
+                retList.append(shelf)
+        return retList
+
+
+
 
     @staticmethod 
     def assign_shelf_to_rack(rack = None, phase = Phase.PHASE1): 
