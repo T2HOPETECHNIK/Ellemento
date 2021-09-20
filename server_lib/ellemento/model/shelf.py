@@ -74,6 +74,10 @@ class Shelf:
     @property
     def id(self):
         return self._id
+    
+    @property 
+    def transfer_status(self):
+        return self._transfer_status
 
     @id.setter
     def id(self, value):
@@ -117,6 +121,8 @@ class Shelf:
         self._rack = rack 
     
     def set_transfer_status(self, trans_status): 
+        for tray in self._trays: 
+            tray.set_transfer_status(trans_status)
         self._transfer_status = trans_status 
 
     # Check if all trays is ready to transfer 

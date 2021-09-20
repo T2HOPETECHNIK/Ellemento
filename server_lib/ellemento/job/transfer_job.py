@@ -30,6 +30,14 @@ class TransferJob:
 
     # check all trays in the 5 phases shelf to determine which ones needs to be transferred  
 
+    @staticmethod 
+    def add_jobs(status = TrayStatus.PHASE1, lst_jobs = []):
+        if status in TransferJob.all_transfer_jobs:
+            TransferJob.all_transfer_jobs[status] = TransferJob.all_transfer_jobs[status] + lst_jobs
+        else:
+            TransferJob.all_transfer_jobs[status] = lst_jobs
+        return TransferJob.all_transfer_jobs[status] 
+
     @staticmethod
     def get_list_full_grown_trays(status = TrayStatus.PHASE1):
         return TrayFactory.get_full_grown_trays(status= status)
@@ -128,8 +136,8 @@ class TransferJob:
                 else: 
                     logger.info("%d of empty phase 3 shelf found", len(lst_shelf))
                 
-                lst_jobs = TransferJob.create_between_shelf_jobs(shelf_phase_2, lst_shelf)             
-                TransferJob.all_transfer_jobs[Phase.PHASE2] = TransferJob.all_transfer_jobs[Phase.PHASE2] + lst_jobs 
+                lst_jobs = TransferJob.create_between_shelf_jobs(shelf_phase_2, lst_shelf)    
+                TransferJob.add_jobs(status = Phase.PHASE2, lst_jobs = lst_jobs)
                 time.sleep(2)
         except: 
             logger.error("Error occured in plan_destination_phase 2")
@@ -155,8 +163,7 @@ class TransferJob:
        
                 # add shelf to shelf transfer jobs in the jobs list 
                 lst_jobs = TransferJob.create_between_shelf_jobs(shelf_phase_1, lst_shelf)       
-                TransferJob.all_transfer_jobs[Phase.PHASE1] = TransferJob.all_transfer_jobs[Phase.PHASE1] + lst_jobs 
-    
+                TransferJob.add_jobs(status = Phase.PHASE1, lst_jobs = lst_jobs)
                 time.sleep(2)
         except: 
             logger.error("Exception in plan_destination_phase 1")
@@ -184,6 +191,16 @@ class TransferJob:
                     continue
                 
                 logger.info("Create jobs")
+                shelf_grown = shelf_phase_3.pop()
+                print(shelf_grown)
+                shelf_grown.set_transfer_status(TransferStatus.TRANSFER_QUEUED)
+                new_job = TransferJob(source=shelf_phase_3, destination=buffer_3_in)
+                logger.info("Create jobs2")
+                lst_jobs = []
+                lst_jobs.append(new_job)
+                logger.info("Create jobs3")
+                TransferJob.add_jobs(status = Phase.PHASE3, lst_jobs = lst_jobs)
+                logger.info("Create jobs4")
                 time.sleep(2)
                 continue
 

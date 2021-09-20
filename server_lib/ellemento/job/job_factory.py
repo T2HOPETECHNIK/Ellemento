@@ -24,12 +24,12 @@ class JobFactory:
         # 1. Phase 1 jobs threads 
         # transfer_job_1_in = threading.Thread(target=TransferJob.plan_destination_phase1_in)
         # transfer_job_1_in.start()  
-        transfer_job_phase_1 = threading.Thread(target = TransferJob.plan_phase1_move_out)
-        transfer_job_phase_1.start()
+        # transfer_job_phase_1 = threading.Thread(target = TransferJob.plan_phase1_move_out)
+        # transfer_job_phase_1.start()
         # transfer_job_phase_2 = threading.Thread(target = TransferJob.plan_phase2_move_out)
         # transfer_job_phase_2.start()
-        # transfer_job_phase_3 = threading.Thread(target = TransferJob.plan_phase3_move_out)
-        # transfer_job_phase_3.start()
+        transfer_job_phase_3 = threading.Thread(target = TransferJob.plan_phase3_move_out)
+        transfer_job_phase_3.start()
 
         # buffer_2_transplantor_job = threading.Thread(target = BufferToTransplantorJob.create_jobs)
         # buffer_2_transplantor_job.start() 
@@ -69,14 +69,14 @@ class JobFactory:
         
     @staticmethod
     def grow_plants_jobs(): 
-        check_duration_phase1 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE1, 'unit':'second', 'duration': 3 })
-        check_duration_phase1.start()
+        # check_duration_phase1 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE1, 'unit':'second', 'duration': 3 })
+        # check_duration_phase1.start()
 
-        check_duration_phase2 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE2, 'unit':'second', 'duration': 4 })
-        check_duration_phase2.start()
+        # check_duration_phase2 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE2, 'unit':'second', 'duration': 4 })
+        # check_duration_phase2.start()
 
-        # check_duration_phase3 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE3, 'unit':'second', 'duration': 7 })
-        # check_duration_phase3.start()
+        check_duration_phase3 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE3, 'unit':'second', 'duration': 7 })
+        check_duration_phase3.start()
 
         # check_duration_phase4 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE4, 'unit':'second', 'duration': 7 })
         # check_duration_phase4.start()

@@ -43,6 +43,8 @@ class ShelfFactory:
     def phase3_shelf_to_transfer(): 
         retList = [] 
         for shelf in ShelfFactory.stage_3_shelves: 
+            print(shelf)
+            
             if shelf.ready_to_transfer(): 
                 retList.append(shelf)
         return retList
