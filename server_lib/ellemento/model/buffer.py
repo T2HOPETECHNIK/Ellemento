@@ -18,12 +18,14 @@ class BufferStatus(Enum):
 
 class Buffer:
     BUFFER_AREA = 3
+   
     @staticmethod 
     def print():
         pass
 
     def __init__(self, id = -1, type_name = "Default"):
         self.trays = []  
+        self.booked_transfer = False 
         pass
 
     @property

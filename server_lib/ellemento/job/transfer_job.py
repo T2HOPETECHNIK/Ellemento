@@ -85,8 +85,12 @@ class TransferJob:
                 if len(lst_shelf) == 0: 
                     logger.info("Not any empty shelf avilable")
                     time.sleep(2)
-                    continue 
-                ret_shelf = get_shelf_from_lst(lst_shelf)
+                    continue
+                else: 
+                    logger.info("%d of empty shelves are availble", len(lst_shelf))
+
+                shelf_empty = get_shelf_from_lst(lst_shelf)
+                shelf_empty.set_transfer_status(TransferStatus.TRANSFER_QUEUED)
                 sower_one = Sower(Sower.get_sower()) 
                 if not sower_one.ready_to_unload(): 
                     time.sleep(2)
@@ -94,7 +98,7 @@ class TransferJob:
                     continue 
                 new_job = TransferJob()
                 new_job.set_source(sower_one)
-                new_job.set_destination(ret_shelf)
+                new_job.set_destination(shelf_empty)
                 time.sleep(2)
         except:
             logger.error("plan_destination_phase1_in gets error")
@@ -185,30 +189,25 @@ class TransferJob:
                     logger.info("%d phase 3 shelves is fully grown", len(shelf_phase_3))
                 
                 buffer_3_in =  BufferFactory.get_buffer(BufferType.BUFFER_3_IN)
+
                 if not buffer_3_in.empty(): 
                     logger.info("3-in buffer is not empty, not ready to load trays")
                     time.sleep(2)
                     continue
-                
-                logger.info("Create jobs")
+                if buffer_3_in.booked_transfer: 
+                    logger.info("3-in buffer is planned for transfer")
+                    time.sleep(2)
+                    continue
+
+                buffer_3_in.booked_transfer = True
                 shelf_grown = shelf_phase_3.pop()
-                print(shelf_grown)
                 shelf_grown.set_transfer_status(TransferStatus.TRANSFER_QUEUED)
-                new_job = TransferJob(source=shelf_phase_3, destination=buffer_3_in)
-                logger.info("Create jobs2")
+                new_job = TransferJob(source=shelf_grown, destination=buffer_3_in)
                 lst_jobs = []
                 lst_jobs.append(new_job)
-                logger.info("Create jobs3")
                 TransferJob.add_jobs(status = Phase.PHASE3, lst_jobs = lst_jobs)
-                logger.info("Create jobs4")
                 time.sleep(2)
                 continue
-
-                src = shelf_phase_3.pop() 
-                new_job = TransferJob(source=src, destination=buffer_3_in) 
-                lst_jobs = [] 
-                lst_jobs.append(new_job)
-                TransferJob.all_transfer_jobs[Phase.PHASE3] = TransferJob.all_transfer_jobs[Phase.PHASE3] + lst_jobs 
         except: 
             logger.error("Get exception at plan_destination_phase3")
         # If buffer is available 
@@ -216,22 +215,35 @@ class TransferJob:
         pass 
 
     @staticmethod 
-    def plan_destination_phase4_out(): 
+    def plan_phase4_move_out(): 
         # only if the buffer still have places
         # 4 in buffer
         while not TransferJob.terminate_job: 
-            buffer_4_in = Buffer(BufferFactory.get_buffer(BufferType.BUFFER_4_IN))
-            if buffer_4_in.full():
+            shelf_phase_4 = ShelfFactory.phase4_shelf_to_transfer()
+            if len(shelf_phase_4) ==0:
+                logger.info("Not any fully grown phase 4 shelf") 
+                time.sleep(2)
+                continue
+            else: 
+                logger.info("%d phase 4 shelves is fully grown", len(shelf_phase_4))
+
+            buffer_4_in = BufferFactory.get_buffer(BufferType.BUFFER_4_IN)
+            if not buffer_4_in.empty():
                 logger.info("Destination buffer is full")
                 time.sleep(2)
                 continue 
+            if buffer_4_in.booked_transfer: 
+                logger.info("Buffer 4 in has booked for transfer")
+                time.sleep(2)
+                continue 
 
-            if Phase.PHASE4 in TransferJob.all_transfer_jobs:  
-                lst_jobs_phase4 = TransferJob.all_transfer_jobs[Phase.PHASE4]
-                for job in lst_jobs_phase4:
-                    job.set_destination(buffer_4_in) 
-            else: 
-                logger.info("Not haveing any phase 4 transfer jobs")
+            buffer_4_in.booked_transfer = True
+            shelf_grown = shelf_phase_4.pop()
+            shelf_grown.set_transfer_status(TransferStatus.TRANSFER_QUEUED)
+            new_job = TransferJob(source=shelf_grown, destination=buffer_4_in)
+            lst_jobs = []
+            lst_jobs.append(new_job)
+            TransferJob.add_jobs(status = Phase.PHASE4, lst_jobs = lst_jobs)
             time.sleep(2)
 
     @staticmethod
@@ -291,18 +303,34 @@ class TransferJob:
         # only if the buffer still have places
         # 4 in buffer
         while not TransferJob.terminate_job: 
-            if Phase.PHASE5 in TransferJob.all_transfer_jobs:  
-                lst_jobs_phase5 = TransferJob.all_transfer_jobs[Phase.PHASE5]
-                harvestor = Harvestor(Harvestor.get_harvestor()) 
-                if not harvestor.ready_to_load(): 
-                    logger.info("Harvestor is not ready")
-                    time.sleep(2)
-                    continue
-                # destincaiton shall be harvester
-                job = lst_jobs_phase5.pop(0)
-                job.set_destination(harvestor) 
+            shelf_phase_5 = ShelfFactory.phase5_ready_to_transfer()
+            if len(shelf_phase_5) == 0:
+                logger.info("Not any fully grown phase 5 shelf") 
+                time.sleep(2)
+                continue
             else: 
-                logger.info("No any phase 5 transfer jobs")
+                logger.info("%d phase 5 shelves is fully grown", len(shelf_phase_5))
+
+            harvestor = Harvestor.get_harvestor()
+            if not harvestor.ready_to_load():
+                logger.info("Harvestor is not ready to load any trays") 
+                time.sleep(2)
+                continue
+            
+            if harvestor.planned_transfer: 
+                logger.info("Transfer planned for the harvestor") 
+                time.sleep(2)
+                continue
+
+            shelf_ready = shelf_phase_5.pop()
+            shelf_ready.set_transfer_status(TransferStatus.TRANSFER_QUEUED)
+            harvestor.planned_transfer = True 
+            new_job = TransferJob()
+            new_job.set_source(shelf_ready)
+            new_job.set_destination(harvestor)
+            lst_jobs = []
+            lst_jobs.append(new_job)
+            TransferJob.add_jobs(status = Phase.PHASE5, lst_jobs = lst_jobs)
             time.sleep(2)
 
     @classmethod 

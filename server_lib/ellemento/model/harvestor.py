@@ -11,6 +11,7 @@ class Harvestor:
         self._id = id
         self._type_name = type_name
         self._trays = [] 
+        self.planned_transfer = False 
 
     @property
     def id(self): 
@@ -19,6 +20,7 @@ class Harvestor:
     @id.setter
     def id(self, value):
         self._id = value 
+       
 
 
     # load a tray to the harvestoer 
