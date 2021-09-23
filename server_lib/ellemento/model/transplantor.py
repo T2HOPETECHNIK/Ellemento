@@ -22,6 +22,7 @@ class Transplantor:
     @id.setter
     def id(self, value):
         self._id = value 
+        self.planned_transfer = False 
 
     def set_src_tray(self, src_tray):
         self._tray_source = src_tray

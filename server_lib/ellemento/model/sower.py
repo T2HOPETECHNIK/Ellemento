@@ -10,6 +10,7 @@ logger = EllementoLogger.__call__().logger
 
 class Sower:
     all_sowers = {}
+  
 
     @staticmethod 
     def create_sower(): 
@@ -26,6 +27,7 @@ class Sower:
         self._id = id
         self._type_name = type_name
         self._trays = []
+        self.transfer_planned = False 
         
     @property
     def id(self): 

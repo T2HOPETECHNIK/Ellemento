@@ -96,6 +96,11 @@ class TransferJob:
                     time.sleep(2)
                     logger.info("Sower is not ready to unload - plants not ready")
                     continue 
+                if sower_one.transfer_planned: 
+                    time.sleep(2)
+                    logger.info("Sower is planned ")
+                    continue
+                sower_one.transfer_planned = True 
                 new_job = TransferJob()
                 new_job.set_source(sower_one)
                 new_job.set_destination(shelf_empty)
@@ -246,6 +251,7 @@ class TransferJob:
             TransferJob.add_jobs(status = Phase.PHASE4, lst_jobs = lst_jobs)
             time.sleep(2)
 
+    # from 4 out buffer 
     @staticmethod
     def plan_destination_phase4_in(): 
         def get_shelf_from_lst(lst_shelf_in): 
@@ -258,20 +264,32 @@ class TransferJob:
 
         while not TransferJob.terminate_job: 
             # if buffer 4-out has something, then can plan transfer 
-            buffer_4_out = Buffer (BufferFactory.get_buffer(BufferType.BUFFER_4_OUT))
+            buffer_4_out = BufferFactory.get_buffer(BufferType.BUFFER_4_OUT)
             lst_shelf = ShelfFactory.get_empty_shelf_of_phase(phase = Phase.PHASE4)
             if len(lst_shelf) == 0: 
                 logger.info("Not any empty shelf in phase 4")
                 time.sleep(2)
                 continue 
-            if not buffer_4_out.empty(): 
-                new_job = TransferJob()
-                new_job.set_source(buffer_4_out)
-                shelf_dst = get_shelf_from_lst(lst_shelf)
-                new_job.set_destination(shelf_dst)
-                TransferJob.all_transfer_jobs[Phase.TRANSPLANT_2_PHASE4].append(new_job)
-            else: 
+            else:
+                logger.info("%d shelves is empty") 
+
+            if buffer_4_out.empty(): 
                 logger.info("Buffer 4 has no trays")
+                time.sleep(2)
+                continue
+            if buffer_4_out.planned_transfer: 
+                logger.info("buffer_4_out has planned transfer")
+                time.sleep(2)
+                continue
+
+            buffer_4_out.planned_transfer = True 
+            new_job = TransferJob()
+            new_job.set_source(buffer_4_out)
+            shelf_dst = get_shelf_from_lst(lst_shelf)
+            new_job.set_destination(shelf_dst)
+            TransferJob.all_transfer_jobs[Phase.TRANSPLANT_2_PHASE4].append(new_job)
+    
+            logger.info("Buffer 4 has no trays")
             time.sleep(2)
 
     @staticmethod
@@ -286,6 +304,11 @@ class TransferJob:
                 time.sleep(2)
                 continue 
             
+            if transplantor_4_5.planned_transfer: 
+                logger.info("Transplator 4-5 has planned for transfer")
+                time.sleep(2)
+                continue
+
             shelf = lst_shelf.pop()
             if len(lst_shelf) == 0: 
                 logger.info("Phase 5 shelf is not ready")
