@@ -119,6 +119,10 @@ class Shelf:
     @rack.setter
     def rack(self, rack):
         self._rack = rack 
+
+    def reset_tray_status(self): 
+        for tray in self._trays:
+            tray.reset_tray_status()  
     
     def set_transfer_status(self, trans_status): 
         for tray in self._trays: 

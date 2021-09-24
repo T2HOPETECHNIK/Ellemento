@@ -28,6 +28,22 @@ class TrayFactory:
         if not status in TrayFactory.full_grown_trays: 
             TrayFactory.full_grown_trays[status] = [] 
         return  TrayFactory.full_grown_trays[status]
+
+    @classmethod
+    def reset_phase123_status_time(self, status = TrayStatus.PHASE1): 
+        for tray in self.all_phase123_trays: 
+            if tray.status == status:
+                tray.reset_status_time()  
+
+    @classmethod 
+    def reset_phase4_status_time(self): 
+        for tray in self.all_phase_4_trays:
+                tray.reset_status_time()  
+    
+    @classmethod 
+    def reset_phase4_status_time(self): 
+        for tray in self.all_phase_5_trays:
+                tray.reset_status_time()  
     
     @staticmethod 
     def create_phase123_trays(): 

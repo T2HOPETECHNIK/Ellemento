@@ -22,6 +22,26 @@ class ShelfFactory:
     max_stage_4_used = 0
     max_stage_5_used = 0
 
+    @classmethod 
+    def reset_status_time_phase1(self, index = 0):
+        self.stage_1_shelves[index].reset_status_time()
+
+    @classmethod 
+    def reset_status_time_phase2(self, index = 0):
+        self.stage_2_shelves[index].reset_status_time()
+
+    @classmethod 
+    def reset_status_time_phase3(self, index = 0):
+        self.stage_3_shelves[index].reset_status_time()
+
+    @classmethod 
+    def reset_status_time_phase4(self, index = 0):
+        self.stage_4_shelves[index].reset_status_time()
+
+    @classmethod 
+    def reset_status_time_phase5(self, index = 0):
+        self.stage_5_shelves[index].reset_status_time()
+    
     @staticmethod 
     def phase1_shelf_to_transfer(): 
         retList = [] 
@@ -30,7 +50,6 @@ class ShelfFactory:
                 retList.append(shelf)
         return retList
 
-    
     @staticmethod 
     def phase2_shelf_to_transfer(): 
         retList = [] 

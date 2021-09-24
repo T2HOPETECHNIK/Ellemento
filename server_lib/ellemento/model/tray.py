@@ -89,6 +89,10 @@ class Tray:
     def set_transfer_status(self, status): 
         self._transfer_status = status
 
+
+    def reset_status_time(self): 
+        self._status_time = datetime.datetime.now()
+        
     def _set_status(self, status):
         self._status = status 
         self._status_time = datetime.datetime.now()
