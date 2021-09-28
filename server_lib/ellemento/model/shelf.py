@@ -153,6 +153,11 @@ class Shelf:
             self._status = ShelfStatus.FULL
      
 
+    def reset_status_time(self): 
+        for tray in self._trays: 
+            print(tray)
+            tray.reset_status_time()
+
     def remove_tray(self, tray_id): 
         if tray_id in self._trays: 
             del self._trays[tray_id]

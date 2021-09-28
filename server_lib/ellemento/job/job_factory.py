@@ -8,7 +8,9 @@ from ellemento.job.transplant_job import TransplantJob
 from ellemento.job.transplantor_to_buffer_job import TransplantorToBufferJob
 from ellemento.job.buffer_to_transplantor_job import BufferToTransplantorJob 
 from ellemento.job.transplantor_to_sower import TransplantorToSower
+from ellemento.model import shelf_factory
 from ellemento.model.tray_factory import TrayFactory
+from ellemento.model.shelf_factory import ShelfFactory
 from ellemento.model.tray import Tray, TrayStatus
 
 from lib.logging.logger_initialiser import EllementoLogger
@@ -74,8 +76,26 @@ class JobFactory:
         # #HarvestorToBuffer.create_job() 
         
     @staticmethod
+    def reset_status(): 
+        thread_ph1 = threading.Thread(target=ShelfFactory.reset_status_time_1, kwargs={'unit': 'second', 'duration': 3})
+        thread_ph2 = threading.Thread(target=ShelfFactory.reset_status_time_2, kwargs={'unit': 'second', 'duration': 4})
+        thread_ph3 = threading.Thread(target=ShelfFactory.reset_status_time_3, kwargs={'unit': 'second', 'duration': 7})
+        thread_ph4 = threading.Thread(target=ShelfFactory.reset_status_time_4, kwargs={'unit': 'second', 'duration': 7})
+        thread_ph5 = threading.Thread(target=ShelfFactory.reset_status_time_5, kwargs={'unit': 'second', 'duration': 7})
+        thread_ph1.start()
+        thread_ph2.start()
+        thread_ph3.start()
+        thread_ph4.start()
+        thread_ph5.start() 
+
+        pass 
+
+
+    @staticmethod
     def grow_plants_jobs():
 
+        JobFactory.reset_status() 
+        time.sleep(1)
         # -- Tested ----------------------------------------------------------------------------- 
         check_duration_phase1 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE1, 'unit':'second', 'duration': 3 })
         check_duration_phase1.start()

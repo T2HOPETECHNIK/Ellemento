@@ -1,3 +1,4 @@
+import time 
 from ellemento.model.tray import TrayStatus
 from ellemento.model import tray_factory
 from ellemento.model.shelf import Shelf, Phase, ShelfStatus
@@ -21,6 +22,88 @@ class ShelfFactory:
     max_stage_3_used = 0
     max_stage_4_used = 0
     max_stage_5_used = 0
+
+    @staticmethod
+    def reset_status_time_1(unit = 'second', duration = 4):
+        if unit == 'second': 
+            duration = duration
+        elif unit == 'minute': 
+            duration = duration * 60
+        elif unit == 'hour':
+            duration = duration * 3600
+        elif unit == 'day':
+            duration = duration *3600 * 24 
+            
+        for i in range (0, 3): 
+            ShelfFactory.reset_status_time_phase1(index = i)
+            time.sleep(duration)
+
+        pass 
+
+    @staticmethod
+    def reset_status_time_2(unit = 'second', duration = 4):
+        if unit == 'second': 
+            duration = duration
+        elif unit == 'minute': 
+            duration = duration * 60
+        elif unit == 'hour':
+            duration = duration * 3600
+        elif unit == 'day':
+            duration = duration *3600 * 24 
+            
+        for i in range (0, 4): 
+            ShelfFactory.reset_status_time_phase2(index = i)
+            time.sleep(duration)
+
+        pass 
+    
+    @staticmethod
+    def reset_status_time_3(unit = 'second', duration = 4):
+        if unit == 'second': 
+            duration = duration
+        elif unit == 'minute': 
+            duration = duration * 60
+        elif unit == 'hour':
+            duration = duration * 3600
+        elif unit == 'day':
+            duration = duration *3600 * 24 
+            
+        for i in range (0, 7): 
+            ShelfFactory.reset_status_time_phase3(index = i)
+            time.sleep(duration)
+        pass 
+
+    @staticmethod
+    def reset_status_time_4(unit = 'second', duration = 4):
+        if unit == 'second': 
+            duration = duration
+        elif unit == 'minute': 
+            duration = duration * 60
+        elif unit == 'hour':
+            duration = duration * 3600
+        elif unit == 'day':
+            duration = duration *3600 * 24 
+            
+        for i in range (0, 28): 
+            ShelfFactory.reset_status_time_phase4(index = i)
+            time.sleep(duration)
+        pass 
+
+    @staticmethod
+    def reset_status_time_5(unit = 'second', duration = 4):
+        if unit == 'second': 
+            duration = duration
+        elif unit == 'minute': 
+            duration = duration * 60
+        elif unit == 'hour':
+            duration = duration * 3600
+        elif unit == 'day':
+            duration = duration *3600 * 24 
+            
+        for i in range (0, 28): 
+            ShelfFactory.reset_status_time_phase5(index = i)
+            time.sleep(duration)
+        pass 
 
     @classmethod 
     def reset_status_time_phase1(self, index = 0):

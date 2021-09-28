@@ -13,3 +13,13 @@ rack_control/plc/project_file/logfile.txt
 /server_lib/dist
 ellemento.egg-info
 *.pyc
+server_lib/ellemento/__pycache__/__init__.cpython-37.pyc
+.gitignore
+.gitignore
+server_lib/ellemento/job/__pycache__/__init__.cpython-37.pyc
+server_lib/ellemento/job/__pycache__/constants.cpython-37.pyc
+server_lib/ellemento/job/__pycache__/job_main.cpython-37.pyc
+server_lib/ellemento/job/__pycache__/job_manager.cpython-37.pyc
+server_lib/ellemento/job/__pycache__/jobThread.cpython-37.pyc
+server_lib/ellemento/job/__pycache__/rest_api.cpython-37.pyc
+server_lib/ellemento/job/__pycache__/task.cpython-37.pyc
