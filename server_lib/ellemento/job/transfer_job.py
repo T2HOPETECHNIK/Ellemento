@@ -374,17 +374,44 @@ class TransferJob:
         pass 
 
     @staticmethod
-    def execute_transfer(tray, source, destination):
+    def execute_transfer():
         time.sleep(2)
         # Behavior of the transfer job 
-        print('Transfering', tray)
-    
+        # Get the list of jobs,,
+        for key in TransferJob.all_transfer_jobs: 
+            print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx1")
+            print(key)
+            lst_jobs = TransferJob.all_transfer_jobs[key]
+            print(len(lst_jobs))
+
+            if len(lst_jobs) == 0: 
+                print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx1")
+                continue 
+            for job in lst_jobs:
+                print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+                print(job.source)
+                print(job.destination)
+                print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+            
+        # Execute transfer ,, get source, get destination
+
+        # update status .. 
+
+
     def __init__(self, id = -1, type_name = 'Default', source = None, destination = None):
         if id == -1: 
             TransferJob.id_cur =   TransferJob.id_cur + 1
         self._source = source
         self._destination = destination
         pass
+    
+    @property
+    def source(self):
+        return self._source
+
+    @property 
+    def destination(self):
+        return self._destination 
 
     def set_tray(self, tray):
         self._tray = tray 
@@ -394,12 +421,16 @@ class TransferJob:
 
     def set_destination(self, destination): 
         self._destination = destination
+    
 
-    def transfer(self, tray, source, destination): 
-        if (tray.location != source):
-            raise Exception("Tray not in source location")
+    def transfer(self):
+        pass 
+
+    # def transfer(self): 
+    #     if (tray.location != source):
+    #         raise Exception("Tray not in source location")
         
-        p = Process(target=TransferJob.execute_transfer, args=(tray, source, destination,))
-        p.start()
-        p.join()
-        tray.location = destination
+    #     p = Process(target=TransferJob.execute_transfer)
+    #     p.start()
+    #     p.join()
+    #     tray.location = destination

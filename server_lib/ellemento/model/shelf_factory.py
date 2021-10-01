@@ -36,6 +36,7 @@ class ShelfFactory:
             
         for i in range (0, 3): 
             ShelfFactory.reset_status_time_phase1(index = i)
+            print("Sleeping ", duration)
             time.sleep(duration)
 
         pass 
@@ -53,6 +54,7 @@ class ShelfFactory:
             
         for i in range (0, 4): 
             ShelfFactory.reset_status_time_phase2(index = i)
+            print("Sleeping ", duration)
             time.sleep(duration)
 
         pass 
@@ -70,6 +72,7 @@ class ShelfFactory:
             
         for i in range (0, 7): 
             ShelfFactory.reset_status_time_phase3(index = i)
+            print("Sleeping ", duration)
             time.sleep(duration)
         pass 
 
@@ -86,6 +89,7 @@ class ShelfFactory:
             
         for i in range (0, 28): 
             ShelfFactory.reset_status_time_phase4(index = i)
+            print("Sleeping ", duration)
             time.sleep(duration)
         pass 
 
@@ -102,6 +106,7 @@ class ShelfFactory:
             
         for i in range (0, 28): 
             ShelfFactory.reset_status_time_phase5(index = i)
+            print("Sleeping ", duration)
             time.sleep(duration)
         pass 
 

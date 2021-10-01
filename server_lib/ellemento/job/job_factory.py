@@ -20,6 +20,10 @@ logger = EllementoLogger.__call__().logger
 class JobFactory:
     lst_all_trans_jobs = {}
 
+    @staticmethod
+    def execute_jobs(): 
+        TransferJob.execute_transfer()
+
     # jobs creation threads 
     @staticmethod 
     def create_thead_jobs(): 

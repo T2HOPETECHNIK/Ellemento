@@ -1,6 +1,7 @@
 from datetime import date
 import datetime
-import time 
+import time
+from ellemento.job import job_factory 
 
 from ellemento.model.farm_factory import FarmFactory
 from ellemento.job import job_main
@@ -34,7 +35,9 @@ if __name__ == '__main__':
         BufferFactory.create_all_buffers()
         JobFactory.create_thead_jobs()
         JobFactory.grow_plants_jobs() 
+       
         while True: 
+            JobFactory.execute_jobs()
             time.sleep(10); 
             print("... waiting")
     except KeyboardInterrupt:

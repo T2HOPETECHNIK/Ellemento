@@ -25,6 +25,8 @@ class Buffer:
 
     def __init__(self, id = -1, type_name = "Default"):
         self.trays = []  
+        self._id = id 
+        self._type_name = type_name
         self.booked_transfer = False 
         pass
 
