@@ -80,12 +80,12 @@ class JobFactory:
         # #HarvestorToBuffer.create_job() 
         
     @staticmethod
-    def reset_status(): 
-        thread_ph1 = threading.Thread(target=ShelfFactory.reset_status_time_1, kwargs={'unit': 'second', 'duration': 3})
-        thread_ph2 = threading.Thread(target=ShelfFactory.reset_status_time_2, kwargs={'unit': 'second', 'duration': 4})
-        thread_ph3 = threading.Thread(target=ShelfFactory.reset_status_time_3, kwargs={'unit': 'second', 'duration': 7})
-        thread_ph4 = threading.Thread(target=ShelfFactory.reset_status_time_4, kwargs={'unit': 'second', 'duration': 7})
-        thread_ph5 = threading.Thread(target=ShelfFactory.reset_status_time_5, kwargs={'unit': 'second', 'duration': 7})
+    def reset_status(unit = 'second'): 
+        thread_ph1 = threading.Thread(target=ShelfFactory.reset_status_time_1, kwargs={'unit': unit, 'duration': 3})
+        thread_ph2 = threading.Thread(target=ShelfFactory.reset_status_time_2, kwargs={'unit': unit, 'duration': 4})
+        thread_ph3 = threading.Thread(target=ShelfFactory.reset_status_time_3, kwargs={'unit': unit, 'duration': 7})
+        thread_ph4 = threading.Thread(target=ShelfFactory.reset_status_time_4, kwargs={'unit': unit, 'duration': 7})
+        thread_ph5 = threading.Thread(target=ShelfFactory.reset_status_time_5, kwargs={'unit': unit, 'duration': 7})
         thread_ph1.start()
         thread_ph2.start()
         thread_ph3.start()
@@ -97,24 +97,25 @@ class JobFactory:
 
     @staticmethod
     def grow_plants_jobs():
+        unit = 'second'
 
-        JobFactory.reset_status() 
+        JobFactory.reset_status(unit=unit) 
         time.sleep(1)
         # -- Tested ----------------------------------------------------------------------------- 
-        check_duration_phase1 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE1, 'unit':'second', 'duration': 3 })
+        check_duration_phase1 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE1, 'unit':unit, 'duration': 3 })
         check_duration_phase1.start()
 
-        check_duration_phase2 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE2, 'unit':'second', 'duration': 4 })
+        check_duration_phase2 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE2, 'unit':unit, 'duration': 4 })
         check_duration_phase2.start()
 
-        check_duration_phase3 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE3, 'unit':'second', 'duration': 7 })
+        check_duration_phase3 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE3, 'unit':unit, 'duration': 7 })
         check_duration_phase3.start()
 
-        check_duration_phase4 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE4, 'unit':'second', 'duration': 7 })
+        check_duration_phase4 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE4, 'unit':unit, 'duration': 7 })
         check_duration_phase4.start()
         # --End of tested 
 
-        check_duration_phase5 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE5, 'unit':'second', 'duration': 7 })
+        check_duration_phase5 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE5, 'unit':unit, 'duration': 7 })
         check_duration_phase5.start()
 
     @staticmethod 

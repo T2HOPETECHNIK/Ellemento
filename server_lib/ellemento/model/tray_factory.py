@@ -85,7 +85,7 @@ class TrayFactory:
         logger.info("Initializing phase 5 trays : %d" , phase_5_trays)
         for i in range (1, phase_5_trays + 1): 
             TrayFactory.max_tray_id = TrayFactory.max_tray_id + 1 
-            tray_new =  TrayFactory.create_tray(id = TrayFactory.max_tray_id, type_name = "phase4")
+            tray_new =  TrayFactory.create_tray(id = TrayFactory.max_tray_id, type_name = "phase5")
             tray_new.has_foam = True
             tray_new.has_veg = True 
             TrayFactory.all_phase_5_trays[tray_new.id] = tray_new
@@ -113,7 +113,7 @@ class TrayFactory:
     def check_duration(trays = [], status = TrayStatus.PHASE1, duration = 3 , unit = 'day'):
         while not TrayFactory.terminate_job: 
             ret_list = TrayFactory.get_full_grown_trays(status)
-            logger.info("Checking growing status %s", str(status))
+            #logger.info("Checking growing status %s", str(status))
 
             for tray_idx in trays:
                 time_now    = datetime.datetime.now() 
@@ -125,19 +125,16 @@ class TrayFactory:
                 if (trays[tray_idx].status == status and trays[tray_idx].transfer_status == TransferStatus.IDLE):
                     if unit == 'day': 
                         if day > duration: 
-                            print("Found xxx")
                             trays[tray_idx].set_transfer_status(TransferStatus.READY_TO_TRANSFER)
                             ret_list.append(trays[tray_idx])
                     elif unit == 'hour': 
                         hour = day * 24 + hour
                         if hour > duration: 
-                            print("Found xxx")
                             trays[tray_idx].set_transfer_status(TransferStatus.READY_TO_TRANSFER)
                             ret_list.append(trays[tray_idx])
                     elif unit == 'minute': 
                         minute = day * 24 * 60 + hour * 60 + minute
                         if minute > duration: 
-                            print("Found xxx")
                             trays[tray_idx].set_transfer_status(TransferStatus.READY_TO_TRANSFER)
                             ret_list.append(trays[tray_idx])
                     elif unit == 'second': 

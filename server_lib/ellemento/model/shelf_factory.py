@@ -24,7 +24,7 @@ class ShelfFactory:
     max_stage_5_used = 0
 
     @staticmethod
-    def reset_status_time_1(unit = 'second', duration = 4):
+    def reset_status_time_1(unit = 'second', duration = 3):
         if unit == 'second': 
             duration = duration
         elif unit == 'minute': 
@@ -36,7 +36,7 @@ class ShelfFactory:
             
         for i in range (0, 3): 
             ShelfFactory.reset_status_time_phase1(index = i)
-            print("Sleeping ", duration)
+            print("Phase 1 Sleeping ", duration, i + 1)
             time.sleep(duration)
 
         pass 
@@ -54,13 +54,13 @@ class ShelfFactory:
             
         for i in range (0, 4): 
             ShelfFactory.reset_status_time_phase2(index = i)
-            print("Sleeping ", duration)
+            print("Phase 2 Sleeping ", duration, i+1)
             time.sleep(duration)
 
         pass 
     
     @staticmethod
-    def reset_status_time_3(unit = 'second', duration = 4):
+    def reset_status_time_3(unit = 'second', duration = 7):
         if unit == 'second': 
             duration = duration
         elif unit == 'minute': 
@@ -72,12 +72,12 @@ class ShelfFactory:
             
         for i in range (0, 7): 
             ShelfFactory.reset_status_time_phase3(index = i)
-            print("Sleeping ", duration)
+            print("Phase 3 Sleeping ", duration, i  + 1)
             time.sleep(duration)
         pass 
 
     @staticmethod
-    def reset_status_time_4(unit = 'second', duration = 4):
+    def reset_status_time_4(unit = 'second', duration = 7):
         if unit == 'second': 
             duration = duration
         elif unit == 'minute': 
@@ -87,14 +87,18 @@ class ShelfFactory:
         elif unit == 'day':
             duration = duration *3600 * 24 
             
-        for i in range (0, 28): 
-            ShelfFactory.reset_status_time_phase4(index = i)
-            print("Sleeping ", duration)
+        for i in range (0, 7):
+            start_idx = i * 4
+            end_index = i * 4 + 4 
+            for j in range(start_idx, end_index):  
+                print("Shelf growing ", j)
+                ShelfFactory.reset_status_time_phase4(index = j)
+            print("Phase 4 Sleeping ", duration, i + 1)
             time.sleep(duration)
         pass 
 
     @staticmethod
-    def reset_status_time_5(unit = 'second', duration = 4):
+    def reset_status_time_5(unit = 'second', duration = 7):
         if unit == 'second': 
             duration = duration
         elif unit == 'minute': 
@@ -104,9 +108,12 @@ class ShelfFactory:
         elif unit == 'day':
             duration = duration *3600 * 24 
             
-        for i in range (0, 28): 
-            ShelfFactory.reset_status_time_phase5(index = i)
-            print("Sleeping ", duration)
+        for i in range (0, 4): 
+            start_idx = i * 16
+            end_index = i * 16 + 16 
+            for j in range(start_idx, end_index):  
+                ShelfFactory.reset_status_time_phase5(index = j)
+            print("Phase 5 Sleeping ", duration, i + 1)
             time.sleep(duration)
         pass 
 

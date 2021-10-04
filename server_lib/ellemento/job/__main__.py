@@ -32,8 +32,8 @@ if __name__ == '__main__':
         now = datetime.datetime.now()
         print("Today's date:", now)
         FarmFactory.create_farm()
-        BufferFactory.create_all_buffers()
-        JobFactory.create_thead_jobs()
+        #BufferFactory.create_all_buffers()
+        #JobFactory.create_thead_jobs()
         JobFactory.grow_plants_jobs() 
        
         while True: 
