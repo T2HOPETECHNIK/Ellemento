@@ -22,3 +22,7 @@ server_lib/ellemento/__pycache__/*.pyc
 
 server_lib/ellemento/__pycache__/__init__.cpython-37.pyc
 server_lib/ellemento/__pycache__/__init__.cpython-37.pyc
+/server_lib/ellemento/__pycache__
+/server_lib/lib/__pycache__
+/server_lib/ellemento/plc/__pycache__
+/server_lib/ellemento/job/__pycache__
