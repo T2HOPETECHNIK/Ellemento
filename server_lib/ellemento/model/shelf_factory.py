@@ -36,7 +36,7 @@ class ShelfFactory:
             
         for i in range (0, 3): 
             ShelfFactory.reset_status_time_phase1(index = i)
-            print("Phase 1 Sleeping ", duration, i + 1)
+            logger.info("Phase 1 Sleeping ", duration, i + 1)
             time.sleep(duration)
 
         pass 
@@ -54,7 +54,7 @@ class ShelfFactory:
             
         for i in range (0, 4): 
             ShelfFactory.reset_status_time_phase2(index = i)
-            print("Phase 2 Sleeping ", duration, i+1)
+            logger.info("Phase 2 Sleeping ", duration, i+1)
             time.sleep(duration)
 
         pass 
@@ -72,7 +72,7 @@ class ShelfFactory:
             
         for i in range (0, 7): 
             ShelfFactory.reset_status_time_phase3(index = i)
-            print("Phase 3 Sleeping ", duration, i  + 1)
+            logger.info("Phase 3 Sleeping ", duration, i  + 1)
             time.sleep(duration)
         pass 
 
@@ -91,9 +91,9 @@ class ShelfFactory:
             start_idx = i * 4
             end_index = i * 4 + 4 
             for j in range(start_idx, end_index):  
-                print("Shelf growing ", j)
+                logger.info("Shelf growing ", j)
                 ShelfFactory.reset_status_time_phase4(index = j)
-            print("Phase 4 Sleeping ", duration, i + 1)
+            logger.info("Phase 4 Sleeping ", duration, i + 1)
             time.sleep(duration)
         pass 
 
@@ -113,7 +113,7 @@ class ShelfFactory:
             end_index = i * 16 + 16 
             for j in range(start_idx, end_index):  
                 ShelfFactory.reset_status_time_phase5(index = j)
-            print("Phase 5 Sleeping ", duration, i + 1)
+            logger.info("Phase 5 Sleeping ", duration, i + 1)
             time.sleep(duration)
         pass 
 
@@ -219,9 +219,9 @@ class ShelfFactory:
     def create_phase1_shelves(): 
         if len(ShelfFactory.stage_1_shelves) != 0: 
             return ShelfFactory.stage_1_shelves 
-        print("Phase 1-2-3 trays creating")
+        logger.info("Phase 1-2-3 trays creating")
         TrayFactory.create_phase123_trays()
-        print("Phase 1-2-3 trays created")
+        logger.info("Phase 1-2-3 trays created")
         for index in range (1, constants.TOTAL_PHASE1_SHELF + 1): 
             ShelfFactory.max_shelf_id = ShelfFactory.max_shelf_id + 1
 
@@ -280,7 +280,7 @@ class ShelfFactory:
     @staticmethod
     def create_phase4_shelves():   
         lists = TrayFactory.create_phase4_trays()
-        print("-------------------------------")
+        #print("-------------------------------")
         #TrayFactory.print()
         #print(len(lists))
         if len(ShelfFactory.stage_4_shelves) != 0:

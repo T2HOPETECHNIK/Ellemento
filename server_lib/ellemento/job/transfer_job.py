@@ -378,6 +378,7 @@ class TransferJob:
         time.sleep(2)
         # Behavior of the transfer job 
         # Get the list of jobs,,
+        print("All jobs", len(TransferJob.all_transfer_jobs))
         for key in TransferJob.all_transfer_jobs: 
             print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx1")
             print(key)

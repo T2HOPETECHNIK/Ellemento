@@ -32,13 +32,17 @@ if __name__ == '__main__':
         now = datetime.datetime.now()
         print("Today's date:", now)
         FarmFactory.create_farm()
-        #BufferFactory.create_all_buffers()
-        #JobFactory.create_thead_jobs()
+        print("-------------------------------------------")
+        BufferFactory.create_all_buffers()
+        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+        JobFactory.create_thead_jobs()
+        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         JobFactory.grow_plants_jobs() 
+        print("###########################################")
        
         while True: 
             JobFactory.execute_jobs()
-            time.sleep(10); 
+            time.sleep(2); 
             print("... waiting")
     except KeyboardInterrupt:
         JobFactory.terminate_jobs()

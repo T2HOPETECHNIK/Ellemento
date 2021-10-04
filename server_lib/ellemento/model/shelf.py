@@ -42,7 +42,7 @@ class Shelf:
 
     @staticmethod
     def add_shelf(shelf): 
-        print(shelf)
+        #print(shelf)
         Shelf.all_shelves[shelf.id] = shelf
     
     @staticmethod 
@@ -155,7 +155,7 @@ class Shelf:
 
     def reset_status_time(self): 
         for tray in self._trays: 
-            print(tray)
+            #print(tray)
             tray.reset_status_time()
 
     def remove_tray(self, tray_id): 

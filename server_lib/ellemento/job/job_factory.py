@@ -31,12 +31,12 @@ class JobFactory:
         transfer_job_1_in = threading.Thread(target=TransferJob.plan_destination_phase1_in)
         transfer_job_1_in.start()  
         #-- Tested------------------------------------------------------------------ 
-        # transfer_job_phase_1 = threading.Thread(target = TransferJob.plan_phase1_move_out)
-        # transfer_job_phase_1.start()
-        # transfer_job_phase_2 = threading.Thread(target = TransferJob.plan_phase2_move_out)
-        # transfer_job_phase_2.start()
-        # transfer_job_phase_3 = threading.Thread(target = TransferJob.plan_phase3_move_out)
-        # transfer_job_phase_3.start()
+        transfer_job_phase_1 = threading.Thread(target = TransferJob.plan_phase1_move_out)
+        transfer_job_phase_1.start()
+        transfer_job_phase_2 = threading.Thread(target = TransferJob.plan_phase2_move_out)
+        transfer_job_phase_2.start()
+        transfer_job_phase_3 = threading.Thread(target = TransferJob.plan_phase3_move_out)
+        transfer_job_phase_3.start()
         # #from phase 4 shelf to 4 in buffer 
         transfer_job_phase_4_in = threading.Thread(target=TransferJob.plan_phase4_move_out)
         transfer_job_phase_4_in.start()
@@ -100,6 +100,7 @@ class JobFactory:
         unit = 'second'
 
         JobFactory.reset_status(unit=unit) 
+        print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
         time.sleep(1)
         # -- Tested ----------------------------------------------------------------------------- 
         check_duration_phase1 = threading.Thread(target=TrayFactory.check_duration, kwargs={'trays':  Tray.all_trays,'status': TrayStatus.PHASE1, 'unit':unit, 'duration': 3 })

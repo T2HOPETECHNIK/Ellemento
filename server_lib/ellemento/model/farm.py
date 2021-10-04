@@ -52,19 +52,19 @@ class Farm:
         ShelfFactory.create_phase4_shelves()
         logger.info("Creaste phase 4 shelves done")
         ShelfFactory.create_phase5_shelves()
-        ShelfFactory.print()
+        #ShelfFactory.print()
         logger.info("Creaste phase 5 shelves done")
         RackFactory.create_rack_A1()
-        RackFactory.print()
+        #RackFactory.print()
         
         logger.info("Create rack A1 DONE")
         RackFactory.create_rack_A2()
-        RackFactory.print()
+        #RackFactory.print()
         logger.info("Create rack A2 DONE")
         RackFactory.create_rack_B2()
-        RackFactory.print()
+        #RackFactory.print()
         logger.info("Create rack B2 DONE")
-        RackFactory.print()
+        #RackFactory.print()
         
         
         for rack in RackFactory.all_B2_racks: 

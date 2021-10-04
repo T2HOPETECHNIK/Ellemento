@@ -69,7 +69,7 @@ class TrayFactory:
         phase_4_trays = constants.TOTAL_PHASE4_SHELF * 9
         logger.info("Initializing phase 4 trays : %d" , phase_4_trays)
         for i in range (1, phase_4_trays + 1):
-            print(TrayFactory.max_tray_id)
+            #print(TrayFactory.max_tray_id)
             TrayFactory.max_tray_id = TrayFactory.max_tray_id + 1 
             tray_new =  TrayFactory.create_tray(id = TrayFactory.max_tray_id, type_name = "phase4")
             tray_new.has_foam = True
