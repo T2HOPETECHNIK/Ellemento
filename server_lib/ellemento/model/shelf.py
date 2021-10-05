@@ -5,6 +5,9 @@ from enum import Enum
 
 from ellemento.model.tray import TransferStatus, Tray, TrayStatus
 from ellemento.model.light_control import LightControl
+from lib.logging.logger_initialiser import EllementoLogger
+
+logger = EllementoLogger.__call__().logger
 
 class ShelfStatus(Enum):
     IDLE = 1        # clean and ready to use
@@ -58,7 +61,7 @@ class Shelf:
         self._phase = Phase.NOT_PLANNED 
         self._max_tray = max_tray
         # Set tray status of the rack. if has, it shall be tray number 
-        self._trays = {}
+        self._trays = []
         self._lights = {}
         self._valves = {}
         self._enable = True 
@@ -122,10 +125,14 @@ class Shelf:
 
     def reset_tray_status(self): 
         for tray in self._trays:
+            #print("...........")
+            #print(tray)
             tray.reset_tray_status()  
     
     def set_transfer_status(self, trans_status): 
         for tray in self._trays: 
+            #print("xxxxxxxxxxx")
+            #print(tray)
             tray.set_transfer_status(trans_status)
         self._transfer_status = trans_status 
 
@@ -143,28 +150,37 @@ class Shelf:
 
 
     def add_tray(self, tray): 
-        if tray.id not in self._trays: 
-            self._trays[tray.id] = tray
+        #print(tray)
+        if tray not in self._trays: 
+            self._trays.append(tray)
+
         tray.location = self; 
         if len(self._trays) == 1: 
             self._status = ShelfStatus.LOADING
         
         if len(self._trays) == self._max_tray:
             self._status = ShelfStatus.FULL
-     
 
-    def reset_status_time(self): 
-        for tray in self._trays: 
-            #print(tray)
-            tray.reset_status_time()
-
-    def remove_tray(self, tray_id): 
-        if tray_id in self._trays: 
-            del self._trays[tray_id]
-        if len(self._trays) == self._max_tray - 1: 
-            self._status = ShelfStatus.UNLOADING
-        if len(self._trays) == 0: 
+    def remove_tray(self): 
+        # no tray is inside the shelf 
+        if self._status == ShelfStatus.IDLE: 
+            return None
+        if self._status == ShelfStatus.LOADING: 
+            logger.warning("Not supposed to unload during loading process")
+            return None 
+        tray = self._trays.pop() 
+        tray.location = None; 
+        # fully unloaded
+        if len(self._trays) == 0:
             self._status = ShelfStatus.IDLE
+        else: 
+            self._status = ShelfStatus.UNLOADING
+        return tray 
+        
+    def reset_status_time(self): 
+        for obj_tray in self._trays: 
+            #print("-------------------" , tray.id)
+            obj_tray.reset_status_time()
 
     def add_light(self, light_id):
         if light_id not in self._lights: 

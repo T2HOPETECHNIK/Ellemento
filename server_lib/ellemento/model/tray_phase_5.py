@@ -11,4 +11,13 @@ class TrayPhase5(Tray):
         self.has_veg = True 
     
     def harvest(self):
+        self.reset_status_time()
+        self.status = TrayStatus.DIRTY
+        self.set_transfer_status(TrayStatus.IDLE) 
         self.has_veg = False 
+
+    def __repr__(self):
+        return "<object:%s id:%d type:%s>" % (self.__class__.__name__, self._id, self._type_name)
+
+    def __str__(self):
+        return "<object:%s, id:%d type:%s>" % (self.__class__.__name__, self._id, self._type_name)

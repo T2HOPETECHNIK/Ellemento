@@ -26,6 +26,7 @@ class Harvestor:
     # load a tray to the harvestoer 
     def load_tray(self, tray): 
         self._trays.insert(0, tray)
+        tray.location = self 
 
     # unload tray if harvesting is done 
     def unload_tray(self):

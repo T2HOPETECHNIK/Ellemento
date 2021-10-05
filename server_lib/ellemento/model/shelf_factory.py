@@ -231,7 +231,7 @@ class ShelfFactory:
             end_idx = ShelfFactory.max_shelf_id * 9 + 1
             for idx in range (start_idx, end_idx): 
                 TrayFactory.all_phase123_trays[idx].status = TrayStatus.PHASE1
-                tray = TrayPhase13(TrayFactory.all_phase123_trays[idx])
+                tray = TrayFactory.all_phase123_trays[idx]
                 #print("Add tray")
                 tray.status = TrayStatus.PHASE1
                 shelf_new.add_tray(tray)
@@ -252,7 +252,7 @@ class ShelfFactory:
             end_idx = ShelfFactory.max_shelf_id * 9 + 1
             for idx in range (start_idx, end_idx): 
                 TrayFactory.all_phase123_trays[idx].status = TrayStatus.PHASE2
-                tray = TrayPhase13(TrayFactory.all_phase123_trays[idx])
+                tray = TrayFactory.all_phase123_trays[idx]
                 shelf_new.add_tray(tray)
             ShelfFactory.stage_2_shelves.append(shelf_new)
         # to do add trays inside the shelf 
@@ -270,7 +270,7 @@ class ShelfFactory:
             end_idx = ShelfFactory.max_shelf_id * 9 + 1
             for idx in range (start_idx, end_idx): 
                 TrayFactory.all_phase123_trays[idx].status = TrayStatus.PHASE3
-                tray = TrayPhase13(TrayFactory.all_phase123_trays[idx])
+                tray = TrayFactory.all_phase123_trays[idx]
                 shelf_new.add_tray(tray)
             ShelfFactory.stage_3_shelves.append(shelf_new)
         # to do add trays inside the shelf 
@@ -297,7 +297,7 @@ class ShelfFactory:
             #     TrayFactory.all_phase_4_trays[obj].print()
             for idx in range (start_idx, end_idx): 
                 TrayFactory.all_phase_4_trays[idx].status = TrayStatus.PHASE4
-                tray = TrayPhase4(TrayFactory.all_phase_4_trays[idx])
+                tray = TrayFactory.all_phase_4_trays[idx]
                 shelf_new.add_tray(tray)
             ShelfFactory.stage_4_shelves.append(shelf_new)
         # to do add trays icnside the shelf 
@@ -315,7 +315,7 @@ class ShelfFactory:
             end_idx = ShelfFactory.max_shelf_id * 9 + 1
             for idx in range (start_idx, end_idx): 
                 TrayFactory.all_phase_5_trays[idx].status = TrayStatus.PHASE5
-                tray = TrayPhase5(TrayFactory.all_phase_5_trays[idx])
+                tray = TrayFactory.all_phase_5_trays[idx]
                 shelf_new.add_tray(tray)
             ShelfFactory.stage_5_shelves.append(shelf_new)
         if len(ShelfFactory.stage_5_shelves) != 0:

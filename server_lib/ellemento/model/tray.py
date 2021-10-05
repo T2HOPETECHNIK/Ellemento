@@ -64,6 +64,7 @@ class Tray:
         self._transfer_status = TransferStatus.IDLE
         # Initial location is not sure 
         self._enable = True 
+
         #str_log = "Created object " + self._type_name + " " + str(self._id); 
         #logger.info(str_log)
         self._set_status(TrayStatus.CREATED)
