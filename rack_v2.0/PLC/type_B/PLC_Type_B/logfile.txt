@@ -1,0 +1,4 @@
+3|***|2021-09-29 11:23:37.4154|***|5640|***|1|***|INFO|***|HWCONFIG.Form_Main.SaveUserProject|***|Project saved successfully.\r\nProject directory: C:\Project\Ellemento\repo\Ellemento_dev\rack_v2.0\PLC\type_B\PLC_Type_B 
+3|***|2021-09-29 13:45:51.4980|***|13960|***|1|***|INFO|***|HWCONFIG.Form_Main.SaveUserProject|***|Project saved successfully.\r\nProject directory: C:\Project\Ellemento\repo\Ellemento_dev\rack_v2.0\PLC\type_B\PLC_Type_B 
+4|***|2021-09-29 13:48:07.1847|***|13960|***|1|***|INFO|***|HWCONFIG.Form_Main.SaveUserProject|***|Project saved successfully.\r\nProject directory: C:\Project\Ellemento\repo\Ellemento_dev\rack_v2.0\PLC\type_B\PLC_Type_B 
+3|***|2021-09-29 14:33:38.1761|***|21572|***|1|***|INFO|***|HWCONFIG.Form_Main.SaveUserProject|***|Project saved successfully.\r\nProject directory: C:\Project\Ellemento\repo\Ellemento_dev\rack_v2.0\PLC\type_B\PLC_Type_B 
