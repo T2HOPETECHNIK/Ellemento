@@ -1,0 +1,4 @@
+Class,Identifiers,Address,Type,Initial Value,Comment,ErrorMessage
+Device is duplicate
+
+Declaration Type : VAR, Identifiers : CTRL_scheduler_lightoff_hh, Address : D4580, Type : ARRAY [14] OF WORD, Initial Value : [14(0)]Identifier Comments : Light off Hr
