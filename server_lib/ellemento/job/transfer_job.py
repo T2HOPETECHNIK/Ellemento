@@ -27,6 +27,8 @@ class TransferJob:
     all_transfer_jobs = {}
     id_cur = 0
     terminate_job = False 
+    job_queue = [] 
+
 
     # check all trays in the 5 phases shelf to determine which ones needs to be transferred  
 
@@ -373,32 +375,45 @@ class TransferJob:
 
         pass 
 
-    @staticmethod
-    def execute_transfer():
+    # Take transfer job one by one from job queue 
+    @classmethod
+    def execute_transfer(self):
+        while not self.job_queue.count == 0:
+            # pop front of the queue 
+            job = self.job_queue.pop(0)
+            job.transfer() 
+
+
+        # Execute transfer ,, get source, get destination
+
+        # update status .. 
+
+    @classmethod
+    def generate_job_queue(self):
         time.sleep(2)
         # Behavior of the transfer job 
         # Get the list of jobs,,
         print("All jobs", len(TransferJob.all_transfer_jobs))
         logger.info("Number of jobs %d", len(TransferJob.all_transfer_jobs))
+
         for key in TransferJob.all_transfer_jobs: 
           
             lst_jobs = TransferJob.all_transfer_jobs[key]
             print("Job type:", key, len(lst_jobs))
             if len(lst_jobs) == 0: 
-                
                 continue 
             while len(lst_jobs) > 0:
                 job = lst_jobs[-1]
                 print("Source:", job.source, type(job.source).__name__)
                 print("Destination:", job.destination, type(job.destination).__name__)
-                jobDone = job.transfer()
-                if jobDone: 
-                    lst_jobs.pop()
+                self.job_queue.append(job)
+
+                #jobDone = job.transfer()
+                #if jobDone: 
+                #    lst_jobs.pop()
         # Execute transfer ,, get source, get destination
-
-        # update status .. 
-
-
+        pass    
+    
     def __init__(self, id = -1, type_name = 'Default', source = None, destination = None):
         if id == -1: 
             TransferJob.id_cur =   TransferJob.id_cur + 1
