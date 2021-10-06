@@ -22,6 +22,7 @@ class JobFactory:
 
     @staticmethod
     def execute_jobs(): 
+        TransferJob.generate_job_queue()
         TransferJob.execute_transfer()
 
     # jobs creation threads 

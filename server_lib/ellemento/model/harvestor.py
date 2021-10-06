@@ -40,13 +40,13 @@ class Harvestor:
         return False  
 
     def ready_to_unload(self): 
-        tray_ph5 = TrayPhase5(self._trays(-1))
+        tray_ph5 = self._trays(-1)
         if tray_ph5.has_veg == False: 
             return True 
         return False  
 
     def harvest(self): 
-        tray_ph5 = TrayPhase5(self._trays(-1))
+        tray_ph5 = self._trays(-1)
         tray_ph5.harvest() 
 
 
