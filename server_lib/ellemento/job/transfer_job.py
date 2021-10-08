@@ -331,13 +331,15 @@ class TransferJob:
         # 4 in buffer
         while not TransferJob.terminate_job: 
             logger.warn("checking phase 5 shelf") 
+            if Phase.PHASE5 in TransferJob.all_transfer_jobs:
+                logger.warn("Phase 5 jobs %d", len(TransferJob.all_transfer_jobs[Phase.PHASE5]))
             shelf_phase_5 = ShelfFactory.phase5_ready_to_transfer()
             if len(shelf_phase_5) == 0:
                 logger.warn("Not any fully grown phase 5 shelf") 
                 time.sleep(2)
                 continue
             else: 
-                logger.info("%d phase 5 shelves is fully grown", len(shelf_phase_5))
+                logger.warn("%d phase 5 shelves is fully grown", len(shelf_phase_5))
 
             harvestor = Harvestor.get_harvestor()
             if not harvestor.ready_to_load():
@@ -346,7 +348,7 @@ class TransferJob:
                 continue
             
             if harvestor.planned_transfer: 
-                logger.info("Transfer planned for the harvestor") 
+                logger.warn("Transfer planned for the harvestor") 
                 time.sleep(2)
                 continue
 
@@ -358,6 +360,8 @@ class TransferJob:
             new_job.set_destination(harvestor)
             lst_jobs = []
             lst_jobs.append(new_job)
+            if Phase.PHASE5 in TransferJob.all_transfer_jobs:
+                logger.warn("Phase 5 jobs %d", len(TransferJob.all_transfer_jobs[Phase.PHASE5]))
             TransferJob.add_jobs(status = Phase.PHASE5, lst_jobs = lst_jobs)
             time.sleep(2)
 

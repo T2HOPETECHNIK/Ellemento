@@ -173,7 +173,9 @@ class ShelfFactory:
     def phase5_ready_to_transfer(): 
         retList = [] 
         for shelf in ShelfFactory.stage_5_shelves: 
+            #logger.warn("Shelf status %s", shelf.transfer_status)
             if shelf.ready_to_transfer(): 
+        
                 retList.append(shelf)
         return retList
 
