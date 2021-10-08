@@ -49,7 +49,7 @@ class Buffer:
 
     def load(self, tray):
         if len(self.trays) >= 9: 
-            raise Exception("Not able to load, buffer is full")
+            print("Not able to load, buffer is full")
             return 
         # update tray location to be the buffer 
         tray.location = self; 

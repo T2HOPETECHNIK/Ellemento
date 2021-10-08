@@ -114,7 +114,7 @@ class TrayFactory:
         while not TrayFactory.terminate_job: 
             ret_list = TrayFactory.get_full_grown_trays(status)
             #logger.info("Checking growing status %s", str(status))
-
+            logger.warn("Checking phase 5 trays %s %d", status, len(ret_list))
             for tray_idx in trays:
                 time_now    = datetime.datetime.now() 
                 diff        = time_now -  trays[tray_idx].status_time 
@@ -140,7 +140,7 @@ class TrayFactory:
                     elif unit == 'second': 
                         second = diff.seconds 
                         if second > duration:
-                            logger.info("Greater than duration %d", duration) 
+                            logger.warning("Greater than duration %d", duration) 
                             trays[tray_idx].set_transfer_status(TransferStatus.READY_TO_TRANSFER)
                             ret_list.append(trays[tray_idx])
                     else:  

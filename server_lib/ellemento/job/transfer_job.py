@@ -44,6 +44,8 @@ class TransferJob:
     def get_list_full_grown_trays(status = TrayStatus.PHASE1):
         return TrayFactory.get_full_grown_trays(status= status)
 
+
+
     # @staticmethod 
     # def prepare_transfer_job_shelf(): 
     #     #      
@@ -328,9 +330,10 @@ class TransferJob:
         # only if the buffer still have places
         # 4 in buffer
         while not TransferJob.terminate_job: 
+            logger.warn("checking phase 5 shelf") 
             shelf_phase_5 = ShelfFactory.phase5_ready_to_transfer()
             if len(shelf_phase_5) == 0:
-                logger.info("Not any fully grown phase 5 shelf") 
+                logger.warn("Not any fully grown phase 5 shelf") 
                 time.sleep(2)
                 continue
             else: 
@@ -338,7 +341,7 @@ class TransferJob:
 
             harvestor = Harvestor.get_harvestor()
             if not harvestor.ready_to_load():
-                logger.info("Harvestor is not ready to load any trays") 
+                logger.warn("Harvestor is not ready to load any trays") 
                 time.sleep(2)
                 continue
             
@@ -397,8 +400,8 @@ class TransferJob:
         time.sleep(2)
         # Behavior of the transfer job 
         # Get the list of jobs,,
-        print("All jobs", len(TransferJob.all_transfer_jobs))
-        logger.info("Number of jobs %d", len(TransferJob.all_transfer_jobs))
+        print("All jobs ***", len(TransferJob.all_transfer_jobs))
+        logger.warn("Number of jobs ready to transfer %d", len(TransferJob.all_transfer_jobs))
 
         for key in TransferJob.all_transfer_jobs: 
           
@@ -413,11 +416,6 @@ class TransferJob:
                 print("Destination:", job.destination, type(job.destination).__name__)
                 self.job_queue.append([key, job])
                 lst_jobs.pop()
-
-                #jobDone = job.transfer()
-                #if jobDone: 
-                #    lst_jobs.pop()
-        # Execute transfer ,, get source, get destination
         pass    
     
     def __init__(self, id = -1, type_name = 'Default', source = None, destination = None):
@@ -472,6 +470,8 @@ class TransferJob:
                 time.sleep(5)
                 print("Load a tray to harvestor")
                 self._destination.load(tray)
+           
+                    
                 print("Tay is moved to 4-in buffer hurray")
 
     def execute_phase5_out(self):
@@ -486,7 +486,17 @@ class TransferJob:
                 print("Unload a tray from shelf")
                 time.sleep(5)
                 print("Load a tray to harvestor")
-                self._destination.load_tray(tray)
+                while True: 
+                    ret = self._destination.load_tray(tray)
+                    self._destination.harvest() 
+                    self._destination.unload_tray()
+                    if not ret: 
+                        time.sleep(4)
+                        print("Not able to load the tray into harvestor")
+                        continue
+                    break; 
+
+
                 tray.harvest()
                 print("Tay is harvested, hurray")
 

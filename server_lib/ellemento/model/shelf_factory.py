@@ -36,7 +36,7 @@ class ShelfFactory:
             
         for i in range (0, 3): 
             ShelfFactory.reset_status_time_phase1(index = i)
-            logger.info("Phase 1 Sleeping ", duration, i + 1)
+            logger.info("Phase 1 Sleeping  %d %d", duration, i + 1)
             time.sleep(duration)
 
         pass 
@@ -54,7 +54,7 @@ class ShelfFactory:
             
         for i in range (0, 4): 
             ShelfFactory.reset_status_time_phase2(index = i)
-            logger.info("Phase 2 Sleeping ", duration, i+1)
+            logger.info("Phase 2 Sleeping %d %d", duration, i+1)
             time.sleep(duration)
 
         pass 
@@ -72,7 +72,7 @@ class ShelfFactory:
             
         for i in range (0, 7): 
             ShelfFactory.reset_status_time_phase3(index = i)
-            logger.info("Phase 3 Sleeping ", duration, i  + 1)
+            logger.info("Phase 3 Sleeping %d %d", duration, i  + 1)
             time.sleep(duration)
         pass 
 
@@ -91,9 +91,9 @@ class ShelfFactory:
             start_idx = i * 4
             end_index = i * 4 + 4 
             for j in range(start_idx, end_index):  
-                logger.info("Shelf growing ", j)
+                logger.info("Shelf growing %d", j)
                 ShelfFactory.reset_status_time_phase4(index = j)
-            logger.info("Phase 4 Sleeping ", duration, i + 1)
+            logger.info("Phase 4 Sleeping  %d %d", duration, i + 1)
             time.sleep(duration)
         pass 
 
@@ -113,7 +113,7 @@ class ShelfFactory:
             end_index = i * 16 + 16 
             for j in range(start_idx, end_index):  
                 ShelfFactory.reset_status_time_phase5(index = j)
-            logger.info("Phase 5 Sleeping ", duration, i + 1)
+            logger.info("Phase 5 Sleeping  %d %d", duration, i + 1)
             time.sleep(duration)
         pass 
 
