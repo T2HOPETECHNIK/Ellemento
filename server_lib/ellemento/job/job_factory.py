@@ -22,8 +22,10 @@ class JobFactory:
 
     @staticmethod
     def execute_jobs(): 
-        TransferJob.generate_job_queue()
-        TransferJob.execute_transfer()
+        job_queue_thread = threading.Thread(target = TransferJob.generate_job_queue()) 
+        job_thread = threading.Thread(TransferJob.execute_transfer())
+        job_queue_thread.start()
+        job_thread.start()
 
     # jobs creation threads 
     @staticmethod 

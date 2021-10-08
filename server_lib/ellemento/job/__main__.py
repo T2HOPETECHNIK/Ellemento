@@ -39,9 +39,9 @@ if __name__ == '__main__':
         print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         JobFactory.grow_plants_jobs() 
         print("###########################################")
-       
+        JobFactory.execute_jobs()
         while True: 
-            JobFactory.execute_jobs()
+            
             time.sleep(2); 
             print("... waiting")
     except KeyboardInterrupt:

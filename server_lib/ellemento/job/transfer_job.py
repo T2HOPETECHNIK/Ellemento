@@ -381,15 +381,18 @@ class TransferJob:
     # Take transfer job one by one from job queue 
     @classmethod
     def execute_transfer(self):
-        while len(self.job_queue) > 0:
-            # pop front of the queue 
-            print(len(self.job_queue))
-            job = self.job_queue[0]
-            jobDone = job[1].transfer(job[0]) 
-            print("Is job done:", jobDone)
-            if jobDone: 
-                print("job is done")
-                job_done = self.job_queue.pop(0)
+        while True: 
+            time.sleep(2)
+            continue
+            while len(self.job_queue) > 0:
+                # pop front of the queue 
+                print(len(self.job_queue))
+                job = self.job_queue[0]
+                jobDone = job[1].transfer(job[0]) 
+                print("Is job done:", jobDone)
+                if jobDone: 
+                    print("job is done")
+                    job_done = self.job_queue.pop(0)
 
         # Execute transfer ,, get source, get destination
 
@@ -397,26 +400,28 @@ class TransferJob:
 
     @classmethod
     def generate_job_queue(self):
-        time.sleep(2)
-        # Behavior of the transfer job 
-        # Get the list of jobs,,
-        print("All jobs ***", len(TransferJob.all_transfer_jobs))
-        logger.warn("Number of jobs ready to transfer %d", len(TransferJob.all_transfer_jobs))
 
-        for key in TransferJob.all_transfer_jobs: 
-          
-            lst_jobs = TransferJob.all_transfer_jobs[key]
-            print("Job type:", key, len(lst_jobs))
-            if len(lst_jobs) == 0: 
-                time.sleep(5)
-                continue 
-            while len(lst_jobs) > 0:
-                job = lst_jobs[-1]
-                print("Source:", job.source, type(job.source).__name__)
-                print("Destination:", job.destination, type(job.destination).__name__)
-                self.job_queue.append([key, job])
-                lst_jobs.pop()
-        pass    
+        while True: 
+            time.sleep(2)
+            # Behavior of the transfer job 
+            # Get the list of jobs,,
+            print("All jobs ***", len(TransferJob.all_transfer_jobs))
+            logger.warn("Number of jobs ready to transfer %d", len(TransferJob.all_transfer_jobs))
+            print("Jobqueue size", len(self.job_queue))
+            for key in TransferJob.all_transfer_jobs: 
+            
+                lst_jobs = TransferJob.all_transfer_jobs[key]
+                print("Job type:", key, len(lst_jobs))
+                if len(lst_jobs) == 0: 
+                    time.sleep(5)
+                    continue 
+                while len(lst_jobs) > 0:
+                    job = lst_jobs[-1]
+                    print("Source:", job.source, type(job.source).__name__)
+                    print("Destination:", job.destination, type(job.destination).__name__)
+                    self.job_queue.append([key, job])
+                    lst_jobs.pop()
+            pass    
     
     def __init__(self, id = -1, type_name = 'Default', source = None, destination = None):
         if id == -1: 
