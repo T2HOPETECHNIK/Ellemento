@@ -1,0 +1,2 @@
+3|***|2021-10-07 13:24:09.3785|***|16976|***|1|***|INFO|***|HWCONFIG.Form_Main.SaveUserProject|***|Project saved successfully.\r\nProject directory: C:\Project\Ellemento\repo\Ellemento_dev\rack_v2.0\PLC\type_A\PLC_Type_A 
+3|***|2021-10-07 13:26:20.0357|***|7880|***|1|***|INFO|***|HWCONFIG.Form_Main.SaveUserProject|***|Project saved successfully.\r\nProject directory: C:\Project\Ellemento\repo\Ellemento_dev\rack_v2.0\PLC\type_A\PLC_Type_A 
