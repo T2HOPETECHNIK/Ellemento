@@ -140,7 +140,10 @@ class Shelf:
     def ready_to_transfer(self): 
         bRet = True 
         for tray in self._trays: 
+            #logger.warning("tray %s", tray.transfer_status)
             if (tray.transfer_status != TransferStatus.READY_TO_TRANSFER): 
+                # print(tray)
+                # print("*********************")
                 bRet = False 
                 break
         

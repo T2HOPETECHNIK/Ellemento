@@ -44,6 +44,8 @@ class TransferJob:
     def get_list_full_grown_trays(status = TrayStatus.PHASE1):
         return TrayFactory.get_full_grown_trays(status= status)
 
+
+
     # @staticmethod 
     # def prepare_transfer_job_shelf(): 
     #     #      
@@ -328,22 +330,25 @@ class TransferJob:
         # only if the buffer still have places
         # 4 in buffer
         while not TransferJob.terminate_job: 
+            logger.warn("checking phase 5 shelf") 
+            if Phase.PHASE5 in TransferJob.all_transfer_jobs:
+                logger.warn("Phase 5 jobs %d", len(TransferJob.all_transfer_jobs[Phase.PHASE5]))
             shelf_phase_5 = ShelfFactory.phase5_ready_to_transfer()
             if len(shelf_phase_5) == 0:
-                logger.info("Not any fully grown phase 5 shelf") 
+                logger.warn("Not any fully grown phase 5 shelf") 
                 time.sleep(2)
                 continue
             else: 
-                logger.info("%d phase 5 shelves is fully grown", len(shelf_phase_5))
+                logger.warn("%d phase 5 shelves is fully grown", len(shelf_phase_5))
 
             harvestor = Harvestor.get_harvestor()
             if not harvestor.ready_to_load():
-                logger.info("Harvestor is not ready to load any trays") 
+                logger.warn("Harvestor is not ready to load any trays") 
                 time.sleep(2)
                 continue
             
             if harvestor.planned_transfer: 
-                logger.info("Transfer planned for the harvestor") 
+                logger.warn("Transfer planned for the harvestor") 
                 time.sleep(2)
                 continue
 
@@ -355,6 +360,8 @@ class TransferJob:
             new_job.set_destination(harvestor)
             lst_jobs = []
             lst_jobs.append(new_job)
+            if Phase.PHASE5 in TransferJob.all_transfer_jobs:
+                logger.warn("Phase 5 jobs %d", len(TransferJob.all_transfer_jobs[Phase.PHASE5]))
             TransferJob.add_jobs(status = Phase.PHASE5, lst_jobs = lst_jobs)
             time.sleep(2)
 
@@ -378,11 +385,18 @@ class TransferJob:
     # Take transfer job one by one from job queue 
     @classmethod
     def execute_transfer(self):
-        while not self.job_queue.count == 0:
-            # pop front of the queue 
-            job = self.job_queue.pop(0)
-            job.transfer() 
-
+        while True: 
+            time.sleep(2)
+            continue
+            while len(self.job_queue) > 0:
+                # pop front of the queue 
+                print(len(self.job_queue))
+                job = self.job_queue[0]
+                jobDone = job[1].transfer(job[0]) 
+                print("Is job done:", jobDone)
+                if jobDone: 
+                    print("job is done")
+                    job_done = self.job_queue.pop(0)
 
         # Execute transfer ,, get source, get destination
 
@@ -390,29 +404,28 @@ class TransferJob:
 
     @classmethod
     def generate_job_queue(self):
-        time.sleep(2)
-        # Behavior of the transfer job 
-        # Get the list of jobs,,
-        print("All jobs", len(TransferJob.all_transfer_jobs))
-        logger.info("Number of jobs %d", len(TransferJob.all_transfer_jobs))
 
-        for key in TransferJob.all_transfer_jobs: 
-          
-            lst_jobs = TransferJob.all_transfer_jobs[key]
-            print("Job type:", key, len(lst_jobs))
-            if len(lst_jobs) == 0: 
-                continue 
-            while len(lst_jobs) > 0:
-                job = lst_jobs[-1]
-                print("Source:", job.source, type(job.source).__name__)
-                print("Destination:", job.destination, type(job.destination).__name__)
-                self.job_queue.append(job)
-
-                #jobDone = job.transfer()
-                #if jobDone: 
-                #    lst_jobs.pop()
-        # Execute transfer ,, get source, get destination
-        pass    
+        while True: 
+            time.sleep(2)
+            # Behavior of the transfer job 
+            # Get the list of jobs,,
+            print("All jobs ***", len(TransferJob.all_transfer_jobs))
+            logger.warn("Number of jobs ready to transfer %d", len(TransferJob.all_transfer_jobs))
+            print("Jobqueue size", len(self.job_queue))
+            for key in TransferJob.all_transfer_jobs: 
+            
+                lst_jobs = TransferJob.all_transfer_jobs[key]
+                print("Job type:", key, len(lst_jobs))
+                if len(lst_jobs) == 0: 
+                    time.sleep(5)
+                    continue 
+                while len(lst_jobs) > 0:
+                    job = lst_jobs[-1]
+                    print("Source:", job.source, type(job.source).__name__)
+                    print("Destination:", job.destination, type(job.destination).__name__)
+                    self.job_queue.append([key, job])
+                    lst_jobs.pop()
+            pass    
     
     def __init__(self, id = -1, type_name = 'Default', source = None, destination = None):
         if id == -1: 
@@ -438,37 +451,87 @@ class TransferJob:
     def set_destination(self, destination): 
         self._destination = destination
     
+    def execute_phase3_out(self): 
+         while self.source.status is not ShelfStatus.IDLE: 
+            tray = self._source.remove_tray() 
+            if tray == None: 
+                logger.error("Harvesting of shelf is done")
+                # job is done time to remove it from the list 
+            else: 
+                print(tray)
+                print(tray.id)
+                print("Unload a tray from shelf")
+                time.sleep(5)
+                print("Load a tray to harvestor")
+                self._destination.load(tray)
+                print("Tay is moved to 3-in buffer hurray")
 
-    def transfer(self):
+    def execute_phase4_out(self): 
+        while self.source.status is not ShelfStatus.IDLE: 
+            tray = self._source.remove_tray() 
+            if tray == None: 
+                logger.error("Harvesting of shelf is done")
+                # job is done time to remove it from the list 
+            else: 
+                print(tray)
+                print(tray.id)
+                print("Unload a tray from shelf")
+                time.sleep(5)
+                print("Load a tray to harvestor")
+                self._destination.load(tray)
+           
+                    
+                print("Tay is moved to 4-in buffer hurray")
+
+    def execute_phase5_out(self):
+        while self.source.status is not ShelfStatus.IDLE:
+            tray = self._source.remove_tray() 
+            if tray == None: 
+                logger.error("Harvesting of shelf is done")
+                # job is done time to remove it from the list 
+            else: 
+                print(tray)
+                print(tray.id)
+                print("Unload a tray from shelf")
+                time.sleep(5)
+                print("Load a tray to harvestor")
+                while True: 
+                    ret = self._destination.load_tray(tray)
+                    self._destination.harvest() 
+                    self._destination.unload_tray()
+                    if not ret: 
+                        time.sleep(4)
+                        print("Not able to load the tray into harvestor")
+                        continue
+                    break; 
+
+
+                tray.harvest()
+                print("Tay is harvested, hurray")
+
+    def transfer(self, job_type):
+        print(job_type)
         print(type(self).__name__)
         ret = False 
-        if type(self._source).__name__ == 'Shelf' and type(self._destination).__name__ == 'Harvestor':
+        print(type(self._source).__name__) 
+        print(type(self._destination).__name__)
+        if job_type == Phase.PHASE5:
             print("............................................................")
-            while self.source.status is not ShelfStatus.IDLE:
-                tray = self._source.remove_tray() 
-                if tray == None: 
-                    logger.error("Harvesting of shelf is done")
-                    # job is done time to remove it from the list 
-                else: 
-                    print(tray)
-                    print(tray.id)
-                    print("Unload a tray from shelf")
-                    time.sleep(5)
-                    print("Load a tray to harvestor")
-                    self._destination.load_tray(tray)
-                    tray.harvest()
-                    print("Tay is harvested, hurray")
+            self.execute_phase5_out()
+            ret = True 
+            time.sleep(5) 
+            print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+        elif job_type == Phase.PHASE4: 
+            self.execute_phase4_out() 
+            time.sleep(5)
+            ret = True 
+        elif job_type == Phase.PHASE3: 
+            self.execute_phase3_out() 
+            time.sleep(5)
+            print("Not yet implemented")
             ret = True 
         else: 
             time.sleep(5)
             print("Not yet implemented")
+            ret = True 
         return ret
-
-    # def transfer(self): 
-    #     if (tray.location != source):
-    #         raise Exception("Tray not in source location")
-        
-    #     p = Process(target=TransferJob.execute_transfer)
-    #     p.start()
-    #     p.join()
-    #     tray.location = destination
