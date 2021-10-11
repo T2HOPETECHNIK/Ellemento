@@ -37,6 +37,10 @@ class LightControl:
     def id(self, value):
         self._id = value 
 
+    # bind the light control with a particular modbus io 
+    def bind_plc(self, plc): 
+        self._plc = plc
+
     def on(self, percent = 100): 
         self._status = LightStatus.ON
         self._percent = percent
