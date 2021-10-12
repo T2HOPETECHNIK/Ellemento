@@ -11,7 +11,7 @@
                 "modeAddress": 2500,
                 "SHELF_LIGHT_ON_OFF_FEEDBACK": 
                 {
-                    "address": 4020, 
+                    "position": 4020, 
                     "bits": 14
                 },
                 

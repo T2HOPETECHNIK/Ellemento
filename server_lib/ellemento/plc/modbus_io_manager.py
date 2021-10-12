@@ -15,9 +15,13 @@ class ModbusIOManager(object):
 
       # name = '', id = '', ip = '',
 
-    @staticmethod
-    def get_modbus_io(**kwargs):
-         for key, value in kwargs.items():
+    @classmethod
+    def get_modbus_io(self, **kwargs):
+        if len(self.modbus_io_dict) == 0:
+            # create modbus io if not defined 
+            self.create_modbus_io()
+    
+        for key, value in kwargs.items():
             if key == 'name': 
                 return ModbusIOManager.modbus_io_dict[value]
             if key == "id": 

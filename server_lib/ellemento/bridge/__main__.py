@@ -9,7 +9,7 @@ from ellemento.model.tray_factory import TrayFactory
 # from ellemento.model.ventilation_control_factory import VentilationControlFactory
 # from ellemento.model.farm_factory import FarmFactory
 from lib.logging.logger_initialiser import EllementoLogger
-from ellemento.bridge.plc_bridge import ModelPlcBridge
+from ellemento.bridge.bridge_factory import ModelPlcBridgeFactory
 # from ellemento.model.buffer import Buffer
 
 phase_1_shelves = 4
@@ -151,8 +151,9 @@ def test_tray_duration():
     pass
 
 def test_bridge(): 
-    bridge = ModelPlcBridge()
-    bridge.print_model()
+    ModelPlcBridgeFactory.build_bridge()
+    brg = ModelPlcBridgeFactory.get_bridge(type = "Light", id = 1)
+    brg.on_off_status()
 
 if __name__ == '__main__':
 

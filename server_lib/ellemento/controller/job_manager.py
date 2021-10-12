@@ -1,9 +1,7 @@
 
 import threading
 import logging
-import jobThread
 import time
-import constants
 from queue import Queue
 
 class JobManager:
