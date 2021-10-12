@@ -29,27 +29,48 @@ class LightModelPlcBridge(ModelPlcBridge):
         #all_lights = json.load(self.cfg[type])
         #print(all_lights)
 
-    def on_light(self): 
-        pass 
+    def on_light(self):
+        tag_name = self.address['control']['tag']
+        location = self.address['control']['position'] 
+        register_address = self.modbus_io.config['address'][tag_name]['position']
+        res, error = self.modbus_io.write_coil(register_address, location, True)
+        return res, error 
 
     def off_light(self): 
-        pass 
+        tag_name = self.address['control']['tag']
+        location = self.address['control']['position'] 
+        register_address = self.modbus_io.config['address'][tag_name]['position']
+        res, error = self.modbus_io.write_coil(register_address, location, False)
+        return res, error
 
-    def dim_light(self): 
-        pass 
+    def set_intensity(self, percent): 
+        tag_name = self.address['control_intensity']['tag']
+        location = self.address['control_intensity']['position']
+        register_address = self.modbus_io.config['address'][tag_name][location]
+        print("------", register_address)
+        res, error = self.modbus_io.write_register(register_address, percent)
+        ret = True  
+        if error: 
+            ret = False
+        return ret, error 
 
-    def bright_light(self ):
-        pass 
 
+    # Read intensity value of lights 
     def intensity(self): 
-        pass
-
-    def on_off_status(self): 
-        print(self.address['on']['tag'])
-        print(self.modbus_io.config)
-        register_address = self.modbus_io.config['address']['SHELF_LIGHT_ON_OFF_FEEDBACK']['position']
+        tag_name = self.address['intensity']['tag']
+        location = self.address['intensity']['position']
+        register_address = self.modbus_io.config['address'][tag_name][location]
         res, error = self.modbus_io.read_register(register_address, 1)
-        print(register_address)
-        print(res.registers)
-        #self.modbus_io. 
-        pass 
+        ret = None 
+        if not error: 
+            ret = res.registers[0]
+        return ret, res 
+        
+    # Read of/off status of the lights 
+    def on_off_status(self): 
+        tag_name = self.address['status']['tag']
+        location = self.address['status']['position']
+        register_address = self.modbus_io.config['address'][tag_name]['position']
+        res, error = self.modbus_io.read_coil(register_address, location)
+        return res, error 
+     

@@ -9,7 +9,10 @@ class ModelPlcBridgeFactory:
     
     light_plc_bridge_dict = {}
     @classmethod 
-    def get_bridge(self, type = None, id = -1): 
+    def get_bridge(self, type = None, id = -1):
+        if  len(self.light_plc_bridge_dict) == 0: 
+            self.build_bridge()
+        
         if type == "Light": 
             return self.light_plc_bridge_dict[id]
 

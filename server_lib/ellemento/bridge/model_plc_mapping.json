@@ -19,10 +19,28 @@
             "id": 1, 
             "address":{
                 "modbus_id": 1, 
-                "on": {
-                    "tag": "SHELF_LIGHT_ON_OFF_FEEDBACK",
-                    "position": 1, 
+                "status": {
+                    "tag": "FEEDBACK_LED",
+                    "position": 0, 
                     "type": "boolean"
+                },
+                "control":
+                {
+                    "tag": "CTRL_LIGHT_ON",
+                    "position": 0, 
+                    "type": "boolean"
+                },
+                "intensity": 
+                {
+                    "tag": "FEEDBACK_LED_INTENSITY", 
+                    "position": 0, 
+                    "type": "interger"
+                },
+                "control_intensity":
+                {
+                    "tag": "CTRL_LIGHT_INTENSITY", 
+                    "position": 0, 
+                    "type": "interger"
                 }
             }
 

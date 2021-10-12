@@ -110,6 +110,7 @@ class PLCManager(object):
         res = 0
         try:
             res = self.client.write_registers(addr, data, unit=1)
+            print(res)
             assert(res.function_code < 0x80)     # test that we are not an error
         except:
             error = 1
@@ -121,10 +122,7 @@ class PLCManager(object):
         res = 0
         try:
             res = self.client.read_holding_registers(addr, count = size, unit=8)
-            print(res.registers)
-            print(res.isError()) 
         except:
-            print("getting error")
             error = 1
         return res, error
 
@@ -162,7 +160,6 @@ class PLCManager(object):
             binvalue = self.bitvalue(bitpos)
             res = self.client.read_holding_registers(addr, 1)
             andresult = (res.registers[0] & binvalue)
-
             if andresult == 0:
                 bres = False
             else:

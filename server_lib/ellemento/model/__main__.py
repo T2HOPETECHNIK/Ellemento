@@ -2,7 +2,7 @@ from ellemento.model.farm_factory import FarmFactory
 from ellemento.model.tray import Tray, TrayStatus
 from ellemento.model.tray_factory import TrayFactory
 # from ellemento.model.shelf_factory import ShelfFactory
-# from ellemento.model.light_factory import LightFactory
+from ellemento.model.light_factory import LightFactory
 # from ellemento.model.water_control_factory import WaterControlFactory
 # from ellemento.model.pump_control_factory import PumpControlFactory
 # from ellemento.model.rack_factory import RackFactory
@@ -151,8 +151,18 @@ def test_tray_duration():
     pass
 
 def test_bridge(): 
-    bridge = ModelPlcBridge()
-    bridge.print_model()
+    light = LightFactory.create_light(id = 1)
+    res, error = light.off()
+    res, error = light.status()
+    res, error = light.set_intensity(90)
+    res, error = light.intensity()
+    print(res)
+    time.sleep(5)
+    res, error = light.on()
+    res, error = light.status()
+
+    # bridge = ModelPlcBridge()
+    # bridge.print_model()
 
 if __name__ == '__main__':
 
