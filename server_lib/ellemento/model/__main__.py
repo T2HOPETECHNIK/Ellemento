@@ -3,7 +3,7 @@ from ellemento.model.tray import Tray, TrayStatus
 from ellemento.model.tray_factory import TrayFactory
 # from ellemento.model.shelf_factory import ShelfFactory
 from ellemento.model.light_factory import LightFactory
-# from ellemento.model.water_control_factory import WaterControlFactory
+from ellemento.model.water_control_factory import WaterControlFactory
 # from ellemento.model.pump_control_factory import PumpControlFactory
 # from ellemento.model.rack_factory import RackFactory
 # from ellemento.model.ventilation_control_factory import VentilationControlFactory
@@ -150,7 +150,7 @@ def test_tray_duration():
         print(obj.transfer_status)
     pass
 
-def test_bridge(): 
+def test_light_bridge(): 
     light = LightFactory.create_light(id = 1)
     res, error = light.off()
     res, error = light.status()
@@ -161,13 +161,22 @@ def test_bridge():
     res, error = light.on()
     res, error = light.status()
 
+def test_water_bridge():
+    valve = WaterControlFactory.create_valve(id = 1); 
+    valve.on()
+    valve.adjust(80)
+    valve.get_percent()
+    valve.off()
+
+
     # bridge = ModelPlcBridge()
     # bridge.print_model()
 
 if __name__ == '__main__':
 
     #FarmFactory.create_farm()
-    test_bridge()
+    test_light_bridge()
+    test_water_bridge()
     pass
     #test_tray_duration()
 

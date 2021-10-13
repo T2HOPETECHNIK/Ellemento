@@ -49,7 +49,34 @@
 
         }
     ],
-    "valve":[],
+    "valve":[
+        {
+            "id": 1,
+            "address":{
+                "modbus_id": 1, 
+                "control":
+                {
+                    "tag": "CTRL_PV_ON",
+                    "position": 0, 
+                    "type": "boolean"
+                },
+                "feedback_rpm": 
+                {
+                    "tag": "FEEDBACK_VALVE_SETTING", 
+                    "position": 0, 
+                    "type": "integer"
+                },
+                "control_rpm":
+                {
+                    "tag": "CTRL_PV_VALUE", 
+                    "position": 0, 
+                    "type": "integer"
+                }
+            }
+
+        }
+
+    ],
     "shelf":[],
     "fan":[]
 }
