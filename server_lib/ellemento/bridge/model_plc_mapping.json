@@ -8,9 +8,32 @@
             "address":
             {
                 "modbus_id": 1, 
-                "CTRL_PUMP_MODE":
+                "status":{
+                    "tag": "FEEDBACK_PUMP_ON",
+                    "position": 0, 
+                    "type": "boolean"
+                }, 
+                "control":{
+                    "tag": "CTRL_PUMP_ON", 
+                    "position": 0, 
+                    "type": "boolean"
+                },
+                "control_mode":
                 {
                     "tag": "CTRL_PUMP_MODE", 
+                    "position": 0, 
+                    "type":"integer" 
+                },
+                "control_rpm":
+                {
+                    "tag": "CTRL_PUMP_RPM_SETPOINT",
+                    "position": 0, 
+                    "type": "integer"
+                },
+                "control_flowrate":
+                {
+                    "tag": "CTRL_PUMP_FLOWRATE_SETPOINT",
+                    "position": 0, 
                     "type": "integer"
                 }
             }
@@ -77,6 +100,26 @@
         }
 
     ],
-    "shelf":[],
+    "shelf":[
+        {
+            "id": 1,
+            "address":{
+                "modbus_id": 1, 
+                "apply_update": 
+                {
+                    "tag": "CTRL_APPLY_UPDATE", 
+                    "position": 0, 
+                    "type": "sysbool"
+                },
+                "section_mode":
+                {
+                    "tag": "CTRL_SECTION_MODE", 
+                    "position": 0, 
+                    "type": "integer"
+                }
+            }
+        }
+
+    ],
     "fan":[]
 }

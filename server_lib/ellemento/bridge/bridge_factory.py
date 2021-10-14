@@ -10,6 +10,7 @@ class ModelPlcBridgeFactory:
     
     light_plc_bridge_dict = {}
     valve_plc_bridge_dict = {} 
+    pump_plc_bridge_dict = {} 
 
     @classmethod 
     def get_bridge(self, type = None, id = -1):
@@ -18,8 +19,10 @@ class ModelPlcBridgeFactory:
         
         if type == "Light": 
             return self.light_plc_bridge_dict[id]
-        if type == "Valve":
+        elif type == "Valve":
             return self.valve_plc_bridge_dict[id]
+        elif type == "Pump": 
+            return self.pump_plc_bridge_dict[id] 
 
     @classmethod
     def build_bridge(self): 
@@ -47,9 +50,19 @@ class ModelPlcBridgeFactory:
         for valve_brg in valve_cfg:
             valve_id = valve_brg['id']
             mod_bus_id = valve_brg['address']['modbus_id'] 
-            lt_bridge = ValveModelPlcBridge(valve_id = valve_id, plc_id=mod_bus_id, address = valve_brg['address'])
+            valve_bridge = ValveModelPlcBridge(valve_id = valve_id, plc_id=mod_bus_id, address = valve_brg['address'])
             print(",,,,,,,,,,,,,,,", valve_id)
-            self.valve_plc_bridge_dict[valve_id ] = lt_bridge
+            self.valve_plc_bridge_dict[valve_id ] = valve_bridge
+
+    @classmethod
+    def build_pump_bridge(self, pump_cfg): 
+        print(pump_cfg)
+        for pump_brg in pump_cfg:
+            pump_id = pump_brg['id']
+            mod_bus_id = pump_brg['address']['modbus_id'] 
+            pump_bridge = ValveModelPlcBridge(valve_id = pump_id, plc_id=mod_bus_id, address = pump_brg['address'])
+            print(",,,,,,,,,,,,,,,", pump_id)
+            self.pump_plc_bridge_dict[pump_id ] = pump_bridge
     
     def __init__(self):
         pass

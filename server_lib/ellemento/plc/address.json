@@ -9,6 +9,8 @@
             "address": 
             {
                 "modeAddress": 2500,
+                "CTRL_APPLY_UPDATE": 301, 
+                "CTRL_SECTION_MODE": 4460,
                 "FEEDBACK_LED": 
                 {
                     "position": 4020, 
@@ -21,17 +23,25 @@
                 },
                 "FEEDBACK_LED_INTENSITY":  [ 4022,4023, 4024,4025, 4026,4027,4028,4029,4030,4031,4032,4033, 4034, 4035 ],
                 "CTRL_LIGHT_INTENSITY": [4085, 4086, 4087, 4088, 4089, 4090, 4091, 4092, 4093, 4094, 4095, 4096, 4097, 4098],
-                "CTRL_PUMP_MODE": 
-                {
-                    "position": 4100, 
-                    "bytes": 2
-                },
                 "CTRL_PV_VALUE": [4000, 4001,4002, 4003, 4004, 4005, 4006,4007,4008, 4009, 4010, 4011, 4012, 4013],
                 "FEEDBACK_VALVE_SETTING":[4640, 4641,4642, 4643, 4644, 4645, 4646,4647,4648, 4649, 4650, 4651, 4652, 4653], 
                 "CTRL_PV_ON":
                 {
                     "position": 4000, 
                     "bits": 14
+                },
+                "CTRL_PUMP_MODE": [4100, 4101, 4012],
+                "CTRL_PUMP_RPM_SETPOINT": [4105, 4106, 4107],
+                "CTRL_PUMP_FLOWRATE_SETPOINT":[4110, 4111, 4112],
+                "CTRL_PUMP_ON":
+                {
+                    "position": 4100,
+                    "bits": 3
+                },
+                "FEEDBACK_PUMP_ON":
+                {
+                    "position": 4655, 
+                    "bits": 3
                 },
 
                 "SHELF_PV_ON_ADDRESS": [11000,11001,11002,11003,11004,11005,11006,11007,11008,11009,11010,11011 ],

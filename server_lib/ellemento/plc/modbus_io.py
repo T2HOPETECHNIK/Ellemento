@@ -169,7 +169,6 @@ class PLCManager(object):
         return bres, error
 
 
-    '''
     def write_system_coil(self, addr, val):
         error = 0
         try:
@@ -189,7 +188,6 @@ class PLCManager(object):
             error = 1
 
         return res, error
-    '''
 
 
 

@@ -4,12 +4,13 @@ from ellemento.model.tray_factory import TrayFactory
 # from ellemento.model.shelf_factory import ShelfFactory
 from ellemento.model.light_factory import LightFactory
 from ellemento.model.water_control_factory import WaterControlFactory
-# from ellemento.model.pump_control_factory import PumpControlFactory
+from ellemento.model.pump_control_factory import PumpControlFactory
 # from ellemento.model.rack_factory import RackFactory
 # from ellemento.model.ventilation_control_factory import VentilationControlFactory
 # from ellemento.model.farm_factory import FarmFactory
 from lib.logging.logger_initialiser import EllementoLogger
 from ellemento.bridge.plc_bridge import ModelPlcBridge
+
 # from ellemento.model.buffer import Buffer
 
 phase_1_shelves = 4
@@ -172,11 +173,18 @@ def test_water_bridge():
     # bridge = ModelPlcBridge()
     # bridge.print_model()
 
+def test_pump_bridge(): 
+    pump = PumpControlFactory.create_valve(id = 1)
+    pump.on() 
+
+    
+
 if __name__ == '__main__':
 
     #FarmFactory.create_farm()
     test_light_bridge()
     test_water_bridge()
+    test_pump_bridge()
     pass
     #test_tray_duration()
 
