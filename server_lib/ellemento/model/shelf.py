@@ -6,6 +6,7 @@ from enum import Enum
 from ellemento.model.tray import TransferStatus, Tray, TrayStatus
 from ellemento.model.light_control import LightControl
 from lib.logging.logger_initialiser import EllementoLogger
+from ellemento.bridge.bridge_factory import ModelPlcBridgeFactory
 
 logger = EllementoLogger.__call__().logger
 
@@ -67,6 +68,7 @@ class Shelf:
         self._enable = True 
         self._transfer_status = TransferStatus.IDLE
         self._type_name = type_name
+        self.mod_bus = ModelPlcBridgeFactory.get_bridge(type = 'Shelf', id = self._id)
 
     def __repr__(self):
         return "<object: %s, id:%d type:%s>" % (self.__class__.__name__, self._id, self._type_name)
@@ -114,6 +116,13 @@ class Shelf:
     def phase(self, value): 
         self._phase - value; 
     
+    def set_control_section_mode(self): 
+        ret, error = self.mod_bus.set_control_section_mode() 
+        return ret, error 
+    
+    def apply_update(self): 
+        ret, error = self.mod_bus.appy_update()
+        return ret, error 
 
     @property 
     def rack(self):

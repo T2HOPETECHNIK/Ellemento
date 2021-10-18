@@ -80,13 +80,11 @@ class ShelfModelPlcBridge(ModelPlcBridge):
         if not error: 
             ret = res.registers[0]
         return ret, res 
-        pass 
 
     def appy_update(self): 
         tag_name = self.address['apply_update']['tag']
         register_address = self.modbus_io.config['address'][tag_name]
         res, error = self.modbus_io.write_system_coil(register_address, True)
         return res, error 
-        pass
 
     

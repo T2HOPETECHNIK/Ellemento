@@ -1,7 +1,7 @@
 from ellemento.model.farm_factory import FarmFactory
 from ellemento.model.tray import Tray, TrayStatus
 from ellemento.model.tray_factory import TrayFactory
-# from ellemento.model.shelf_factory import ShelfFactory
+from ellemento.model.shelf_factory import ShelfFactory
 from ellemento.model.light_factory import LightFactory
 from ellemento.model.water_control_factory import WaterControlFactory
 from ellemento.model.pump_control_factory import PumpControlFactory
@@ -168,8 +168,6 @@ def test_water_bridge():
     valve.adjust(80)
     valve.get_percent()
     valve.off()
-
-
     # bridge = ModelPlcBridge()
     # bridge.print_model()
 
@@ -177,8 +175,11 @@ def test_pump_bridge():
     pump = PumpControlFactory.create_valve(id = 1)
     pump.on() 
 
-    
 
+def test_shelf_bridge():
+    shelf = ShelfFactory.create_shelf(id = 1)
+    shelf.on()
+    
 if __name__ == '__main__':
 
     #FarmFactory.create_farm()
