@@ -105,6 +105,73 @@
             "id": 1,
             "address":{
                 "modbus_id": 1, 
+                "use_scheduler":
+                {
+                    "tag": "CTRL_SHELF_USE_SCHEDULER",
+                    "position": 0, 
+                    "type": "boolean"
+                },
+                "pv_on_hh":
+                {
+                    "tag": "CTRL_SCHEDULER_PVON_HH",
+                    "position": 0, 
+                    "type": "integer"
+                },
+                "pv_on_mm":
+                {
+                    "tag": "CTRL_SCHEDULER_PVON_MM",
+                    "position": 0, 
+                    "type": "integer"
+                }, 
+                "pv_off_hh":
+                {
+                    "tag": "CTRL_SCHEDULER_PVOFF_HH",
+                    "position": 0, 
+                    "type": "integer"
+                },
+                "pv_off_mm":
+                {
+                    "tag": "CTRL_SCHEDULER_PVOFF_MM",
+                    "position": 0, 
+                    "type": "integer"
+                },
+                "schedule_pv_value":
+                {
+                    "tag": "CTRL_SCHEDULER_PV_VALUE", 
+                    "position": 0, 
+                    "type": "integer"
+                },
+                "light_on_hh":
+                {
+                    "tag": "CTRL_SCHEDULER_LIGHTON_HH",
+                    "position": 0, 
+                    "type": "integer"
+                },
+                "light_on_mm":
+                {
+                    "tag": "CTRL_SCHEDULER_LIGHTON_MM",
+                    "position": 0, 
+                    "type": "integer"
+                }, 
+                "light_off_hh":
+                {
+                    "tag": "CTRL_SCHEDULER_LIGHTOFF_HH",
+                    "position": 0, 
+                    "type": "integer"
+                },
+                "light_off_mm":
+                {
+                    "tag": "CTRL_SCHEDULER_LIGHTOFF_MM",
+                    "position": 0, 
+                    "type": "integer"
+                }, 
+                "schedule_light_intensity":
+                {
+                    "tag": "CTRL_SCHEDULER_LIGHT_INTENSITY", 
+                    "position": 0, 
+                    "type": "integer"
+                },
+
                 "apply_update": 
                 {
                     "tag": "CTRL_APPLY_UPDATE", 
@@ -119,7 +186,26 @@
                 }
             }
         }
-
+    ],
+    "rack":[
+        {
+            "id": 1,
+            "address":{
+                "modbus_id": 1, 
+                "apply_update": 
+                {
+                    "tag": "CTRL_APPLY_UPDATE", 
+                    "position": 0, 
+                    "type": "sysbool"
+                },
+                "section_mode":
+                {
+                    "tag": "CTRL_SECTION_MODE", 
+                    "position": 0, 
+                    "type": "integer"
+                }
+            }
+        }
     ],
     "fan":[]
 }
