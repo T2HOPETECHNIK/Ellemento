@@ -82,6 +82,56 @@ class PumpModelPlcBridge(ModelPlcBridge):
         register_address = self.modbus_io.config['address'][tag_name]['position']
         res, error = self.modbus_io.read_coil(register_address, location)
         return res, error 
-     
 
-        pass 
+    # only for type b racks
+    def enable_fill_drain_mode(self):
+        tag_name = self.address['fill_drain_control']['tag']
+        location = self.address['fill_drain_control']['position'] 
+        register_address = self.modbus_io.config['address'][tag_name]['position']
+        res, error = self.modbus_io.write_coil(register_address, location, False)
+        return res, error
+
+
+    def set_fill_mode_flowrate(self, flowrate):
+        tag_name = self.address['control_fill_flowrate']['tag']
+        location = self.address['control_fill_flowrate']['position']
+        register_address = self.modbus_io.config['address'][tag_name][location]
+        print("------", register_address)
+        res, error = self.modbus_io.write_register(register_address, flowrate)
+        ret = None   
+        if error: 
+            ret = res.registers[0]
+        return ret, error 
+
+    def set_drain_mode_flowrate(self, flowrate):
+        tag_name = self.address['control_drain_flowrate']['tag']
+        location = self.address['control_drain_flowrate']['position']
+        register_address = self.modbus_io.config['address'][tag_name][location]
+        print("------", register_address)
+        res, error = self.modbus_io.write_register(register_address, flowrate)
+        ret = None   
+        if error: 
+            ret = res.registers[0]
+        return ret, error 
+
+    def set_fill_mode_duration(self, duration): 
+        tag_name = self.address['control_fill_duration']['tag']
+        location = self.address['control_fill_duration']['position']
+        register_address = self.modbus_io.config['address'][tag_name][location]
+        print("------", register_address)
+        res, error = self.modbus_io.write_register(register_address, duration)
+        ret = None   
+        if error: 
+            ret = res.registers[0]
+        return ret, error 
+
+    def set_drain_mode_duration(self, duration): 
+        tag_name = self.address['control_drain_duration']['tag']
+        location = self.address['control_drain_duration']['position']
+        register_address = self.modbus_io.config['address'][tag_name][location]
+        print("------", register_address)
+        res, error = self.modbus_io.write_register(register_address, duration)
+        ret = None   
+        if error: 
+            ret = res.registers[0]
+        return ret, error 

@@ -35,6 +35,36 @@
                     "tag": "CTRL_PUMP_FLOWRATE_SETPOINT",
                     "position": 0, 
                     "type": "integer"
+                },
+                "fill_drain_control":
+                {
+                    "tag": "CTRL_PUMP_FILL_DRAIN_MODE", 
+                    "position": 0,  
+                    "type": "boolean"
+                },
+                "control_fill_flowrate":
+                {
+                    "tag": "CTRL_PUMP_FILL_MODE_FLOWRATE", 
+                    "position": 0, 
+                    "type": "integer"
+                }, 
+                "control_drain_flowrate": 
+                {
+                    "tag": "CTRL_PUMP_DRAIN_MODE_FLOWRATE", 
+                    "position": 0, 
+                    "type": "integer"
+                },
+                "control_fill_duration":
+                {
+                    "tag": "CTRL_PUMP_FILL_DURATION", 
+                    "position": 0, 
+                    "type": "integer"
+                },
+                "control_drain_duration":
+                {
+                    "tag": "CTRL_PUMP_DRAIN_DURATION", 
+                    "position": 0, 
+                    "type": "integer"
                 }
             }
         }
@@ -176,7 +206,7 @@
                 {
                     "tag": "CTRL_APPLY_UPDATE", 
                     "position": 0, 
-                    "type": "sysbool"
+                    "type": "boolean"
                 },
                 "section_mode":
                 {
