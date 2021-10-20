@@ -175,7 +175,6 @@ class ShelfFactory:
         for shelf in ShelfFactory.stage_5_shelves: 
             #logger.warn("Shelf status %s", shelf.transfer_status)
             if shelf.ready_to_transfer(): 
-        
                 retList.append(shelf)
         return retList
 

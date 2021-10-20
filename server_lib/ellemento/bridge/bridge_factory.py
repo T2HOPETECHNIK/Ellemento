@@ -18,15 +18,27 @@ class ModelPlcBridgeFactory:
         if  len(self.light_plc_bridge_dict) == 0: 
             self.build_bridge()
         
+        
         if type == "Light": 
-            return self.light_plc_bridge_dict[id]
+            if id in  self.light_plc_bridge_dict:
+                return self.light_plc_bridge_dict[id]
+            else:  
+                return None 
         elif type == "Valve":
-            return self.valve_plc_bridge_dict[id]
+            if id in self.valve_plc_bridge_dict: 
+                return self.valve_plc_bridge_dict[id]
+            else: 
+                return None 
         elif type == "Pump": 
-            return self.pump_plc_bridge_dict[id] 
-        elif type == "Shelf": 
-            return self.shelf_plc_bridge_dict[id]
-
+            if id in self.pump_plc_bridge_dict: 
+                return self.pump_plc_bridge_dict[id] 
+            else: 
+                return None 
+        elif type == "Shelf":
+            if id in  self.shelf_plc_bridge_dict:  
+                return self.shelf_plc_bridge_dict[id]
+            else: 
+                return None 
     @classmethod
     def build_bridge(self): 
         #  step 1 load cfg file 

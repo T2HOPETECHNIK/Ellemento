@@ -147,6 +147,8 @@ class Shelf:
 
     # Check if all trays is ready to transfer 
     def ready_to_transfer(self): 
+        if len(self._trays) != self._max_tray:
+            return False 
         bRet = True 
         for tray in self._trays: 
             #logger.warning("tray %s", tray.transfer_status)

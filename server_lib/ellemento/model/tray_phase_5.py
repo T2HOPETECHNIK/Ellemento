@@ -1,4 +1,4 @@
-from ellemento.model.tray import TrayStatus, Tray
+from ellemento.model.tray import TransferStatus, TrayStatus, Tray
 
 class TrayPhase5(Tray):
     def __init__(self, id = 0, dimensions = [12, 10], type_name="Unknown"):
@@ -13,7 +13,7 @@ class TrayPhase5(Tray):
     def harvest(self):
         self.reset_status_time()
         self.status = TrayStatus.DIRTY
-        self.set_transfer_status(TrayStatus.IDLE) 
+        self.set_transfer_status(TransferStatus.IDLE)
         self.has_veg = False 
 
     def __repr__(self):

@@ -30,9 +30,7 @@ if __name__ == '__main__':
         print("###########################################")
         JobFactory.execute_jobs()
         while True: 
-            
             time.sleep(2); 
-            print("... waiting")
     except KeyboardInterrupt:
         JobFactory.terminate_jobs()
         print("Bye bye ellemento")
