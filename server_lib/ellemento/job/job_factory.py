@@ -22,10 +22,12 @@ class JobFactory:
 
     @staticmethod
     def execute_jobs(): 
-        job_queue_thread = threading.Thread(target = TransferJob.generate_job_queue) 
+        job_queue_thread = threading.Thread(target=TransferJob.generate_job_queue)
         job_queue_thread.start()
-        job_thread = threading.Thread(target = TransferJob.execute_transfer)
+        job_thread = threading.Thread(target=TransferJob.execute_transfer)
         job_thread.start()
+        h2b_job_thread = threading.Thread(target=HarvestorToBuffer.execute_job)
+        h2b_job_thread.start()
 
     # jobs creation threads 
     @staticmethod 
@@ -34,11 +36,11 @@ class JobFactory:
         transfer_job_1_in = threading.Thread(target=TransferJob.plan_destination_phase1_in)
         transfer_job_1_in.start()  
         #-- Tested------------------------------------------------------------------ 
-        transfer_job_phase_1 = threading.Thread(target = TransferJob.plan_phase1_move_out)
+        transfer_job_phase_1 = threading.Thread(target=TransferJob.plan_phase1_move_out)
         transfer_job_phase_1.start()
-        transfer_job_phase_2 = threading.Thread(target = TransferJob.plan_phase2_move_out)
+        transfer_job_phase_2 = threading.Thread(target=TransferJob.plan_phase2_move_out)
         transfer_job_phase_2.start()
-        transfer_job_phase_3 = threading.Thread(target = TransferJob.plan_phase3_move_out)
+        transfer_job_phase_3 = threading.Thread(target=TransferJob.plan_phase3_move_out)
         transfer_job_phase_3.start()
         # #from phase 4 shelf to 4 in buffer 
         transfer_job_phase_4_in = threading.Thread(target=TransferJob.plan_phase4_move_out)
@@ -48,27 +50,24 @@ class JobFactory:
 
         # -- end tested --------------------------------------------------------------
 
-        buffer_2_transplantor_job = threading.Thread(target = BufferToTransplantorJob.create_jobs)
+        buffer_2_transplantor_job = threading.Thread(target=BufferToTransplantorJob.create_jobs)
         buffer_2_transplantor_job.start() 
 
-        transplant_jobs = threading.Thread(target = TransplantJob.create_transplant_jobs)
+        transplant_jobs = threading.Thread(target=TransplantJob.create_transplant_jobs)
         transplant_jobs.start()
 
-        transplantor_2_sower_job = threading.Thread(target = TransplantorToSower.create_jobs)
+        transplantor_2_sower_job = threading.Thread(target=TransplantorToSower.create_jobs)
         transplantor_2_sower_job.start() 
 
         #4. Phase 4 jobs threads 
         # TransplantorToBufferJob.create_jobs()
-        transplantor_2_buffer_job = threading.Thread(target = TransplantorToBufferJob.create_jobs)
+        transplantor_2_buffer_job = threading.Thread(target=TransplantorToBufferJob.create_jobs)
         transplantor_2_buffer_job.start() 
         # from 4 out buffer to phase 4 shelf
-        transfer_job_phase_4_out = threading.Thread(target= TransferJob.plan_phase4_move_out)
+        transfer_job_phase_4_out = threading.Thread(target=TransferJob.plan_phase4_move_out)
         transfer_job_phase_4_out.start()
         # # TransferJob.plan_destination_phase4_out() 
-        
-        
 
-        
         # TransferJob.plan_destination_phase4_in() 
 
         # #5. Phase 5 jobs threads

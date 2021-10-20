@@ -17,9 +17,26 @@ from lib.logging.logger_initialiser import EllementoLogger
 
 logger = EllementoLogger.__call__().logger
 
-class HarvestorToBuffer:   
+class HarvestorToBuffer:
     harvestor_to_buffer_job = None 
     terminate_job = False 
+
+    @classmethod
+    def execute_job(cls):
+        # execute harvestor to buffer
+        while not cls.terminate_job:
+            print("Executing harvestor job")
+            if cls.harvestor_to_buffer_job is None:
+                time.sleep(2)
+                continue
+            ret = cls.harvestor_to_buffer_job.execute()
+            if ret:
+                cls.harvestor_to_buffer_job = None
+            else:
+                print("Not able to execute harvestor job")
+            time.sleep(2)
+            continue
+        pass
 
     @staticmethod 
     def create_job():
@@ -61,7 +78,12 @@ class HarvestorToBuffer:
         self._destination = buffer 
         pass
 
-    def execute(self): 
-        # 
-        pass 
+    def execute(self):
+        self._source.harvest()
+        tray = self._source.unload_tray()
+        if tray is None:
+            print("Failed to unload tray from harvestor")
+            return False
+        self._destination.load(tray)
+        return True
    

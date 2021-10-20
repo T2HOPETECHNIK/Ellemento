@@ -36,11 +36,11 @@ class Harvestor:
     def unload_tray(self):
         if len(self._trays) == 0: 
             print("No trays available for unloading") 
-            return False  
-        self._trays.pop() 
+            return None
+        tray = self._trays.pop()
         if len(self._trays) == 0: 
             self.planned_transfer = False 
-        return True   
+        return tray
     
     def ready_to_load(self):
         if len(self._trays) == 0: 

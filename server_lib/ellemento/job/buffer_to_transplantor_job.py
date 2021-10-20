@@ -40,6 +40,14 @@ class BufferToTransplantorJob:
         except: 
             logger.info("Not able to create BufferToTransplantorJob")
 
+    @staticmethod
+    def create_5_buffer_to_transplantor_job():
+        pass
+
+    @staticmethod
+    def create_4_in_buffer_to_transplantor_job():
+        pass 
+
     @staticmethod 
     def create_job(id = -1, src_buffer = None, dst_tranplantor = None ): 
         if src_buffer == None or dst_tranplantor == None: 
