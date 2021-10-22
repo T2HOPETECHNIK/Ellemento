@@ -6,6 +6,8 @@ from lib.logging.logger_initialiser import EllementoLogger
 class TransplantorFactory:
     all_transplantors = {}
 
+    
+
     @staticmethod 
     def get_transplantor_3_4(): 
         if len(TransplantorFactory.all_transplantors) == 0: 

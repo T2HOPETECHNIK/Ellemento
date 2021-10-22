@@ -44,15 +44,14 @@ class BufferToTransplantorJob:
     def create_4_buffer_to_transplantor_job(): 
         try: 
             while not BufferToTransplantorJob.terminate_job: 
-                buffer_3_in = BufferFactory.get_buffer(BufferType.BUFFER_3_IN)
-                if not buffer_3_in.has_tray():
+                buffer_4 = BufferFactory.get_buffer(BufferType.BUFFER_4)
+                if not buffer_4.has_tray():
                     logger.info("Buffer 3-in has not any trays")
                     time.sleep(2)
                     continue  
-
                 transplantor_3_4 = Transplantor(TransplantorFactory.get_transplator_3_4()) 
-                if transplantor_3_4.ready_to_move_in_src_tray(): 
-                    BufferToTransplantorJob.create_job(id = 1, src_buffer=buffer_3_in, dst_tranplantor=transplantor_3_4)
+                if transplantor_3_4.ready_to_move_in_dst_tray(): 
+                    BufferToTransplantorJob.create_job(id = 1, src_buffer=buffer_4, dst_tranplantor=transplantor_3_4)
                     logger.info("transplantor_3_4 is not ready to move in source tray")
                 time.sleep(2)
                 pass
@@ -61,7 +60,7 @@ class BufferToTransplantorJob:
         pass 
 
     @staticmethod 
-    def create_3_buffer_to_transplantor_job():
+    def create_3_in_buffer_to_transplantor_job():
         try: 
             while not BufferToTransplantorJob.terminate_job: 
                 buffer_3_in = BufferFactory.get_buffer(BufferType.BUFFER_3_IN)
@@ -84,15 +83,15 @@ class BufferToTransplantorJob:
     def create_5_buffer_to_transplantor_job():
         try: 
             while not BufferToTransplantorJob.terminate_job: 
-                buffer_3_in = BufferFactory.get_buffer(BufferType.BUFFER_3_IN)
-                if not buffer_3_in.has_tray():
+                buffer_5 = BufferFactory.get_buffer(BufferType.BUFFER_5)
+                if not buffer_5.has_tray():
                     logger.info("Buffer 3-in has not any trays")
                     time.sleep(2)
                     continue  
 
-                transplantor_3_4 = Transplantor(TransplantorFactory.get_transplator_3_4()) 
-                if transplantor_3_4.ready_to_move_in_src_tray(): 
-                    BufferToTransplantorJob.create_job(id = 1, src_buffer=buffer_3_in, dst_tranplantor=transplantor_3_4)
+                transplantor_4_5 = Transplantor(TransplantorFactory.get_transplator_4_5()) 
+                if transplantor_4_5.ready_to_move_in_dst_tray(): 
+                    BufferToTransplantorJob.create_job(id = 1, src_buffer=buffer_5, dst_tranplantor=transplantor_4_5)
                     logger.info("transplantor_3_4 is not ready to move in source tray")
                 time.sleep(2)
                 pass
@@ -104,20 +103,21 @@ class BufferToTransplantorJob:
     def create_4_in_buffer_to_transplantor_job():
         try: 
             while not BufferToTransplantorJob.terminate_job: 
-                buffer_3_in = BufferFactory.get_buffer(BufferType.BUFFER_3_IN)
-                if not buffer_3_in.has_tray():
+                buffer_4_in = BufferFactory.get_buffer(BufferType.BUFFER_4_IN)
+                if not buffer_4_in.has_tray():
                     logger.info("Buffer 3-in has not any trays")
                     time.sleep(2)
                     continue  
 
-                transplantor_3_4 = Transplantor(TransplantorFactory.get_transplator_3_4()) 
-                if transplantor_3_4.ready_to_move_in_src_tray(): 
-                    BufferToTransplantorJob.create_job(id = 1, src_buffer=buffer_3_in, dst_tranplantor=transplantor_3_4)
+                transplantor_4_5 = Transplantor(TransplantorFactory.get_transplator_4_5()) 
+                if transplantor_4_5.ready_to_move_in_dst_tray(): 
+                    BufferToTransplantorJob.create_job(id = 1, src_buffer=buffer_4_in, dst_tranplantor=transplantor_4_5)
                     logger.info("transplantor_3_4 is not ready to move in source tray")
                 time.sleep(2)
                 pass
         except: 
             logger.info("Not able to create BufferToTransplantorJob")
+        pass
 
 
     @staticmethod 
