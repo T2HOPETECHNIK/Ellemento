@@ -42,20 +42,23 @@ class HarvestorToBuffer:
     @staticmethod 
     def create_job():
         while not HarvestorToBuffer.terminate_job:
-            harvestor = Harvestor(Harvestor.get_harvestor())
-            buffer_5 = Buffer(BufferFactory.get_buffer(BufferType.BUFFER_5))
+            print("#****************************************************#")     
+            harvestor = Harvestor.get_harvestor()
+            buffer_5 = BufferFactory.get_buffer(BufferType.BUFFER_5)
 
-            if not harvestor.ready_to_unload: 
+            if not harvestor.ready_to_unload(): 
                 print("Harvestor is not ready")
                 logger.info("Harvestor is not ready")
                 time.sleep(2)
                 continue 
 
-            if buffer_5.full: 
+            if buffer_5.full(): 
                 print("Buffer is full, not ready to load the tray")
                 logger.info("Buffer is full, not ready to load the tray")
                 time.sleep(2)
-                continue           
+                continue  
+
+            print("^****************************************************^")         
             job = HarvestorToBuffer(1)
             job.set_source(harvestor)
             job.set_destination(buffer_5)
@@ -82,12 +85,10 @@ class HarvestorToBuffer:
         pass
 
     def execute(self):
-        self._source.harvest()
         tray = self._source.unload_tray()
         if tray is None:
             print("Failed to unload tray from harvestor")
             return False
-        tray.harvest()
         print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
         self._destination.load(tray)
         return True

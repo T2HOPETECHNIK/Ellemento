@@ -49,9 +49,13 @@ class Harvestor:
         return False  
 
     def ready_to_unload(self): 
+        if len(self._trays) == 0: 
+            print("No tray")
+            return False
         tray_ph5 = self._trays[-1]
-        if tray_ph5.has_veg == False: 
+        if tray_ph5.has_veg == False:
             return True 
+        print("Not harvested")
         return False  
 
     def harvest(self): 

@@ -505,7 +505,7 @@ class TransferJob:
                 print("Phase 5 -> Harvestor: Load a tray to harvestor")
                 while True: 
                     ret = self._destination.load_tray(tray)
-                    #self._destination.harvest() 
+                    self._destination.harvest() 
                     #self._destination.unload_tray()
                     if not ret: 
                         time.sleep(1)
@@ -513,7 +513,7 @@ class TransferJob:
                         continue
                     break; 
 
-                #tray.harvest()
+                tray.harvest()
                 print("Phase 5 -> Harvestor: Tay is harvested, hurray")
 
     def transfer(self, job_type):
