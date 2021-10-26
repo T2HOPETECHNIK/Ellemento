@@ -80,7 +80,7 @@ class PumpControl:
         return ret, error 
 
 
-    def set_flowrate(self, rpm):
+    def set_rpm(self, rpm):
         ret, error = self.mod_bus.set_rpm(rpm)
         # to do link to the PLC  
         # set the rate 

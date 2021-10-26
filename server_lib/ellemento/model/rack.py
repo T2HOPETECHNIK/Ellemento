@@ -163,7 +163,7 @@ class Rack:
         self.mod_bus.apply_update()
         pass 
 
-    def change_session_model(self, section = RackSection.TOP, mode = SectionMode.MANUAL):
+    def change_session_mode(self, section = RackSection.TOP, mode = SectionMode.MANUAL):
         self.mod_bus.set_control_section_mode(section, mode)
         self._sections[section].section_mode = mode 
         pass 

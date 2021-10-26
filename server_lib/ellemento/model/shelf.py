@@ -115,14 +115,6 @@ class Shelf:
     @phase.setter
     def phase(self, value): 
         self._phase - value; 
-    
-    def set_control_section_mode(self): 
-        ret, error = self.mod_bus.set_control_section_mode() 
-        return ret, error 
-    
-    def apply_update(self): 
-        ret, error = self.mod_bus.appy_update()
-        return ret, error 
 
     @property 
     def rack(self):
@@ -219,6 +211,7 @@ class Shelf:
         pass 
 
     def water_on(self): 
+        # 
         pass 
 
     def water_off(self): 
