@@ -33,6 +33,7 @@ To test the project
 # Modules
 ## Ellemento 
 ### Model
+[Model description](Ellemento/model/readme.md)
 ### PLC
 ### Bridge
 ### Job 

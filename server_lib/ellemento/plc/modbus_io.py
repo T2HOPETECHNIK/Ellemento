@@ -142,7 +142,7 @@ class PLCManager(object):
             if bdata == True:
                 data = data | binvalue
             else:
-                data = data ^ binvalue
+                data = data & (65535 ^ binvalue)
 
             res = self.client.write_register(addr, data, unit=1)
             assert(res.function_code < 0x80)     # test that we are not an error
