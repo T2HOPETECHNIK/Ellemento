@@ -3,8 +3,12 @@
 from ellemento.model.water_control import WaterControl
 from enum import Enum
 
-from ellemento.model.tray import Tray, TrayStatus
+from ellemento.model.tray import TransferStatus, Tray, TrayStatus
 from ellemento.model.light_control import LightControl
+from lib.logging.logger_initialiser import EllementoLogger
+from ellemento.bridge.bridge_factory import ModelPlcBridgeFactory
+
+logger = EllementoLogger.__call__().logger
 
 class ShelfStatus(Enum):
     IDLE = 1        # clean and ready to use
@@ -42,7 +46,7 @@ class Shelf:
 
     @staticmethod
     def add_shelf(shelf): 
-        print(shelf)
+        #print(shelf)
         Shelf.all_shelves[shelf.id] = shelf
     
     @staticmethod 
@@ -53,16 +57,18 @@ class Shelf:
     def __init__(self, id = -1, type_name='default', max_tray = 9):
         self._id = id
         self._status = ShelfStatus.IDLE
-        self._rack =  -1
+        self._rack =  None
         # each shelf must be 1 of the phase, [1, 2, 3, 4, 5]
         self._phase = Phase.NOT_PLANNED 
         self._max_tray = max_tray
         # Set tray status of the rack. if has, it shall be tray number 
-        self._trays = {}
+        self._trays = []
         self._lights = {}
         self._valves = {}
         self._enable = True 
+        self._transfer_status = TransferStatus.IDLE
         self._type_name = type_name
+        self.mod_bus = ModelPlcBridgeFactory.get_bridge(type = 'Shelf', id = self._id)
 
     def __repr__(self):
         return "<object: %s, id:%d type:%s>" % (self.__class__.__name__, self._id, self._type_name)
@@ -73,6 +79,10 @@ class Shelf:
     @property
     def id(self):
         return self._id
+    
+    @property 
+    def transfer_status(self):
+        return self._transfer_status
 
     @id.setter
     def id(self, value):
@@ -105,24 +115,86 @@ class Shelf:
     @phase.setter
     def phase(self, value): 
         self._phase - value; 
+    
+    def set_control_section_mode(self): 
+        ret, error = self.mod_bus.set_control_section_mode() 
+        return ret, error 
+    
+    def apply_update(self): 
+        ret, error = self.mod_bus.appy_update()
+        return ret, error 
+
+    @property 
+    def rack(self):
+        return self._rack 
+
+    @rack.setter
+    def rack(self, rack):
+        self._rack = rack 
+
+    def reset_tray_status(self): 
+        for tray in self._trays:
+            #print("...........")
+            #print(tray)
+            tray.reset_tray_status()  
+    
+    def set_transfer_status(self, trans_status): 
+        for tray in self._trays: 
+            #print("xxxxxxxxxxx")
+            #print(tray)
+            tray.set_transfer_status(trans_status)
+        self._transfer_status = trans_status 
+
+    # Check if all trays is ready to transfer 
+    def ready_to_transfer(self): 
+        if len(self._trays) != self._max_tray:
+            return False 
+        bRet = True 
+        for tray in self._trays: 
+            #logger.warning("tray %s", tray.transfer_status)
+            if (tray.transfer_status != TransferStatus.READY_TO_TRANSFER): 
+                # print(tray)
+                # print("*********************")
+                bRet = False 
+                break
         
-    def add_tray(self, tray_id): 
-        if tray_id not in self._trays: 
-            self._trays[tray_id] = Tray.get_tray(tray_id)
+        if bRet: 
+            self._transfer_status = TransferStatus.READY_TO_TRANSFER
+        return bRet 
+
+
+    def add_tray(self, tray): 
+        #print(tray)
+        if tray not in self._trays: 
+            self._trays.append(tray)
+
+        tray.location = self; 
         if len(self._trays) == 1: 
             self._status = ShelfStatus.LOADING
         
         if len(self._trays) == self._max_tray:
             self._status = ShelfStatus.FULL
-     
 
-    def remove_tray(self, tray_id): 
-        if tray_id in self._trays: 
-            del self._trays[tray_id]
-        if len(self._trays) == self._max_tray - 1: 
-            self._status = ShelfStatus.UNLOADING
-        if len(self._trays) == 0: 
+    def remove_tray(self): 
+        # no tray is inside the shelf 
+        if self._status == ShelfStatus.IDLE: 
+            return None
+        if self._status == ShelfStatus.LOADING: 
+            logger.warning("Not supposed to unload during loading process")
+            return None 
+        tray = self._trays.pop() 
+        tray.location = None; 
+        # fully unloaded
+        if len(self._trays) == 0:
             self._status = ShelfStatus.IDLE
+        else: 
+            self._status = ShelfStatus.UNLOADING
+        return tray 
+        
+    def reset_status_time(self): 
+        for obj_tray in self._trays: 
+            #print("-------------------" , tray.id)
+            obj_tray.reset_status_time()
 
     def add_light(self, light_id):
         if light_id not in self._lights: 

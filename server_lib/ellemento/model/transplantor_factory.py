@@ -1,18 +1,21 @@
 from os import stat
 
 from ellemento.model.transplantor import Transplantor, TransplantorType
+from lib.logging.logger_initialiser import EllementoLogger
 
 class TransplantorFactory:
     all_transplantors = {}
 
+    
+
     @staticmethod 
-    def get_transplator_3_4(): 
+    def get_transplantor_3_4(): 
         if len(TransplantorFactory.all_transplantors) == 0: 
             TransplantorFactory.create_transplantors()
         return TransplantorFactory.all_transplantors[1] 
      
     @staticmethod 
-    def get_transplator_4_5(): 
+    def get_transplantor_4_5(): 
         if len(TransplantorFactory.all_transplantors) == 0: 
             TransplantorFactory.create_transplantors()
         return TransplantorFactory.all_transplantors[2] 
@@ -27,14 +30,14 @@ class TransplantorFactory:
 
     @staticmethod  
     def create_transplantor(type_name = "default", id = -1):
-        shelf_new = None
+        trans_new = None
         #Tray.add_tray(tray_new)
-        shelf_new = Transplantor(id = id, type_name = type_name)
+        trans_new = Transplantor(id = id, type_name = type_name)
         # add trays, 
         # add water controls
-        # add lights 
+        # add lights Z
         
-        return Transplantor.get_shelf(id)
+        return trans_new
 
     @staticmethod 
     def print():

@@ -8,6 +8,9 @@ from pymodbus.register_read_message import ReadHoldingRegistersResponse, ReadInp
 from pymodbus.register_read_message import ReadWriteMultipleRegistersResponse
 from pymodbus.bit_write_message import WriteSingleCoilResponse, WriteMultipleCoilsResponse
 from pymodbus.register_write_message import WriteSingleRegisterResponse, WriteMultipleRegistersResponse
+from pymodbus.payload import BinaryPayloadDecoder
+from pymodbus.constants import Endian
+
 
 class PLCManager(object):
     # name = '', id = '', ip = '', cfg = cfg_json
@@ -15,22 +18,23 @@ class PLCManager(object):
         super().__init__()
         self.__name = ''
         self.__id = -1
-        self.__ip = '0.0.0.0'
+        self.__ip = "0.0.0.0"
         self.__parse_args(**kwargs)
+        self.setIP(self.__ip)
+       
    
     def __parse_args(self, **kwargs): 
-         for key, value in kwargs.items():
-             
+        for key, value in kwargs.items():
             if key == 'name': 
                 self.__name = value
             if key == "id": 
-                self.__id == value
+                self.__id = value
             if key == 'ip':
-                self.__ip == value
+                self.__ip = value
             if key == 'cfg':
                 self.__cfg = value
                 self.__parse_config(value)
-        
+       
     def __parse_config(self, cfg): 
         self.__name = cfg['name']
         self.__id = cfg['id']
@@ -106,6 +110,7 @@ class PLCManager(object):
         res = 0
         try:
             res = self.client.write_registers(addr, data, unit=1)
+            print(res)
             assert(res.function_code < 0x80)     # test that we are not an error
         except:
             error = 1
@@ -116,7 +121,7 @@ class PLCManager(object):
         error = 0
         res = 0
         try:
-            res = self.client.read_holding_registers(addr, size, unit=1)
+            res = self.client.read_holding_registers(addr, count = size, unit=8)
         except:
             error = 1
         return res, error
@@ -137,7 +142,7 @@ class PLCManager(object):
             if bdata == True:
                 data = data | binvalue
             else:
-                data = data ^ binvalue
+                data = data & (65535 ^ binvalue)
 
             res = self.client.write_register(addr, data, unit=1)
             assert(res.function_code < 0x80)     # test that we are not an error
@@ -155,7 +160,6 @@ class PLCManager(object):
             binvalue = self.bitvalue(bitpos)
             res = self.client.read_holding_registers(addr, 1)
             andresult = (res.registers[0] & binvalue)
-
             if andresult == 0:
                 bres = False
             else:
@@ -165,7 +169,6 @@ class PLCManager(object):
         return bres, error
 
 
-    '''
     def write_system_coil(self, addr, val):
         error = 0
         try:
@@ -185,7 +188,6 @@ class PLCManager(object):
             error = 1
 
         return res, error
-    '''
 
 
 

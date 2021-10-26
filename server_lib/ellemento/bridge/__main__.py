@@ -1,16 +1,15 @@
 from ellemento.model.farm_factory import FarmFactory
 from ellemento.model.tray import Tray, TrayStatus
 from ellemento.model.tray_factory import TrayFactory
-from ellemento.model.shelf_factory import ShelfFactory
-from ellemento.model.light_factory import LightFactory
-from ellemento.model.water_control_factory import WaterControlFactory
-from ellemento.model.pump_control_factory import PumpControlFactory
-from ellemento.model.rack_factory import RackFactory
+# from ellemento.model.shelf_factory import ShelfFactory
+# from ellemento.model.light_factory import LightFactory
+# from ellemento.model.water_control_factory import WaterControlFactory
+# from ellemento.model.pump_control_factory import PumpControlFactory
+# from ellemento.model.rack_factory import RackFactory
 # from ellemento.model.ventilation_control_factory import VentilationControlFactory
 # from ellemento.model.farm_factory import FarmFactory
 from lib.logging.logger_initialiser import EllementoLogger
-from ellemento.bridge.plc_bridge import ModelPlcBridge
-
+from ellemento.bridge.bridge_factory import ModelPlcBridgeFactory
 # from ellemento.model.buffer import Buffer
 
 phase_1_shelves = 4
@@ -151,47 +150,15 @@ def test_tray_duration():
         print(obj.transfer_status)
     pass
 
-def test_light_bridge(): 
-    light = LightFactory.create_light(id = 1)
-    res, error = light.off()
-    res, error = light.status()
-    res, error = light.set_intensity(90)
-    res, error = light.intensity()
-    print(res)
-    time.sleep(5)
-    res, error = light.on()
-    res, error = light.status()
-
-def test_water_bridge():
-    valve = WaterControlFactory.create_valve(id = 1); 
-    valve.on()
-    valve.adjust(80)
-    valve.get_percent()
-    valve.off()
-    # bridge = ModelPlcBridge()
-    # bridge.print_model()
-
-def test_pump_bridge(): 
-    pump = PumpControlFactory.create_valve(id = 1)
-    pump.on() 
-
-
-def test_shelf_bridge():
-    shelf = ShelfFactory.create_shelf(id = 1)
-    shelf.on()
-
-def test_rack_bridge(): 
-    valve = WaterControlFactory.create_valve(id = 1); 
-    pump = PumpControlFactory.create_valve(id = 1)
-    shelf = ShelfFactory.create_shelf(id = 1)
-    rack = RackFactory.create_rack(id = 1)
+def test_bridge(): 
+    ModelPlcBridgeFactory.build_bridge()
+    brg = ModelPlcBridgeFactory.get_bridge(type = "Light", id = 1)
+    brg.on_off_status()
 
 if __name__ == '__main__':
 
     #FarmFactory.create_farm()
-    test_light_bridge()
-    test_water_bridge()
-    test_pump_bridge()
+    test_bridge()
     pass
     #test_tray_duration()
 

@@ -1,27 +1,69 @@
 # Interfacing with ASRS to execute transfer job
-from ellemento.model.tray import Tray
-from ellemento.model.tray_phase_1_3 import TrayPhase13
-from ellemento.model.tray_phase_4 import TrayPhase4
-from ellemento.model.harvestor import Harvestor 
-from ellemento.job.haverstor_to_buffer import HarvestorToBuffer
-from ellemento.model.bufffer_factory import BufferFactory, BufferType
+from logging import Logger
 import threading
 import time
 from multiprocessing import Process
 import os
 
-class HarvestorToBuffer:   
+from ellemento.model.tray import Tray
+from ellemento.model.tray_phase_1_3 import TrayPhase13
+from ellemento.model.tray_phase_4 import TrayPhase4
+from ellemento.model.harvestor import Harvestor 
+from ellemento.model.bufffer_factory import BufferFactory, BufferType
+from ellemento.model.buffer import Buffer 
+
+from lib.logging.logger_initialiser import EllementoLogger
+
+
+logger = EllementoLogger.__call__().logger
+
+class HarvestorToBuffer:
     harvestor_to_buffer_job = None 
+    terminate_job = False 
+
+    @classmethod
+    def execute_job(cls):
+        # execute harvestor to buffer
+        while not cls.terminate_job:
+            print("Executing harvestor job")
+            if cls.harvestor_to_buffer_job is None:
+                print("Not having harvestor to buffer job")
+                time.sleep(2)
+                continue
+            ret = cls.harvestor_to_buffer_job.execute()
+            if ret:
+                cls.harvestor_to_buffer_job = None
+            else:
+                print("Not able to execute harvestor job")
+            time.sleep(2)
+            continue
+        pass
 
     @staticmethod 
     def create_job():
-        job = HarvestorToBuffer(1)
-        harvestor = Harvestor.get_harvestor()
-        buffer_5 = BufferFactory.get_buffer(BufferType.BUFFER_5)
-        job.set_source(harvestor)
-        job.set_destination(buffer_5)
-        HarvestorToBuffer.harvestor_to_buffer_job = job
-        return HarvestorToBuffer.harvestor_to_buffer_job 
+        while not HarvestorToBuffer.terminate_job:
+            print("#****************************************************#")     
+            harvestor = Harvestor.get_harvestor()
+            buffer_5 = BufferFactory.get_buffer(BufferType.BUFFER_5)
+
+            if not harvestor.ready_to_unload(): 
+                print("Harvestor is not ready")
+                logger.info("Harvestor is not ready")
+                time.sleep(2)
+                continue 
+
+            if buffer_5.full(): 
+                print("Buffer is full, not ready to load the tray")
+                logger.info("Buffer is full, not ready to load the tray")
+                time.sleep(2)
+                continue  
+
+            print("^****************************************************^")         
+            job = HarvestorToBuffer(1)
+            job.set_source(harvestor)
+            job.set_destination(buffer_5)
+            HarvestorToBuffer.harvestor_to_buffer_job = job
+            time.sleep(2)
 
     def __init__(self, id = -1, type_name = 'Default'):
         self._source = None
@@ -42,7 +84,12 @@ class HarvestorToBuffer:
         self._destination = buffer 
         pass
 
-    def execute(self): 
-        # 
-        pass 
+    def execute(self):
+        tray = self._source.unload_tray()
+        if tray is None:
+            print("Failed to unload tray from harvestor")
+            return False
+        print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+        self._destination.load(tray)
+        return True
    

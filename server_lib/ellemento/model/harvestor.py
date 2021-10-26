@@ -5,12 +5,16 @@
 from enum import Enum
 
 from ellemento.model.tray_phase_5 import TrayPhase5
+from lib.logging.logger_initialiser import EllementoLogger
+
+logger = EllementoLogger.__call__().logger
 
 class Harvestor:
     def __init__(self, id = -1, type_name = "Default"):
         self._id = id
         self._type_name = type_name
         self._trays = [] 
+        self.planned_transfer = False 
 
     @property
     def id(self): 
@@ -19,20 +23,46 @@ class Harvestor:
     @id.setter
     def id(self, value):
         self._id = value 
-
-
+       
     # load a tray to the harvestoer 
     def load_tray(self, tray): 
+        if not self.ready_to_load(): 
+            return False 
         self._trays.insert(0, tray)
+        tray.location = self
+        return True  
 
     # unload tray if harvesting is done 
     def unload_tray(self):
-        if len(self._trays == 0): 
-            raise Exception("No trays available for unloading")  
-        return self._trays.pop()   
+        if len(self._trays) == 0: 
+            print("No trays available for unloading") 
+            return None
+        tray = self._trays.pop()
+        if len(self._trays) == 0: 
+            self.planned_transfer = False 
+        return tray
+    
+    def ready_to_load(self):
+        if len(self._trays) == 0: 
+            return True
+        print("Harvestor is not ready to unload")
+        return False  
+
+    def ready_to_unload(self): 
+        if len(self._trays) == 0: 
+            print("No tray")
+            return False
+        tray_ph5 = self._trays[-1]
+        if tray_ph5.has_veg == False:
+            return True 
+        print("Not harvested")
+        return False  
 
     def harvest(self): 
-        tray_ph5 = TrayPhase5(self._trays(-1))
+        if len(self._trays) <= 0: 
+            logger.error("Not have trays to harvest")
+            return ; 
+        tray_ph5 = self._trays[-1]
         tray_ph5.harvest() 
 
 
@@ -44,7 +74,12 @@ class Harvestor:
     
 
     all_Harvestor = {}
-    
+
+    @staticmethod 
+    def Harvest(): 
+        Harvestor.get_harvestor().harvest()
+        pass
+
     @staticmethod
     def create_harvestor():
         harvestor_new = Harvestor(id = 1, type_name= "harvestor")    
@@ -52,4 +87,6 @@ class Harvestor:
 
     @staticmethod
     def get_harvestor():
+        if len (Harvestor.all_Harvestor) == 0:
+            Harvestor.create_harvestor()
         return Harvestor.all_Harvestor[1] 

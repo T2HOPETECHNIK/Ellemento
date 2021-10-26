@@ -19,7 +19,7 @@ class EllementoLogger(object, metaclass=SingletonType):
     _logger = None
 
 
-    def __init__(self, log_file_name = "debug", log_lvl = logging.DEBUG, output_dir = os.path.dirname(__file__)):
+    def __init__(self, log_file_name = "debug", log_lvl = logging.ERROR, output_dir = os.path.dirname(__file__)):
         """ Initialise the log to do the following:
             (1) Output all log levels (from DEBUG upwards) to stdout
             (2) Log ERROR and CRITICAL messages to file

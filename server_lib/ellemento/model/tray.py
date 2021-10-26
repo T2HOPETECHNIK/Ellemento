@@ -64,6 +64,7 @@ class Tray:
         self._transfer_status = TransferStatus.IDLE
         # Initial location is not sure 
         self._enable = True 
+
         #str_log = "Created object " + self._type_name + " " + str(self._id); 
         #logger.info(str_log)
         self._set_status(TrayStatus.CREATED)
@@ -83,10 +84,16 @@ class Tray:
     @property 
     def transfer_status(self): 
         return self._transfer_status 
+    
+    
 
     def set_transfer_status(self, status): 
         self._transfer_status = status
 
+
+    def reset_status_time(self): 
+        self._status_time = datetime.datetime.now()
+        
     def _set_status(self, status):
         self._status = status 
         self._status_time = datetime.datetime.now()
@@ -149,6 +156,10 @@ class Tray:
     @property
     def has_foam(self):
         return self._has_foam
+
+    @has_foam.setter
+    def has_foam(self, value): 
+        self._has_foam = value 
 
     @ property
     def dimension(self): 

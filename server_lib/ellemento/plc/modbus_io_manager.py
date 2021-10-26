@@ -4,20 +4,24 @@ import sys
 from ellemento.plc.modbus_io import PLCManager
 from lib.logging.logger_initialiser import EllementoLogger
 
-
+logger = EllementoLogger.__call__().logger
 
 # Used to hold all the modbus io 
 class ModbusIOManager(object):  
     modbus_io_dict = {}; 
-    logger = EllementoLogger.initialize_logger()
     
     def __init__ (self):
         super().__init__()
 
       # name = '', id = '', ip = '',
-    @staticmethod
-    def get_modbus_io(**kwargs):
-         for key, value in kwargs.items():
+
+    @classmethod
+    def get_modbus_io(self, **kwargs):
+        if len(self.modbus_io_dict) == 0:
+            # create modbus io if not defined 
+            self.create_modbus_io()
+    
+        for key, value in kwargs.items():
             if key == 'name': 
                 return ModbusIOManager.modbus_io_dict[value]
             if key == "id": 
@@ -41,12 +45,14 @@ class ModbusIOManager(object):
         try:
             script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
             init_file = script_dir + "\\" + "address.json"
-            ModbusIOManager.logger.info(init_file)
+            logger.info(init_file)
             json_file = open(init_file)
             cfg = json.load(json_file)
             json_file.close()
             for x in cfg['modbus']: 
                 plc_from_json = PLCManager(cfg = x)
+                print(x['ip'])
+                #print(cfg)
                 ModbusIOManager.modbus_io_dict[x['name']] = plc_from_json 
                 ModbusIOManager.modbus_io_dict[x['id']] = plc_from_json
                 ModbusIOManager.modbus_io_dict[x['ip']] = plc_from_json

@@ -18,12 +18,16 @@ class BufferStatus(Enum):
 
 class Buffer:
     BUFFER_AREA = 3
+   
     @staticmethod 
     def print():
         pass
 
     def __init__(self, id = -1, type_name = "Default"):
         self.trays = []  
+        self._id = id 
+        self._type_name = type_name
+        self.booked_transfer = False 
         pass
 
     @property
@@ -33,6 +37,9 @@ class Buffer:
     @id.setter
     def id(self, value):
         self._id = value
+    
+    def has_tray(self): 
+        return len(self.trays) > 0 
 
     def full(self): 
         return len(self.trays) == 9
@@ -42,8 +49,10 @@ class Buffer:
 
     def load(self, tray):
         if len(self.trays) >= 9: 
-            raise Exception("Not able to load, buffer is full")
+            print("Not able to load, buffer is full")
             return 
+        # update tray location to be the buffer 
+        tray.location = self; 
         if len(self.trays) < self.BUFFER_AREA:
             self.trays.append(tray) 
             return 
