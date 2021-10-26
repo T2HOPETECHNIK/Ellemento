@@ -2,7 +2,10 @@ import json, os
 # Local library import
 from ellemento.bridge.plc_bridge import ModelPlcBridge
 from ellemento.bridge.light_bridge import LightModelPlcBridge 
-from ellemento.bridge.valve_bridge import ValveModelPlcBridge 
+from ellemento.bridge.valve_bridge import ValveModelPlcBridge
+from ellemento.bridge.pump_bridge import PumpModelPlcBridge
+from ellemento.bridge.shelf_bridge import ShelfModelPlcBridge
+from ellemento.bridge.rack_bridge import RackModelPlcBridge
 from lib.logging.logger_initialiser import EllementoLogger
 logger = EllementoLogger.__call__().logger
 
@@ -12,13 +15,12 @@ class ModelPlcBridgeFactory:
     valve_plc_bridge_dict = {} 
     pump_plc_bridge_dict = {}
     shelf_plc_bridge_dict = {}  
+    rack_plc_bridge_dict = {} 
 
     @classmethod 
     def get_bridge(self, type = None, id = -1):
         if  len(self.light_plc_bridge_dict) == 0: 
             self.build_bridge()
-        
-        
         if type == "Light": 
             if id in  self.light_plc_bridge_dict:
                 return self.light_plc_bridge_dict[id]
@@ -39,6 +41,12 @@ class ModelPlcBridgeFactory:
                 return self.shelf_plc_bridge_dict[id]
             else: 
                 return None 
+        elif type == "Rack": 
+            if id in self.rack_plc_braidge_dict: 
+                return self.rack_plc_braidge_dict[id]
+            else: 
+                return None
+
     @classmethod
     def build_bridge(self): 
         #  step 1 load cfg file 
@@ -75,7 +83,7 @@ class ModelPlcBridgeFactory:
         for pump_brg in pump_cfg:
             pump_id = pump_brg['id']
             mod_bus_id = pump_brg['address']['modbus_id'] 
-            pump_bridge = ValveModelPlcBridge(valve_id = pump_id, plc_id=mod_bus_id, address = pump_brg['address'])
+            pump_bridge = PumpModelPlcBridge(valve_id = pump_id, plc_id=mod_bus_id, address = pump_brg['address'])
             print(",,,,,,,,,,,,,,,", pump_id)
             self.pump_plc_bridge_dict[pump_id ] = pump_bridge
 
@@ -85,9 +93,21 @@ class ModelPlcBridgeFactory:
         for shelf_brg in shelf_cfg:
             shelf_id = shelf_brg['id']
             mod_bus_id = shelf_brg['address']['modbus_id'] 
-            shelf_bridge = ValveModelPlcBridge(valve_id = shelf_id, plc_id=mod_bus_id, address = shelf_brg['address'])
+            shelf_bridge = ShelfModelPlcBridge(shelf_id = shelf_id, plc_id=mod_bus_id, address = shelf_brg['address'])
             print(",,,,,,,,,,,,,,,", shelf_id)
             self.shelf_plc_bridge_dict[shelf_id ] = shelf_bridge
     
+
+    @classmethod
+    def build_rack_bridge(self, rack_cfg): 
+        print(rack_cfg)
+        for rack_brg in rack_cfg:
+            rack_id = rack_cfg['id']
+            mod_bus_id = rack_cfg['address']['modbus_id'] 
+            rack_bridge = RackModelPlcBridge(rack_id = rack_id, plc_id=mod_bus_id, address = rack_brg['address'])
+            print(",,,,,,,,,,,,,,,", rack_id)
+            self.rack_plc_bridge_dict[rack_id ] = rack_bridge
+    
+
     def __init__(self):
         pass

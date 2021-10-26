@@ -5,7 +5,7 @@ from ellemento.model.shelf_factory import ShelfFactory
 from ellemento.model.light_factory import LightFactory
 from ellemento.model.water_control_factory import WaterControlFactory
 from ellemento.model.pump_control_factory import PumpControlFactory
-# from ellemento.model.rack_factory import RackFactory
+from ellemento.model.rack_factory import RackFactory
 # from ellemento.model.ventilation_control_factory import VentilationControlFactory
 # from ellemento.model.farm_factory import FarmFactory
 from lib.logging.logger_initialiser import EllementoLogger
@@ -179,7 +179,13 @@ def test_pump_bridge():
 def test_shelf_bridge():
     shelf = ShelfFactory.create_shelf(id = 1)
     shelf.on()
-    
+
+def test_rack_bridge(): 
+    valve = WaterControlFactory.create_valve(id = 1); 
+    pump = PumpControlFactory.create_valve(id = 1)
+    shelf = ShelfFactory.create_shelf(id = 1)
+    rack = RackFactory.create_rack(id = 1)
+
 if __name__ == '__main__':
 
     #FarmFactory.create_farm()

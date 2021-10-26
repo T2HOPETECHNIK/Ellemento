@@ -231,7 +231,7 @@
                 "section_mode":
                 {
                     "tag": "CTRL_SECTION_MODE", 
-                    "position": 0, 
+                    "position": [0, 1], 
                     "type": "integer"
                 }
             }

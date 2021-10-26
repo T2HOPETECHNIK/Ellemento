@@ -13,7 +13,7 @@ from ellemento.plc.modbus_io_manager import ModbusIOManager
 
 logger = EllementoLogger.__call__().logger
 
-class ShelfModelPlcBridge(ModelPlcBridge):
+class RackModelPlcBridge(ModelPlcBridge):
     ModelPlcDict = {}
     
     def __init__(self, id = -1, type_name = "Default", rack_id = -1, plc_id = -1, address = None):                   
@@ -24,11 +24,11 @@ class ShelfModelPlcBridge(ModelPlcBridge):
         self.modbus_io  = ModbusIOManager.get_modbus_io(id = self._plc_id)
         self.address    = address
      
-    def set_control_section_mode(self):
+    def set_control_section_mode(self, section, mode):
         tag_name = self.address['CTRL_SECTION_MODE']['tag']
-        location = self.address['CTRL_SECTION_MODE']['position']
+        location = self.address['CTRL_SECTION_MODE']['position'][section - 1]
         register_address = self.modbus_io.config['address'][tag_name][location]
-        res, error = self.modbus_io.read_register(register_address, 1)
+        res, error = self.modbus_io.write_register(register_address, mode)
         ret = None 
         if not error: 
             ret = res.registers[0]

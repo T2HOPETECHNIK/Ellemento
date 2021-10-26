@@ -10,7 +10,7 @@
             {
                 "modeAddress": 2500,
                 "CTRL_APPLY_UPDATE": 301, 
-                "CTRL_SECTION_MODE": 4460,
+                "CTRL_SECTION_MODE": [4460, 4461, 4462], 
                 "FEEDBACK_LED": 
                 {
                     "position": 4020, 
