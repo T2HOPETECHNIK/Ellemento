@@ -8,10 +8,10 @@ from lib.logging.logger_initialiser import EllementoLogger
 
 logger = EllementoLogger.__call__().logger
 
-class RackFactory:
-    all_B2_racks = []
+class RackFactory: 
+    all_B2_racks = [] # 2 pumps 14 shelves 
     all_A1_racks = [] 
-    all_A2_racks = [] 
+    all_A2_racks = []  # only 1 pump
     max_idx_used = 0 
 
     @staticmethod # A1 has 8 phase 4 shelves, and 4 phase 5 shelves
