@@ -1,0 +1,92 @@
+﻿/n/TsDmiy,CO2 PPM
+0352biLQ4,LED 14
+0XwuPJaWi,LED 13
+0lBNVXRNz,GEMHO 3 in 1 Sensor 7
+1Ga9qCjfM,Valve 12
+1Qfo4SFYK,Wind Speed & Direction 2
+1l+NljK6J,Valve 6
+2EVlhgYJL,Valve 11
+2FdJDEBlI,LED 6
+3QdH4AfPN,GEMHO 3 in 1 Sensor 5
+4GRBkAmes,Pump Speed
+75sXEcqyt,Wind Speed
+7xAgBbu5t,GEMHO 3 in 1 Sensor 4
+8tfGDxCHk,Ventilation Logger
+997oqw3+K,LED 11
+9SqofOcbH,Valve 3
+9pDaDZzon,Temp 3
+AnalogLabel,Analog,3,Indicates the tag can input and output analog data.
+BCb2JqhkQ,GEMHO 3 in 1 Sensor 11
+BU1HX59kk,GEMHO 3 in 1 Sensor 12
+Bms9WnVjJ,Wind Speed & Direction 4
+D/HwK102M,Temp 2
+DXXrh8UM5,Temp Sensor Detected
+Description_XXzmzb3,Pump 1,1,Description for Station Pump1 child tags
+Description_aqKTbxu,Pump 3,1,Description for Station Pump3 child tags
+Description_iyE8AMi,Pump 2,1,Description for Station Pump2 child tags
+DigitalLabel,Digital,1,Indicates the tag can input and output digital data.
+EdHXVQkeu,Wind Speed & Direction 5
+EzJnidE+9,GEMHO 3 in 1 Sensor 8
+FAzztMl03,Wind Speed & Direction 8
+GSiQ0N97N,LED 2
+Gd8EZiHlf,Valve 10
+JkKNMUa0u,LED On/Off
+KTq4tUHtM,LED 3
+MA0EDe7oj,Temp Sensor
+Meter22Label,Power Meter,3,Title of a gauge in the drawing menu
+NcWEm+SWv,Pump RPM
+PGs9oCCNm,Kw
+QrJfXddG6,GEMHO 3 in 1 Sensor 1
+RWQ4dDs5k,GEMHO 3 in 1 Sensor 3
+Rx++Qsqh7,GEMHO 3 in 1 Sensor 9
+SQCxf/TiK,Temp 1
+StW2EdgVg,Test_Logger
+UEyNk5R2+,Wind Speed & Direction 6
+UFPSHrJ4u,Valve 8
+V7FzPxxw5,Air Temperature
+X/I/P6r5+,Wind Direction
+Xvg+gGjOd,Wind Speed & Direction
+YLX9sOeU3,Valve 13
+ZFS04BDSn,LED 4
+ZwH9AbGV4,GEMHO 3 in 1 Sensor 10
+b9ZRVxMlN,Valve 4
+bgo047Tt+,LED 7
+c5ked0wsl,Valve 9
+cxBAV5SFu,Ic
+dL+8JniJT,Wind Speed & Direction 3
+eHcyCZOlr,Rack4 Logger
+f12gABrpY,LED3
+f3E6NzciD,Wind Speed & Direction 1
+fhOGDHxSh,GEMHO 3 in 1 Sensor
+fm6DwpOgn,LED 1
+fmKdgOHrt,LED 9
+gEPwQFKGe,Valve 5
+gR/6TNWGH,Air Humidity
+hGdWUYC1I,LED 10
+hJ1PWkrI+,Wind Speed & Direction 9
+hQM/B5Qo7,Watt
+i3g0eZ4Lp,Wind Speed & Direction 11
+iMTc9448d,Wind Speed & Direction 10
+j+0s0jFR2,GEMHO 3 in 1 Sensor 2
+jcZ0/u4C4,Valve 2
+jvKlX+sfx,LED 12
+kKwJVa11+,Rack1 Logger
+l3De7dyqy,Wind Speed & Direction 7
+m4xu5kQNE,Ib
+p6ZHxQQS8,Lousy page
+pY17iG8fJ,LED 5
+paO7YPfET,Valve 7
+roH4p0OSm,Pump Flow Rate
+stKYUi9r2,LED 8
+u1frkqWGJ,GEMHO 3 in 1 Sensor 6
+v7YLW4Kpp,The TCP Port
+vCz2TQM+f,Valve 14
+vhKuijZI1,Valve 1
+vnAFQBuvb,Page 1
+w6gjFCQcC,Wind Speed & Direction 
+wHGKM8tuc,Test text
+wXFx7ld4o,test
+wvzLHqIbK,Temp 4
+xAgXpkxX6,Ia
+xUY9jwJoS,Modbus driver
+xbWTsOxt5,Wind Speed & Direction 12

@@ -1,0 +1,112 @@
+[
+  Title = "8tfGDxCHk";
+  PageToolTipLabel;
+  PageX;
+  PageY;
+  PageHeight = 1080;
+  PageWidth = 1920;
+  PageMinWidth;
+  PageMinHeight;
+  PageVWidth;
+  PageVHeight;
+  PageStyle;
+  PageWStyle = 540672;
+]
+
+Main [
+  Return(Self);
+  GUITransform(426, 237, 499, 216,
+               10, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               Scope(\Code, "Library", TRUE)\PageChangeBtn("Overview", "PageLabel"));
+  GUIText(346, 302, 506, 282,
+          1, 1, 1, 1, 1 { Scaling              },
+          10, 0          { Movement             },
+          1, PickValid(\ScaleDisplayContent, 0) { Visibility, Font Scaling },
+          0, 0, 0       { Selectability        },
+          Brush("<00000000>", 0, 1), Pen("<FF000000>", 1, 1),
+          Scope(\VTSDB, "LabelFont", TRUE)\Value,
+          0, 4,
+          "%s",
+          \GetPhrase("DXXrh8UM5"));
+  GUITransform(109, 430, 176, 363,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               Scope(\VTSDB, ":AlarmPoint", TRUE)\IndicatorLight(Invalid, \ImageParmSet("Bitmaps\Lights\Round2Light.png", Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid), \ImageParmSet("Bitmaps\Lights\Round2.png", Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid), 0, 0, 0));
+  GUITransform(109, 529, 176, 462,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               PickValid(Scope(\VTSDB, "5fx8)-=.&s\=1ydtx#)(^", TRUE)\IndicatorLight, Scope(\VTSDB, ":AlarmPoint", TRUE)\IndicatorLight)(Invalid, \ImageParmSet("Bitmaps\Lights\Round2Light.png", Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid), \ImageParmSet("Bitmaps\Lights\Round2.png", Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid), 0, 0, 0));
+  GUITransform(513, 237, 586, 216,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               Scope(\Code, "Library", TRUE)\HDVPlotGrpBtn(Invalid, 86400, "HDVOpenLabel"));
+  GUITransform(106, 204, 934, 54,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               Scope(\Code, "SystemStatusTools", TRUE)\HistorianStatus());
+  GUITransform(235, 557, 570, 307,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Opacity, Reserved    },
+               0, 0, 0       { Selectability        },
+               Scope(\Code, "UserMethods", TRUE)\Group_c39cb794_9851_4f72_b4e1_9b591e38db6d(Scope(\VTSDB, "5fx8)-=.&s\mr6&!h4;y&\zr6~t{x1u$", TRUE), Scope(\VTSDB, "5fx8)-=.&s\mr6&!h4;y&\#os-jajgfn", TRUE), Scope(\VTSDB, "5fx8)-=.&s\mr6&!h4;y&\#w.p1d{)o)", TRUE), Scope(\VTSDB, "5fx8)-=.&s\mr6&!h4;y&\gk6=qft)9v", TRUE)));
+  GUIText(334, 624, 494, 604,
+          1, 1, 1, 1, 1 { Scaling              },
+          0, 0          { Movement             },
+          1, PickValid(\ScaleDisplayContent, 0) { Visibility, Font Scaling },
+          0, 0, 0       { Selectability        },
+          Brush("<00000000>", 0, 1), Pen("<FF000000>", 1, 1),
+          Scope(\VTSDB, "LabelFont", TRUE)\Value,
+          0, 4,
+          "%s",
+          \GetPhrase("f3E6NzciD"));
+  GUITransform(267, 771, 560, 644,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               Scope(\Code, "UserMethods", TRUE)\Group_b51b8644_861e_4dd0_9b2d_fffb143f2771(Scope(\VTSDB, "5fx8)-=.&s\=1ydtx#)(^\awr!6^ocv~", TRUE), Scope(\VTSDB, "5fx8)-=.&s\=1ydtx#)(^\t)+4mrzc#}", TRUE)));
+  GUIText(649, 624, 809, 604,
+          1, 1, 1, 1, 1 { Scaling              },
+          0, 0          { Movement             },
+          1, PickValid(\ScaleDisplayContent, 0) { Visibility, Font Scaling },
+          0, 0, 0       { Selectability        },
+          Brush("<00000000>", 0, 1), Pen("<FF000000>", 1, 1),
+          Scope(\VTSDB, "LabelFont", TRUE)\Value,
+          0, 4,
+          "%s",
+          \GetPhrase("f3E6NzciD"));
+  GUITransform(583, 771, 876, 644,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               Scope(\Code, "UserMethods", TRUE)\Group_b51b8644_861e_4dd0_9b2d_fffb143f2771(Scope(\VTSDB, "5fx8)-=.&s\ukz$=i+@wg\#esosvf@f7", TRUE), Scope(\VTSDB, "5fx8)-=.&s\ukz$=i+@wg\.5k%f0_u7t", TRUE)));
+  GUIText(971, 623, 1131, 603,
+          1, 1, 1, 1, 1 { Scaling              },
+          0, 0          { Movement             },
+          1, PickValid(\ScaleDisplayContent, 0) { Visibility, Font Scaling },
+          0, 0, 0       { Selectability        },
+          Brush("<00000000>", 0, 1), Pen("<FF000000>", 1, 1),
+          Scope(\VTSDB, "LabelFont", TRUE)\Value,
+          0, 4,
+          "%s",
+          \GetPhrase("f3E6NzciD"));
+  GUITransform(904, 770, 1197, 643,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               Scope(\Code, "UserMethods", TRUE)\Group_b51b8644_861e_4dd0_9b2d_fffb143f2771(Scope(\VTSDB, "5fx8)-=.&s\=1ydtx#)(^\awr!6^ocv~", TRUE), Scope(\VTSDB, "5fx8)-=.&s\=1ydtx#)(^\t)+4mrzc#}", TRUE)));
+]

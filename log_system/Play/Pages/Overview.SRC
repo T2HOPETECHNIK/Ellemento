@@ -1,0 +1,68 @@
+[
+  Title = "OverviewLabel";
+  Color = "<FFFFFFFF>";
+]
+
+Main [
+  Return(Self);
+  GUITransform(115, 198, 192, 121,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               PickValid(Scope(\VTSDB, "5fx8)-=.&s\Lnp#+9r973\s1^4$mb9#x", TRUE)\IndicatorLight, Scope(\VTSDB, ":AlarmPoint", TRUE)\IndicatorLight)(Invalid, \ImageParmSet("Bitmaps\Lights\Hex1Light.png", Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid), \ImageParmSet("Bitmaps\Lights\Hex1.png", Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid), 0, 0, 0));
+  GUITransform(306, 142, 379, 121,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               PickValid(Scope(\VTSDB, "5fx8)-=.&s\Lnp#+9r973", TRUE)\CommMessages, Scope(\VTSDB, ":ModiconDriver", TRUE)\CommMessages)(Invalid, 0, 0, Invalid));
+  GUITransform(422, 142, 495, 121,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               PickValid(Scope(\VTSDB, "5fx8)-=.&s\Lnp#+9r973", TRUE)\CommStatistics, Scope(\VTSDB, ":ModiconDriver", TRUE)\CommStatistics)(1, Invalid, Invalid, Invalid, Invalid));
+  GUITransform(96, 311, 212, 266,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               PickValid(Scope(\VTSDB, "5fx8)-=.&s\Lnp#+9r973\z}dvwfwpbw", TRUE)\LEDNumeric, Scope(\VTSDB, ":AnalogStatus", TRUE)\LEDNumeric)(4, 0, Invalid, 0, 0, 0, 1, 0));
+  GUITransform(297, 335, 389, 243,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               PickValid(Scope(\VTSDB, "5fx8)-=.&s\Lnp#+9r973\3gax672}tn", TRUE)\RotaryControl, Scope(\VTSDB, ":AnalogOutput", TRUE)\RotaryControl)(\ImageParmSet("Bitmaps\Knobs\GreyKnob.png", Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid), \ImageParmSet(Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid), 2, 1, 0, 100, 0, 45, 0, 0, 0));
+  GUITransform(115, 501, 207, 410,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               PickValid(Scope(\VTSDB, "5fx8)-=.&s\Lnp#+9r973\d8k@(L", TRUE)\RotaryControl, Scope(\VTSDB, ":AnalogOutput", TRUE)\RotaryControl)(\ImageParmSet("Bitmaps\Knobs\BrassKnobDot.png", Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid), \ImageParmSet("Bitmaps\Knobs\BrassKnob.png", Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid, Invalid), 100, 1, 0, 100, 225, 135, 0, 0, 0));
+  GUITransform(288, 528, 404, 483,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               PickValid(Scope(\VTSDB, "5fx8)-=.&s\Lnp#+9r973\@Lg}eg", TRUE)\LEDNumeric, Scope(\VTSDB, ":AnalogStatus", TRUE)\LEDNumeric)(4, 0, Invalid, 0, 0, 0, 1, 0));
+  GUITransform(695, 593, 768, 572,
+               2, 5, 3, 2, 4 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               Scope(\Code, "Library", TRUE)\PageChangeBtn("Page1", "p6ZHxQQS8"));
+  GUITransform(700, 417, 1171, 103,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               PickValid(Scope(\VTSDB, "5fx8)-=.&s\Lnp#+9r973\z}dvwfwpbw", TRUE)\PlotData, Scope(\VTSDB, ":AnalogStatus", TRUE)\PlotData)(Invalid, Invalid, Invalid, 15, Invalid, Invalid, Invalid, Invalid, Invalid, 1, 1, Invalid, Invalid, Invalid, Invalid, Invalid, 245, Invalid, 245, "Value", 0, 0, 0, 8, 0, 1, 0));
+  GUITransform(321, 728, 495, 676,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               Scope(\Code, "Library", TRUE)\EditIni(Invalid, Invalid, Invalid, 1, 1, 2, 1, 1, 1, Invalid, 0, 100, Invalid));
+]

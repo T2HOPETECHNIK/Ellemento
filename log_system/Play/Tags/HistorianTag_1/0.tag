@@ -1,0 +1,9 @@
+SystemAlarmHistorian,AuditName<Logged Off|1635213439.835>,SystemAlarmHistorian
+SystemAlarmHistorian,Name<Logged Off|1635213439.835>,*SystemAlarmHistorian
+SystemAlarmHistorian,Tag_Start_Condition<Logged Off|1635213439.835>,deleted
+SystemHistorian,AuditName<Logged Off|1632277907.68>,SystemHistorian
+SystemHistorian,ClientStorage<Logged Off|1632277907.678>,1
+SystemHistorian,Name<Logged Off|1632277907.678>,SystemHistorian
+SystemHistorian,StorageLocation<Logged Off|1632898888.487>,DSN=vtscada
+SystemHistorian,StorageName<Logged Off|1632907690.09>,ellemento
+SystemHistorian,StorageType<Logged Off|1632907690.09>,ODBC

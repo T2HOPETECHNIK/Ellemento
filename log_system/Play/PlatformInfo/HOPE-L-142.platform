@@ -1,0 +1,40 @@
+[Application]
+  Path                             = C:\VTScada\Play\
+  GUID                             = eb1ef3ef-6893-45c1-9881-c226ab4ecc18
+  OEM                              = VTScada Library
+  OEM GUID                         = 46347dd5-cb24-11d1-a130-0060971477af
+[VTScada]
+  VTScada Version                  = 12.0.26 (64-bit)
+  VTScada Serial Number            = 0
+  Running Hours Limit              = Unlimited
+  Maintenance Expiry               = Jan 1, 2000
+  Tag Count Limit                  = 50
+  VIC Count Limit                  = 1
+  VTScada Run Mode                 = Configuration
+  Hardware Key Required            = No
+  Evaluation Days Left             = Unlimited
+  Alarm Notification Enabled       = No
+  Remote Data Access Enabled       = Yes
+  OPC Server Enabled               = Yes
+  Version Control Enabled          = Yes
+  Remote Configuration Enabled     = Yes
+  Redundancy Capability Enabled    = Yes
+  Server Capability Enabled        = Yes
+  Custom Installation Enabled      = No
+  Highest bits supported by license = 64
+  Remote Idea Studio Enabled       = Yes
+[Microsoft Windows]
+  Windows Version                  = 10.0
+  Windows Product Type             = 1
+  Windows Suite Mask               = 256
+  Windows Build Number             = 19043
+  Service Pack Name                = None
+  Service Pack Version             =
+  Windows Product Info             = 48
+[Hardware]
+  Workstation Name                 = HOPE-L-142
+  Machine ID                       = 6D9B58CDEC0D
+  CPU Architecture                 = x64
+  Number of CPUs                   = 8
+  Physical Memory                  = 17,027,801,088
+

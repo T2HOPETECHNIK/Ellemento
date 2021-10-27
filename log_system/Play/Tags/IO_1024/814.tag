@@ -1,0 +1,13 @@
+SystemHistorian\nx#deq(-5n,AuditName<Logged Off|1634610318.468>,SystemHistorian\\D1001
+SystemHistorian\nx#deq(-5n,DisplayOrder<Logged Off|1632386206.485>,1
+SystemHistorian\nx#deq(-5n,EnableLogging<Logged Off|1632386206.485>,1
+SystemHistorian\nx#deq(-5n,HistorianName<Logged Off|1632386206.485>,SystemHistorian
+SystemHistorian\nx#deq(-5n,MinimumLogInterval<Logged Off|1634610318.463>,60
+SystemHistorian\nx#deq(-5n,Name<Logged Off|1632386206.485>,SystemHistorian\\nx#deq(-5n
+SystemHistorian\nx#deq(-5n,RangeMax<Logged Off|1632386206.485>,10000
+SystemHistorian\nx#deq(-5n,RangeMin<Logged Off|1632386206.485>,0
+SystemHistorian\nx#deq(-5n,ReadAddress<Logged Off|1632386206.485>,41002
+SystemHistorian\nx#deq(-5n,ScaledMax<Logged Off|1632386206.485>,10000
+SystemHistorian\nx#deq(-5n,ScanRate<Logged Off|1634609813.583>,60
+SystemHistorian\nx#deq(-5n,ShortName<Logged Off|1632386206.485>,D1001
+SystemHistorian\nx#deq(-5n,UnscaledMax<Logged Off|1632386206.485>,10000
