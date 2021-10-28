@@ -41,12 +41,13 @@ class Application(tk.Frame):
         name = tk.Entry(content)
 
         content.grid(column=0, row=0)
-        frame.grid(column=0, row=0, columnspan=20, rowspan=22)
+        frame.grid(column=0, row=0, columnspan=25, rowspan=22)
 
         self.drawPVButtons(content)
         self.drawLEDControls(content)
         self.drawPumpControl(content)
         self.drawSectionControl(content)
+        self.drawScheduler(content)
 
         self.drawApplyButton(content)
 
@@ -225,9 +226,6 @@ class Application(tk.Frame):
         self.pvUpdateBtn.grid(column=4, row=17, columnspan=1)
 
 
-    
-
-
         
     def updateSetPVPos(self):
 
@@ -267,11 +265,11 @@ class Application(tk.Frame):
 
 
     def drawLEDControls(self, content):
-        self.led1Btn = tk.Button(content, text="LED1 On")
+        self.led1Btn = tk.Button(content, text="N.A.")
         self.led1Btn["command"] = self.led1OnClick
         self.led1Btn.grid(column=7, row=1, columnspan=1)
 
-        self.led2Btn = tk.Button(content, text="LED2 On")
+        self.led2Btn = tk.Button(content, text="N.A.")
         self.led2Btn["command"] = self.led2OnClick
         self.led2Btn.grid(column=7, row=2, columnspan=1)
 
@@ -325,11 +323,11 @@ class Application(tk.Frame):
 
         #==================================
 
-        self.led1Btn = tk.Button(content, text="LED1 Off")
+        self.led1Btn = tk.Button(content, text="N.A.")
         self.led1Btn["command"] = self.led1OffClick
         self.led1Btn.grid(column=8, row=1, columnspan=1)
 
-        self.led2Btn = tk.Button(content, text="LED2 Off")
+        self.led2Btn = tk.Button(content, text="N.A.")
         self.led2Btn["command"] = self.led2OffClick
         self.led2Btn.grid(column=8, row=2, columnspan=1)
 
@@ -621,15 +619,15 @@ class Application(tk.Frame):
 
         # pump mode buttons
         self.uipump2Autobutton = tk.Button(content, text="AUTO")
-        self.uipump2Autobutton["command"] = self.uipump2Autobutton
+        self.uipump2Autobutton["command"] = self.uipump2AutobuttonClick
         self.uipump2Autobutton.grid(column=13, row=rowOffset+3, columnspan=1)
 
         self.uipump2Flowbutton = tk.Button(content, text="FLOW")
-        self.uipump2Flowbutton["command"] = self.uipump2Flowbutton
+        self.uipump2Flowbutton["command"] = self.uipump2FlowbuttonClick
         self.uipump2Flowbutton.grid(column=14, row=rowOffset+3, columnspan=1)
 
         self.uipump2Hzbutton = tk.Button(content, text="FREQ")
-        self.uipump2Hzbutton["command"] = self.uipump2Hzbutton
+        self.uipump2Hzbutton["command"] = self.uipump2HzbuttonClick
         self.uipump2Hzbutton.grid(column=15, row=rowOffset+3, columnspan=1)
 
         # ----------------------------------
@@ -641,47 +639,163 @@ class Application(tk.Frame):
 
     def updatePumpSetting(self):
         tmp = self.uipump1FlowSetting.get()
-        fr = int(tmp)
-        self.elem1.setPumpFlowrate(1,fr)
+        if tmp != "":
+            fr = int(tmp)
+            self.elem1.setPumpFlowrate(1,fr)
 
         tmp = self.uipump1HzSetting.get()
-        hz = int(tmp)
-        self.elem1.setPumpRPM(1,hz)
+        if tmp != "":
+            hz = int(tmp)
+            self.elem1.setPumpRPM(1,hz)
 
-        tmp = self.uipump2FlowSetting.getint()
-        fr = int(tmp)
-        self.elem1.setPumpFlowrate(2,fr)
+        tmp = self.uipump2FlowSetting.get()
+        if tmp != "":
+            fr = int(tmp)
+            self.elem1.setPumpFlowrate(2,fr)
 
-        tmp = self.uipump2HzSetting.getint()
-        hz = int(tmp)
-        self.elem1.setPumpRPM(2,hz)
+        tmp = self.uipump2HzSetting.get()
+        if tmp != "":
+            hz = int(tmp)
+            self.elem1.setPumpRPM(2,hz)
 
+        # Fill drain settings
+        local_fill_duration = self.FillDuration.get()
+        local_drain_duration = self.DrainDuration.get()
+        local_fill_rate = self.FillFlowrate.get()
+        local_drain_rate = self.DrainFlowrate.get()
+
+        print("Fill settings: ", local_fill_rate, " Duration: ", local_fill_duration)
+        print("Drain settings: ", local_drain_rate, " Duration: ", local_drain_duration)
+
+        self.elem1.setFillDrainModeDuration_s(1, int(local_fill_duration,10), int(local_drain_duration,10))
+
+        self.elem1.setFillDrainModeSetpoint(1, int(local_fill_rate), int(local_drain_rate))
+
+        #self.elem1.setFillDrainParams(local_fill_rate, local_fill_duration, local_drain_rate, local_drain_duration)
 
 
     def drawSectionControl(self, content):
+
+        rowOffset = 1
+
+        self.sec1ModeText = tk.StringVar()
+        self.sec1ModeText.set("")
+        self.sec1ModeLabel = tk.Label( content, textvariable=self.sec1ModeText )
+        self.sec1ModeLabel.grid(column=18, row=rowOffset, columnspan=1)
+
         self.sec1ModeAutoBtn = tk.Button(content, text="Sec 1 AUTO")
         self.sec1ModeAutoBtn["command"] = self.sec1AutoClick
-        self.sec1ModeAutoBtn.grid(column=18, row=2, columnspan=1)
+        self.sec1ModeAutoBtn.grid(column=18, row=rowOffset+1, columnspan=1)
 
         self.sec1ModeSemiBtn = tk.Button(content, text="Sec 1 SEMI")
         self.sec1ModeSemiBtn["command"] = self.sec1SemiClick
-        self.sec1ModeSemiBtn.grid(column=18, row=3, columnspan=1)
+        self.sec1ModeSemiBtn.grid(column=18, row=rowOffset+2, columnspan=1)
 
         self.sec1ModeManuBtn = tk.Button(content, text="Sec 1 MANU")
         self.sec1ModeManuBtn["command"] = self.sec1ManuClick
-        self.sec1ModeManuBtn.grid(column=18, row=4, columnspan=1)
+        self.sec1ModeManuBtn.grid(column=18, row=rowOffset+3, columnspan=1)
+
+
+        rowOffset = 11
+
+        self.sec2ModeText = tk.StringVar()
+        self.sec2ModeText.set("")
+        self.sec2ModeLabel = tk.Label( content, textvariable=self.sec2ModeText )
+        self.sec2ModeLabel.grid(column=18, row=rowOffset, columnspan=1)
 
         self.sec2ModeAutoBtn = tk.Button(content, text="Sec 2 AUTO")
-        self.sec2ModeAutoBtn["command"] = self.sec1AutoClick
-        self.sec2ModeAutoBtn.grid(column=18, row=12, columnspan=1)
+        self.sec2ModeAutoBtn["command"] = self.sec2AutoClick
+        self.sec2ModeAutoBtn.grid(column=18, row=rowOffset+1, columnspan=1)
 
         self.sec2ModeSemiBtn = tk.Button(content, text="Sec 2 SEMI")
-        self.sec2ModeSemiBtn["command"] = self.sec1SemiClick
-        self.sec2ModeSemiBtn.grid(column=18, row=13, columnspan=1)
+        self.sec2ModeSemiBtn["command"] = self.sec2SemiClick
+        self.sec2ModeSemiBtn.grid(column=18, row=rowOffset+2, columnspan=1)
 
         self.sec2ModeManuBtn = tk.Button(content, text="Sec 2 MANU")
-        self.sec2ModeManuBtn["command"] = self.sec1ManuClick
-        self.sec2ModeManuBtn.grid(column=18, row=14, columnspan=1)
+        self.sec2ModeManuBtn["command"] = self.sec2ManuClick
+        self.sec2ModeManuBtn.grid(column=18, row=rowOffset+3, columnspan=1)
+
+
+    # ==============================================================
+    # Draw scheduler
+    # ==============================================================
+
+    def drawScheduler(self, content):
+
+        self.sched1Btn = tk.Button(content, text="SCHED 1", relief="raised")
+        self.sched1Btn["command"] = self.sched1BtnClick
+        self.sched1Btn.grid(column=20, row=1, columnspan=1)
+
+        self.sched2Btn = tk.Button(content, text="SCHED 2", relief="raised")
+        self.sched2Btn["command"] = self.sched1BtnClick
+        self.sched2Btn.grid(column=20, row=2, columnspan=1)
+
+        self.sched3Btn = tk.Button(content, text="SCHED 3", relief="raised")
+        self.sched3Btn["command"] = self.sched1BtnClick
+        self.sched3Btn.grid(column=20, row=3, columnspan=1)
+        
+        self.sched4Btn = tk.Button(content, text="SCHED 4", relief="raised")
+        self.sched4Btn["command"] = self.sched1BtnClick
+        self.sched4Btn.grid(column=20, row=4, columnspan=1)
+
+        self.sched5Btn = tk.Button(content, text="SCHED 5", relief="raised")
+        self.sched5Btn["command"] = self.sched1BtnClick
+        self.sched5Btn.grid(column=20, row=5, columnspan=1)
+        
+        self.sched6Btn = tk.Button(content, text="SCHED 6", relief="raised")
+        self.sched6Btn["command"] = self.sched1BtnClick
+        self.sched6Btn.grid(column=20, row=6, columnspan=1)
+
+        self.sched7Btn = tk.Button(content, text="SCHED 7", relief="raised")
+        self.sched7Btn["command"] = self.sched1BtnClick
+        self.sched7Btn.grid(column=20, row=7, columnspan=1)
+        
+        self.sched8Btn = tk.Button(content, text="SCHED 8", relief="raised")
+        self.sched8Btn["command"] = self.sched1BtnClick
+        self.sched8Btn.grid(column=20, row=8, columnspan=1)
+
+        self.sched9Btn = tk.Button(content, text="SCHED 9", relief="raised")
+        self.sched9Btn["command"] = self.sched9BtnClick
+        self.sched9Btn.grid(column=20, row=9, columnspan=1)
+        
+        self.sched10Btn = tk.Button(content, text="SCHED 10", relief="raised")
+        self.sched10Btn["command"] = self.sched10BtnClick
+        self.sched10Btn.grid(column=20, row=10, columnspan=1)
+
+        self.sched11Btn = tk.Button(content, text="SCHED 11", relief="raised")
+        self.sched11Btn["command"] = self.sched11BtnClick
+        self.sched11Btn.grid(column=20, row=11, columnspan=1)
+        
+        self.sched12Btn = tk.Button(content, text="SCHED 12", relief="raised")
+        self.sched12Btn["command"] = self.sched12BtnClick
+        self.sched12Btn.grid(column=20, row=12, columnspan=1)
+
+        self.sched13Btn = tk.Button(content, text="SCHED 13", relief="raised")
+        self.sched13Btn["command"] = self.sched13BtnClick
+        self.sched13Btn.grid(column=20, row=13, columnspan=1)
+        
+        self.sched14Btn = tk.Button(content, text="SCHED 14", relief="raised")
+        self.sched14Btn["command"] = self.sched14BtnClick
+        self.sched14Btn.grid(column=20, row=14, columnspan=1)
+
+        # Shcedule time
+        self.GenericText = tk.StringVar()
+        self.GenericText.set("PLC addr")
+        self.genericLabel = tk.Label( content, textvariable=self.GenericText )
+        self.genericLabel.grid(column=19, row=16, columnspan=1)
+
+        self.genericAddr = tk.Entry(content)
+        self.genericAddr.grid(column=20, row=16, columnspan=1)
+
+        self.genericValue = tk.Entry(content)
+        self.genericValue.grid(column=20, row=17, columnspan=1)
+
+        self.genSetBtn = tk.Button(content, text="SET ADDR")
+        self.genSetBtn["command"] = self.genSetClick
+        self.genSetBtn.grid(column=20, row=18, columnspan=2)
+
+
+
 
 
     # ==============================================================
@@ -882,25 +996,7 @@ class Application(tk.Frame):
     def LEDUpdateClick(self):
         self.updateSetLEDPos()
 
-    # ----------------------------
-
-    def sec1AutoClick(self):
-        self.elem1.changeSectionMode(1,1)
-
-    def sec1SemiClick(self):
-        self.elem1.changeSectionMode(1,2)
-
-    def sec1ManuClick(self):
-        self.elem1.changeSectionMode(1,3)
-
-    def sec2AutoClick(self):
-        self.elem1.changeSectionMode(2,1)
-
-    def sec2SemiClick(self):
-        self.elem1.changeSectionMode(2,2)
-
-    def sec2ManuClick(self):
-        self.elem1.changeSectionMode(2,3)
+    
 
     # -------------------------------
     # Pump on/off
@@ -957,10 +1053,91 @@ class Application(tk.Frame):
 
     # ----------------------------    
 
+
+
+    def sec1AutoClick(self):
+        self.elem1.changeSectionMode(1,1)
+
+    def sec1SemiClick(self):
+        self.elem1.changeSectionMode(1,2)
+
+    def sec1ManuClick(self):
+        self.elem1.changeSectionMode(1,3)
+
+    def sec2AutoClick(self):
+        self.elem1.changeSectionMode(2,1)
+
+    def sec2SemiClick(self):
+        self.elem1.changeSectionMode(2,2)
+
+    def sec2ManuClick(self):
+        self.elem1.changeSectionMode(2,3)
+
+    # ----------------------------
+
+
+    def genericSchedButtonClick(self, btn, shelfno):
+        if btn.config('relief')[-1] == 'sunken':
+            btn.config(relief="raised")
+            self.elem1.toggleSched(shelfno, False)
+        else:
+            btn.config(relief="sunken")
+            self.elem1.toggleSched(shelfno, True)
+
+
+    def sched1BtnClick(self):
+        self.genericSchedButtonClick(self.sched1Btn, 1)
+        
+    def sched2BtnClick(self):
+        self.genericSchedButtonClick(self.sched2Btn, 2)
+
+    def sched3BtnClick(self):
+        self.genericSchedButtonClick(self.sched3Btn, 3)
+        
+    def sched4BtnClick(self):
+        self.genericSchedButtonClick(self.sched4Btn, 4)
+
+    def sched5BtnClick(self):
+        self.genericSchedButtonClick(self.sched5Btn, 5)
+        
+    def sched6BtnClick(self):
+        self.genericSchedButtonClick(self.sched6Btn, 6)
+
+    def sched7BtnClick(self):
+        self.genericSchedButtonClick(self.sched7Btn, 7)
+        
+    def sched8BtnClick(self):
+        self.genericSchedButtonClick(self.sched8Btn, 8)
+
+    def sched9BtnClick(self):
+        self.genericSchedButtonClick(self.sched9Btn, 9)
+        
+    def sched10BtnClick(self):
+        self.genericSchedButtonClick(self.sched10Btn, 10)
+
+    def sched11BtnClick(self):
+        self.genericSchedButtonClick(self.sched11Btn, 11)
+        
+    def sched12BtnClick(self):
+        self.genericSchedButtonClick(self.sched12Btn, 12)
+
+    def sched13BtnClick(self):
+        self.genericSchedButtonClick(self.sched13Btn, 13)
+        
+    def sched14BtnClick(self):
+        self.genericSchedButtonClick(self.sched14Btn, 14)
+
+
+    def genSetClick(self):
+        addr = int(self.genericAddr.get())
+        value = int(self.genericValue.get())
+        self.elem1.genericSend(addr,value)
+
+
+    # ----------------------------
+
     def applyOnClick(self):
         self.elem1.apply()
-
-
 
     #-----------------------------
 
@@ -971,7 +1148,8 @@ class Application(tk.Frame):
         self.uipump1flowrateFeedback.set(flowrate)
         self.uipump1HzFeedback.set(freq)
 
-        pumpMode = self.elem1.getPumpMode(1)
+        pumpMode,_ = self.elem1.getPumpMode(1)
+
         if pumpMode == 1:
             self.uipump1ModeFeedback.set("Auto")
         elif pumpMode == 2:
@@ -982,20 +1160,38 @@ class Application(tk.Frame):
             self.uipump1ModeFeedback.set("Unknown")
 
 
-        flowrate = self.elem1.getPumpRunningFlowRate(2)
-        freq = self.elem1.getPumpRunningRPM(2)
+        flowrate,_ = self.elem1.getPumpRunningFlowRate(2)
+        freq,_ = self.elem1.getPumpRunningRPM(2)
         self.uipump2flowrateFeedback.set(flowrate)
         self.uipump2HzFeedback.set(freq)
 
-        pumpMode = self.elem1.getPumpMode(2)
+        pumpMode,_ = self.elem1.getPumpMode(2)
         if pumpMode == 1:
-            self.uipump1ModeFeedback.set("Auto")
+            self.uipump2ModeFeedback.set("Auto")
         elif pumpMode == 2:
-            self.uipump1ModeFeedback.set("Flowrate")
+            self.uipump2ModeFeedback.set("Flowrate")
         elif pumpMode == 3:
-            self.uipump1ModeFeedback.set("Speed")
+            self.uipump2ModeFeedback.set("Speed")
         else:
-            self.uipump1ModeFeedback.set("Unknown")
+            self.uipump2ModeFeedback.set("Unknown")
+
+
+    def updateSectionMode(self):
+        secmode1,_ = self.elem1.getSectionMode(1)
+        if secmode1 == 1:
+            self.sec1ModeText.set("Sec mode: AUTO")
+        elif secmode1 == 2:
+            self.sec1ModeText.set("Sec mode: Semi")
+        else:
+            self.sec1ModeText.set("Sec mode: Manual")
+
+        secmode2,_ = self.elem1.getSectionMode(2)
+        if secmode2 == 1:
+            self.sec2ModeText.set("Sec mode: AUTO")
+        elif secmode2 == 2:
+            self.sec2ModeText.set("Sec mode: Semi")
+        else:
+            self.sec2ModeText.set("Sec mode: Manual")
 
 
     def updateValveStatus(self):

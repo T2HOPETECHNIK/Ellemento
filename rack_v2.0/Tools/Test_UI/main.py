@@ -43,6 +43,7 @@ class StatusThread (threading.Thread):
         interval = config.UPDATE_INTERVAL_SEC
         while(self.gRunning):
             self.ui_interface.updatePumpStatus()
+            self.ui_interface.updateSectionMode()
             self.ui_interface.updateValveStatus()
             self.ui_interface.updateLEDStatus()
             time.sleep(interval)

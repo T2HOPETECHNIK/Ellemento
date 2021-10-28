@@ -78,7 +78,7 @@ class plc(object):
                 else:
                     data = data & (65535 ^ binvalue)
 
-                print("WC: ",bdata," => ",addr," B.",bitpos," (",data,")",binvalue)
+                print("WC: ",bdata," => ",addr," B.",bitpos," => ",data)
 
                 res = self.client.write_register(addr, data, unit=1)
                 assert(res.function_code < 0x80)     # test that we are not an error

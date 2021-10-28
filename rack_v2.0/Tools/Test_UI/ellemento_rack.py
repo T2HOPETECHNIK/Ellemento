@@ -60,12 +60,7 @@ class ellemento_rack(object):
         res,err = self.plc.write_register(4080, 88)
         self.plc.write_coil(4081,0,True)
 
-    #===============================================================
-
-    def changeSectionMode(self, section, mode):
-        modeAddress = address.CTRL_SECTION_MODE_ADDR + (section - 1)
-        res,err = self.plc.write_register(modeAddress, mode)
-
+    
     #===============================================================
 
     def apply(self):
@@ -77,7 +72,28 @@ class ellemento_rack(object):
         addr = address.REF_RACK_TYPE
         res,err = self.plc.read_register(addr, 1)
         return res, err
-    
+
+
+    #===============================================================
+    #  Section
+    #===============================================================
+
+    def changeSectionMode(self, section, mode):
+        modeAddress = address.CTRL_SECTION_MODE_ADDR + (section - 1)
+        res,err = self.plc.write_register(modeAddress, mode)
+
+
+    def getSectionMode(self, secno):
+        if secno==1:
+            addr = address.FEEDBACK_SECTION1_MODE
+        else:
+            addr = address.FEEDBACK_SECTION2_MODE
+        res,err = self.plc.read_register(addr, 1)
+        if err > 0:
+            return 0,err
+        else:
+            return res.registers[0], err
+
 
     #================================================================
     # Lighting
@@ -213,6 +229,7 @@ class ellemento_rack(object):
             addr = address.FEEDBACK_PUMP2_MODE_ADDR
 
         res,err = self.plc.read_register(addr, 1)
+
         if err > 0:
             return 0, err
         else:
@@ -242,7 +259,7 @@ class ellemento_rack(object):
             return False
 
     # Set Fill mode and Drain mode value
-    def setFillDrainModeValue(self, pumpNo, wFillValue, wDrainValue):
+    def setFillDrainModeSetpoint(self, pumpNo, wFillValue, wDrainValue):
         addr1 = address.CTRL_PUMP_FILL_MODE_FLOWRATE_ADDR + (pumpNo - 1)
         addr2 = address.CTRL_PUMP_DRAIN_MODE_FLOWRATE + (pumpNo - 1)
         res,err = self.plc.write_register(addr1, wFillValue)
@@ -277,4 +294,59 @@ class ellemento_rack(object):
 
         res,err = self.plc.read_register(addr, 1)
         return res.registers[0], err
+
+
+    # ============================================
+
+    '''
+    def toggleSched(self, shelfno, state):
+
+        if shelfno == 1:
+            addr = address.SHELF1_SCHED_ADDR
+        elif shelfno == 2:
+            addr = address.SHELF2_SCHED_ADDR
+        elif shelfno == 3:
+            addr = address.SHELF3_SCHED_ADDR
+        elif shelfno == 4:
+            addr = address.SHELF4_SCHED_ADDR
+        elif shelfno == 5:
+            addr = address.SHELF5_SCHED_ADDR
+        elif shelfno == 6:
+            addr = address.SHELF6_SCHED_ADDR
+        elif shelfno == 7:
+            addr = address.SHELF7_SCHED_ADDR
+        elif shelfno == 8:
+            addr = address.SHELF8_SCHED_ADDR
+        elif shelfno == 9:
+            addr = address.SHELF9_SCHED_ADDR
+        elif shelfno == 10:
+            addr = address.SHELF10_SCHED_ADDR
+        elif shelfno == 11:
+            addr = address.SHELF11_SCHED_ADDR
+        elif shelfno == 12:
+            addr = address.SHELF12_SCHED_ADDR
+        elif shelfno == 13:
+            addr = address.SHELF13_SCHED_ADDR
+        elif shelfno == 14:
+            addr = address.SHELF14_SCHED_ADDR
+
+     '''
+
+    def toggleSched(self, shelfno, state):
+        addr = address.CTRL_SHELF_USE_SCHEDULER_ADDR
+        bitpos = shelfno - 1
+        res,err = self.plc.write_coil(addr, bitpos, state)
+        if err != 0:
+            return False
+        else:
+            return True
+
+
+    def genericSend(self, addr, value):
+        res,err = self.plc.write_register(addr, value)
+        if err != 0:
+            return False
+        else:
+            return True
+            
 
