@@ -3,6 +3,7 @@
 
 '''
 
+import address as addr
 from ellemento_rack import ellemento_rack
 
 import config
@@ -31,7 +32,7 @@ class Application(tk.Frame):
         
     # Draw the UI
     def create_ui(self, root):
-        self.master.title("Ellemento Farm Test GUI")
+        self.master.title("Ellemento Farm Test GUI [" + config.PLC_IP_ADDRESS + "]")
         self.master.resizable(0,0)
 
         # Grid
@@ -255,7 +256,7 @@ class Application(tk.Frame):
             if tmps == "":
                 pvpos = 0
             else:
-                pvpos = int(tmps, 10)
+                pvpos = self.convertInt(tmps)
                 
             self.elem1.setShelfPVPosition(x+1, pvpos)
 
@@ -464,7 +465,7 @@ class Application(tk.Frame):
             if tmps == "":
                 ledpos = 0
             else:
-                ledpos = int(tmps, 10)
+                ledpos = self.convertInt(tmps)
 
             self.elem1.setLEDIntensity(x+1, ledpos)
 
@@ -637,26 +638,34 @@ class Application(tk.Frame):
         self.pumpUpdateBtn.grid(column=11, row=17, columnspan=5)
 
 
+    def convertInt(self,s):
+        if s != "":
+            if s.isnumeric() == True:
+                return (int(s))
+            else:
+                return(0)
+        else:
+            return(0)
+
+
     def updatePumpSetting(self):
         tmp = self.uipump1FlowSetting.get()
-        if tmp != "":
-            fr = int(tmp)
-            self.elem1.setPumpFlowrate(1,fr)
+
+        print(tmp)
+        fr = self.convertInt(tmp)
+        self.elem1.setPumpFlowrate(1,fr)
 
         tmp = self.uipump1HzSetting.get()
-        if tmp != "":
-            hz = int(tmp)
-            self.elem1.setPumpRPM(1,hz)
+        hz = self.convertInt(tmp)
+        self.elem1.setPumpRPM(1,hz)
 
         tmp = self.uipump2FlowSetting.get()
-        if tmp != "":
-            fr = int(tmp)
-            self.elem1.setPumpFlowrate(2,fr)
+        fr = self.convertInt(tmp)
+        self.elem1.setPumpFlowrate(2,fr)
 
         tmp = self.uipump2HzSetting.get()
-        if tmp != "":
-            hz = int(tmp)
-            self.elem1.setPumpRPM(2,hz)
+        hz = self.convertInt(tmp)
+        self.elem1.setPumpRPM(2,hz)
 
         # Fill drain settings
         local_fill_duration = self.FillDuration.get()
@@ -667,9 +676,9 @@ class Application(tk.Frame):
         print("Fill settings: ", local_fill_rate, " Duration: ", local_fill_duration)
         print("Drain settings: ", local_drain_rate, " Duration: ", local_drain_duration)
 
-        self.elem1.setFillDrainModeDuration_s(1, int(local_fill_duration,10), int(local_drain_duration,10))
+        self.elem1.setFillDrainModeDuration_s(1, self.convertInt(local_fill_duration), self.convertInt(local_drain_duration))
 
-        self.elem1.setFillDrainModeSetpoint(1, int(local_fill_rate), int(local_drain_rate))
+        self.elem1.setFillDrainModeSetpoint(1, self.convertInt(local_fill_rate), self.convertInt(local_drain_rate))
 
         #self.elem1.setFillDrainParams(local_fill_rate, local_fill_duration, local_drain_rate, local_drain_duration)
 
@@ -694,7 +703,6 @@ class Application(tk.Frame):
         self.sec1ModeManuBtn = tk.Button(content, text="Sec 1 MANU")
         self.sec1ModeManuBtn["command"] = self.sec1ManuClick
         self.sec1ModeManuBtn.grid(column=18, row=rowOffset+3, columnspan=1)
-
 
         rowOffset = 11
 
@@ -778,24 +786,36 @@ class Application(tk.Frame):
         self.sched14Btn["command"] = self.sched14BtnClick
         self.sched14Btn.grid(column=20, row=14, columnspan=1)
 
-        # Shcedule time
+        # Scheduler
+        self.schedSetText = tk.StringVar()
+        self.schedSetText.set("S#,L/W,HH,MM,HH,MM,xx")
+        self.schedSetLabel = tk.Label( content, textvariable=self.schedSetText )
+        self.schedSetLabel.grid(column=15, row=16, columnspan=5)
+
+        self.schedSetString = tk.Entry(content)
+        self.schedSetString.grid(column=19, row=16, columnspan=1)
+
+        self.schedSetBtn = tk.Button(content, text="SET Schedule")
+        self.schedSetBtn["command"] = self.schedSetClick
+        self.schedSetBtn.grid(column=20, row=16, columnspan=1)
+
+        # Generic out
+        
         self.GenericText = tk.StringVar()
         self.GenericText.set("PLC addr")
         self.genericLabel = tk.Label( content, textvariable=self.GenericText )
-        self.genericLabel.grid(column=19, row=16, columnspan=1)
+        self.genericLabel.grid(column=17, row=19, columnspan=1)
 
         self.genericAddr = tk.Entry(content)
-        self.genericAddr.grid(column=20, row=16, columnspan=1)
+        self.genericAddr.grid(column=18, row=19, columnspan=1)
 
         self.genericValue = tk.Entry(content)
-        self.genericValue.grid(column=20, row=17, columnspan=1)
+        self.genericValue.grid(column=19, row=19, columnspan=1)
 
         self.genSetBtn = tk.Button(content, text="SET ADDR")
-        self.genSetBtn["command"] = self.genSetClick
-        self.genSetBtn.grid(column=20, row=18, columnspan=2)
-
-
-
+        self.genSetBtn["command"] = self.genericSetClick
+        self.genSetBtn.grid(column=20, row=19, columnspan=2)
+        
 
 
     # ==============================================================
@@ -1128,9 +1148,57 @@ class Application(tk.Frame):
         self.genericSchedButtonClick(self.sched14Btn, 14)
 
 
-    def genSetClick(self):
-        addr = int(self.genericAddr.get())
-        value = int(self.genericValue.get())
+    # shelf, type, hh, mm, hh, mm, value
+    def schedSetClick(self):
+        inStr = self.schedSetString.get()
+        snum = inStr.split(",")
+        shelfno = self.convertInt(snum[0])
+        if snum[1] == "L":
+            laddr = addr.CTRL_SCHEDULER_LIGHTON_HH_ADDR + (shelfno-1)
+            value = self.convertInt(snum[2])
+            self.elem1.genericSend(laddr,value)
+
+            laddr = addr.CTRL_SCHEDULER_LIGHTON_MM_ADDR + (shelfno-1)
+            value = self.convertInt(snum[3])
+            self.elem1.genericSend(laddr,value)
+
+            laddr = addr.CTRL_SCHEDULER_LIGHTOFF_HH_ADDR + (shelfno-1)
+            value = self.convertInt(snum[4])
+            self.elem1.genericSend(laddr,value)
+
+            laddr = addr.CTRL_SCHEDULER_LIGHTOFF_MM_ADDR + (shelfno-1)
+            value = self.convertInt(snum[5])
+            self.elem1.genericSend(laddr,value)
+
+            laddr = addr.CTRL_SCHEDULER_LIGHT_INTENSITY + (shelfno-1)
+            value = self.convertInt(snum[6])
+            self.elem1.genericSend(laddr,value)
+
+        elif snum[1] == "W":
+            laddr = addr.CTRL_SCHEDULER_PVON_HH_ADDR + (shelfno-1)
+            value = self.convertInt(snum[2])
+            self.elem1.genericSend(laddr,value)
+
+            laddr = addr.CTRL_SCHEDULER_PVON_MM_ADDR + (shelfno-1)
+            value = self.convertInt(snum[3])
+            self.elem1.genericSend(laddr,value)
+
+            laddr = addr.CTRL_SCHEDULER_PVOFF_HH_ADDR + (shelfno-1)
+            value = self.convertInt(snum[4])
+            self.elem1.genericSend(laddr,value)
+
+            laddr = addr.CTRL_SCHEDULER_PVOFF_MM_ADDR + (shelfno-1)
+            value = self.convertInt(snum[5])
+            self.elem1.genericSend(laddr,value)
+
+            laddr = addr.CTRL_SCHEDULER_PV_VALUE_ADDR + (shelfno-1)
+            value = self.convertInt(snum[6])
+            self.elem1.genericSend(laddr,value)
+
+
+    def genericSetClick(self):
+        addr = self.convertInt(self.genericAddr.get())
+        value = self.convertInt(self.genericValue.get())
         self.elem1.genericSend(addr,value)
 
 
@@ -1143,9 +1211,18 @@ class Application(tk.Frame):
 
     def updatePumpStatus(self):
 
-        flowrate = self.elem1.getPumpRunningFlowRate(1)
-        freq = self.elem1.getPumpRunningRPM(1)
+        abnormal = self.elem1.getPumpAbnormalTerminationStatus(1)
+        if abnormal == True:
+            self.pump1Label1Text.set("Pump 1: Ab")
+        else:
+            self.pump1Label1Text.set("Pump 1 Norm")
+
+
+        flowrate,_ = self.elem1.getPumpRunningFlowRate(1)
+        freq,_ = self.elem1.getPumpRunningRPM(1)
+        flowrate = str(flowrate/100) + " l/min"
         self.uipump1flowrateFeedback.set(flowrate)
+        freq = str(freq/100) + " Hz"
         self.uipump1HzFeedback.set(freq)
 
         pumpMode,_ = self.elem1.getPumpMode(1)
@@ -1160,9 +1237,18 @@ class Application(tk.Frame):
             self.uipump1ModeFeedback.set("Unknown")
 
 
+        # pump 2
+        abnormal = self.elem1.getPumpAbnormalTerminationStatus(2)
+        if abnormal == True:
+            self.pump2Label1Text.set("Pump 2: Ab")
+        else:
+            self.pump2Label1Text.set("Pump 2 Norm")
+
         flowrate,_ = self.elem1.getPumpRunningFlowRate(2)
         freq,_ = self.elem1.getPumpRunningRPM(2)
+        flowrate = str(flowrate/100) + " l/min"
         self.uipump2flowrateFeedback.set(flowrate)
+        freq = str(freq/100) + " Hz"
         self.uipump2HzFeedback.set(freq)
 
         pumpMode,_ = self.elem1.getPumpMode(2)

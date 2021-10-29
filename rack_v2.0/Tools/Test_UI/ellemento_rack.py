@@ -144,6 +144,8 @@ class ellemento_rack(object):
     # Pump
     #================================================================
 
+
+    
     def togglePump(self, pumpNum, bOnOff):
         pumpOnAddress = address.CTRL_PUMP_ON_ADDR
         res,err = self.plc.write_coil(pumpOnAddress, address.CTRL_PUMP_ON_BITPOS + (pumpNum - 1), bOnOff)
@@ -182,6 +184,17 @@ class ellemento_rack(object):
             return False
         else:
             return True
+
+    def getPumpAbnormalTerminationStatus(self, pumpNo):
+        addr = address.FEEDBACK_PUMP_ERROR_ADDR
+        bitpos = (pumpNo - 1)
+        
+        res,err = self.plc.read_coil(addr, bitpos)
+        if res == True:
+            return True
+        else:
+            return False
+
 
 
     # get value that was set
@@ -253,7 +266,7 @@ class ellemento_rack(object):
         bitpos = address.PUMP_1_FILLING_FLAG_BITPOS + (pumpNo - 1)
         
         res,err = self.plc.read_coil(addr, bitpos)
-        if res.registers[0] == True:
+        if res == True:
             return True
         else:
             return False
@@ -298,39 +311,6 @@ class ellemento_rack(object):
 
     # ============================================
 
-    '''
-    def toggleSched(self, shelfno, state):
-
-        if shelfno == 1:
-            addr = address.SHELF1_SCHED_ADDR
-        elif shelfno == 2:
-            addr = address.SHELF2_SCHED_ADDR
-        elif shelfno == 3:
-            addr = address.SHELF3_SCHED_ADDR
-        elif shelfno == 4:
-            addr = address.SHELF4_SCHED_ADDR
-        elif shelfno == 5:
-            addr = address.SHELF5_SCHED_ADDR
-        elif shelfno == 6:
-            addr = address.SHELF6_SCHED_ADDR
-        elif shelfno == 7:
-            addr = address.SHELF7_SCHED_ADDR
-        elif shelfno == 8:
-            addr = address.SHELF8_SCHED_ADDR
-        elif shelfno == 9:
-            addr = address.SHELF9_SCHED_ADDR
-        elif shelfno == 10:
-            addr = address.SHELF10_SCHED_ADDR
-        elif shelfno == 11:
-            addr = address.SHELF11_SCHED_ADDR
-        elif shelfno == 12:
-            addr = address.SHELF12_SCHED_ADDR
-        elif shelfno == 13:
-            addr = address.SHELF13_SCHED_ADDR
-        elif shelfno == 14:
-            addr = address.SHELF14_SCHED_ADDR
-
-     '''
 
     def toggleSched(self, shelfno, state):
         addr = address.CTRL_SHELF_USE_SCHEDULER_ADDR
@@ -348,5 +328,10 @@ class ellemento_rack(object):
             return False
         else:
             return True
+
+
+    def genericRead(self, addr):
+        res,err = self.plc.read_register(addr, 1)
+        return res.registers[0], err
             
 
