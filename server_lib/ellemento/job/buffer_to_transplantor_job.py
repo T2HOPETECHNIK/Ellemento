@@ -83,16 +83,19 @@ class BufferToTransplantorJob:
     def create_5_buffer_to_transplantor_job():
         try: 
             while not BufferToTransplantorJob.terminate_job: 
+                print("1. Creating 5_buffer to tranplantor job")
                 buffer_5 = BufferFactory.get_buffer(BufferType.BUFFER_5)
                 if not buffer_5.has_tray():
-                    logger.info("Buffer 3-in has not any trays")
+                    print("2. Buffer 5 has not any trays")
+                    logger.info("Buffer 5 has not any trays")
                     time.sleep(2)
                     continue  
-
+                
                 transplantor_4_5 = Transplantor(TransplantorFactory.get_transplator_4_5()) 
                 if transplantor_4_5.ready_to_move_in_dst_tray(): 
                     BufferToTransplantorJob.create_job(id = 1, src_buffer=buffer_5, dst_tranplantor=transplantor_4_5)
-                    logger.info("transplantor_3_4 is not ready to move in source tray")
+                    print("3. transplantor_4_5 is not ready to move in destination tray")
+                    logger.info("transplantor_4_5 is not ready to move in destination tray")
                 time.sleep(2)
                 pass
         except: 

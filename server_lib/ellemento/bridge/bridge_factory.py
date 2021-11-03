@@ -42,8 +42,8 @@ class ModelPlcBridgeFactory:
             else: 
                 return None 
         elif type == "Rack": 
-            if id in self.rack_plc_braidge_dict: 
-                return self.rack_plc_braidge_dict[id]
+            if id in self.rack_plc_bridge_dict: 
+                return self.rack_plc_bridge_dict[id]
             else: 
                 return None
 
