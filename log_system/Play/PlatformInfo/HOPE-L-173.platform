@@ -1,0 +1,40 @@
+[Application]
+  Path                             = C:\Users\jianbo.hu\Documents\git\Ellemento\log_system\Play\
+  GUID                             = eb1ef3ef-6893-45c1-9881-c226ab4ecc18
+  OEM                              = VTScada Library
+  OEM GUID                         = 46347dd5-cb24-11d1-a130-0060971477af
+[VTScada]
+  Version                          = 12.0.42 (64-bit)
+  Serial Number                    = 0
+  Running Hours Limit              = Unlimited
+  SupportPlus Expires              = Jan 1, 2000
+  Maximum Tags Allowed             = 50
+  Maximum Thin Clients             = 1
+  VTScada Run Mode                 = Configuration
+  Hardware Key Required            = No
+  Evaluation Days Left             = Unlimited
+  Alarm Notification               = Disabled
+  Remote Data Access               = Enabled
+  OPC Server                       = Enabled
+  Version Control                  = Enabled
+  Remote Configuration             = Enabled
+  Redundancy Capability            = Enabled
+  Server Capability                = Enabled
+  Custom Installation              = Disabled
+  Highest bits supported by license = 64
+  Remote Idea Studio               = Enabled
+[Microsoft Windows]
+  Windows Version                  = 10.0
+  Windows Product Type             = 1
+  Windows Suite Mask               = 256
+  Windows Build Number             = 19042
+  Service Pack Name                = None
+  Service Pack Version             =
+  Windows Product Info             = 48
+[Hardware]
+  Workstation Name                 = HOPE-L-173
+  Machine ID                       = 0F9D13575627
+  CPU Architecture                 = x64
+  Number of CPUs                   = 8
+  Physical Memory                  = 17,022,443,520
+

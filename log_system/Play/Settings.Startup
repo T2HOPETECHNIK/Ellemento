@@ -1,0 +1,24 @@
+[System]
+  ModiconTypedAddr1Offset          = 0
+                                     ;Applies offset for "Type specified" Modicon address, e.g IC0025 to be 1-based
+[Layer]
+  FriendlyTagServiceNames          = 1
+                                     ;Makes tag network services base their names off of tag names rather than unique IDs.
+<Application>
+  GUID                             = eb1ef3ef-6893-45c1-9881-c226ab4ecc18
+  OEMGUID                          = 46347dd5-cb24-11d1-a130-0060971477af
+  PDSN                             = fileDSN=^VAccess.DSN;DBQ=^APoints.MDB
+  LocalScopeSyntax                 = 1
+                                     ;TRUE indicates that expressions can use . as the local scope operator
+  HistorianODBCTableNames0  = Numerics,     Timestamp-TSTAMP-T|GenTimestamp-UI4-A|Value-R8|Value!-UI4
+  HistorianODBCTableNames1  = Digitals,     Timestamp-TSTAMP-T|GenTimestamp-UI4-A|Value-UI1|Value!-UI4
+  HistorianODBCTableNames2  = Strings,      Timestamp-TSTAMP-T|GenTimestamp-UI4-A|Value-STR|Value!-UI4
+  HistorianODBCTableNames3  = Historians,   Timestamp-TSTAMP-T|MachineID-STR-M|Availability-BOOL-U
+  HistorianODBCTableNames4  = Notebooks,    Timestamp-TSTAMP-T|GenTimestamp-UI4-A|Value-STR
+  HistorianODBCTableNames5  = Ports,        Timestamp-TSTAMP-T|GenTimestamp-UI4-A|Value-I2
+  HistorianODBCTableNames6  = Drivers,      Timestamp-TSTAMP-T|GenTimestamp-UI4-A|ErrorValue-I2|FailedCount-I2|FailedRetryCount-I2|SuccessCount-I2|Quality-R8|ResponseTime-R8|ErrorAddress-STR
+  HistorianODBCTableNames7  = Modems,       Timestamp-TSTAMP-T|GenTimestamp-UI4-A|LCallFailures-R8|LCallState-R8|LEnabled-R8|LFailure-R8|LMediaMode-R8|LOffHook-R8|LCurrentNumber-STR
+  HistorianODBCTableNames8  = Transactions, Timestamp-TSTAMP-T|GenTime-R8|TransactionID-BYTES|ErrorCode-I4|Encoding-I4|PackedData-BYTES
+  HistorianODBCTableNames9  = Alarms,       Timestamp-TSTAMP-T|PackedData-PACK|Area-STR|Encrypted-BOOL|PackedInfo-PACK
+  HistorianODBCTableNames10 = DataFlowTag,  Timestamp-TSTAMP-T|GenTimestamp-UI4-A|ErrData1-UI1|ErrData10-UI1|ErrData11-UI1|ErrData12-UI1|ErrData13-UI1|ErrData14-UI1|ErrData15-UI1|ErrData16-UI1|ErrData17-UI1|ErrData18-UI1|ErrData19-UI1|ErrData2-UI1|ErrData20-UI1|ErrData21-UI1|ErrData22-UI1|ErrData23-UI1|ErrData24-UI1|ErrData25-UI1|ErrData26-UI1|ErrData27-UI1|ErrData28-UI1|ErrData29-UI1|ErrData3-UI1|ErrData30-UI1|ErrData31-UI1|ErrData32-UI1|ErrData4-UI1|ErrData5-UI1|ErrData6-UI1|ErrData7-UI1|ErrData8-UI1|ErrData9-UI1|ErrMod-UI1|ErrorValue-I2|FailedCount-I2|FailedRetryCount-I2|SuccessCount-I2|Quality-R8|ResponseTime-R8|ErrorAddress-STR
+

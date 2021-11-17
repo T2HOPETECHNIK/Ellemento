@@ -11,6 +11,7 @@ python -m build
 # Entry Point
 To run the project
 ```
+python main.py
 python -m ellemento
 python -m ellemento.job
 ```

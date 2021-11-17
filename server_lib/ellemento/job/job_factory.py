@@ -56,8 +56,8 @@ class JobFactory:
         # buffer_4_2_transplantor_job = threading.Thread(target=BufferToTransplantorJob.create_4_buffer_to_transplantor_job)
         # buffer_4_2_transplantor_job.start() 
 
-        # buffer_5_2_transplantor_job = threading.Thread(target=BufferToTransplantorJob.create_5_buffer_to_transplantor_job)
-        # buffer_5_2_transplantor_job.start() 
+        buffer_5_2_transplantor_job = threading.Thread(target=BufferToTransplantorJob.create_5_buffer_to_transplantor_job)
+        buffer_5_2_transplantor_job.start() 
 
         # buffer_4_in_2_transplantor_job = threading.Thread(target=BufferToTransplantorJob.create_4_in_buffer_to_transplantor_job)
         # buffer_4_in_2_transplantor_job.start() 

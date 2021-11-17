@@ -1,0 +1,17 @@
+SystemHistorian\mk~}d&+d@w,AuditName<Logged Off|1634610340.044>,SystemHistorian\\D1003
+SystemHistorian\mk~}d&+d@w,DisplayOrder<Logged Off|1634607447.423>,1
+SystemHistorian\mk~}d&+d@w,EnableLogging<Logged Off|1634607447.423>,1
+SystemHistorian\mk~}d&+d@w,EquipmentType<Logged Off|1634607447.423>,PumpLabel
+SystemHistorian\mk~}d&+d@w,Expression<Logged Off|1634607447.423>
+SystemHistorian\mk~}d&+d@w,HistorianName<Logged Off|1634607447.423>,SystemHistorian
+SystemHistorian\mk~}d&+d@w,MinimumLogInterval<Logged Off|1634610340.039>,60
+SystemHistorian\mk~}d&+d@w,Mode<Logged Off|1634607447.423>,AnalogLabel
+SystemHistorian\mk~}d&+d@w,Name<Logged Off|1634607447.423>,SystemHistorian\\mk~}d&+d@w
+SystemHistorian\mk~}d&+d@w,RangeMax<Logged Off|1634607447.423>,10000
+SystemHistorian\mk~}d&+d@w,RangeMin<Logged Off|1634607447.423>,0
+SystemHistorian\mk~}d&+d@w,ReadAddress<Logged Off|1634607447.423>,41002
+SystemHistorian\mk~}d&+d@w,ScaledMax<Logged Off|1634607447.423>,10000
+SystemHistorian\mk~}d&+d@w,ScanRate<Logged Off|1634609841.183>,60
+SystemHistorian\mk~}d&+d@w,ShortName<Logged Off|1634607447.423>,D1003
+SystemHistorian\mk~}d&+d@w,SyncCalc<Logged Off|1634607447.423>,1
+SystemHistorian\mk~}d&+d@w,UnscaledMax<Logged Off|1634607447.423>,10000

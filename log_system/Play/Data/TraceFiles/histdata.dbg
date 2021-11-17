@@ -1,0 +1,565 @@
+21-09-23T05:36:30.53Z,
+
+21-09-23T05:36:30.56Z,***** Starting HistorianTag *****,Name=histdata,MID=0F9D13575627,WkStnName=HOPE-L-173
+21-09-23T05:36:30.72Z,HistorianTag,Client->InitConnectionHandle
+21-09-23T05:36:30.79Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\jianbo.hu\Documents\gdrive\projects\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-09-23T05:36:30.90Z,Session\SetCounters,NewCountersDict=Valid
+21-09-23T05:36:30.92Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-23T05:36:31.03Z,Session\LoadSessionState,Persisted state is corrupt or missing!!
+21-09-23T05:36:31.04Z,Session\LoadSessionState,Verifying expected state,SessionNum=0,SearchMIDS=0F9D135756270000,NumEntries=
+21-09-23T05:36:31.07Z,Session\SessionOpen,AuthoringKey=0F9D1357562700008042DD5F
+21-09-23T05:36:31.08Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632375391.084(05:36:31.08)
+21-09-23T05:36:31.12Z,WriteUptime,StopTime=(),StartTime=1632375391.128(05:36:31.12),ClientMID=0F9D13575627,ServerMID=0F9D13575627
+21-09-23T05:36:31.14Z,UptimeUpdate,StopTime=(),StartTime=1632375391.128(05:36:31.12),MachineID=0F9D13575627,UptimeSyncMID=0F9D13575627
+21-09-23T05:36:31.22Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-23T05:46:09.68Z,
+
+21-09-23T05:46:09.74Z,***** Starting HistorianTag *****,Name=histdata,MID=0F9D13575627,WkStnName=HOPE-L-173
+21-09-23T05:46:10.87Z,HistorianTag,Client->InitConnectionHandle
+21-09-23T05:46:11.13Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\jianbo.hu\Documents\gdrive\projects\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-09-23T05:46:11.19Z,Session\SetCounters,NewCountersDict=Valid
+21-09-23T05:46:11.20Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-23T05:46:11.39Z,Session\LoadSessionState,Verifying expected state,SessionNum=0,SearchMIDS=0F9D135756270000,NumEntries=2
+21-09-23T05:46:11.44Z,Session\SessionOpen,AuthoringKey=0F9D1357562700008042DD5F
+21-09-23T05:46:11.52Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632375971.529(05:46:11.52)
+21-09-23T05:46:11.58Z,WriteUptime,StopTime=1632375864.615(05:44:24.61),StartTime=1632375971.58(05:46:11.58),ClientMID=0F9D13575627,ServerMID=0F9D13575627
+21-09-23T05:46:11.59Z,UptimeUpdate,StopTime=1632375864.615(05:44:24.61),StartTime=1632375971.58(05:46:11.58),MachineID=0F9D13575627,UptimeSyncMID=0F9D13575627
+21-09-23T05:46:11.72Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-23T05:57:01.88Z,Session\SessionClose
+21-09-23T05:57:01.90Z,Session\SetCounters,NewCountersDict=Invalid
+21-09-23T05:57:01.94Z,HistorianTag,StorageOnline->ServerReset,Configuration Changed
+21-09-23T05:57:01.99Z,HistorianTag,ServerReset->InitConnectionHandle
+21-09-23T05:57:02.00Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=ODBC,ConnectString=DSN=VTSCADA,CntConnectAttempts=1
+21-09-23T05:57:02.12Z,Session\SetCounters,NewCountersDict=Valid
+21-09-23T05:57:02.14Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-23T05:57:02.16Z,Session\LoadSessionState,Verifying expected state,SessionNum=0,SearchMIDS=0F9D135756270000,NumEntries=2
+21-09-23T05:57:02.18Z,Session\LoadSessionState,Sequence Error,TagName=5fx8)-=.&s\Lnp#+9r973\z}dvwfwpbw,Schema=Timestamp-TSTAMP-T|GenTimestamp-UI4-A|Value-R8|Value!-UI4,SeqKey=0F9D1357562700008042DD5F,ExpectedCount=72,ActualCount=
+21-09-23T05:57:02.20Z,Session\SessionOpen,AuthoringKey=0F9D1357562700018042DD5F
+21-09-23T05:57:02.22Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632376622.226(05:57:02.22)
+21-09-23T05:57:02.27Z,WriteUptime,StopTime=1632376621.925(05:57:01.92),StartTime=1632376622.253(05:57:02.25),ClientMID=0F9D13575627,ServerMID=0F9D13575627
+21-09-23T05:57:02.30Z,UptimeUpdate,StopTime=1632376621.925(05:57:01.92),StartTime=1632376622.253(05:57:02.25),MachineID=0F9D13575627,UptimeSyncMID=0F9D13575627
+21-09-23T05:57:02.33Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-23T05:58:46.93Z,Session\SessionClose
+21-09-23T05:58:46.98Z,Session\SetCounters,NewCountersDict=Invalid
+21-09-23T05:58:47.03Z,HistorianTag,StorageOnline->ServerReset,Configuration Changed
+21-09-23T05:58:47.06Z,HistorianTag,ServerReset->InitConnectionHandle
+21-09-23T05:58:47.07Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\jianbo.hu\Documents\gdrive\projects\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-09-23T05:58:47.13Z,Session\SetCounters,NewCountersDict=Valid
+21-09-23T05:58:47.15Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-23T05:58:47.18Z,Session\LoadSessionState,Verifying expected state,SessionNum=1,SearchMIDS=0F9D135756270001,NumEntries=1
+21-09-23T05:58:47.20Z,Session\LoadSessionState,Sequence Error,TagName=^#2-{qe21-,Schema=Timestamp-TSTAMP-T|MachineID-STR-M|Availability-BOOL-U,SeqKey=0F9D1357562700018042DD5F,ExpectedCount=3,ActualCount=
+21-09-23T05:58:47.23Z,Session\SessionOpen,AuthoringKey=0F9D1357562700028042DD5F
+21-09-23T05:58:47.26Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632376727.26(05:58:47.26)
+21-09-23T05:58:47.30Z,WriteUptime,StopTime=1632376727.004(05:58:47.00),StartTime=1632376727.3(05:58:47.30),ClientMID=0F9D13575627,ServerMID=0F9D13575627
+21-09-23T05:58:47.32Z,UptimeUpdate,StopTime=1632376727.004(05:58:47.00),StartTime=1632376727.3(05:58:47.30),MachineID=0F9D13575627,UptimeSyncMID=0F9D13575627
+21-09-23T05:58:47.37Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-23T06:03:58.39Z,Session\SessionClose
+21-09-23T06:03:58.44Z,Session\SetCounters,NewCountersDict=Invalid
+21-09-23T06:03:58.46Z,HistorianTag,StorageOnline->ServerReset,Configuration Changed
+21-09-23T06:03:58.53Z,HistorianTag,ServerReset->InitConnectionHandle
+21-09-23T06:03:58.55Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=ODBC,ConnectString=DSN=VTSCADA,CntConnectAttempts=1
+21-09-23T06:03:58.71Z,Session\SetCounters,NewCountersDict=Valid
+21-09-23T06:03:58.74Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-23T06:03:58.75Z,HistorianTag,StorageOnline,RPCStatus=0,LastRestartTime=()
+21-09-23T06:03:58.78Z,BroadcastManager,AutoFlush->Idle,Discarding 0 updates
+21-09-23T06:03:58.82Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-23T06:03:58.85Z,Session\LoadSessionState,Verifying expected state,SessionNum=2,SearchMIDS=0F9D135756270002,NumEntries=1
+21-09-23T06:03:58.87Z,Session\LoadSessionState,Sequence Error,TagName=^#2-{qe21-,Schema=Timestamp-TSTAMP-T|MachineID-STR-M|Availability-BOOL-U,SeqKey=0F9D1357562700028042DD5F,ExpectedCount=3,ActualCount=
+21-09-23T06:03:58.91Z,Session\SessionOpen,AuthoringKey=0F9D1357562700038042DD5F
+21-09-23T06:03:58.93Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632377038.938(06:03:58.93)
+21-09-23T06:03:58.98Z,WriteUptime,StopTime=1632377038.459(06:03:58.45),StartTime=1632377038.966(06:03:58.96),ClientMID=0F9D13575627,ServerMID=0F9D13575627
+21-09-23T06:03:59.01Z,UptimeUpdate,StopTime=1632377038.459(06:03:58.45),StartTime=1632377038.966(06:03:58.96),MachineID=0F9D13575627,UptimeSyncMID=0F9D13575627
+21-09-23T06:05:36.90Z,
+
+21-09-23T06:05:36.92Z,***** Starting HistorianTag *****,Name=histdata,MID=0F9D13575627,WkStnName=HOPE-L-173
+21-09-23T06:05:37.20Z,HistorianTag,Client->InitConnectionHandle
+21-09-23T06:05:37.30Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=ODBC,ConnectString=DSN=VTSCADA,CntConnectAttempts=1
+21-09-23T06:05:37.46Z,Session\SetCounters,NewCountersDict=Valid
+21-09-23T06:05:37.50Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-23T06:05:38.00Z,Session\LoadSessionState,Verifying expected state,SessionNum=3,SearchMIDS=0F9D135756270003,NumEntries=1
+21-09-23T06:05:38.03Z,Session\SessionOpen,AuthoringKey=0F9D1357562700038042DD5F
+21-09-23T06:05:38.08Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632377138.084(06:05:38.08)
+21-09-23T06:05:38.11Z,WriteUptime,StopTime=1632377053.637(06:04:13.63),StartTime=1632377138.114(06:05:38.11),ClientMID=0F9D13575627,ServerMID=0F9D13575627
+21-09-23T06:05:38.13Z,UptimeUpdate,StopTime=1632377053.637(06:04:13.63),StartTime=1632377138.114(06:05:38.11),MachineID=0F9D13575627,UptimeSyncMID=0F9D13575627
+21-09-23T06:05:38.67Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-23T06:15:28.27Z,Session\SessionClose
+21-09-23T06:15:28.33Z,Session\SetCounters,NewCountersDict=Invalid
+21-09-23T06:15:28.40Z,HistorianTag,StorageOnline->ServerReset,Configuration Changed
+21-09-23T06:15:28.46Z,HistorianTag,ServerReset->InitConnectionHandle
+21-09-23T06:15:28.47Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=ODBCSingleTable,ConnectString=DSN=VTSCADA,CntConnectAttempts=1
+21-09-23T06:15:28.56Z,Session\SetCounters,NewCountersDict=Valid
+21-09-23T06:15:28.58Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-23T06:15:28.60Z,HistorianTag,StorageOnline,RPCStatus=0,LastRestartTime=()
+21-09-23T06:15:28.63Z,BroadcastManager,AutoFlush->Idle,Discarding 0 updates
+21-09-23T06:15:28.65Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-23T06:15:28.67Z,Session\LoadSessionState,Verifying expected state,SessionNum=3,SearchMIDS=0F9D135756270003,NumEntries=1
+21-09-23T06:15:28.69Z,Session\LoadSessionState,Sequence Error,TagName=^#2-{qe21-,Schema=Timestamp-TSTAMP-T|MachineID-STR-M|Availability-BOOL-U,SeqKey=0F9D1357562700038042DD5F,ExpectedCount=6,ActualCount=
+21-09-23T06:15:28.71Z,Session\SessionOpen,AuthoringKey=0F9D1357562700048042DD5F
+21-09-23T06:15:28.73Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632377728.731(06:15:28.73)
+21-09-23T06:15:28.74Z,WriteUptime,StopTime=1632377728.359(06:15:28.35),StartTime=1632377728.747(06:15:28.74),ClientMID=0F9D13575627,ServerMID=0F9D13575627
+21-09-23T06:15:28.76Z,UptimeUpdate,StopTime=1632377728.359(06:15:28.35),StartTime=1632377728.747(06:15:28.74),MachineID=0F9D13575627,UptimeSyncMID=0F9D13575627
+21-09-23T06:36:38.93Z,
+
+21-09-23T06:36:38.94Z,***** Starting HistorianTag *****,Name=histdata,MID=0F9D13575627,WkStnName=HOPE-L-173
+21-09-23T06:36:39.13Z,HistorianTag,Client->InitConnectionHandle
+21-09-23T06:36:39.19Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=ODBCSingleTable,ConnectString=DSN=VTSCADA,CntConnectAttempts=1
+21-09-23T06:36:39.27Z,Session\SetCounters,NewCountersDict=Valid
+21-09-23T06:36:39.28Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-23T06:36:39.42Z,Session\LoadSessionState,Verifying expected state,SessionNum=4,SearchMIDS=0F9D135756270004,NumEntries=1
+21-09-23T06:36:39.44Z,Session\SessionOpen,AuthoringKey=0F9D1357562700048042DD5F
+21-09-23T06:36:39.45Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632378999.453(06:36:39.45)
+21-09-23T06:36:39.52Z,WriteUptime,StopTime=1632378706.541(06:31:46.54),StartTime=1632378999.52(06:36:39.52),ClientMID=0F9D13575627,ServerMID=0F9D13575627
+21-09-23T06:36:39.53Z,UptimeUpdate,StopTime=1632378706.541(06:31:46.54),StartTime=1632378999.52(06:36:39.52),MachineID=0F9D13575627,UptimeSyncMID=0F9D13575627
+21-09-23T06:36:40.02Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-23T07:54:40.74Z,Session\SessionClose
+21-09-23T07:54:40.80Z,Session\SetCounters,NewCountersDict=Invalid
+21-09-23T07:54:40.84Z,HistorianTag,StorageOnline->ServerReset,Configuration Changed
+21-09-23T07:54:40.87Z,HistorianTag,ServerReset->InitConnectionHandle
+21-09-23T07:54:40.97Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=ODBC,ConnectString=DSN=VTSCADA,CntConnectAttempts=1
+21-09-23T07:54:41.07Z,Session\SetCounters,NewCountersDict=Valid
+21-09-23T07:54:41.09Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-23T07:54:41.12Z,Session\LoadSessionState,Verifying expected state,SessionNum=4,SearchMIDS=0F9D135756270004,NumEntries=1
+21-09-23T07:54:41.14Z,Session\LoadSessionState,Sequence Error,TagName=^#2-{qe21-,Schema=Timestamp-TSTAMP-T|MachineID-STR-M|Availability-BOOL-U,SeqKey=0F9D1357562700048042DD5F,ExpectedCount=6,ActualCount=
+21-09-23T07:54:41.17Z,Session\SessionOpen,AuthoringKey=0F9D1357562700058042DD5F
+21-09-23T07:54:41.19Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632383681.197(07:54:41.19)
+21-09-23T07:54:41.21Z,WriteUptime,StopTime=1632383680.834(07:54:40.83),StartTime=1632383681.217(07:54:41.21),ClientMID=0F9D13575627,ServerMID=0F9D13575627
+21-09-23T07:54:41.23Z,UptimeUpdate,StopTime=1632383680.834(07:54:40.83),StartTime=1632383681.217(07:54:41.21),MachineID=0F9D13575627,UptimeSyncMID=0F9D13575627
+21-09-23T07:54:41.27Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-23T07:56:26.40Z,
+
+21-09-23T07:56:26.42Z,***** Starting HistorianTag *****,Name=histdata,MID=0F9D13575627,WkStnName=HOPE-L-173
+21-09-23T07:56:26.75Z,HistorianTag,Client->InitConnectionHandle
+21-09-23T07:56:26.88Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=ODBC,ConnectString=DSN=VTSCADA,CntConnectAttempts=1
+21-09-23T07:56:27.02Z,Session\SetCounters,NewCountersDict=Valid
+21-09-23T07:56:27.04Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-23T07:56:27.29Z,Session\LoadSessionState,Verifying expected state,SessionNum=5,SearchMIDS=0F9D135756270005,NumEntries=1
+21-09-23T07:56:27.31Z,Session\LoadSessionState,Sequence Error,TagName=^#2-{qe21-,Schema=Timestamp-TSTAMP-T|MachineID-STR-M|Availability-BOOL-U,SeqKey=0F9D1357562700058042DD5F,ExpectedCount=3,ActualCount=
+21-09-23T07:56:27.34Z,Session\SessionOpen,AuthoringKey=0F9D1357562700068042DD5F
+21-09-23T07:56:27.37Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632383787.372(07:56:27.37)
+21-09-23T07:56:27.41Z,WriteUptime,StopTime=1632383702.43(07:55:02.43),StartTime=1632383787.418(07:56:27.41),ClientMID=0F9D13575627,ServerMID=0F9D13575627
+21-09-23T07:56:27.44Z,UptimeUpdate,StopTime=1632383702.43(07:55:02.43),StartTime=1632383787.418(07:56:27.41),MachineID=0F9D13575627,UptimeSyncMID=0F9D13575627
+21-09-23T07:56:28.26Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-23T08:03:19.46Z,
+
+21-09-23T08:03:19.54Z,***** Starting HistorianTag *****,Name=histdata,MID=0F9D13575627,WkStnName=HOPE-L-173
+21-09-23T08:03:19.99Z,HistorianTag,Client->InitConnectionHandle
+21-09-23T08:03:20.12Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=ODBC,ConnectString=DSN=VTSCADA,CntConnectAttempts=1
+21-09-23T08:03:20.46Z,Session\SetCounters,NewCountersDict=Valid
+21-09-23T08:03:20.48Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-23T08:03:21.22Z,Session\LoadSessionState,Verifying expected state,SessionNum=6,SearchMIDS=0F9D135756270006,NumEntries=1
+21-09-23T08:03:21.25Z,Session\SessionOpen,AuthoringKey=0F9D1357562700068042DD5F
+21-09-23T08:03:21.30Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632384201.306(08:03:21.30)
+21-09-23T08:03:21.33Z,WriteUptime,StopTime=1632383975.131(07:59:35.13),StartTime=1632384201.339(08:03:21.33),ClientMID=0F9D13575627,ServerMID=0F9D13575627
+21-09-23T08:03:21.36Z,UptimeUpdate,StopTime=1632383975.131(07:59:35.13),StartTime=1632384201.339(08:03:21.33),MachineID=0F9D13575627,UptimeSyncMID=0F9D13575627
+21-09-23T08:03:21.71Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-23T08:04:47.99Z,Session\SessionClose
+21-09-23T08:04:48.02Z,Session\SetCounters,NewCountersDict=Invalid
+21-09-23T08:04:48.06Z,HistorianTag,StorageOnline->ServerReset,Configuration Changed
+21-09-23T08:04:48.09Z,HistorianTag,ServerReset->InitConnectionHandle
+21-09-23T08:04:48.11Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=ODBCSingleTable ,ConnectString=DSN=VTSCADA,CntConnectAttempts=1
+21-09-23T08:04:48.25Z,Session\SetCounters,NewCountersDict=Valid
+21-09-23T08:04:48.27Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-23T08:04:48.30Z,Session\LoadSessionState,Verifying expected state,SessionNum=6,SearchMIDS=0F9D135756270006,NumEntries=1
+21-09-23T08:04:48.32Z,Session\LoadSessionState,Sequence Error,TagName=^#2-{qe21-,Schema=Timestamp-TSTAMP-T|MachineID-STR-M|Availability-BOOL-U,SeqKey=0F9D1357562700068042DD5F,ExpectedCount=6,ActualCount=
+21-09-23T08:04:48.35Z,Session\SessionOpen,AuthoringKey=0F9D1357562700078042DD5F
+21-09-23T08:04:48.39Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632384288.396(08:04:48.39)
+21-09-23T08:04:48.42Z,WriteUptime,StopTime=1632384288.059(08:04:48.05),StartTime=1632384288.42(08:04:48.42),ClientMID=0F9D13575627,ServerMID=0F9D13575627
+21-09-23T08:04:48.44Z,UptimeUpdate,StopTime=1632384288.059(08:04:48.05),StartTime=1632384288.42(08:04:48.42),MachineID=0F9D13575627,UptimeSyncMID=0F9D13575627
+21-09-23T08:04:48.52Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-23T08:37:26.48Z,Session\SessionClose
+21-09-23T08:37:26.53Z,Session\SetCounters,NewCountersDict=Invalid
+21-09-23T08:37:26.58Z,HistorianTag,StorageOnline->ServerReset,Configuration Changed
+21-09-23T08:37:26.61Z,HistorianTag,ServerReset->InitConnectionHandle
+21-09-23T08:37:26.63Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\jianbo.hu\Documents\gdrive\projects\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-09-23T08:37:26.71Z,Session\SetCounters,NewCountersDict=Valid
+21-09-23T08:37:26.76Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-23T08:37:26.79Z,Session\LoadSessionState,Verifying expected state,SessionNum=7,SearchMIDS=0F9D135756270007,NumEntries=1
+21-09-23T08:37:26.81Z,Session\LoadSessionState,Sequence Error,TagName=^#2-{qe21-,Schema=Timestamp-TSTAMP-T|MachineID-STR-M|Availability-BOOL-U,SeqKey=0F9D1357562700078042DD5F,ExpectedCount=3,ActualCount=
+21-09-23T08:37:26.85Z,Session\SessionOpen,AuthoringKey=0F9D1357562700088042DD5F
+21-09-23T08:37:26.90Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632386246.902(08:37:26.90)
+21-09-23T08:37:26.92Z,WriteUptime,StopTime=1632386246.551(08:37:26.55),StartTime=1632386246.923(08:37:26.92),ClientMID=0F9D13575627,ServerMID=0F9D13575627
+21-09-23T08:37:26.94Z,UptimeUpdate,StopTime=1632386246.551(08:37:26.55),StartTime=1632386246.923(08:37:26.92),MachineID=0F9D13575627,UptimeSyncMID=0F9D13575627
+21-09-23T08:37:27.00Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-29T05:01:38.76Z,
+
+21-09-29T05:01:38.81Z,***** Starting HistorianTag *****,Name=histdata,MID=0F9D13575627,WkStnName=HOPE-L-173
+21-09-29T05:01:39.34Z,HistorianTag,Client->InitConnectionHandle
+21-09-29T05:01:39.51Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\jianbo.hu\Documents\gdrive\projects\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-09-29T05:01:39.74Z,Session\SetCounters,NewCountersDict=Valid
+21-09-29T05:01:39.78Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-29T05:01:39.93Z,Session\LoadSessionState,Verifying expected state,SessionNum=8,SearchMIDS=0F9D135756270008,NumEntries=1
+21-09-29T05:01:40.00Z,Session\SessionOpen,AuthoringKey=0F9D1357562700088042DD5F
+21-09-29T05:01:40.10Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632891700.106(05:01:40.10)
+21-09-29T05:01:40.17Z,WriteUptime,StopTime=1632450228.634(02:23:48.63),StartTime=1632891700.174(05:01:40.17),ClientMID=0F9D13575627,ServerMID=0F9D13575627
+21-09-29T05:01:40.22Z,UptimeUpdate,StopTime=1632450228.634(02:23:48.63),StartTime=1632891700.174(05:01:40.17),MachineID=0F9D13575627,UptimeSyncMID=0F9D13575627
+21-09-29T05:01:40.66Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-29T05:05:53.08Z,
+
+21-09-29T05:05:53.11Z,***** Starting HistorianTag *****,Name=histdata,MID=0F9D13575627,WkStnName=HOPE-L-173
+21-09-29T05:05:53.44Z,HistorianTag,Client->InitConnectionHandle
+21-09-29T05:05:53.57Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\jianbo.hu\Documents\gdrive\projects\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-09-29T05:05:53.77Z,Session\SetCounters,NewCountersDict=Valid
+21-09-29T05:05:53.81Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-29T05:05:53.89Z,Session\LoadSessionState,Verifying expected state,SessionNum=8,SearchMIDS=0F9D135756270008,NumEntries=1
+21-09-29T05:05:53.93Z,Session\SessionOpen,AuthoringKey=0F9D1357562700088042DD5F
+21-09-29T05:05:53.99Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632891953.99(05:05:53.99)
+21-09-29T05:05:54.05Z,WriteUptime,StopTime=1632891739.297(05:02:19.29),StartTime=1632891954.051(05:05:54.05),ClientMID=0F9D13575627,ServerMID=0F9D13575627
+21-09-29T05:05:54.07Z,UptimeUpdate,StopTime=1632891739.297(05:02:19.29),StartTime=1632891954.051(05:05:54.05),MachineID=0F9D13575627,UptimeSyncMID=0F9D13575627
+21-09-29T05:05:54.52Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-29T05:28:08.15Z,
+
+21-09-29T05:28:08.19Z,***** Starting HistorianTag *****,Name=histdata,MID=0F9D13575627,WkStnName=HOPE-L-173
+21-09-29T05:28:08.59Z,HistorianTag,Client->InitConnectionHandle
+21-09-29T05:28:08.74Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\jianbo.hu\Documents\gdrive\projects\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-09-29T05:28:08.88Z,Session\SetCounters,NewCountersDict=Valid
+21-09-29T05:28:08.91Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-29T05:28:08.99Z,Session\LoadSessionState,Verifying expected state,SessionNum=8,SearchMIDS=0F9D135756270008,NumEntries=1
+21-09-29T05:28:09.03Z,Session\SessionOpen,AuthoringKey=0F9D1357562700088042DD5F
+21-09-29T05:28:09.08Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632893289.083(05:28:09.08)
+21-09-29T05:28:09.11Z,WriteUptime,StopTime=1632893228.533(05:27:08.53),StartTime=1632893289.114(05:28:09.11),ClientMID=0F9D13575627,ServerMID=0F9D13575627
+21-09-29T05:28:09.14Z,UptimeUpdate,StopTime=1632893228.533(05:27:08.53),StartTime=1632893289.114(05:28:09.11),MachineID=0F9D13575627,UptimeSyncMID=0F9D13575627
+21-09-29T05:28:09.53Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-29T05:37:02.33Z,
+
+21-09-29T05:37:02.36Z,***** Starting HistorianTag *****,Name=histdata,MID=0F9D13575627,WkStnName=HOPE-L-173
+21-09-29T05:37:02.76Z,HistorianTag,Client->InitConnectionHandle
+21-09-29T05:37:02.92Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\jianbo.hu\Documents\gdrive\projects\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-09-29T05:37:03.09Z,Session\SetCounters,NewCountersDict=Valid
+21-09-29T05:37:03.14Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-29T05:37:03.23Z,Session\LoadSessionState,Verifying expected state,SessionNum=8,SearchMIDS=0F9D135756270008,NumEntries=1
+21-09-29T05:37:03.26Z,Session\SessionOpen,AuthoringKey=0F9D1357562700088042DD5F
+21-09-29T05:37:03.30Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632893823.301(05:37:03.30)
+21-09-29T05:37:03.33Z,WriteUptime,StopTime=1632893705.808(05:35:05.80),StartTime=1632893823.333(05:37:03.33),ClientMID=0F9D13575627,ServerMID=0F9D13575627
+21-09-29T05:37:03.35Z,UptimeUpdate,StopTime=1632893705.808(05:35:05.80),StartTime=1632893823.333(05:37:03.33),MachineID=0F9D13575627,UptimeSyncMID=0F9D13575627
+21-09-29T05:37:03.66Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-29T06:25:54.43Z,
+
+21-09-29T06:25:54.46Z,***** Starting HistorianTag *****,Name=histdata,MID=0F9D13575627,WkStnName=HOPE-L-173
+21-09-29T06:25:54.74Z,HistorianTag,Client->InitConnectionHandle
+21-09-29T06:25:54.83Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\jianbo.hu\Documents\gdrive\projects\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-09-29T06:25:54.93Z,Session\SetCounters,NewCountersDict=Valid
+21-09-29T06:25:54.95Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-29T06:25:55.03Z,Session\LoadSessionState,Verifying expected state,SessionNum=8,SearchMIDS=0F9D135756270008,NumEntries=1
+21-09-29T06:25:55.06Z,Session\SessionOpen,AuthoringKey=0F9D1357562700088042DD5F
+21-09-29T06:25:55.11Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632896755.116(06:25:55.11)
+21-09-29T06:25:55.14Z,WriteUptime,StopTime=1632896060.444(06:14:20.44),StartTime=1632896755.146(06:25:55.14),ClientMID=0F9D13575627,ServerMID=0F9D13575627
+21-09-29T06:25:55.17Z,UptimeUpdate,StopTime=1632896060.444(06:14:20.44),StartTime=1632896755.146(06:25:55.14),MachineID=0F9D13575627,UptimeSyncMID=0F9D13575627
+21-09-29T06:25:55.44Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-29T06:28:55.19Z,
+
+21-09-29T06:28:55.21Z,***** Starting HistorianTag *****,Name=histdata,MID=0F9D13575627,WkStnName=HOPE-L-173
+21-09-29T06:28:55.48Z,HistorianTag,Client->InitConnectionHandle
+21-09-29T06:28:55.58Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\jianbo.hu\Documents\gdrive\projects\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-09-29T06:28:55.70Z,Session\SetCounters,NewCountersDict=Valid
+21-09-29T06:28:55.72Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-29T06:28:55.81Z,Session\LoadSessionState,Verifying expected state,SessionNum=8,SearchMIDS=0F9D135756270008,NumEntries=1
+21-09-29T06:28:55.83Z,Session\SessionOpen,AuthoringKey=0F9D1357562700088042DD5F
+21-09-29T06:28:55.88Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632896935.883(06:28:55.88)
+21-09-29T06:28:55.94Z,WriteUptime,StopTime=1632896887.663(06:28:07.66),StartTime=1632896935.941(06:28:55.94),ClientMID=0F9D13575627,ServerMID=0F9D13575627
+21-09-29T06:28:55.97Z,UptimeUpdate,StopTime=1632896887.663(06:28:07.66),StartTime=1632896935.941(06:28:55.94),MachineID=0F9D13575627,UptimeSyncMID=0F9D13575627
+21-09-29T06:28:56.34Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-29T06:34:03.93Z,
+
+21-09-29T06:34:03.95Z,***** Starting HistorianTag *****,Name=histdata,MID=0F9D13575627,WkStnName=HOPE-L-173
+21-09-29T06:34:04.20Z,HistorianTag,Client->InitConnectionHandle
+21-09-29T06:34:04.28Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\jianbo.hu\Documents\gdrive\projects\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-09-29T06:34:04.37Z,Session\SetCounters,NewCountersDict=Valid
+21-09-29T06:34:04.39Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-29T06:34:04.46Z,Session\LoadSessionState,Verifying expected state,SessionNum=8,SearchMIDS=0F9D135756270008,NumEntries=1
+21-09-29T06:34:04.49Z,Session\SessionOpen,AuthoringKey=0F9D1357562700088042DD5F
+21-09-29T06:34:04.54Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632897244.541(06:34:04.54)
+21-09-29T06:34:04.57Z,WriteUptime,StopTime=1632897192.72(06:33:12.72),StartTime=1632897244.571(06:34:04.57),ClientMID=0F9D13575627,ServerMID=0F9D13575627
+21-09-29T06:34:04.59Z,UptimeUpdate,StopTime=1632897192.72(06:33:12.72),StartTime=1632897244.571(06:34:04.57),MachineID=0F9D13575627,UptimeSyncMID=0F9D13575627
+21-09-29T06:34:04.93Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-29T06:38:10.89Z,
+
+21-09-29T06:38:10.93Z,***** Starting HistorianTag *****,Name=histdata,MID=0F9D13575627,WkStnName=HOPE-L-173
+21-09-29T06:38:11.27Z,HistorianTag,Client->InitConnectionHandle
+21-09-29T06:38:11.38Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\jianbo.hu\Documents\gdrive\projects\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-09-29T06:38:11.50Z,Session\SetCounters,NewCountersDict=Valid
+21-09-29T06:38:11.53Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-29T06:38:11.75Z,Session\LoadSessionState,Verifying expected state,SessionNum=8,SearchMIDS=0F9D135756270008,NumEntries=1
+21-09-29T06:38:11.78Z,Session\SessionOpen,AuthoringKey=0F9D1357562700088042DD5F
+21-09-29T06:38:11.80Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632897491.809(06:38:11.80)
+21-09-29T06:38:11.85Z,WriteUptime,StopTime=1632897372.584(06:36:12.58),StartTime=1632897491.857(06:38:11.85),ClientMID=0F9D13575627,ServerMID=0F9D13575627
+21-09-29T06:38:11.88Z,UptimeUpdate,StopTime=1632897372.584(06:36:12.58),StartTime=1632897491.857(06:38:11.85),MachineID=0F9D13575627,UptimeSyncMID=0F9D13575627
+21-09-29T06:38:12.74Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-29T06:59:41.32Z,
+
+21-09-29T06:59:41.34Z,***** Starting HistorianTag *****,Name=histdata,MID=3F02AF71C94C,WkStnName=HOPE-L-149
+21-09-29T06:59:41.54Z,HistorianTag,Client->InitConnectionHandle
+21-09-29T06:59:41.60Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\anish.khurana\Documents\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-09-29T06:59:41.70Z,Session\SetCounters,NewCountersDict=Valid
+21-09-29T06:59:41.72Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-29T06:59:41.79Z,Session\LoadSessionState,Verifying expected state,SessionNum=8,SearchMIDS=3F02AF71C94C0008,NumEntries=1
+21-09-29T06:59:41.80Z,Session\LoadSessionState,Sequence Error,TagName=^#2-{qe21-,Schema=Timestamp-TSTAMP-T|MachineID-STR-M|Availability-BOOL-U,SeqKey=3F02AF71C94C00088042DD5F,ExpectedCount=27,ActualCount=
+21-09-29T06:59:41.83Z,Session\SessionOpen,AuthoringKey=3F02AF71C94C00098042DD5F
+21-09-29T06:59:41.93Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632898781.934(06:59:41.93)
+21-09-29T06:59:41.99Z,WriteUptime,StopTime=1632898303.389(06:51:43.38),StartTime=1632898781.993(06:59:41.99),ClientMID=3F02AF71C94C,ServerMID=3F02AF71C94C
+21-09-29T06:59:42.01Z,UptimeUpdate,StopTime=1632898303.389(06:51:43.38),StartTime=1632898781.993(06:59:41.99),MachineID=3F02AF71C94C,UptimeSyncMID=3F02AF71C94C
+21-09-29T06:59:42.25Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-29T07:04:15.05Z,
+
+21-09-29T07:04:15.06Z,***** Starting HistorianTag *****,Name=histdata,MID=3F02AF71C94C,WkStnName=HOPE-L-149
+21-09-29T07:04:15.21Z,HistorianTag,Client->InitConnectionHandle
+21-09-29T07:04:15.27Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\anish.khurana\Documents\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-09-29T07:04:15.35Z,Session\SetCounters,NewCountersDict=Valid
+21-09-29T07:04:15.36Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-29T07:04:15.47Z,Session\LoadSessionState,Verifying expected state,SessionNum=9,SearchMIDS=3F02AF71C94C0009,NumEntries=1
+21-09-29T07:04:15.49Z,Session\SessionOpen,AuthoringKey=3F02AF71C94C00098042DD5F
+21-09-29T07:04:15.50Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632899055.503(07:04:15.50)
+21-09-29T07:04:15.57Z,WriteUptime,StopTime=1632899023.478(07:03:43.47),StartTime=1632899055.574(07:04:15.57),ClientMID=3F02AF71C94C,ServerMID=3F02AF71C94C
+21-09-29T07:04:15.60Z,UptimeUpdate,StopTime=1632899023.478(07:03:43.47),StartTime=1632899055.574(07:04:15.57),MachineID=3F02AF71C94C,UptimeSyncMID=3F02AF71C94C
+21-09-29T07:04:15.86Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-29T08:00:21.08Z,
+
+21-09-29T08:00:21.11Z,***** Starting HistorianTag *****,Name=histdata,MID=3F02AF71C94C,WkStnName=HOPE-L-149
+21-09-29T08:00:21.46Z,HistorianTag,Client->InitConnectionHandle
+21-09-29T08:00:21.52Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\anish.khurana\Documents\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-09-29T08:00:21.60Z,Session\SetCounters,NewCountersDict=Valid
+21-09-29T08:00:21.61Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-29T08:00:21.68Z,Session\LoadSessionState,Verifying expected state,SessionNum=9,SearchMIDS=3F02AF71C94C0009,NumEntries=
+21-09-29T08:00:21.71Z,Session\SessionOpen,AuthoringKey=3F02AF71C94C000A8042DD5F
+21-09-29T08:00:21.76Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632902421.763(08:00:21.76)
+21-09-29T08:00:21.80Z,UptimeUpdate,Hard Stop Detected,StartTime=1632899055.574(07:04:15.57),StopTime=1632899537.778(07:12:17.77)
+21-09-29T08:00:21.81Z,WriteUptime,StopTime=1632899537.778(07:12:17.77),StartTime=1632902421.818(08:00:21.81),ClientMID=3F02AF71C94C,ServerMID=3F02AF71C94C
+21-09-29T08:00:21.86Z,UptimeUpdate,StopTime=1632899537.778(07:12:17.77),StartTime=1632902421.818(08:00:21.81),MachineID=3F02AF71C94C,UptimeSyncMID=3F02AF71C94C
+21-09-29T08:00:22.14Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-30T00:31:05.93Z,
+
+21-09-30T00:31:05.95Z,***** Starting HistorianTag *****,Name=histdata,MID=3F02AF71C94C,WkStnName=HOPE-L-149
+21-09-30T00:31:06.12Z,HistorianTag,Client->InitConnectionHandle
+21-09-30T00:31:06.19Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\anish.khurana\Documents\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-09-30T00:31:06.26Z,Session\SetCounters,NewCountersDict=Valid
+21-09-30T00:31:06.27Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-30T00:31:06.31Z,Session\LoadSessionState,Verifying expected state,SessionNum=10,SearchMIDS=3F02AF71C94C000A,NumEntries=1
+21-09-30T00:31:06.33Z,Session\SessionOpen,AuthoringKey=3F02AF71C94C000A8042DD5F
+21-09-30T00:31:06.37Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632961866.374(00:31:06.37)
+21-09-30T00:31:06.40Z,WriteUptime,StopTime=1632934790.339(16:59:50.33),StartTime=1632961866.403(00:31:06.40),ClientMID=3F02AF71C94C,ServerMID=3F02AF71C94C
+21-09-30T00:31:06.41Z,UptimeUpdate,StopTime=1632934790.339(16:59:50.33),StartTime=1632961866.403(00:31:06.40),MachineID=3F02AF71C94C,UptimeSyncMID=3F02AF71C94C
+21-09-30T00:31:06.68Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-09-30T09:31:06.34Z,
+
+21-09-30T09:31:06.36Z,***** Starting HistorianTag *****,Name=histdata,MID=3F02AF71C94C,WkStnName=HOPE-L-149
+21-09-30T09:31:06.56Z,HistorianTag,Client->InitConnectionHandle
+21-09-30T09:31:06.98Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\anish.khurana\Documents\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-09-30T09:31:07.15Z,Session\SetCounters,NewCountersDict=Valid
+21-09-30T09:31:07.17Z,HistorianTag,AccessingDatastore->StorageOnline
+21-09-30T09:31:07.23Z,Session\LoadSessionState,Verifying expected state,SessionNum=10,SearchMIDS=3F02AF71C94C000A,NumEntries=1
+21-09-30T09:31:07.25Z,Session\SessionOpen,AuthoringKey=3F02AF71C94C000A8042DD5F
+21-09-30T09:31:07.29Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1632994267.297(09:31:07.29)
+21-09-30T09:31:07.32Z,WriteUptime,StopTime=1632985847.087(07:10:47.08),StartTime=1632994267.326(09:31:07.32),ClientMID=3F02AF71C94C,ServerMID=3F02AF71C94C
+21-09-30T09:31:07.34Z,UptimeUpdate,StopTime=1632985847.087(07:10:47.08),StartTime=1632994267.326(09:31:07.32),MachineID=3F02AF71C94C,UptimeSyncMID=3F02AF71C94C
+21-09-30T09:31:07.61Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-10-01T01:57:21.98Z,
+
+21-10-01T01:57:22.00Z,***** Starting HistorianTag *****,Name=histdata,MID=3F02AF71C94C,WkStnName=HOPE-L-149
+21-10-01T01:57:22.21Z,HistorianTag,Client->InitConnectionHandle
+21-10-01T01:57:22.53Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\anish.khurana\Documents\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-10-01T01:57:22.76Z,Session\SetCounters,NewCountersDict=Valid
+21-10-01T01:57:22.78Z,HistorianTag,AccessingDatastore->StorageOnline
+21-10-01T01:57:22.87Z,Session\LoadSessionState,Verifying expected state,SessionNum=10,SearchMIDS=3F02AF71C94C000A,NumEntries=
+21-10-01T01:57:22.90Z,Session\SessionOpen,AuthoringKey=3F02AF71C94C000B8042DD5F
+21-10-01T01:57:22.96Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1633053442.96(01:57:22.96)
+21-10-01T01:57:22.98Z,UptimeUpdate,Hard Stop Detected,StartTime=1632994267.326(09:31:07.32),StopTime=1633014935.648(15:15:35.64)
+21-10-01T01:57:23.00Z,WriteUptime,StopTime=1633014935.648(15:15:35.64),StartTime=1633053443(01:57:23.00),ClientMID=3F02AF71C94C,ServerMID=3F02AF71C94C
+21-10-01T01:57:23.05Z,UptimeUpdate,StopTime=1633014935.648(15:15:35.64),StartTime=1633053443(01:57:23.00),MachineID=3F02AF71C94C,UptimeSyncMID=3F02AF71C94C
+21-10-01T01:57:23.28Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-10-01T04:15:29.95Z,
+
+21-10-01T04:15:29.96Z,***** Starting HistorianTag *****,Name=histdata,MID=3F02AF71C94C,WkStnName=HOPE-L-149
+21-10-01T04:15:30.14Z,HistorianTag,Client->InitConnectionHandle
+21-10-01T04:15:30.43Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\anish.khurana\Documents\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-10-01T04:15:30.76Z,Session\SetCounters,NewCountersDict=Valid
+21-10-01T04:15:30.78Z,HistorianTag,AccessingDatastore->StorageOnline
+21-10-01T04:15:30.90Z,Session\LoadSessionState,Verifying expected state,SessionNum=11,SearchMIDS=3F02AF71C94C000B,NumEntries=1
+21-10-01T04:15:30.94Z,Session\SessionOpen,AuthoringKey=3F02AF71C94C000B8042DD5F
+21-10-01T04:15:31.01Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1633061731.01(04:15:31.01)
+21-10-01T04:15:31.09Z,WriteUptime,StopTime=1633058325.792(03:18:45.79),StartTime=1633061731.089(04:15:31.08),ClientMID=3F02AF71C94C,ServerMID=3F02AF71C94C
+21-10-01T04:15:31.14Z,UptimeUpdate,StopTime=1633058325.792(03:18:45.79),StartTime=1633061731.089(04:15:31.08),MachineID=3F02AF71C94C,UptimeSyncMID=3F02AF71C94C
+21-10-01T04:15:31.53Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-10-04T05:40:20.28Z,
+
+21-10-04T05:40:20.30Z,***** Starting HistorianTag *****,Name=histdata,MID=3F02AF71C94C,WkStnName=HOPE-L-149
+21-10-04T05:40:20.48Z,HistorianTag,Client->InitConnectionHandle
+21-10-04T05:40:20.74Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\anish.khurana\Documents\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-10-04T05:40:20.91Z,Session\SetCounters,NewCountersDict=Valid
+21-10-04T05:40:20.93Z,HistorianTag,AccessingDatastore->StorageOnline
+21-10-04T05:40:20.99Z,Session\LoadSessionState,Verifying expected state,SessionNum=11,SearchMIDS=3F02AF71C94C000B,NumEntries=
+21-10-04T05:40:21.02Z,Session\SessionOpen,AuthoringKey=3F02AF71C94C000C8042DD5F
+21-10-04T05:40:21.06Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1633326021.067(05:40:21.06)
+21-10-04T05:40:21.10Z,UptimeUpdate,Hard Stop Detected,StartTime=1633061731.089(04:15:31.08),StopTime=1633061995.103(04:19:55.10)
+21-10-04T05:40:21.12Z,WriteUptime,StopTime=1633061995.103(04:19:55.10),StartTime=1633326021.122(05:40:21.12),ClientMID=3F02AF71C94C,ServerMID=3F02AF71C94C
+21-10-04T05:40:21.18Z,UptimeUpdate,StopTime=1633061995.103(04:19:55.10),StartTime=1633326021.122(05:40:21.12),MachineID=3F02AF71C94C,UptimeSyncMID=3F02AF71C94C
+21-10-04T05:40:21.52Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-10-07T01:06:00.72Z,
+
+21-10-07T01:06:00.73Z,***** Starting HistorianTag *****,Name=histdata,MID=3F02AF71C94C,WkStnName=HOPE-L-149
+21-10-07T01:06:00.93Z,HistorianTag,Client->InitConnectionHandle
+21-10-07T01:06:01.22Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\anish.khurana\Documents\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-10-07T01:06:01.39Z,Session\SetCounters,NewCountersDict=Valid
+21-10-07T01:06:01.41Z,HistorianTag,AccessingDatastore->StorageOnline
+21-10-07T01:06:01.48Z,Session\LoadSessionState,Verifying expected state,SessionNum=12,SearchMIDS=3F02AF71C94C000C,NumEntries=
+21-10-07T01:06:01.52Z,Session\SessionOpen,AuthoringKey=3F02AF71C94C000D8042DD5F
+21-10-07T01:06:01.58Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1633568761.58(01:06:01.58)
+21-10-07T01:06:01.60Z,UptimeUpdate,Hard Stop Detected,StartTime=1633326021.122(05:40:21.12),StopTime=1633428394.162(10:06:34.16)
+21-10-07T01:06:01.62Z,WriteUptime,StopTime=1633428394.162(10:06:34.16),StartTime=1633568761.62(01:06:01.62),ClientMID=3F02AF71C94C,ServerMID=3F02AF71C94C
+21-10-07T01:06:01.64Z,UptimeUpdate,StopTime=1633428394.162(10:06:34.16),StartTime=1633568761.62(01:06:01.62),MachineID=3F02AF71C94C,UptimeSyncMID=3F02AF71C94C
+21-10-07T01:06:01.93Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-10-07T02:01:38.73Z,
+
+21-10-07T02:01:38.74Z,***** Starting HistorianTag *****,Name=histdata,MID=3F02AF71C94C,WkStnName=HOPE-L-149
+21-10-07T02:01:38.91Z,HistorianTag,Client->InitConnectionHandle
+21-10-07T02:01:39.13Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\anish.khurana\Documents\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-10-07T02:01:39.30Z,Session\SetCounters,NewCountersDict=Valid
+21-10-07T02:01:39.31Z,HistorianTag,AccessingDatastore->StorageOnline
+21-10-07T02:01:39.36Z,Session\LoadSessionState,Verifying expected state,SessionNum=13,SearchMIDS=3F02AF71C94C000D,NumEntries=1
+21-10-07T02:01:39.37Z,Session\SessionOpen,AuthoringKey=3F02AF71C94C000D8042DD5F
+21-10-07T02:01:39.42Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1633572099.423(02:01:39.42)
+21-10-07T02:01:39.44Z,WriteUptime,StopTime=1633572067.994(02:01:07.99),StartTime=1633572099.445(02:01:39.44),ClientMID=3F02AF71C94C,ServerMID=3F02AF71C94C
+21-10-07T02:01:39.46Z,UptimeUpdate,StopTime=1633572067.994(02:01:07.99),StartTime=1633572099.445(02:01:39.44),MachineID=3F02AF71C94C,UptimeSyncMID=3F02AF71C94C
+21-10-07T02:01:39.68Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-10-07T02:18:28.19Z,
+
+21-10-07T02:18:28.21Z,***** Starting HistorianTag *****,Name=histdata,MID=3F02AF71C94C,WkStnName=HOPE-L-149
+21-10-07T02:18:28.36Z,HistorianTag,Client->InitConnectionHandle
+21-10-07T02:18:28.50Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\anish.khurana\Documents\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-10-07T02:18:28.88Z,Session\SetCounters,NewCountersDict=Valid
+21-10-07T02:18:28.89Z,HistorianTag,AccessingDatastore->StorageOnline
+21-10-07T02:18:29.08Z,Session\LoadSessionState,Verifying expected state,SessionNum=13,SearchMIDS=3F02AF71C94C000D,NumEntries=1
+21-10-07T02:18:29.09Z,Session\SessionOpen,AuthoringKey=3F02AF71C94C000D8042DD5F
+21-10-07T02:18:29.13Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1633573109.135(02:18:29.13)
+21-10-07T02:18:29.16Z,WriteUptime,StopTime=1633573076.785(02:17:56.78),StartTime=1633573109.164(02:18:29.16),ClientMID=3F02AF71C94C,ServerMID=3F02AF71C94C
+21-10-07T02:18:29.18Z,UptimeUpdate,StopTime=1633573076.785(02:17:56.78),StartTime=1633573109.164(02:18:29.16),MachineID=3F02AF71C94C,UptimeSyncMID=3F02AF71C94C
+21-10-07T02:18:29.47Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-10-07T04:54:57.04Z,
+
+21-10-07T04:54:57.06Z,***** Starting HistorianTag *****,Name=histdata,MID=3F02AF71C94C,WkStnName=HOPE-L-149
+21-10-07T04:54:57.27Z,HistorianTag,Client->InitConnectionHandle
+21-10-07T04:54:57.42Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\anish.khurana\Documents\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-10-07T04:54:57.93Z,Session\SetCounters,NewCountersDict=Valid
+21-10-07T04:54:57.95Z,HistorianTag,AccessingDatastore->StorageOnline
+21-10-07T04:54:58.19Z,Session\LoadSessionState,Verifying expected state,SessionNum=13,SearchMIDS=3F02AF71C94C000D,NumEntries=1
+21-10-07T04:54:58.21Z,Session\SessionOpen,AuthoringKey=3F02AF71C94C000D8042DD5F
+21-10-07T04:54:58.30Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1633582498.309(04:54:58.30)
+21-10-07T04:54:58.47Z,WriteUptime,StopTime=1633582405.066(04:53:25.06),StartTime=1633582498.471(04:54:58.47),ClientMID=3F02AF71C94C,ServerMID=3F02AF71C94C
+21-10-07T04:54:58.86Z,UptimeUpdate,StopTime=1633582405.066(04:53:25.06),StartTime=1633582498.471(04:54:58.47),MachineID=3F02AF71C94C,UptimeSyncMID=3F02AF71C94C
+21-10-07T04:54:59.92Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-10-07T05:36:56.40Z,
+
+21-10-07T05:36:56.42Z,***** Starting HistorianTag *****,Name=histdata,MID=3F02AF71C94C,WkStnName=HOPE-L-149
+21-10-07T05:36:56.60Z,HistorianTag,Client->InitConnectionHandle
+21-10-07T05:36:56.76Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\anish.khurana\Documents\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-10-07T05:36:57.24Z,Session\SetCounters,NewCountersDict=Valid
+21-10-07T05:36:57.26Z,HistorianTag,AccessingDatastore->StorageOnline
+21-10-07T05:36:57.53Z,Session\LoadSessionState,Verifying expected state,SessionNum=13,SearchMIDS=3F02AF71C94C000D,NumEntries=1
+21-10-07T05:36:57.55Z,Session\SessionOpen,AuthoringKey=3F02AF71C94C000D8042DD5F
+21-10-07T05:36:57.61Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1633585017.618(05:36:57.61)
+21-10-07T05:36:57.64Z,WriteUptime,StopTime=1633584780.418(05:33:00.41),StartTime=1633585017.648(05:36:57.64),ClientMID=3F02AF71C94C,ServerMID=3F02AF71C94C
+21-10-07T05:36:57.67Z,UptimeUpdate,StopTime=1633584780.418(05:33:00.41),StartTime=1633585017.648(05:36:57.64),MachineID=3F02AF71C94C,UptimeSyncMID=3F02AF71C94C
+21-10-07T05:36:57.96Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-10-07T05:47:15.90Z,
+
+21-10-07T05:47:15.91Z,***** Starting HistorianTag *****,Name=histdata,MID=3F02AF71C94C,WkStnName=HOPE-L-149
+21-10-07T05:47:16.10Z,HistorianTag,Client->InitConnectionHandle
+21-10-07T05:47:16.28Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\anish.khurana\Documents\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-10-07T05:47:16.77Z,Session\SetCounters,NewCountersDict=Valid
+21-10-07T05:47:16.79Z,HistorianTag,AccessingDatastore->StorageOnline
+21-10-07T05:47:17.02Z,Session\LoadSessionState,Verifying expected state,SessionNum=13,SearchMIDS=3F02AF71C94C000D,NumEntries=1
+21-10-07T05:47:17.05Z,Session\SessionOpen,AuthoringKey=3F02AF71C94C000D8042DD5F
+21-10-07T05:47:17.10Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1633585637.109(05:47:17.10)
+21-10-07T05:47:17.13Z,WriteUptime,StopTime=1633585230.991(05:40:30.99),StartTime=1633585637.135(05:47:17.13),ClientMID=3F02AF71C94C,ServerMID=3F02AF71C94C
+21-10-07T05:47:17.16Z,UptimeUpdate,StopTime=1633585230.991(05:40:30.99),StartTime=1633585637.135(05:47:17.13),MachineID=3F02AF71C94C,UptimeSyncMID=3F02AF71C94C
+21-10-07T05:47:17.48Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-10-07T05:50:38.95Z,
+
+21-10-07T05:50:38.97Z,***** Starting HistorianTag *****,Name=histdata,MID=3F02AF71C94C,WkStnName=HOPE-L-149
+21-10-07T05:50:39.16Z,HistorianTag,Client->InitConnectionHandle
+21-10-07T05:50:39.31Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\anish.khurana\Documents\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-10-07T05:50:39.76Z,Session\SetCounters,NewCountersDict=Valid
+21-10-07T05:50:39.77Z,HistorianTag,AccessingDatastore->StorageOnline
+21-10-07T05:50:40.04Z,Session\LoadSessionState,Verifying expected state,SessionNum=13,SearchMIDS=3F02AF71C94C000D,NumEntries=1
+21-10-07T05:50:40.07Z,Session\SessionOpen,AuthoringKey=3F02AF71C94C000D8042DD5F
+21-10-07T05:50:40.14Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1633585840.143(05:50:40.14)
+21-10-07T05:50:40.17Z,WriteUptime,StopTime=1633585767.24(05:49:27.24),StartTime=1633585840.174(05:50:40.17),ClientMID=3F02AF71C94C,ServerMID=3F02AF71C94C
+21-10-07T05:50:40.24Z,UptimeUpdate,StopTime=1633585767.24(05:49:27.24),StartTime=1633585840.174(05:50:40.17),MachineID=3F02AF71C94C,UptimeSyncMID=3F02AF71C94C
+21-10-07T05:50:40.57Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-10-07T09:07:11.52Z,
+
+21-10-07T09:07:11.54Z,***** Starting HistorianTag *****,Name=histdata,MID=3F02AF71C94C,WkStnName=HOPE-L-149
+21-10-07T09:07:11.80Z,HistorianTag,Client->InitConnectionHandle
+21-10-07T09:07:12.07Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\anish.khurana\Documents\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-10-07T09:07:12.55Z,Session\SetCounters,NewCountersDict=Valid
+21-10-07T09:07:12.56Z,HistorianTag,AccessingDatastore->StorageOnline
+21-10-07T09:07:12.80Z,Session\LoadSessionState,Verifying expected state,SessionNum=13,SearchMIDS=3F02AF71C94C000D,NumEntries=1
+21-10-07T09:07:12.82Z,Session\SessionOpen,AuthoringKey=3F02AF71C94C000D8042DD5F
+21-10-07T09:07:12.87Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1633597632.87(09:07:12.87)
+21-10-07T09:07:12.90Z,WriteUptime,StopTime=1633597385.862(09:03:05.86),StartTime=1633597632.903(09:07:12.90),ClientMID=3F02AF71C94C,ServerMID=3F02AF71C94C
+21-10-07T09:07:12.92Z,UptimeUpdate,StopTime=1633597385.862(09:03:05.86),StartTime=1633597632.903(09:07:12.90),MachineID=3F02AF71C94C,UptimeSyncMID=3F02AF71C94C
+21-10-07T09:07:13.31Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-10-08T03:12:38.86Z,
+
+21-10-08T03:12:38.88Z,***** Starting HistorianTag *****,Name=histdata,MID=3F02AF71C94C,WkStnName=HOPE-L-149
+21-10-08T03:12:39.08Z,HistorianTag,Client->InitConnectionHandle
+21-10-08T03:12:39.26Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\anish.khurana\Documents\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-10-08T03:12:39.71Z,Session\SetCounters,NewCountersDict=Valid
+21-10-08T03:12:39.73Z,HistorianTag,AccessingDatastore->StorageOnline
+21-10-08T03:12:40.00Z,Session\LoadSessionState,Verifying expected state,SessionNum=13,SearchMIDS=3F02AF71C94C000D,NumEntries=1
+21-10-08T03:12:40.02Z,Session\SessionOpen,AuthoringKey=3F02AF71C94C000D8042DD5F
+21-10-08T03:12:40.07Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1633662760.079(03:12:40.07)
+21-10-08T03:12:40.14Z,WriteUptime,StopTime=1633600085.941(09:48:05.94),StartTime=1633662760.139(03:12:40.13),ClientMID=3F02AF71C94C,ServerMID=3F02AF71C94C
+21-10-08T03:12:40.16Z,UptimeUpdate,StopTime=1633600085.941(09:48:05.94),StartTime=1633662760.139(03:12:40.13),MachineID=3F02AF71C94C,UptimeSyncMID=3F02AF71C94C
+21-10-08T03:12:40.41Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-10-08T04:39:14.75Z,
+
+21-10-08T04:39:14.76Z,***** Starting HistorianTag *****,Name=histdata,MID=3F02AF71C94C,WkStnName=HOPE-L-149
+21-10-08T04:39:14.96Z,HistorianTag,Client->InitConnectionHandle
+21-10-08T04:39:15.11Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\anish.khurana\Documents\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-10-08T04:39:15.47Z,Session\SetCounters,NewCountersDict=Valid
+21-10-08T04:39:15.48Z,HistorianTag,AccessingDatastore->StorageOnline
+21-10-08T04:39:15.66Z,Session\LoadSessionState,Verifying expected state,SessionNum=13,SearchMIDS=3F02AF71C94C000D,NumEntries=1
+21-10-08T04:39:15.68Z,Session\SessionOpen,AuthoringKey=3F02AF71C94C000D8042DD5F
+21-10-08T04:39:15.74Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1633667955.742(04:39:15.74)
+21-10-08T04:39:15.76Z,WriteUptime,StopTime=1633664781.632(03:46:21.63),StartTime=1633667955.764(04:39:15.76),ClientMID=3F02AF71C94C,ServerMID=3F02AF71C94C
+21-10-08T04:39:15.78Z,UptimeUpdate,StopTime=1633664781.632(03:46:21.63),StartTime=1633667955.764(04:39:15.76),MachineID=3F02AF71C94C,UptimeSyncMID=3F02AF71C94C
+21-10-08T04:39:16.07Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-10-08T05:06:20.44Z,
+
+21-10-08T05:06:20.45Z,***** Starting HistorianTag *****,Name=histdata,MID=3F02AF71C94C,WkStnName=HOPE-L-149
+21-10-08T05:06:20.61Z,HistorianTag,Client->InitConnectionHandle
+21-10-08T05:06:20.77Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\anish.khurana\Documents\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-10-08T05:06:21.11Z,Session\SetCounters,NewCountersDict=Valid
+21-10-08T05:06:21.12Z,HistorianTag,AccessingDatastore->StorageOnline
+21-10-08T05:06:21.29Z,Session\LoadSessionState,Verifying expected state,SessionNum=13,SearchMIDS=3F02AF71C94C000D,NumEntries=1
+21-10-08T05:06:21.31Z,Session\SessionOpen,AuthoringKey=3F02AF71C94C000D8042DD5F
+21-10-08T05:06:21.35Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1633669581.354(05:06:21.35)
+21-10-08T05:06:21.38Z,WriteUptime,StopTime=1633669551.674(05:05:51.67),StartTime=1633669581.384(05:06:21.38),ClientMID=3F02AF71C94C,ServerMID=3F02AF71C94C
+21-10-08T05:06:21.40Z,UptimeUpdate,StopTime=1633669551.674(05:05:51.67),StartTime=1633669581.384(05:06:21.38),MachineID=3F02AF71C94C,UptimeSyncMID=3F02AF71C94C
+21-10-08T05:06:21.69Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-10-11T00:54:24.13Z,
+
+21-10-11T00:54:24.16Z,***** Starting HistorianTag *****,Name=histdata,MID=3F02AF71C94C,WkStnName=HOPE-L-149
+21-10-11T00:54:24.49Z,HistorianTag,Client->InitConnectionHandle
+21-10-11T00:54:24.76Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\anish.khurana\Documents\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-10-11T00:54:25.40Z,Session\SetCounters,NewCountersDict=Valid
+21-10-11T00:54:25.42Z,HistorianTag,AccessingDatastore->StorageOnline
+21-10-11T00:54:25.72Z,Session\LoadSessionState,Verifying expected state,SessionNum=13,SearchMIDS=3F02AF71C94C000D,NumEntries=1
+21-10-11T00:54:25.75Z,Session\SessionOpen,AuthoringKey=3F02AF71C94C000D8042DD5F
+21-10-11T00:54:25.81Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1633913665.81(00:54:25.81)
+21-10-11T00:54:25.83Z,WriteUptime,StopTime=1633671347.257(05:35:47.25),StartTime=1633913665.835(00:54:25.83),ClientMID=3F02AF71C94C,ServerMID=3F02AF71C94C
+21-10-11T00:54:25.85Z,UptimeUpdate,StopTime=1633671347.257(05:35:47.25),StartTime=1633913665.835(00:54:25.83),MachineID=3F02AF71C94C,UptimeSyncMID=3F02AF71C94C
+21-10-11T00:54:26.14Z,QueueManager,DoNothing->FlushBufferQueues,Length=0
+21-10-12T09:04:14.23Z,
+
+21-10-12T09:04:14.26Z,***** Starting HistorianTag *****,Name=histdata,MID=3F02AF71C94C,WkStnName=HOPE-L-149
+21-10-12T09:04:14.51Z,HistorianTag,Client->InitConnectionHandle
+21-10-12T09:04:14.76Z,HistorianTag,InitConnectionHandle->AccessingDatastore,ConsecConnectErrors=0,ConnectType=FileDB,ConnectString=C:\Users\anish.khurana\Documents\ellemento\VTSCADA\Play\Data\History,CntConnectAttempts=1
+21-10-12T09:04:15.29Z,Session\SetCounters,NewCountersDict=Valid
+21-10-12T09:04:15.32Z,HistorianTag,AccessingDatastore->StorageOnline
+21-10-12T09:04:15.62Z,Session\LoadSessionState,Verifying expected state,SessionNum=13,SearchMIDS=3F02AF71C94C000D,NumEntries=
+21-10-12T09:04:15.65Z,Session\SessionOpen,AuthoringKey=3F02AF71C94C000E8042DD5F
+21-10-12T09:04:15.71Z,HistorianTag,StorageOnline,RPCStatus=2,LastRestartTime=1634029455.716(09:04:15.71)
+21-10-12T09:04:15.77Z,UptimeUpdate,Hard Stop Detected,StartTime=1633913665.835(00:54:25.83),StopTime=1633941997.034(08:46:37.03)
+21-10-12T09:04:15.79Z,WriteUptime,StopTime=1633941997.034(08:46:37.03),StartTime=1634029455.799(09:04:15.79),ClientMID=3F02AF71C94C,ServerMID=3F02AF71C94C
+21-10-12T09:04:15.83Z,UptimeUpdate,StopTime=1633941997.034(08:46:37.03),StartTime=1634029455.799(09:04:15.79),MachineID=3F02AF71C94C,UptimeSyncMID=3F02AF71C94C
+21-10-12T09:04:16.23Z,QueueManager,DoNothing->FlushBufferQueues,Length=0

@@ -1,0 +1,14 @@
+5fx8)-=.&s,Address<Logged Off|1633586107.318>,192.168.1.30
+5fx8)-=.&s,Area<Logged Off|1615270185.351>,System
+5fx8)-=.&s,AuditName<Logged Off|1633571917.968>,Ventilation
+5fx8)-=.&s,Description<Logged Off|1615270185.351>,v7YLW4Kpp
+5fx8)-=.&s,Name<Logged Off|1615270185.351>,5fx8)-=.&s
+5fx8)-=.&s,PortNum<Logged Off|1615270185.351>,502
+5fx8)-=.&s,ShortName<Logged Off|1633571917.966>,Ventilation
+SystemHistorian\h1La~!pedp,Address<Logged Off|1633585730.326>,192.168.1.30
+SystemHistorian\h1La~!pedp,Area<Logged Off|1633573036.564>,System
+SystemHistorian\h1La~!pedp,AuditName<Logged Off|1633585730.329>,SystemHistorian\\Ventilation
+SystemHistorian\h1La~!pedp,Description<Logged Off|1633573036.564>,v7YLW4Kpp
+SystemHistorian\h1La~!pedp,Name<Logged Off|1633573036.564>,SystemHistorian\\h1La~!pedp
+SystemHistorian\h1La~!pedp,PortNum<Logged Off|1633573036.564>,502
+SystemHistorian\h1La~!pedp,ShortName<Logged Off|1633573036.564>,Ventilation
