@@ -4,7 +4,7 @@ import time
 import sys
 
 sys.path.append('../plc')
-import ellemento.plc.modbus_io as modbus
+import ellemento.plc.plc_io as modbus
 
 from ellemento.job import constants
 from ellemento.job import rest_api 

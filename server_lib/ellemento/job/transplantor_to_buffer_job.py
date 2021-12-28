@@ -1,5 +1,5 @@
 # Interfacing with ASRS to execute transfer job
-from ellemento.model import transplantor
+from ellemento.model import transplanter
 from ellemento.model.transplantor_factory import TransplantorFactory
 import threading
 import time
@@ -12,7 +12,7 @@ from ellemento.model.tray_phase_1_3 import TrayPhase13
 from ellemento.model.tray_phase_4 import TrayPhase4
 from ellemento.model.bufffer_factory import BufferFactory, BufferType
 from ellemento.model.buffer import Buffer
-from ellemento.model.transplantor import Transplantor
+from ellemento.model.transplanter import Transplanter
 from lib.logging.logger_initialiser import EllementoLogger
 
 logger = EllementoLogger.__call__().logger
@@ -25,10 +25,10 @@ class TransplantorToBufferJob:
     @staticmethod 
     def create_jobs(): 
         while not TransplantorToBufferJob.terminate_job:
-            transplantor_3_4 = Transplantor(TransplantorFactory.get_transplantor_3_4()) 
+            transplantor_3_4 = Transplanter(TransplantorFactory.get_transplanter_3_4())
             buffer_3_in = Buffer(BufferFactory.get_buffer(BufferType.BUFFER_3_IN))
             if not transplantor_3_4.ready_to_move_out_dst_tray(): 
-                logger.info("Transplantor not ready to move out destination tray")
+                logger.info("Transplanter not ready to move out destination tray")
                 time.sleep(2)
                 continue 
             if buffer_3_in.full(): 

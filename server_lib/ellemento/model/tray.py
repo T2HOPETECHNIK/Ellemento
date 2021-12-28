@@ -1,154 +1,139 @@
-#*
+# ***************************************************************
 #  Tray class to define  the basic tray properties and operations 
-#* 
-
+# ***************************************************************
+import time
 from enum import Enum
 import datetime
-
 from lib.logging.logger_initialiser import EllementoLogger
+logger = EllementoLogger.__call__().logger
 
-logger = EllementoLogger.__call__().logger; 
 
 class TrayStatus(Enum):
-    CREATED             = 1
-    IDLE                = 2        # clean and ready to use
-    SOWER               = 3
-    SOWER_TO_PHASE1     = 4
-    PHASE1              = 5
-    PHASE1_TO_PHASE2    = 6 
-    PHASE2              = 7
-    PHASE2_TO_PHASE3    = 8
-    PHASE3              = 9
-    PHASE3_TO_TRANPLANT = 10
-    TRANSPLANT_TO_PHASE4        = 11
-    PHASE4                      = 12
-    PHASE4_TO_TRANSPLANT        = 13
-    TRANSPLANT_TO_PHASE5        = 14
-    PHASE5                      = 15
-    PHASE5_TO_TRANSPLANT        = 16 
-    DIRTY                       = 17       # empty but not clean 
+    CREATED = 1
+    IDLE = 2  # clean and ready to use
+    SOWER = 3
+    SOWER_TO_PHASE1 = 4
+    PHASE1 = 5
+    PHASE1_TO_PHASE2 = 6
+    PHASE2 = 7
+    PHASE2_TO_PHASE3 = 8
+    PHASE3 = 9
+    PHASE3_TO_TRANSPLANT = 10
+    TRANSPLANT_TO_PHASE4 = 11
+    PHASE4 = 12
+    PHASE4_TO_TRANSPLANT = 13
+    TRANSPLANT_TO_PHASE5 = 14
+    PHASE5 = 15
+    PHASE5_TO_TRANSPLANT = 16
+    DIRTY = 17  # empty but not clean
+
 
 class TransferStatus(Enum):
-    IDLE                = 1
-    READY_TO_TRANSFER   = 2
-    TRANSFER_QUEUED     = 3
-    TRANSFERING         = 4 
+    IDLE = 1
+    READY_TO_TRANSFER = 2
+    TRANSFER_QUEUED = 3
+    TRANSFERRING = 4
 
-
-# Other status could be added later 
 
 class Tray:
-    all_trays = {} 
-    # Check whether the duration of tray staying in each phase 
+    all_trays = {}
+    # Check whether the duration of tray staying in each phase
     @staticmethod
     def get_tray(id):
         return Tray.all_trays[id]
 
-    @staticmethod 
-    def add_tray(tray): 
+    @staticmethod
+    def add_tray(tray):
         Tray.all_trays[tray.id] = tray
-    
-    @staticmethod 
-    def print(): 
+
+    @staticmethod
+    def print():
         for tray_x in Tray.all_trays:
             print(Tray.all_trays[tray_x])
-    
-    def __init__(self, id = 0, dimensions = [12, 10], type_name="Unknown" ):
+
+    def __init__(self, id=0, dimensions=None, type_name="Unknown"):
+        if dimensions is None:
+            dimensions = [12, 10]
         self._id = id
-        self._has_veg = False   
+        self._has_veg = False
         self._has_foam = False
         self._dimensions = dimensions
-        self._pots= {}
+        self._pots = {}
         self._location = None
         self._type_name = type_name
         self._transfer_status = TransferStatus.IDLE
-        # Initial location is not sure 
-        self._enable = True 
-
-        #str_log = "Created object " + self._type_name + " " + str(self._id); 
-        #logger.info(str_log)
+        self._enable = True
         self._set_status(TrayStatus.CREATED)
 
     @property
-    def status_time(self): 
-        return self._status_time  
-    
-    @property 
-    def status(self): 
-        return self._status
-    
-    @status.setter 
-    def status(self, value): 
-        self._status = value 
+    def status_time(self):
+        return self._status_time
 
-    @property 
-    def transfer_status(self): 
-        return self._transfer_status 
-    
-    
+    @property
+    def transfer_status(self):
+        return self._transfer_status
 
-    def set_transfer_status(self, status): 
+    def set_transfer_status(self, status):
         self._transfer_status = status
 
-
-    def reset_status_time(self): 
+    def reset_status_time(self):
         self._status_time = datetime.datetime.now()
-        
+
     def _set_status(self, status):
-        self._status = status 
+        self._status = status
         self._status_time = datetime.datetime.now()
 
-    @property 
+    @property
     def type_name(self):
-        return self._type_name 
+        return self._type_name
 
     @type_name.setter
-    def type_name(self, value): 
-        self._type_name = value 
+    def type_name(self, value):
+        self._type_name = value
 
-    def transplant_out(self): 
+    def transplant_out(self):
         self._set_status(TrayStatus.DIRTY)
-        pass 
+        pass
 
-    def transplant_in(self): 
-        pass 
-    
+    def transplant_in(self):
+        pass
+
     def __repr__(self):
         return "<object:%s id:%d type:%s>" % (self.__class__.__name__, self._id, self._type_name)
 
     def __str__(self):
         return "<object:%s, id:%d type:%s>" % (self.__class__.__name__, self._id, self._type_name)
 
-    @property 
+    @property
     def enable(self):
-        return self._enable 
+        return self._enable
 
     @enable.setter
-    def enable(self, value): 
-        self._enable = value   
+    def enable(self, value):
+        self._enable = value
 
     @property
-    def id(self): 
+    def id(self):
         return self._id
 
     @id.setter
-    def id(self, value): 
-        self._id = value 
+    def id(self, value):
+        self._id = value
 
     @property
     def status(self):
         return self._status
-    
+
     @status.setter
-    def status(self, value): 
-        if (not isinstance(value, TrayStatus)):
-            raise(ValueError("Status is not in the predefined list"))
-        self._status = value 
+    def status(self, value):
+        if not isinstance(value, TrayStatus):
+            raise (ValueError("Status is not in the predefined list"))
+        self._status = value
 
     @property
-    def has_veg(self): 
-        return self._has_veg 
-    
+    def has_veg(self):
+        return self._has_veg
+
     @has_veg.setter
     def has_veg(self, value):
         self._has_veg = value
@@ -158,26 +143,25 @@ class Tray:
         return self._has_foam
 
     @has_foam.setter
-    def has_foam(self, value): 
-        self._has_foam = value 
+    def has_foam(self, value):
+        self._has_foam = value
 
-    @ property
-    def dimension(self): 
+    @property
+    def dimension(self):
         return self._dimension
-    
+
     @dimension.setter
-    def dimension(self, row, col) : 
+    def dimension(self, row,col):
         self._dimension = [row, col]
 
     @property
     def location(self):
         return self._location
-    
-    @location.setter
-    def location(self, value) : 
-        self._location = value 
 
-    # Fill an empty tray with pots 
+    @location.setter
+    def location(self, value):
+        self._location = value
+
     def fill_pots(self):
         for row in self._pots:
             for col in row:
@@ -187,21 +171,3 @@ class Tray:
         for row in self._pots:
             for col in row:
                 self._pots[row][col] = 0
-
-    # def fill_foams(self): 
-    #     self.has_foam = True
-
-    # def fill_seeds(self): 
-    #     self.has_veg = True 
-  
-    
-
-    
-    
-
-
-    
-
-
-
-

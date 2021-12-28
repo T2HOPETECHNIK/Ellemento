@@ -1,6 +1,5 @@
 {
-    "id": 1, 
-    "Description": "For farm models and modbus plc address mapping", 
+    "Description": "For farm models and modbus plc address mapping",
     "Pump":
     [
         {
@@ -74,7 +73,7 @@
         {
             "id": 1, 
             "address":{
-                "modbus_id": 1, 
+                "modbus_id": 1,
                 "status": {
                     "tag": "FEEDBACK_LED",
                     "position": 0, 
@@ -89,20 +88,21 @@
                 "intensity": 
                 {
                     "tag": "FEEDBACK_LED_INTENSITY", 
-                    "position": 0, 
+                    "position": 0,
                     "type": "integer"
                 },
                 "control_intensity":
                 {
                     "tag": "CTRL_LIGHT_INTENSITY", 
-                    "position": 0, 
+                    "position": 0,
                     "type": "integer"
                 }
             }
 
         }
     ],
-    "valve":[
+    "valve":
+    [
         {
             "id": 1,
             "address":{
@@ -130,7 +130,8 @@
         }
 
     ],
-    "shelf":[
+    "shelf":
+    [
         {
             "id": 1,
             "address":{
@@ -217,7 +218,8 @@
             }
         }
     ],
-    "rack":[
+    "rack":
+    [
         {
             "id": 1,
             "address":{
@@ -237,5 +239,106 @@
             }
         }
     ],
-    "fan":[]
+    "fan":
+    [],
+    "sower":
+    [
+          {
+            "id": 1,
+            "address":
+            {
+                "twincat_id": 20,
+                "read":
+                {
+                    "part_ready_S1": "part_ready_address",
+                    "lock_ASRS_S1" : "lock_ASRS_address"
+                },
+                "write":
+                {
+                    "ASRS_arrived_S1" : "ASRS_arrived_address",
+                    "part_picked_S1"  : "part_picked_address",
+                    "part_presence_S1": "part_presence_address",
+                    "ASRS_locked_S1"  : "ASRS_locked_address"
+                }
+            }
+        }
+    ],
+     "t34":
+    [
+          {
+            "id": 1,
+            "address":
+            {
+                "twincat_id": 30,
+                "read":
+                {
+                    "part_ready_S3": "part_ready_S3_address",
+                    "lock_ASRS_S3" : "lock_ASRS_S3_address",
+                    "part_ready_S4": "part_ready_S4_address",
+                    "lock_ASRS_S4" : "lock_ASRS_S4_address"
+                },
+                "write":
+                {
+                    "ASRS_arrived_S3" : "ASRS_arrived_S3_address",
+                    "part_placed_S3"  : "part_placed_S3_address",
+                    "part_presence_S3": "part_presence_S3_address",
+                    "ASRS_locked_S3"  : "ASRS_locked_S3_address",
+                    "ASRS_arrived_S4" : "ASRS_arrived_S4_address",
+                    "part_picked_S4"  : "part_picked_S4_address",
+                    "part_presence_S4": "part_presence_S4_address",
+                    "ASRS_locked_S4"  : "ASRS_locked_S4_address"
+                }
+            }
+        }
+    ],
+     "t45":
+    [
+          {
+            "id": 1,
+            "address":
+            {
+                "twincat_id": 40,
+                "read":
+                {
+                    "part_ready_S4": "part_ready_S4_address",
+                    "lock_ASRS_S4" : "lock_ASRS_S4_address",
+                    "part_ready_S5": "part_ready_S5_address",
+                    "lock_ASRS_S5" : "lock_ASRS_S5_address"
+                },
+                "write":
+                {
+                    "ASRS_arrived_S4" : "ASRS_arrived_S4_address",
+                    "part_placed_S4"  : "part_placed_S4_address",
+                    "part_presence_S4": "part_presence_S4_address",
+                    "ASRS_locked_S4"  : "ASRS_locked_S4_address",
+                    "ASRS_arrived_S5" : "ASRS_arrived_S5_address",
+                    "part_picked_S5"  : "part_picked_S5_address",
+                    "part_presence_S5": "part_presence_S5_address",
+                    "ASRS_locked_S5"  : "ASRS_locked_S5_address"
+                }
+            }
+        }
+    ],
+     "harvester":
+    [
+         {
+            "id": 1,
+            "address":
+            {
+                "twincat_id": 50,
+                "read":
+                {
+                    "part_ready_S5" : "part_ready_address",
+                    "lock_ASRS_S5"  : "lock_ASRS_address"
+                },
+                "write":
+                {
+                    "ASRS_arrived_S5"  : "ASRS_arrived_address",
+                    "part_placed_S5"   : "part_placed_address",
+                    "part_presence_S5" : "part_presence_address",
+                    "ASRS_locked_S5"   : "ASRS_locked_address"
+                }
+            }
+        }
+    ]
 }

@@ -1,4 +1,4 @@
-from ellemento.model import transplantor
+from ellemento.model import transplanter
 from multiprocessing.context import BufferTooShort
 import threading
 import time
@@ -11,8 +11,8 @@ from ellemento.model.tray_phase_1_3 import TrayPhase13
 from ellemento.model.tray_phase_4 import TrayPhase4
 from ellemento.model.bufffer_factory import BufferFactory, BufferType
 from ellemento.model.transplantor_factory import TransplantorFactory
-from ellemento.model.sower import Sower
-from ellemento.model.transplantor import Transplantor 
+from ellemento.model.sower_control import sower
+from ellemento.model.transplanter import Transplanter
 
 from lib.logging.logger_initialiser import EllementoLogger
 
@@ -25,8 +25,8 @@ class TransplantorToSower:
     def create_jobs():
         # create jobs for 
         while not TransplantorToSower.termninate_job: 
-            transplantor_3_4 = Transplantor(TransplantorFactory.get_transplantor_3_4()) 
-            sower = Sower(Sower.get_sower())
+            transplantor_3_4 = Transplanter(TransplantorFactory.get_transplanter_3_4())
+            sower = sower(sower.get_sower())
             if not transplantor_3_4.ready_to_move_out_src_tray():
                 logger.info("Not able to move out since transplantor 3-4 not ready")
                 time.sleep(2)
