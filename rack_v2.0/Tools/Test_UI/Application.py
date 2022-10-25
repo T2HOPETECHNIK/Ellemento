@@ -735,31 +735,31 @@ class Application(tk.Frame):
         self.sched1Btn.grid(column=20, row=1, columnspan=1)
 
         self.sched2Btn = tk.Button(content, text="SCHED 2", relief="raised")
-        self.sched2Btn["command"] = self.sched1BtnClick
+        self.sched2Btn["command"] = self.sched2BtnClick
         self.sched2Btn.grid(column=20, row=2, columnspan=1)
 
         self.sched3Btn = tk.Button(content, text="SCHED 3", relief="raised")
-        self.sched3Btn["command"] = self.sched1BtnClick
+        self.sched3Btn["command"] = self.sched3BtnClick
         self.sched3Btn.grid(column=20, row=3, columnspan=1)
         
         self.sched4Btn = tk.Button(content, text="SCHED 4", relief="raised")
-        self.sched4Btn["command"] = self.sched1BtnClick
+        self.sched4Btn["command"] = self.sched4BtnClick
         self.sched4Btn.grid(column=20, row=4, columnspan=1)
 
         self.sched5Btn = tk.Button(content, text="SCHED 5", relief="raised")
-        self.sched5Btn["command"] = self.sched1BtnClick
+        self.sched5Btn["command"] = self.sched5BtnClick
         self.sched5Btn.grid(column=20, row=5, columnspan=1)
         
         self.sched6Btn = tk.Button(content, text="SCHED 6", relief="raised")
-        self.sched6Btn["command"] = self.sched1BtnClick
+        self.sched6Btn["command"] = self.sched6BtnClick
         self.sched6Btn.grid(column=20, row=6, columnspan=1)
 
         self.sched7Btn = tk.Button(content, text="SCHED 7", relief="raised")
-        self.sched7Btn["command"] = self.sched1BtnClick
+        self.sched7Btn["command"] = self.sched7BtnClick
         self.sched7Btn.grid(column=20, row=7, columnspan=1)
         
         self.sched8Btn = tk.Button(content, text="SCHED 8", relief="raised")
-        self.sched8Btn["command"] = self.sched1BtnClick
+        self.sched8Btn["command"] = self.sched8BtnClick
         self.sched8Btn.grid(column=20, row=8, columnspan=1)
 
         self.sched9Btn = tk.Button(content, text="SCHED 9", relief="raised")
@@ -788,7 +788,7 @@ class Application(tk.Frame):
 
         # Scheduler
         self.schedSetText = tk.StringVar()
-        self.schedSetText.set("S#,L/W,HH,MM,HH,MM,xx")
+        self.schedSetText.set("#,L/W,HH,MM,HH,MM,xx")
         self.schedSetLabel = tk.Label( content, textvariable=self.schedSetText )
         self.schedSetLabel.grid(column=15, row=16, columnspan=5)
 
