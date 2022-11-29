@@ -7,7 +7,7 @@ from multiprocessing import Process
 import os
 import threading
 
-from ellemento.model import bufffer_factory, transplantor
+from ellemento.model import bufffer_factory, transplanter
 from lib.logging.logger_initialiser import EllementoLogger
 import ellemento.model.tray 
 from ellemento.model.shelf import Phase, ShelfStatus
@@ -17,8 +17,8 @@ from ellemento.model.shelf import Shelf
 from ellemento.model.tray import Tray
 from ellemento.model.tray import TrayStatus, TransferStatus
 from ellemento.model.bufffer_factory import BufferFactory, BufferType
-from ellemento.model.harvestor import Harvestor
-from ellemento.model.sower import Sower
+from ellemento.model.harvester_control import harvester
+from ellemento.model.sower_control import sower
 from ellemento.model.buffer import Buffer 
 
 logger = EllementoLogger.__call__().logger
@@ -95,7 +95,7 @@ class TransferJob:
 
                 shelf_empty = get_shelf_from_lst(lst_shelf)
                 shelf_empty.set_transfer_status(TransferStatus.TRANSFER_QUEUED)
-                sower_one = Sower(Sower.get_sower()) 
+                sower_one = sower(sower.get_sower())
                 if not sower_one.ready_to_unload(): 
                     time.sleep(2)
                     logger.info("Sower is not ready to unload - plants not ready")
@@ -301,10 +301,10 @@ class TransferJob:
         # only if the buffer still have places
         # if harvester is ready ..
         while not TransferJob.terminate_job: 
-            transplantor_4_5 =  transplantor.Transplantor( TransplantorFactory.get_transplantor_4_5())
+            transplantor_4_5 =  transplanter.Transplanter(TransplantorFactory.get_transplantor_4_5())
             lst_shelf = ShelfFactory.get_empty_shelf_of_phase(phase = Phase.PHASE5)
             if not transplantor_4_5.ready_to_move_out_dst_tray():
-                logger.info("Transplantor is not ready")
+                logger.info("Transplanter is not ready")
                 time.sleep(2)
                 continue 
             
@@ -347,7 +347,7 @@ class TransferJob:
                 print( len(shelf_phase_5), "phase 5 shelves is fully grown",)
                 logger.warn("%d phase 5 shelves is fully grown", len(shelf_phase_5))
 
-            harvestor = Harvestor.get_harvestor()
+            harvestor = harvestor.get_harvestor()
             if not harvestor.ready_to_load():
                 print("Harvestor is not ready to load any trays")
                 logger.warn("Harvestor is not ready to load any trays") 
@@ -375,7 +375,7 @@ class TransferJob:
             time.sleep(2)
 
     @classmethod 
-    def check_destination_available():
+    def check_destination_available(cls):
         # find the destination of the available shelves now 
 
         # For all phase 1 trays, need to find another phase 2 shelf which is empty 

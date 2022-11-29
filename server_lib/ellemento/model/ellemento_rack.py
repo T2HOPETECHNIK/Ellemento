@@ -7,54 +7,50 @@ This class will handle the rack: shelf lighting, water, pump, etc.
 from ellemento.plc import address
 from ellemento.plc import utils
 from ellemento.plc import constants as const
-from ellemento.plc import modbus_io
+from ellemento.plc import plc_io
+
 
 class ellemento_rack(object):
+    plc = plc_io.plc()
 
-    plc = modbus_io.plc()
-    
-    def __init__ (self, ip):
+    def __init__(self, ip):
         super().__init__()
         self.plc.setIP(ip)
-        print ("Ellemento rack client connected")
-
+        print("Ellemento rack modbus_client connected")
 
     def __del__(self):
-        print ("Ellemento rack client disconnected")
-        #self.client.close()
-
+        print("Ellemento rack modbus_client disconnected")
+        # self.modbus_client.close()
 
     def test(self):
-        print ("Odin will cast his lightning bolts upon you.")
-        res,err = self.plc.write_register(1000, 1234)   #.write_registers(1000, 1512, unit=1)
-        res,err = self.plc.write_register(2000, 888)
-        res,err = self.plc.read_register(1000, 1)
-        res,err = self.plc.write_coil(5000,1, True)
-        data,err = self.plc.read_coil(5000,6)
+        print("Odin will cast his lightning bolts upon you.")
+        res, err = self.plc.write_address_json(1000, 1234)  # .write_registers(1000, 1512, unit=1)
+        res, err = self.plc.write_address_json(2000, 888)
+        res, err = self.plc.read_address_json(1000, 1)
+        res, err = self.plc.write_coil(5000, 1, True)
+        data, err = self.plc.read_coil(5000, 6)
 
-        if data == True:
-            print ("Result: True")
+        if data:
+            print("Result: True")
         else:
-            print ("Result: False")
+            print("Result: False")
 
     def test2(self):
-        print ("Change mode")
+        print("Change mode")
 
         self.changeMode(const.AUTO_MODE)
-        self.toggleLED(2,True)
+        self.toggleLED(2, True)
         self.setLEDIntensity(2, 22)
-        self.togglePV(1,True)
-        self.setShelfPVPosition(1,50)
-        self.setPumpMode(1,const.PUMP_FLOW_MODE)
+        self.togglePV(1, True)
+        self.setShelfPVPosition(1, 50)
+        self.setPumpMode(1, const.PUMP_FLOW_MODE)
         self.setPumpRPM(1, 100)
         self.setPumpFlowRate(1, 20)
-        self.setPumpFlowRatePerShelf(1,23)
+        self.setPumpFlowRatePerShelf(1, 23)
         ps = self.getPumpRPMsetting(1)
-        print ("Pump setting:",ps)
+        print("Pump setting:", ps)
 
-
-
-    #===============================================================
+    # ===============================================================
 
     def changeMode(self, mode):
 
@@ -63,36 +59,33 @@ class ellemento_rack(object):
         if mode == const.AUTO_MODE:
             # Auto mode
             values = 1
-            res,err = self.plc.write_register(modeAddress, values)
-            
+            res, err = self.plc.write_address_json(modeAddress, values)
+
         elif mode == const.SEMI_AUTO_MODE:
             # Semi auto mode
             values = 2
-            res,err = self.plc.write_registers(modeAddress, values)
+            res, err = self.plc.write_registers(modeAddress, values)
 
         else:
             # Manual mode
             values = const.MANUAL_MODE
-            res,err = self.plc.write_registers(modeAddress, values)
+            res, err = self.plc.write_registers(modeAddress, values)
 
-    
-    #================================================================
+    # ================================================================
     # Lighting
-    #================================================================
+    # ================================================================
 
     def getShelfLEDOnAddress(self, ledNum):
-        ledOnAddress = address.SHELF_LIGHT_ON_ADDRESS[ledNum];
+        ledOnAddress = address.SHELF_LIGHT_ON_ADDRESS[ledNum]
         return ledOnAddress
-    
 
     def toggleLED(self, ledNum, bOnOff):
         ledOnAddress = self.getShelfLEDOnAddress(ledNum)
-        res,err = self.plc.write_coil(ledOnAddress, address.SHELF_LIGHT_ON_BITPOS[ledNum], bOnOff)
+        res, err = self.plc.write_coil(ledOnAddress, address.SHELF_LIGHT_ON_BITPOS[ledNum], bOnOff)
 
-    
     def getLEDStatus(self, ledNum):
         ledOnAddress = self.getShelfLEDOnAddress(ledNum)
-        res,err = self.plc.read_coil(ledOnAddress, address.SHELF_LIGHT_ON_BITPOS[ledNum])
+        res, err = self.plc.read_coil(ledOnAddress, address.SHELF_LIGHT_ON_BITPOS[ledNum])
         if res == True:
             return True
         else:
@@ -104,39 +97,36 @@ class ellemento_rack(object):
 
     def setLEDIntensity(self, ledNum, intensity):
         ledIntensityAddress = self.getShelfLEDIntensityAddress(ledNum)
-        res,err = self.plc.write_register(ledIntensityAddress, intensity)
+        res, err = self.plc.write_address_json(ledIntensityAddress, intensity)
 
     def getLEDIntensity(self, ledNum):
         ledIntensityAddress = self.getShelfLEDIntensityAddress(ledNum)
-        res,err = self.plc.read_register(ledIntensityAddress, 1)
+        res, err = self.plc.read_address_json(ledIntensityAddress, 1)
         if res.registers[0] == 1:
             return True
         else:
             return False
 
-
-    #================================================================
+    # ================================================================
     # PV
-    #================================================================
+    # ================================================================
 
     def togglePV(self, pvNum, bOnOff):
         pvOnAddress = address.SHELF_PV_ON_ADDRESS[pvNum]
-        res,err = self.plc.write_coil(pvOnAddress, address.SHELF_PV_ON_BITPOS[pvNum], bOnOff)
+        res, err = self.plc.write_coil(pvOnAddress, address.SHELF_PV_ON_BITPOS[pvNum], bOnOff)
 
     # Position is 0-100
     def setShelfPVPosition(self, pvNum, pvPos):
         pvPosAddress = address.SHELF_PV_POSITION_ADDRESS[pvNum]
-        res,err = self.plc.write_register(pvPosAddress,pvPos)
+        res, err = self.plc.write_address_json(pvPosAddress, pvPos)
 
     def setShelfPVLUTPosition(self, pvNum, pvPos):
         pvPosAddress = address.SHELF_PV_LUT_ADDRESS[pvNum]
-        res,err = self.plc.write_register(pvPosAddress,pvPos)
-    
+        res, err = self.plc.write_address_json(pvPosAddress, pvPos)
 
-
-    #================================================================
+    # ================================================================
     # Pump
-    #================================================================
+    # ================================================================
 
     # set pump mode: auto, manual flowrate, manual RPM
     def setPumpMode(self, pumpNo, mode):
@@ -145,7 +135,7 @@ class ellemento_rack(object):
         else:
             addr = address.PUMP_1_MODE_ADDRESS
 
-        res,err = self.plc.write_register(addr, mode)
+        res, err = self.plc.write_address_json(addr, mode)
         if err != 0:
             return False
         else:
@@ -158,10 +148,9 @@ class ellemento_rack(object):
         else:
             addr = address.PUMP_1_MODE_ADDRESS
 
-        res,err = self.plc.read_register(addr, 1)
-        return res.registers[0],err
+        res, err = self.plc.read_address_json(addr, 1)
+        return res.registers[0], err
 
-    
     # set pump RPM
     def setPumpRPM(self, pumpNo, RPM):
         if pumpNo == 1:
@@ -169,7 +158,7 @@ class ellemento_rack(object):
         else:
             addr = address.PUMP_1_SET_RPM_ADDRESS
 
-        res,err = self.plc.write_register(addr, RPM)
+        res, err = self.plc.write_address_json(addr, RPM)
         if err != 0:
             return False
         else:
@@ -182,8 +171,8 @@ class ellemento_rack(object):
         else:
             addr = address.PUMP_1_SET_RPM_ADDRESS
 
-        res,err = self.plc.read_register(addr, 1)
-        return res.registers[0],err
+        res, err = self.plc.read_address_json(addr, 1)
+        return res.registers[0], err
 
     # get actual running RPM
     def getPumpRunningRPM(self, pumpNo):
@@ -192,37 +181,34 @@ class ellemento_rack(object):
         else:
             addr = address.PUMP_1_CURRENT_RPM_ADDRESS
 
-        res,err = self.plc.read_register(addr, 1)
-        return res.registers[0],err
-
+        res, err = self.plc.read_address_json(addr, 1)
+        return res.registers[0], err
 
     # Set overall flow rate setting
-    def  setPumpFlowRate(self, pumpNo, wFlowrate):
+    def setPumpFlowRate(self, pumpNo, wFlowrate):
         if pumpNo == 1:
             addr = address.PUMP_0_FLOWRATE_ADDRESS
         else:
             addr = address.PUMP_1_FLOWRATE_ADDRESS
 
-        res,err = self.plc.write_register(addr, wFlowrate)
+        res, err = self.plc.write_address_json(addr, wFlowrate)
         if err != 0:
             return False
         else:
             return True
 
-
     # get overall flow rate setting
-    def  getPumpFlowRate(self, pumpNo):
+    def getPumpFlowRate(self, pumpNo):
         if pumpNo == 1:
             addr = address.PUMP_0_FLOWRATE_ADDRESS
         else:
             addr = address.PUMP_1_FLOWRATE_ADDRESS
 
-        res,err = self.plc.read_register(addr, 1)
-        return res.registers[0],err
-
+        res, err = self.plc.read_address_json(addr, 1)
+        return res.registers[0], err
 
     # set flow rate per shelf
-    def  setPumpFlowRatePerShelf(self, pumpNo, wFlowrate):
+    def setPumpFlowRatePerShelf(self, pumpNo, wFlowrate):
         res = 0
         err = 0
         if pumpNo == 1:
@@ -230,7 +216,7 @@ class ellemento_rack(object):
         else:
             addr = address.PUMP_1_FLOWRATE_PER_SHELF_ADDRESS
 
-        res,err = self.plc.write_register(addr, wFlowrate)
+        res, err = self.plc.write_address_json(addr, wFlowrate)
 
         if err != 0:
             return False
@@ -238,24 +224,22 @@ class ellemento_rack(object):
             return True
 
     # get flow rate per shelf setting
-    def  getPumpFlowRatePerShelf(self, pumpNo):
+    def getPumpFlowRatePerShelf(self, pumpNo):
         if pumpNo == 1:
-            res,err = self.plc.read_register(address.PUMP_0_FLOWRATE_PER_SHELF_ADDRESS, 1)
-            return res.registers[0],err
+            res, err = self.plc.read_address_json(address.PUMP_0_FLOWRATE_PER_SHELF_ADDRESS, 1)
+            return res.registers[0], err
         else:
-            res,err = self.plc.read_register(address.PUMP_1_FLOWRATE_PER_SHELF_ADDRESS, 1)
-            return res.registers[0],err
-
+            res, err = self.plc.read_address_json(address.PUMP_1_FLOWRATE_PER_SHELF_ADDRESS, 1)
+            return res.registers[0], err
 
     # recover from stoppage due to low water and pump PID ramp-up too fast
     def recoverPump(self, pumpNo):
         if pumpNo == 1:
-            res,err = self.plc.write_coil(address.PUMP_0_RECOVER_ADDRESS, address.PUMP_0_RECOVER_BITPOS, True)
-            return res.registers[0],err
+            res, err = self.plc.write_coil(address.PUMP_0_RECOVER_ADDRESS, address.PUMP_0_RECOVER_BITPOS, True)
+            return res.registers[0], err
         else:
-            res,err = self.plc.write_coil(address.PUMP_1_RECOVER_ADDRESS, address.PUMP_1_RECOVER_BITPOS, True)
-            return res.registers[0],err
-
+            res, err = self.plc.write_coil(address.PUMP_1_RECOVER_ADDRESS, address.PUMP_1_RECOVER_BITPOS, True)
+            return res.registers[0], err
 
     # =========================================
     # Fill drain mode or normal mode
@@ -267,14 +251,14 @@ class ellemento_rack(object):
             addr = address.PUMP_1_FILL_DRAIN_MODE_ADDRESS
             bitpos = address.PUMP_1_FILL_DRAIN_MODE_BITPOS
 
-        res,err = self.plc.write_coil(addr, bitpos, bFillMode)
+        res, err = self.plc.write_coil(addr, bitpos, bFillMode)
         if err != 0:
             return False
         else:
             return True
 
     # Check whether pump is in Fill drain mode or Normal mode
-    def  bIsPumpInFillDrainMode(self, pumpNo):
+    def bIsPumpInFillDrainMode(self, pumpNo):
         if pumpNo == 1:
             addr = address.PUMP_0_FILL_DRAIN_MODE_ADDRESS
             bitpos = address.PUMP_0_FILL_DRAIN_MODE_BITPOS
@@ -282,8 +266,8 @@ class ellemento_rack(object):
             addr = address.PUMP_1_FILL_DRAIN_MODE_ADDRESS
             bitpos = address.PUMP_1_FILL_DRAIN_MODE_BITPOS
 
-        res,err = self.plc.read_coil(addr, bitpos)
-        if res.registers[0] == True:
+        res, err = self.plc.read_coil(addr, bitpos)
+        if res.registers[0]:
             return True
         else:
             return False
@@ -296,9 +280,9 @@ class ellemento_rack(object):
         else:
             addr = address.PUMP_1_FILLING_FLAG_ADDRESS
             bitpos = address.PUMP_1_FILLING_FLAG_BITPOS
-        
-        res,err = self.plc.read_coil(addr, bitpos)
-        if res.registers[0] == True:
+
+        res, err = self.plc.read_coil(addr, bitpos)
+        if res.registers[0]:
             return True
         else:
             return False
@@ -313,12 +297,11 @@ class ellemento_rack(object):
             addr1 = address.PUMP_1_FILL_VALUE_HZ_ADDRESS
             addr2 = address.PUMP_1_DRAIN_VALUE_HZ_ADDRESS
 
-
-        res,err = self.plc.write_register(addr1, wFillValue_hz)
+        res, err = self.plc.write_address_json(addr1, wFillValue_hz)
         if err != 0:
             return False
 
-        res,err = self.plc.write_register(addr2, wDrainValue_hz)
+        res, err = self.plc.write_address_json(addr2, wDrainValue_hz)
         if err != 0:
             return False
         else:
@@ -333,11 +316,11 @@ class ellemento_rack(object):
             addr1 = address.PUMP_1_FILL_DURATION_ADDRESS
             addr2 = address.PUMP_1_DRAIN_DURATION_ADDRESS
 
-        res,err = self.plc.write_register(addr1, wFillDuration_s)
+        res, err = self.plc.write_address_json(addr1, wFillDuration_s)
         if err != 0:
             return False
 
-        res,err = self.plc.write_register(addr2, wDrainDuration_s)
+        res, err = self.plc.write_address_json(addr2, wDrainDuration_s)
         if err != 0:
             return False
         else:
@@ -350,17 +333,15 @@ class ellemento_rack(object):
         else:
             addr = address.PUMP_1_FILL_DRAIN_TIMER_ADDRESS
 
-        res,err = self.plc.read_register(addr, 1)
-        return res.registers[0], err        
+        res, err = self.plc.read_address_json(addr, 1)
+        return res.registers[0], err
 
+        # Get current Fill Drain action (whether it is filling or draining)
 
-    # Get current Fill Drain action (whether it is filling or draining)
     def getCurrentFillDrainAction(self, pumpNo):
         if pumpNo == 1:
             addr = address.PUMP_0_FILL_DRAIN_ACTION_ADDRESS
         else:
             addr = address.PUMP_1_FILL_DRAIN_ACTION_ADDRESS
-
-        res,err = self.plc.read_register(addr, 1)
+        res, err = self.plc.read_address_json(addr, 1)
         return res.registers[0], err
-

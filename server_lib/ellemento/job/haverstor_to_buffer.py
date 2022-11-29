@@ -8,7 +8,7 @@ import os
 from ellemento.model.tray import Tray
 from ellemento.model.tray_phase_1_3 import TrayPhase13
 from ellemento.model.tray_phase_4 import TrayPhase4
-from ellemento.model.harvestor import Harvestor 
+from ellemento.model.harvester_control import harvester
 from ellemento.model.bufffer_factory import BufferFactory, BufferType
 from ellemento.model.buffer import Buffer 
 
@@ -43,7 +43,7 @@ class HarvestorToBuffer:
     def create_job():
         while not HarvestorToBuffer.terminate_job:
             print("#****************************************************#")     
-            harvestor = Harvestor.get_harvestor()
+            harvestor = harvestor.get_harvestor()
             buffer_5 = BufferFactory.get_buffer(BufferType.BUFFER_5)
 
             if not harvestor.ready_to_unload(): 

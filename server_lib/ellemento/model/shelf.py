@@ -10,222 +10,224 @@ from ellemento.bridge.bridge_factory import ModelPlcBridgeFactory
 
 logger = EllementoLogger.__call__().logger
 
+
 class ShelfStatus(Enum):
-    IDLE = 1        # clean and ready to use
-    LOADING = 2     # System is loading the shelf with plants
-    UNLOADING = 3   # System is unloading the shelf with plants 
-    FULL = 4       # empty but not clean 
-# Other status could be added later 
+    IDLE = 1  # clean and ready to use
+    LOADING = 2  # System is loading the shelf with plants
+    UNLOADING = 3  # System is unloading the shelf with plants
+    FULL = 4  # empty but not clean
+
+
+# Other status could be added later
 # light control 
 # water control 
 
 class Phase(Enum):
-    NOT_PLANNED     = 0 
-    PHASE1          = 1
-    PHASE2          = 2
-    PHASE3          = 3
-    PHASE4          = 4
-    PHASE5          = 5 
-    PHASE1_BACK_UP  = 6
-    PHASE2_BACK_UP  = 7
-    PHASE3_BACK_UP  = 8
-    PHASE4_BACK_UP  = 9
-    PHASE5_BACK_UP  = 10
-    SOWER_2_PHASE1  = 11
+    NOT_PLANNED = 0
+    PHASE1 = 1
+    PHASE2 = 2
+    PHASE3 = 3
+    PHASE4 = 4
+    PHASE5 = 5
+    PHASE1_BACK_UP = 6
+    PHASE2_BACK_UP = 7
+    PHASE3_BACK_UP = 8
+    PHASE4_BACK_UP = 9
+    PHASE5_BACK_UP = 10
+    SOWER_2_PHASE1 = 11
     PHASE3_2_TRANSPLANT = 12
     TRANSPLANT_2_PHASE4 = 13
     PHASE4_2_TRANSPLANT = 14
-    TRANSPLANT_2_PHASE5 = 15 
+    TRANSPLANT_2_PHASE5 = 15
+
 
 class Shelf:
-    all_shelves = {} 
-    
-    @staticmethod 
+    all_shelves = {}
+
+    @staticmethod
     def get_shelf(id):
         return Shelf.all_shelves[id]
 
     @staticmethod
-    def add_shelf(shelf): 
-        #print(shelf)
+    def add_shelf(shelf):
+        # print(shelf)
         Shelf.all_shelves[shelf.id] = shelf
-    
-    @staticmethod 
-    def print(): 
+
+    @staticmethod
+    def print():
         for shelf_x in Shelf.all_shelves:
             print(Shelf.all_shelves[shelf_x])
 
-    def __init__(self, id = -1, type_name='default', max_tray = 9):
+    def __init__(self, id=-1, type_name='default', max_tray=9):
         self._id = id
         self._status = ShelfStatus.IDLE
-        self._rack =  None
+        self._rack = None
         # each shelf must be 1 of the phase, [1, 2, 3, 4, 5]
-        self._phase = Phase.NOT_PLANNED 
+        self._phase = Phase.NOT_PLANNED
         self._max_tray = max_tray
         # Set tray status of the rack. if has, it shall be tray number 
         self._trays = []
         self._lights = {}
         self._valves = {}
-        self._enable = True 
+        self._enable = True
         self._transfer_status = TransferStatus.IDLE
         self._type_name = type_name
-        self.mod_bus = ModelPlcBridgeFactory.get_bridge(type = 'Shelf', id = self._id)
+        self.mod_bus = ModelPlcBridgeFactory.get_bridge(type='Shelf', id=self._id)
 
     def __repr__(self):
         return "<object: %s, id:%d type:%s>" % (self.__class__.__name__, self._id, self._type_name)
 
     def __str__(self):
         return "<object: %s, id:%d type:%s>" % (self.__class__.__name__, self._id, self._type_name)
-    
+
     @property
     def id(self):
         return self._id
-    
-    @property 
+
+    @property
     def transfer_status(self):
         return self._transfer_status
 
     @id.setter
     def id(self, value):
-        self.id = value 
+        self.id = value
 
     @property
-    def status(self): 
+    def status(self):
         return self._status
 
-    @property 
-    def type_name(self): 
+    @property
+    def type_name(self):
         return self._type_name
 
     @type_name.setter
-    def type_name(self, value): 
-        self._type_name = value 
+    def type_name(self, value):
+        self._type_name = value
 
-    @property 
+    @property
     def enable(self):
-        return self._enable 
+        return self._enable
 
     @enable.setter
-    def enable(self, value): 
-        self._enable = value   
+    def enable(self, value):
+        self._enable = value
 
-    @property 
-    def phase(self): 
-        return self._phase 
-    
+    @property
+    def phase(self):
+        return self._phase
+
     @phase.setter
-    def phase(self, value): 
-        self._phase - value; 
-    
-    def set_control_section_mode(self): 
-        ret, error = self.mod_bus.set_control_section_mode() 
-        return ret, error 
-    
-    def apply_update(self): 
-        ret, error = self.mod_bus.appy_update()
-        return ret, error 
+    def phase(self, value):
+        self._phase - value
 
-    @property 
+    def set_control_section_mode(self):
+        ret, error = self.mod_bus.set_control_section_mode()
+        return ret, error
+
+    def apply_update(self):
+        ret, error = self.mod_bus.appy_update()
+        return ret, error
+
+    @property
     def rack(self):
-        return self._rack 
+        return self._rack
 
     @rack.setter
     def rack(self, rack):
-        self._rack = rack 
+        self._rack = rack
 
-    def reset_tray_status(self): 
+    def reset_tray_status(self):
         for tray in self._trays:
-            #print("...........")
-            #print(tray)
-            tray.reset_tray_status()  
-    
-    def set_transfer_status(self, trans_status): 
-        for tray in self._trays: 
-            #print("xxxxxxxxxxx")
-            #print(tray)
-            tray.set_transfer_status(trans_status)
-        self._transfer_status = trans_status 
+            # print("...........")
+            # print(tray)
+            tray.reset_tray_status()
 
-    # Check if all trays is ready to transfer 
-    def ready_to_transfer(self): 
+    def set_transfer_status(self, trans_status):
+        for tray in self._trays:
+            # print("xxxxxxxxxxx")
+            # print(tray)
+            tray.set_transfer_status(trans_status)
+        self._transfer_status = trans_status
+
+        # Check if all trays is ready to transfer
+
+    def ready_to_transfer(self):
         if len(self._trays) != self._max_tray:
-            return False 
-        bRet = True 
-        for tray in self._trays: 
-            #logger.warning("tray %s", tray.transfer_status)
-            if (tray.transfer_status != TransferStatus.READY_TO_TRANSFER): 
+            return False
+        bRet = True
+        for tray in self._trays:
+            # logger.warning("tray %s", tray.transfer_status)
+            if tray.transfer_status != TransferStatus.READY_TO_TRANSFER:
                 # print(tray)
                 # print("*********************")
-                bRet = False 
+                bRet = False
                 break
-        
-        if bRet: 
+
+        if bRet:
             self._transfer_status = TransferStatus.READY_TO_TRANSFER
-        return bRet 
+        return bRet
 
-
-    def add_tray(self, tray): 
-        #print(tray)
-        if tray not in self._trays: 
+    def add_tray(self, tray):
+        # print(tray)
+        if tray not in self._trays:
             self._trays.append(tray)
-
-        tray.location = self; 
-        if len(self._trays) == 1: 
+        tray.location = self
+        if len(self._trays) == 1:
             self._status = ShelfStatus.LOADING
-        
         if len(self._trays) == self._max_tray:
             self._status = ShelfStatus.FULL
 
-    def remove_tray(self): 
+    def remove_tray(self):
         # no tray is inside the shelf 
-        if self._status == ShelfStatus.IDLE: 
+        if self._status == ShelfStatus.IDLE:
             return None
-        if self._status == ShelfStatus.LOADING: 
+        if self._status == ShelfStatus.LOADING:
             logger.warning("Not supposed to unload during loading process")
-            return None 
-        tray = self._trays.pop() 
-        tray.location = None; 
+            return None
+        tray = self._trays.pop()
+        tray.location = None
         # fully unloaded
         if len(self._trays) == 0:
             self._status = ShelfStatus.IDLE
-        else: 
+        else:
             self._status = ShelfStatus.UNLOADING
-        return tray 
-        
-    def reset_status_time(self): 
-        for obj_tray in self._trays: 
-            #print("-------------------" , tray.id)
+        return tray
+
+    def reset_status_time(self):
+        for obj_tray in self._trays:
+            # print("-------------------" , tray.id)
             obj_tray.reset_status_time()
 
     def add_light(self, light_id):
-        if light_id not in self._lights: 
+        if light_id not in self._lights:
             self._lights[light_id] = LightControl.get_light(light_id)
 
-    def remove_light(self, light_id): 
-        if light_id in self._lights: 
+    def remove_light(self, light_id):
+        if light_id in self._lights:
             del self._lights[light_id]
-    
-    def add_valve(self, valve_id): 
-        if valve_id not in self._valves: 
+
+    def add_valve(self, valve_id):
+        if valve_id not in self._valves:
             self._valves[valve_id] = WaterControl.get_valve(valve_id)
 
-    def remove_valve(self, valve_id): 
-        if valve_id in self._valves: 
-            del self._valves [valve_id]
+    def remove_valve(self, valve_id):
+        if valve_id in self._valves:
+            del self._valves[valve_id]
 
-    def transfer_in(self, tray_id): 
+    def transfer_in(self, tray_id):
         pass
 
-    def transfer_out(self, tray_out): 
-        pass 
+    def transfer_out(self, tray_out):
+        pass
 
-    def water_on(self): 
-        pass 
+    def water_on(self):
+        pass
 
-    def water_off(self): 
-        pass 
+    def water_off(self):
+        pass
 
-    def light_on(self): 
-        pass 
+    def light_on(self):
+        pass
 
-    def light_off(self): 
-        pass 
+    def light_off(self):
+        pass

@@ -17,12 +17,12 @@ class ellemento_rack(object):
     def __init__ (self, ip):
         super().__init__()
         self.plc.setIP(ip)
-        print ("Ellemento rack client connected")
+        print ("Ellemento rack modbus_client connected")
 
 
     def __del__(self):
-        print ("Ellemento rack client disconnected")
-        #self.client.close()
+        print ("Ellemento rack modbus_client disconnected")
+        #self.modbus_client.close()
 
     '''
     def test(self):

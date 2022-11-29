@@ -1,17 +1,18 @@
-from ellemento.model.farm_factory import FarmFactory
+import time
+from ellemento.bridge.bridge_factory import ModelPlcBridgeFactory
 from ellemento.model.tray import Tray, TrayStatus
 from ellemento.model.tray_factory import TrayFactory
+from ellemento.model.farm_factory import FarmFactory
 from ellemento.model.shelf_factory import ShelfFactory
 from ellemento.model.light_factory import LightFactory
+from ellemento.model.sower_factory import sowerFactory
+from ellemento.model.harvester_factory import harvesterFactory
+from ellemento.model.t34_factory import t34Factory
+from ellemento.model.t45_factory import t45Factory
 from ellemento.model.water_control_factory import WaterControlFactory
 from ellemento.model.pump_control_factory import PumpControlFactory
 from ellemento.model.rack_factory import RackFactory
-# from ellemento.model.ventilation_control_factory import VentilationControlFactory
-# from ellemento.model.farm_factory import FarmFactory
 from lib.logging.logger_initialiser import EllementoLogger
-from ellemento.bridge.plc_bridge import ModelPlcBridge
-
-# from ellemento.model.buffer import Buffer
 
 phase_1_shelves = 4
 phase_2_shelves = 10
@@ -23,9 +24,9 @@ total_racks = 16
 total_fans = 5
 total_farms = 1
 
-import time
 
 logger = EllementoLogger.__call__().logger
+
 
 # def init_farms():
 #     logger.info("Initialize Farms")
@@ -136,14 +137,13 @@ logger = EllementoLogger.__call__().logger
 #     buffer_obj.load(Tray.get_tray(8))
 #     buffer_obj.load(Tray.get_tray(9))
 #     buffer_obj.load(Tray.get_tray(10))
-
 #     buffer_obj.print_trays()
 
 def test_tray_duration():
-    #init_buffer()
-    #init_model()
-    for i in range (1, 20):
-        tray_new = TrayFactory.create_tray(id = i, type_name = "phase1-3")
+    # init_buffer()
+    # init_model()
+    for i in range(1, 20):
+        tray_new = TrayFactory.create_tray(id=i, type_name="phase1-3")
         tray_new.status = TrayStatus.PHASE1
     time.sleep(5)
     ret_list = TrayFactory.check_duration(Tray.all_trays, unit='second')
@@ -151,50 +151,75 @@ def test_tray_duration():
         print(obj.transfer_status)
     pass
 
-def test_light_bridge(): 
-    light = LightFactory.create_light(id = 1)
-    res, error = light.off()
-    res, error = light.status()
-    res, error = light.set_intensity(90)
-    res, error = light.intensity()
-    print(res)
-    time.sleep(5)
-    res, error = light.on()
-    res, error = light.status()
+
+def test_light_bridge():
+    ModelPlcBridgeFactory.build_bridge()
+    light = LightFactory.create_light(id=1)
+    res, error = light.set_intensity(56)
+
+
+def test_sower_bridge():
+    sower = sowerFactory.create_sower(id=1)
+    sower.unload_tray()
+
+
+def test_harvester_bridge():
+    harvester = harvesterFactory.create_harvestor(id=1)
+    harvester.load_tray()
+
+
+def test_t34_bridge():
+    t34 = t34Factory.create_t34(id=1)
+    t34.unload_tray()
+    t34.load_tray()
+
+
+def test_t45_bridge():
+    t45 = t45Factory.create_t45(id=1)
+    t45.unload_tray()
+    t45.load_tray()
+
 
 def test_water_bridge():
-    valve = WaterControlFactory.create_valve(id = 1); 
+    valve = WaterControlFactory.create_valve(id=1)
     valve.on()
     valve.adjust(80)
     valve.get_percent()
     valve.off()
-    # bridge = ModelPlcBridge()
-    # bridge.print_model()
 
-def test_pump_bridge(): 
-    pump = PumpControlFactory.create_valve(id = 1)
-    pump.on() 
+
+def test_pump_bridge():
+    pump = PumpControlFactory.create_valve(id=1)
+    pump.on()
 
 
 def test_shelf_bridge():
-    shelf = ShelfFactory.create_shelf(id = 1)
+    shelf = ShelfFactory.create_shelf(id=1)
     shelf.on()
 
-def test_rack_bridge(): 
-    valve = WaterControlFactory.create_valve(id = 1); 
-    pump = PumpControlFactory.create_valve(id = 1)
-    shelf = ShelfFactory.create_shelf(id = 1)
-    rack = RackFactory.create_rack(id = 1)
+
+def test_rack_bridge():
+    valve = WaterControlFactory.create_valve(id=1)
+    pump = PumpControlFactory.create_valve(id=1)
+    shelf = ShelfFactory.create_shelf(id=1)
+    rack = RackFactory.create_rack(id=1)
+
+
+def build_bridge():
+    ModelPlcBridgeFactory.build_bridge()
+
 
 if __name__ == '__main__':
-
     #FarmFactory.create_farm()
-    test_light_bridge()
-    test_water_bridge()
-    test_pump_bridge()
-    pass
-    #test_tray_duration()
-
-
-
-
+    # test_light_bridge()
+    #build_bridge()
+    while True:
+        TrayFactory.create_phase5_trays()
+        #test_sower_bridge()
+        #test_harvester_bridge()
+       # test_t45_bridge()
+# test_water_bridge()
+# test_pump_bridge()
+# pass
+# test_tray_duration()
+# TrayFactory.create_tray("phase1", id=1)

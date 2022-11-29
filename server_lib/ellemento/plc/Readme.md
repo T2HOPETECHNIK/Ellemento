@@ -10,3 +10,5 @@ Generic functions implemented:
 - write_coil
 - read_coil
 
+
+PLC_address is to communicate with Delta and beckhoff PLC

@@ -10,6 +10,7 @@ from ellemento.model.tray_factory import TrayFactory
 # from ellemento.model.farm_factory import FarmFactory
 from lib.logging.logger_initialiser import EllementoLogger
 from ellemento.bridge.bridge_factory import ModelPlcBridgeFactory
+
 # from ellemento.model.buffer import Buffer
 
 phase_1_shelves = 4
@@ -25,6 +26,7 @@ total_farms = 1
 import time
 
 logger = EllementoLogger.__call__().logger
+
 
 # def init_farms():
 #     logger.info("Initialize Farms")
@@ -139,10 +141,10 @@ logger = EllementoLogger.__call__().logger
 #     buffer_obj.print_trays()
 
 def test_tray_duration():
-    #init_buffer()
-    #init_model()
-    for i in range (1, 20):
-        tray_new = TrayFactory.create_tray(id = i, type_name = "phase1-3")
+    # init_buffer()
+    # init_model()
+    for i in range(1, 20):
+        tray_new = TrayFactory.create_tray(id=i, type_name="phase1-3")
         tray_new.status = TrayStatus.PHASE1
     time.sleep(5)
     ret_list = TrayFactory.check_duration(Tray.all_trays, unit='second')
@@ -150,18 +152,15 @@ def test_tray_duration():
         print(obj.transfer_status)
     pass
 
-def test_bridge(): 
+
+def test_bridge():
     ModelPlcBridgeFactory.build_bridge()
-    brg = ModelPlcBridgeFactory.get_bridge(type = "Light", id = 1)
+    brg = ModelPlcBridgeFactory.get_bridge(type="Light", id=1)
     brg.on_off_status()
 
-if __name__ == '__main__':
 
-    #FarmFactory.create_farm()
+if __name__ == '__main__':
+    # FarmFactory.create_farm()
     test_bridge()
     pass
-    #test_tray_duration()
-
-
-
-
+    # test_tray_duration()

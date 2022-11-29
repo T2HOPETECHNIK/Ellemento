@@ -42,14 +42,14 @@ class plc(object):
         return res, error
 
 
-    def read_register(self, addr, size):
+    def read_register(self, addr):
         error = 0
         res = 0
         try:
             if config.DEBUG_MODE == True:
                 res = 0
             else:
-                res = self.client.read_holding_registers(addr, size, unit=1)
+                res = self.client.read_holding_registers(addr,unit=1)
         except:
             error = 1
         return res, error
@@ -113,7 +113,7 @@ class plc(object):
     def write_system_coil(self, addr, val):
         error = 0
         try:
-            res = self.client.write_coil(addr,val)
+            res = self.modbus_client.write_coil(addr,val)
         except:
             print("write_coil error")
             error = 1
@@ -123,7 +123,7 @@ class plc(object):
     def read_system_coil(self, addr):
         error = 0
         try:
-            res = self.client.read_coils(addr, 1)
+            res = self.modbus_client.read_coils(addr, 1)
         except:
             print("read_coil error")
             error = 1

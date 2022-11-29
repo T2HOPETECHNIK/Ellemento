@@ -1,4 +1,4 @@
-from ellemento.model import transplantor
+from ellemento.model import transplanter
 from multiprocessing.context import BufferTooShort
 import threading
 import time
@@ -9,7 +9,7 @@ import os
 from ellemento.model.tray import Tray
 from ellemento.model.tray_phase_1_3 import TrayPhase13
 from ellemento.model.tray_phase_4 import TrayPhase4
-from ellemento.model.transplantor import Transplantor, TransplantorType
+from ellemento.model.transplanter import Transplanter, TransplantorType
 from ellemento.model.bufffer_factory import BufferFactory, BufferType
 from ellemento.model.transplantor_factory import TransplantorFactory
 from lib.logging.logger_initialiser import EllementoLogger
@@ -31,7 +31,7 @@ class BufferToTransplantorJob:
                     time.sleep(2)
                     continue  
 
-                transplantor_3_4 = Transplantor(TransplantorFactory.get_transplator_3_4()) 
+                transplantor_3_4 = Transplanter(TransplantorFactory.get_transplator_3_4())
                 if transplantor_3_4.ready_to_move_in_src_tray(): 
                     BufferToTransplantorJob.create_job(id = 1, src_buffer=buffer_3_in, dst_tranplantor=transplantor_3_4)
                     logger.info("transplantor_3_4 is not ready to move in source tray")
@@ -49,7 +49,7 @@ class BufferToTransplantorJob:
                     logger.info("Buffer 3-in has not any trays")
                     time.sleep(2)
                     continue  
-                transplantor_3_4 = Transplantor(TransplantorFactory.get_transplator_3_4()) 
+                transplantor_3_4 = Transplanter(TransplantorFactory.get_transplator_3_4())
                 if transplantor_3_4.ready_to_move_in_dst_tray(): 
                     BufferToTransplantorJob.create_job(id = 1, src_buffer=buffer_4, dst_tranplantor=transplantor_3_4)
                     logger.info("transplantor_3_4 is not ready to move in source tray")
@@ -69,7 +69,7 @@ class BufferToTransplantorJob:
                     time.sleep(2)
                     continue  
 
-                transplantor_3_4 = Transplantor(TransplantorFactory.get_transplator_3_4()) 
+                transplantor_3_4 = Transplanter(TransplantorFactory.get_transplator_3_4())
                 if transplantor_3_4.ready_to_move_in_src_tray(): 
                     BufferToTransplantorJob.create_job(id = 1, src_buffer=buffer_3_in, dst_tranplantor=transplantor_3_4)
                     logger.info("transplantor_3_4 is not ready to move in source tray")
@@ -91,7 +91,7 @@ class BufferToTransplantorJob:
                     time.sleep(2)
                     continue  
                 
-                transplantor_4_5 = Transplantor(TransplantorFactory.get_transplator_4_5()) 
+                transplantor_4_5 = Transplanter(TransplantorFactory.get_transplator_4_5())
                 if transplantor_4_5.ready_to_move_in_dst_tray(): 
                     BufferToTransplantorJob.create_job(id = 1, src_buffer=buffer_5, dst_tranplantor=transplantor_4_5)
                     print("3. transplantor_4_5 is not ready to move in destination tray")
@@ -112,7 +112,7 @@ class BufferToTransplantorJob:
                     time.sleep(2)
                     continue  
 
-                transplantor_4_5 = Transplantor(TransplantorFactory.get_transplator_4_5()) 
+                transplantor_4_5 = Transplanter(TransplantorFactory.get_transplator_4_5())
                 if transplantor_4_5.ready_to_move_in_dst_tray(): 
                     BufferToTransplantorJob.create_job(id = 1, src_buffer=buffer_4_in, dst_tranplantor=transplantor_4_5)
                     logger.info("transplantor_3_4 is not ready to move in source tray")

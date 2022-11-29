@@ -1,11 +1,12 @@
 {
-    "Description": "For modbus ip and address configurations", 
-    "modbus": 
+    "Description": "For modbus ip / TwinCAT and address configurations",
+    "PlcAddress":
     [
         {
             "name": "Ellemento rack 1", 
-            "ip": "192.168.1.5", 
-            "id": 1, 
+            "ip": "192.168.11.5",
+            "id": 1,
+            "ads": "",
             "address": 
             {
                 "modeAddress": 2500,
@@ -110,8 +111,9 @@
         },
         {
             "name": "Ellemento rack 2", 
-            "ip": "192.168.1.6", 
+            "ip": "192.168.11.5",
             "id": 2,
+            "ads": "",
             "address": 
             {
                 "modeAddress": 2500,
@@ -155,7 +157,79 @@
                 "PUMP_1_RECOVER_ADDRESS":  11083,             
                 "PUMP_1_RECOVER_BITPOS":  0,                 
                 "PUMP_1_SET_RPM_ADDRESS":  11084,             
-                "PUMP_1_CURRENT_RPM_ADDRESS":  11085        
+                "PUMP_1_CURRENT_RPM_ADDRESS":  11085
+            }
+        },
+        {
+            "name": "sower",
+            "ip": "192.168.11.10",
+            "id": 20,
+            "ads": "5.85.153.90.1.1",
+            "address":
+            {
+                "part_ready_address"   : ["ASRS_S_COM.bPartReadyToPick_S1","bool"],
+                "lock_ASRS_address"    : ["ASRS_S_COM.bLockASRS_S1","bool"],
+                "ASRS_arrived_address" : ["ASRS_S_COM.bASRSArrived_S1","bool"],
+                "part_picked_address"  : ["ASRS_S_COM.bPartPicked_S1","bool"],
+                "part_presence_address": ["ASRS_S_COM.bASRSPartPresence_S1","bool"],
+                "ASRS_locked_address"  : ["ASRS_S_COM.bASRSLocked_S1","bool"]
+            }
+        },
+        {
+            "name": "t34",
+            "ip": "192.168.11.11",
+            "id": 30,
+            "ads": "5.85.153.36.1.1",
+            "address":
+            {
+                "part_ready_S3_address"   : ["ASRS_T34_COM.bPartReadyToPlace_S3","bool"],
+                "part_ready_S4_address"   : ["ASRS_T34_COM.bPartReadyToPick_S4","bool"],
+                "lock_ASRS_S3_address"    : ["ASRS_T34_COM.bLockASRS_S3","bool"],
+                "lock_ASRS_S4_address"    : ["ASRS_T34_COM.bLockASRS_S4","bool"],
+                "ASRS_arrived_S3_address" : ["ASRS_T34_COM.bASRSArrived_S3","bool"],
+                "ASRS_arrived_S4_address" : ["ASRS_T34_COM.bASRSArrived_S4","bool"],
+                "part_placed_S3_address"  : ["ASRS_T34_COM.bPartPlaced_S3","bool"],
+                "part_picked_S4_address"  : ["ASRS_T34_COM.bPartPicked_S4","bool"],
+                "part_presence_S3_address": ["ASRS_T34_COM.bASRSPartPresence_S3","bool"],
+                "part_presence_S4_address": ["ASRS_T34_COM.bASRSPartPresence_S4","bool"],
+                "ASRS_locked_S3_address"  : ["ASRS_T34_COM.bASRSLocked_S3","bool"],
+                "ASRS_locked_S4_address"  : ["ASRS_T34_COM.bASRSLocked_S4","bool"]
+            }
+        },
+        {
+            "name": "t45",
+            "ip": "192.168.11.12",
+            "id": 40,
+            "ads": "5.81.203.136.1.1",
+            "address":
+            {
+                "part_ready_S4_address"   : ["ASRS_T45_COM.bPartReadyToPlace_S4","bool"],
+                "part_ready_S5_address"   : ["ASRS_T45_COM.bPartReadyToPick_S5","bool"],
+                "lock_ASRS_S4_address"    : ["ASRS_T45_COM.bLockASRS_S4","bool"],
+                "lock_ASRS_S5_address"    : ["ASRS_T45_COM.bLockASRS_S5","bool"],
+                "ASRS_arrived_S4_address" : ["ASRS_T45_COM.bASRSArrived_S4","bool"],
+                "ASRS_arrived_S5_address" : ["ASRS_T45_COM.bASRSArrived_S5","bool"],
+                "part_placed_S4_address"  : ["ASRS_T45_COM.bPartPlaced_S4","bool"],
+                "part_picked_S5_address"  : ["ASRS_T45_COM.bPartPicked_S5","bool"],
+                "part_presence_S4_address": ["ASRS_T45_COM.bASRSPartPresence_S4","bool"],
+                "part_presence_S5_address": ["ASRS_T45_COM.bASRSPartPresence_S5","bool"],
+                "ASRS_locked_S4_address"  : ["ASRS_T45_COM.bASRSLocked_S4","bool"],
+                "ASRS_locked_S5_address"  : ["ASRS_T45_COM.bASRSLocked_S5","bool"]
+            }
+        },
+        {
+            "name": "harvester",
+            "ip": "192.168.11.13",
+            "id": 50,
+            "ads": "5.80.198.90.1.1",
+            "address":
+            {
+                "part_ready_address"   : ["ASRS_H_COM.bPartReadyToPlace_S5","bool"],
+                "lock_ASRS_address"    : ["ASRS_H_COM.bLockASRS_S5","bool"],
+                "ASRS_arrived_address" : ["ASRS_H_COM.bASRSArrived_S5","bool"],
+                "part_placed_address"  : ["ASRS_H_COM.bPartPlaced_S5","bool"],
+                "part_presence_address": ["ASRS_H_COM.bASRSPartPresence_S5","bool"],
+                "ASRS_locked_address"  : ["ASRS_H_COM.bASRSLocked_S5","bool"]
             }
         }
     ]
