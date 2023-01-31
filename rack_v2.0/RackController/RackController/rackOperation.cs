@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,7 +9,7 @@ namespace RackController
 {
     internal class rackOperation
     {
-        modbusTCP mb;
+        rackIO mb;
         farmType farm;
         uint rackID;
 
@@ -17,21 +18,39 @@ namespace RackController
             rackID = rID;
         }
 
-
-        public void test()
+        ~rackOperation()
         {
-            Console.WriteLine(">> Test");
+
         }
-
-        public bool init(string ip, ref farmType farmIn)
+        
+        
+        public bool init(string ip, ref farmType farmIn, ref rackDB rdb)
         {
-            Console.WriteLine("Init " + ip);
+            Console.Write("Init " + ip);
 
             farm = farmIn;
 
-            mb = new modbusTCP(ip);
+            mb = new rackIO(ip);
 
-            return (true);
+            farm.rackArray[rackID].bAvailable = mb.isAvailable();
+
+            if (farm.rackArray[rackID].bAvailable)
+            {
+                Console.WriteLine(" OK");
+                rdb.getRackInfo(rackID, ref farm.rackArray[rackID]);  // rackID in table starts at 1, while arrays starts at 0
+                return true;
+            }
+            else
+            {
+                Console.WriteLine(" failed");
+                return (false);
+            }
+        }
+
+
+        public void test()
+        {
+            mb.test();
         }
 
 
@@ -39,11 +58,26 @@ namespace RackController
         {
             uint numShelf;
             bool bresult;
-
+            uint numPump;
+            
             numShelf = constants.NUM_SHELF_PER_RACK[rackID];
 
             for (uint sid = 0; sid < numShelf; sid++) {
-                bresult = rdb.readShelfData(rackID, sid, ref currentRack.shelfArray[sid]);
+                // Shelf shelf data from DB
+                bresult = rdb.readShelfData(rackID, sid, ref currentRack.shelfCommandArray[sid]);
+            }
+            // update via modbus
+            mb.setShelfData(rackID, numShelf, ref currentRack.shelfCommandArray);
+
+            // Pumps
+            numPump = currentRack.numPump;
+
+            for (uint sid = 0; sid < numShelf; sid++)
+            {
+                // read modbus data
+                mb.getShelfFeedback(sid, ref currentRack.shelfFeedbackArray[sid]);
+                // To do: Update shelf data to DB
+                rdb.setShelfData(rackID, sid, ref currentRack.shelfFeedbackArray[sid]);
             }
 
             // read DB and process data
@@ -51,4 +85,5 @@ namespace RackController
         }
 
     }
+
 }

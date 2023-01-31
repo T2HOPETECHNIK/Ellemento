@@ -42,7 +42,7 @@
     <Compile Include="dataStruct.cs" />
     <Compile Include="constants.cs" />
     <Compile Include="shelf.cs" />
-    <Compile Include="modbusTCP.cs" />
+    <Compile Include="rackIO.cs" />
     <Compile Include="rackDB.cs" />
     <Compile Include="main.cs" />
   </ItemGroup>
