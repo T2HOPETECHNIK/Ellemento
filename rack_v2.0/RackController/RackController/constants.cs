@@ -28,7 +28,6 @@ namespace RackController
 
         public static readonly ushort NUM_RACKS = 14;
 
-
         public static readonly uint[] NUM_SHELF_PER_RACK = { 14, 14, 14, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12 };
 
         // Modbus addresses
@@ -39,9 +38,14 @@ namespace RackController
         // Mode:  1 = auto, 2 = semi, 3 = manual
 
         public static readonly ushort[] SHELF_PV_ON_ADDRESS = { 4465, 4465, 4465, 4465, 4465, 4465, 4465, 4465, 4465, 4465, 4465, 4465, 4465, 4465 };   // per bit
+        public static readonly ushort[] SHELF_PV_ON_BITVAL = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192 };
+
         public static readonly ushort[] SHELF_PV_POSITION_ADDRESS = { 4000,4001,4002,4003,4004,4005,4006,4007,4008,4009,4010,4011,4012,4013 };
         public static readonly ushort[] SHELF_PV_LUT_ADDRESS = { 5120, 5134, 5148, 5162, 5176, 5190, 5204, 5218, 5232, 5246, 5260, 5274, 5288, 5302 };
+
         public static readonly ushort[] SHELF_LIGHT_ON_ADDRESS = { 4080, 4080, 4080, 4080, 4080, 4080, 4080, 4080, 4080, 4080, 4080, 4080, 4080, 4080 };    // per bit
+        public static readonly ushort[] SHELF_LIGHT_ON_BITVAL = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192 };
+
         public static readonly ushort[] SHELF_LIGHT_INTENSITY_ADDRESS = { 4085,4086,4087,4088,4089,4090,4091,4092,4093,4094,4095,4096,4097,4098 };
 
         public static readonly ushort[] SHELF_WATER_SCHED_ON_ADDRESS = { 4620, 4620, 4620, 4620, 4620, 4620, 4620, 4620, 4620, 4620, 4620, 4620, 4620, 4620 };  // per bit
@@ -57,7 +61,6 @@ namespace RackController
         public static readonly ushort[] SHELF_LIGHT_END_HOUR_ADDRESS = { 4590, 4591, 4592, 4593, 4594, 4595, 4596, 4597, 4598, 4599, 4600, 4601, 4602, 4603 };
         public static readonly ushort[] SHELF_LIGHT_END_MINUTE_ADDRESS = { 4605, 4606, 4607, 4608, 4609, 4610, 4611, 4612, 4613, 4614, 4615, 4616, 4617, 4618 };
         public static readonly ushort[] SHELF_LIGHT_SCHED_INTENSITY_ADDRESS = { 4680, 4681, 4682, 4683, 4684, 4685, 4686, 4687, 4688, 4689, 4690, 4691, 4692, 4693 };
-        
 
         public static readonly ushort[] PUMP_FLOWRATE_SET_ADDRESS = { 4110, 4111 };
         public static readonly ushort[] PUMP_FLOWRATE_PER_SHELF_SET_ADDRESS = { 4364, 4365 };

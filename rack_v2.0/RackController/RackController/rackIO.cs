@@ -24,6 +24,8 @@ namespace RackController
         string sIPaddress;
         int iTcpPort;
 
+        bool isConnected;
+
         public rackIO(string ipAddr)
         {
             tcpClient = new TcpClient();
@@ -112,6 +114,7 @@ namespace RackController
                 return false;
             }
 
+            isConnected = true;
 
             return true;
 
@@ -141,6 +144,8 @@ namespace RackController
                     bAvailable = true;
 
                 master = ModbusIpMaster.CreateIp(tcpClient);
+
+                isConnected = true;
             }
 
         }
@@ -148,6 +153,9 @@ namespace RackController
 
         void disconnect()
         {
+
+            isConnected = false;
+
             tcpClient.Close();
             tcpClient.Dispose();
             tcpClient = null;
@@ -173,7 +181,10 @@ namespace RackController
             ushort addr;
 
             addr = constants.SHELF_LIGHT_ON_ADDRESS[shelf];
-            master.WriteSingleRegister(addr, 1);
+            if (bOn)
+                master.WriteSingleRegister(addr, constants.SHELF_LIGHT_ON_BITVAL[shelf]);
+            else
+                master.WriteSingleRegister(addr, 0);
 
         }
 
@@ -183,7 +194,7 @@ namespace RackController
             ushort addr;
 
             addr = constants.SHELF_LIGHT_INTENSITY_ADDRESS[shelf];
-            master.WriteSingleRegister(addr, 1);
+            master.WriteSingleRegister(addr, intensity);
 
         }
 
@@ -215,19 +226,6 @@ namespace RackController
         {
             ushort addr;
                         
-            if (percentage > 0)
-            {
-                // on
-                addr = constants.SHELF_PV_ON_ADDRESS[shelf];
-                master.WriteSingleRegister(addr, 1);
-            }
-            else
-            {
-                // off
-                addr = constants.SHELF_PV_ON_ADDRESS[shelf];
-                master.WriteSingleRegister(addr, 0);
-            }
-
             addr = constants.SHELF_PV_POSITION_ADDRESS[shelf];
             master.WriteSingleRegister(addr, 1);
 
@@ -252,7 +250,7 @@ namespace RackController
         {
             ushort addr;
 
-            connect();
+            //connect();
 
             addr = constants.SHELF_LIGHT_SCHED_ON_ADDRESS[shelf];
             if (bOn)
@@ -279,7 +277,7 @@ namespace RackController
 
             }
 
-            disconnect();
+            //disconnect();
 
         }
 
@@ -288,7 +286,7 @@ namespace RackController
         {
             ushort addr;
 
-            connect();
+            //connect();
 
             addr = constants.SHELF_WATER_SCHED_ON_ADDRESS[shelf];
             if (bOn)
@@ -315,14 +313,26 @@ namespace RackController
 
             }
 
-            disconnect();
+           // disconnect();
 
         }
 
 
         ushort bitVal(ushort bitidx)
         {
-            return (ushort)(2 ^ bitidx);
+            int tmp, i;
+
+            if (bitidx == 0)
+                return (1);
+            else
+            {
+                tmp = 1;
+                for (i = 0; i < bitidx; i++)
+                    tmp = tmp * 2;
+
+                return ((ushort)tmp);
+            }
+            
         }
 
         //=============================================

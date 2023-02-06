@@ -1,0 +1,13 @@
+C:\Project\Ellemento\Part 2\dev\RackControllerCS\RackController\bin\Debug\RackController.exe.config
+C:\Project\Ellemento\Part 2\dev\RackControllerCS\RackController\bin\Debug\RackController.exe
+C:\Project\Ellemento\Part 2\dev\RackControllerCS\RackController\bin\Debug\RackController.pdb
+C:\Project\Ellemento\Part 2\dev\RackControllerCS\RackController\bin\Debug\NModbus4.dll
+C:\Project\Ellemento\Part 2\dev\RackControllerCS\RackController\bin\Debug\System.Data.SqlClient.dll
+C:\Project\Ellemento\Part 2\dev\RackControllerCS\RackController\bin\Debug\NModbus4.xml
+C:\Project\Ellemento\Part 2\dev\RackControllerCS\RackController\bin\Debug\System.Data.SqlClient.xml
+C:\Project\Ellemento\Part 2\dev\RackControllerCS\RackController\obj\Debug\RackController.csproj.AssemblyReference.cache
+C:\Project\Ellemento\Part 2\dev\RackControllerCS\RackController\obj\Debug\RackController.csproj.SuggestedBindingRedirects.cache
+C:\Project\Ellemento\Part 2\dev\RackControllerCS\RackController\obj\Debug\RackController.csproj.CoreCompileInputs.cache
+C:\Project\Ellemento\Part 2\dev\RackControllerCS\RackController\obj\Debug\RackController.csproj.CopyComplete
+C:\Project\Ellemento\Part 2\dev\RackControllerCS\RackController\obj\Debug\RackController.exe
+C:\Project\Ellemento\Part 2\dev\RackControllerCS\RackController\obj\Debug\RackController.pdb
