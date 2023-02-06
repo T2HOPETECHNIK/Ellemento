@@ -175,6 +175,8 @@ namespace RackController
                 index = (ushort) dataReader.GetInt32(0);
                 changelist[index - 1] = true;       // rackID starts with 1 while our index starts with zero
             }
+
+            dataReader.Close();
         }
 
 
@@ -201,6 +203,8 @@ namespace RackController
             while (dataReader.Read())
             {
                 sdata.bAvailable = true;
+
+                sdata.C_mode = (ushort)dataReader.GetInt32(4);
 
                 //output = output + "," + dataReader.GetValue(0);
                 sdata.C_lightOn = (bool)dataReader.GetBoolean(5);             // lightOn

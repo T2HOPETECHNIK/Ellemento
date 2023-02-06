@@ -37,6 +37,8 @@ public struct shelfCommandType
     public ushort C_waterScheduleEndMM;
     public ushort C_waterScheduleValvePercentage;
 
+    public ushort C_mode;
+
     /*
     public shelfCommandType()
     {

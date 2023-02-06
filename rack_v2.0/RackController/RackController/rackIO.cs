@@ -167,8 +167,6 @@ namespace RackController
         */
 
 
-
-
         // shelf start at 1, not 0
         public void setLightOn(uint shelf, bool bOn)
         {
@@ -247,6 +245,7 @@ namespace RackController
         {
             return (false);
         }
+
 
 
         public void setLightSchedule(uint shelf, bool bOn, uint startHr, uint startMin, uint endHr, uint endMin, uint intensity)
@@ -342,10 +341,33 @@ namespace RackController
                 if (shelfData[sid].bAvailable)
                 {
                     setValvePercentage(sid, shelfData[sid].C_valvePercentage);
+
                     setLightIntensity(sid, shelfData[sid].C_lightIntensity);
 
-                }
-            }
+                    // Scheduler
+                    setWaterSchedule(   
+                                        sid,
+                                        shelfData[sid].C_waterScheduleOn,
+                                        shelfData[sid].C_waterScheduleStartHH,
+                                        shelfData[sid].C_waterScheduleStartMM,
+                                        shelfData[sid].C_waterScheduleEndHH,
+                                        shelfData[sid].C_waterScheduleEndMM,
+                                        shelfData[sid].C_waterScheduleValvePercentage
+                                    );
+
+                    setLightSchedule(   
+                                        sid,
+                                        shelfData[sid].C_lightSchedulerOn,
+                                        shelfData[sid].C_lightScheduleStartHH,
+                                        shelfData[sid].C_lightScheduleStartMM,
+                                        shelfData[sid].C_lightScheduleEndHH,
+                                        shelfData[sid].C_lightScheduleEndMM,
+                                        shelfData[sid].C_lightScheduleIntensity
+                                    );
+
+                }   //if
+
+            }   // for
 
             uswater = 0;
             uslight = 0;
@@ -358,8 +380,12 @@ namespace RackController
 
                     if (shelfData[sid].C_lightOn)
                         uslight = (ushort)(uslight | (ushort)bitVal(sid));
-                }
-            }
+
+
+
+                }   // if
+
+            }   // for
 
             // Update groups
 
@@ -368,8 +394,6 @@ namespace RackController
 
             addr = constants.SHELF_LIGHT_ON_ADDRESS[0];
             master.WriteSingleRegister(addr, uslight);
-
-            // To do: Add more info to update in PLC
 
             disconnect();
 
