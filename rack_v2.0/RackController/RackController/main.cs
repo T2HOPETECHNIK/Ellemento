@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Threading;
 
 /*
  * Packages required:
@@ -86,8 +86,30 @@ namespace RackController
                 rdb.getRackUpdateList(ref isChanged);
 
 
-                for (int rid=0; rid<farm.numRacks; rid++)
+                for (int rid = 0; rid < farm.numRacks; rid++)
                 {
+                    // progress indicator
+                    Console.Write((char)0x08);
+                    switch (rid % 5) {
+                        case 0:
+                            Console.Write(" ");
+                            break;
+                        case 1:
+                            Console.Write("/");
+                            break;
+                        case 2:
+                            Console.Write("-");
+                            break;
+                        case 3:
+                            Console.Write("\\");
+                            break;
+                        case 4:
+                            Console.Write("|");
+                            break;
+
+                    }   //switch
+
+
                     if ((farm.rackArray[rid].bAvailable) && (isChanged[rid] || bStartup))
                     {
                         result = rackOpInstance[rid].processRack(rdb, ref farm.rackArray[rid]);
@@ -99,6 +121,10 @@ namespace RackController
                         }   // if disconnected
 
                     }   // if available
+                    else
+                    {
+                        Thread.Sleep(150);
+                    }
                 }   // for
 
                 // Do first processing done

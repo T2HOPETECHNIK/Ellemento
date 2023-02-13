@@ -59,6 +59,7 @@ namespace RackController
             uint numShelf;
             bool bresult;
             uint numPump;
+
             
             numShelf = constants.NUM_SHELF_PER_RACK[rackID];
 

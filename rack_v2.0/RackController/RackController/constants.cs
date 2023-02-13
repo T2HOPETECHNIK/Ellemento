@@ -77,5 +77,9 @@ namespace RackController
         // Feedback
         public static readonly ushort[] PUMP_FILL_DRAIN_TIMER_ADDRESS = { 4077, 4078 };    // setting of countdown timer for both fill and drain
         public static readonly ushort[] PUMP_FILL_DRAIN_ACTION_ADDRESS = { 4076, 4076 };   // Whether pump is currently filling or draining (bit)
+
+
+        public static readonly ushort[] SHELF_OVERFLOW_ADDRESS = { 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 };      // To do: Assignment
+        public static readonly ushort[] SHELF_OVERFLOW_BITVAL = { 0, 1,2,3,4,5,6,7,8,9,10,11,12,13 };                   // To do: assigment
     }
 }

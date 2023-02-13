@@ -217,6 +217,21 @@ namespace RackController
 
         public bool getLightStatus(uint shelf)
         {
+            ushort addr;
+            ushort[] data;
+
+            connect();
+
+            addr = constants.SHELF_LIGHT_ON_ADDRESS[shelf];
+            data = master.ReadHoldingRegisters(addr, 1);
+
+            if ((data[0]  & constants.SHELF_LIGHT_ON_BITVAL[shelf]) != 0)
+                return (true);
+            else
+                return (false);
+
+            disconnect();
+
             // To do
             return (true);
         }
@@ -235,13 +250,38 @@ namespace RackController
         public ushort getValvePercentage(uint shelf)
         {
             // To do
-            return (0);
+            ushort addr;
+            ushort[] data;
+
+            connect();
+
+            addr = constants.SHELF_PV_POSITION_ADDRESS[shelf];
+            data = master.ReadHoldingRegisters(addr, 1);
+
+            disconnect();
+
+            return (data[0]);
+
         }
 
 
         public bool getOverflowSensorState(uint shelf)
         {
-            return (false);
+            ushort addr;
+            ushort[] data;
+
+            connect();
+
+            addr = constants.SHELF_LIGHT_INTENSITY_ADDRESS[shelf];
+            data = master.ReadHoldingRegisters(addr, 1);
+
+            disconnect();
+
+            if ((data[0] & constants.SHELF_OVERFLOW_BITVAL[shelf]) != 0)
+                return (true);
+            else
+                return (false);
+
         }
 
 
