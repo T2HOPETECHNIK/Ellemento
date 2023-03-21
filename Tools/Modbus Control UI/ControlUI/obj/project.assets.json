@@ -239,7 +239,7 @@
     "C:\\Users\\vincent.lao\\.nuget\\packages\\": {}
   },
   "project": {
-    "version": "0.1.0",
+    "version": "0.1.1",
     "restore": {
       "projectUniqueName": "C:\\Project\\internal\\DeltaService\\dev\\ControlUI\\ControlUI.csproj",
       "projectName": "ControlUI",

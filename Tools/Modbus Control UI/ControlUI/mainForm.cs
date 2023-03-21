@@ -429,8 +429,6 @@ namespace ControlUI
                     newLabel.MouseEnter += new EventHandler(label_MouseHover);
                     newLabel.MouseLeave += new EventHandler(label_MouseLeave);
 
-
-
                     newTextbox.Left = Constants.offset_left + (col * Constants.col_offset) + Constants.label_width;
                     newTextbox.Top = Constants.offset_top + (row * Constants.height_offset);
                     newTextbox.Width = Constants.textbox_width;
@@ -468,6 +466,9 @@ namespace ControlUI
                         readLabel.Text = "--";
                         readLabel.Left = Constants.offset_left + (col * Constants.col_offset) + Constants.label_width + Constants.textbox_width + Constants.button_width;
                         readLabel.Top = Constants.offset_top + (row * Constants.height_offset);
+                        readLabel.Tag = index;
+                        readLabel.MouseEnter += new EventHandler(readlabel_MouseHover);
+                        readLabel.MouseLeave += new EventHandler(readlabel_MouseLeave);
                         readLabel.Name = "LblBox" + index.ToString();
 
 
@@ -484,8 +485,8 @@ namespace ControlUI
                         readLabel.Top = Constants.offset_top + (row * Constants.height_offset);
                         readLabel.Name = "LblBox" + index.ToString();
                         readLabel.Tag = index;
-                        readLabel.MouseEnter += new EventHandler(label_MouseHover);
-                        readLabel.MouseLeave += new EventHandler(label_MouseLeave);
+                        readLabel.MouseEnter += new EventHandler(readlabel_MouseHover);
+                        readLabel.MouseLeave += new EventHandler(readlabel_MouseLeave);
 
 
                         mainPanel1.Controls.Add(newLabel);
@@ -826,6 +827,7 @@ namespace ControlUI
             {
                 index = (int)lb.Tag;
                 statusLabel.Text = dfield[index].textLabel;
+                //statusLabel.Text = "[" + dfield[index].address + "] " + dfield[index].textLabel;
             }
             else
             {
@@ -879,6 +881,44 @@ namespace ControlUI
             if (tb != null)
             {
                 index = (int)tb.Tag;
+                statusLabel.Text = "";
+            }
+            else
+            {
+                statusLabel.Text = "";
+            }
+
+        }
+
+
+
+        void readlabel_MouseHover(object sender, EventArgs e)
+        {
+            Label lb = sender as Label;
+            int index;
+
+            if (lb != null)
+            {
+                index = (int)lb.Tag;
+                
+                statusLabel.Text = "[" + dfield[index].address + "]";
+            }
+            else
+            {
+                statusLabel.Text = "None";
+            }
+
+        }
+
+
+        void readlabel_MouseLeave(object sender, EventArgs e)
+        {
+            Label lb = sender as Label;
+            int index;
+
+            if (lb != null)
+            {
+                index = (int)lb.Tag;
                 statusLabel.Text = "";
             }
             else

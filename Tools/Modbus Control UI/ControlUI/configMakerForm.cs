@@ -106,6 +106,13 @@ namespace ControlUI
             int iLineCount;
             string stmp;
 
+
+            if ((ipBox.Text.Trim() == "") || (portBox.Text.Trim() == ""))
+            {
+                MsgBox("You forgot to set the IP or port");
+                return;
+            }
+
             currentSetting = "IP," + ipBox.Text + "," + portBox.Text;
 
             try
@@ -165,7 +172,7 @@ namespace ControlUI
             if (bitposComboBox.Text.Trim() == "") {
                 if (addrTextBox.Text.Trim() != "")
                 {
-                    currentEntry = currentEntry + addrTextBox.Text;
+                    currentEntry = currentEntry + addrTextBox.Text + ",";
                 }
                 else
                     currentEntry = currentEntry + ",";
@@ -276,7 +283,7 @@ namespace ControlUI
             MessageBoxButtons buttons = MessageBoxButtons.OK;
 
             // Displays the MessageBox.
-            MessageBox.Show(s, "Indo", buttons);
+            MessageBox.Show(s, "Info", buttons);
         }
 
 
@@ -332,9 +339,13 @@ namespace ControlUI
             getCurrentUISetting();
 
             index = contentListBox.SelectedIndex;
-            // Replace entry
-            contentListBox.Items.RemoveAt(index);
-            contentListBox.Items.Insert(index, currentEntry);
+
+            if (index != -1)
+            {
+                // Replace entry
+                contentListBox.Items.RemoveAt(index);
+                contentListBox.Items.Insert(index, currentEntry);
+            }
         }
 
         private void contentListBox_SelectedIndexChanged(object sender, EventArgs e)
