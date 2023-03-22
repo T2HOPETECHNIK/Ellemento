@@ -352,11 +352,20 @@ namespace ControlUI
         {
             string stmp;
 
-            controlGroupBox.Text = "Control #" + contentListBox.SelectedIndex.ToString();
-            stmp = contentListBox.GetItemText(contentListBox.SelectedItem); 
+            if (contentListBox.SelectedIndex > -1)
+            {
+                controlGroupBox.Text = "Control # " + contentListBox.SelectedIndex.ToString();
+                updateEntryButton.Enabled = true;
+            }
+            else
+            {
+                controlGroupBox.Text = "Control (none selected)";
+                updateEntryButton.Enabled = false;
+            }
 
-            //stmp = ((ListBoxItem)contentListBox.SelectedItem).Content.ToString;
+            stmp = contentListBox.GetItemText(contentListBox.SelectedItem);
             updateCurrentUISetting(stmp);
+
         }
 
         private void configMakerForm_Load(object sender, EventArgs e)
@@ -364,8 +373,15 @@ namespace ControlUI
             bitposComboBox.Items.Clear();
 
             bitposComboBox.Items.Add("");
-            for (int i=0;i<16;i++)
+            for (int i = 0; i < 16; i++)
+            {
                 bitposComboBox.Items.Add(i.ToString());
+            }
+
+            if (contentListBox.SelectedIndex > -1)
+                updateEntryButton.Enabled = true;
+            else
+                updateEntryButton.Enabled = false;
         }
 
         private void cloneButton_Click(object sender, EventArgs e)
@@ -399,8 +415,28 @@ namespace ControlUI
         private void deleteButton_Click(object sender, EventArgs e)
         {
             int index = contentListBox.SelectedIndex;
-            contentListBox.Items.RemoveAt(index);
+            if (index > -1)
+                contentListBox.Items.RemoveAt(index);
         }
 
+        private void updateEntryButton_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(updateEntryButton, "Update highlighted entry in the Content section (Add or click on one)");
+        }
+
+        private void cloneButton_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(cloneButton, "Clone a highlighted entry in thre Content section");
+        }
+
+        private void addButton_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(addButton, "Add a new entry or insert an entry (if an entry is highlighted)");
+        }
+
+        private void deleteButton_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(deleteButton, "Delete an entry in the Contents section");
+        }
     }
 }

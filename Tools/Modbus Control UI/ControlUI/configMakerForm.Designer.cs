@@ -29,6 +29,7 @@ namespace ControlUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.configFileLabel = new System.Windows.Forms.Label();
             this.contentListBox = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -56,6 +57,7 @@ namespace ControlUI
             this.cloneButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.controlGroupBox.SuspendLayout();
             this.typeGroupBox.SuspendLayout();
@@ -147,13 +149,15 @@ namespace ControlUI
             // 
             // updateEntryButton
             // 
-            this.updateEntryButton.Location = new System.Drawing.Point(159, 240);
+            this.updateEntryButton.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.updateEntryButton.Location = new System.Drawing.Point(134, 240);
             this.updateEntryButton.Name = "updateEntryButton";
-            this.updateEntryButton.Size = new System.Drawing.Size(111, 35);
+            this.updateEntryButton.Size = new System.Drawing.Size(158, 35);
             this.updateEntryButton.TabIndex = 8;
-            this.updateEntryButton.Text = "Update entry";
+            this.updateEntryButton.Text = "<-- UPDATE ENTRY";
             this.updateEntryButton.UseVisualStyleBackColor = true;
             this.updateEntryButton.Click += new System.EventHandler(this.updateEntryButton_Click);
+            this.updateEntryButton.MouseHover += new System.EventHandler(this.updateEntryButton_MouseHover);
             // 
             // labelTextBox
             // 
@@ -326,6 +330,7 @@ namespace ControlUI
             this.cloneButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.cloneButton.UseVisualStyleBackColor = true;
             this.cloneButton.Click += new System.EventHandler(this.cloneButton_Click);
+            this.cloneButton.MouseHover += new System.EventHandler(this.cloneButton_MouseHover);
             // 
             // addButton
             // 
@@ -341,6 +346,7 @@ namespace ControlUI
             this.addButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
+            this.addButton.MouseHover += new System.EventHandler(this.addButton_MouseHover);
             // 
             // deleteButton
             // 
@@ -357,12 +363,13 @@ namespace ControlUI
             this.deleteButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.deleteButton.UseVisualStyleBackColor = true;
             this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            this.deleteButton.MouseHover += new System.EventHandler(this.deleteButton_MouseHover);
             // 
             // configMakerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1064, 621);
+            this.ClientSize = new System.Drawing.Size(1064, 642);
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.addButton);
             this.Controls.Add(this.saveAsButton);
@@ -420,5 +427,6 @@ namespace ControlUI
         private System.Windows.Forms.Button cloneButton;
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
