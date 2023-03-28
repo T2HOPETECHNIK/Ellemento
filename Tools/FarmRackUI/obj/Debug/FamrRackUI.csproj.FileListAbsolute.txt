@@ -1,0 +1,13 @@
+C:\Project\Ellemento\Part 2\dev\RackControllerUI\FamrRackUI\bin\Debug\NModbus4.dll
+C:\Project\Ellemento\Part 2\dev\RackControllerUI\FamrRackUI\bin\Debug\NModbus4.xml
+C:\Project\Ellemento\Part 2\dev\RackControllerUI\FamrRackUI\obj\Debug\FamrRackUI.mainForm.resources
+C:\Project\Ellemento\Part 2\dev\RackControllerUI\FamrRackUI\obj\Debug\FamrRackUI.csproj.GenerateResource.cache
+C:\Project\Ellemento\Part 2\dev\RackControllerUI\FamrRackUI\obj\Debug\FamrRackUI.csproj.CoreCompileInputs.cache
+C:\Project\Ellemento\Part 2\dev\RackControllerUI\FamrRackUI\obj\Debug\FamrRackUI.csproj.CopyComplete
+C:\Project\Ellemento\Part 2\dev\RackControllerUI\FamrRackUI\obj\Debug\FamrRackUI.AboutBox1.resources
+C:\Project\Ellemento\Part 2\dev\RackControllerUI\FamrRackUI\bin\Debug\FarmRackUI.exe.config
+C:\Project\Ellemento\Part 2\dev\RackControllerUI\FamrRackUI\bin\Debug\FarmRackUI.exe
+C:\Project\Ellemento\Part 2\dev\RackControllerUI\FamrRackUI\bin\Debug\FarmRackUI.pdb
+C:\Project\Ellemento\Part 2\dev\RackControllerUI\FamrRackUI\obj\Debug\FarmRackUI.Properties.Resources.resources
+C:\Project\Ellemento\Part 2\dev\RackControllerUI\FamrRackUI\obj\Debug\FarmRackUI.exe
+C:\Project\Ellemento\Part 2\dev\RackControllerUI\FamrRackUI\obj\Debug\FarmRackUI.pdb
