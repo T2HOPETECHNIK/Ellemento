@@ -14,7 +14,7 @@ namespace ControlUI
     public partial class configMakerForm : Form
     {
 
-        int currentIndex;
+        //int currentIndex;
         string currentSetting;
         string currentEntry;
         string currentFile;
@@ -25,7 +25,7 @@ namespace ControlUI
         {
             InitializeComponent();
 
-            currentIndex = 0;
+            //currentIndex = 0;
             currentEntry = "";
             currentSetting = "";
 
@@ -189,7 +189,12 @@ namespace ControlUI
             if (radioButton4.Checked)
                 currentEntry = currentEntry + "1,"; // radio button
             else if (radioButton5.Checked)
-                currentEntry = currentEntry + "2,"; // input textbox
+            {
+                if (hexCheckBox.Checked)
+                    currentEntry = currentEntry + "3,"; // input textbox (Hex)
+                else
+                    currentEntry = currentEntry + "2,"; // input textbox
+            }
             else
                 currentEntry = currentEntry + ",";
 
@@ -206,7 +211,6 @@ namespace ControlUI
         {
             int index, index2;
 
-
             // Reset all first
             radioButton1.Checked = false;
             radioButton2.Checked = false;
@@ -216,8 +220,6 @@ namespace ControlUI
             addrTextBox.Text = "";
             bitposComboBox.Text = "";
             labelTextBox.Text = "";
-
-            //s = ((ListBoxItem)contentListBox.SelectedItem).Content.ToString;
 
             string[] words = strLine.Split(',');
             index = 0;
@@ -262,6 +264,10 @@ namespace ControlUI
 
                     case 4:
                         // control type
+                        if (kword == "3")
+                            hexCheckBox.Checked = true;
+                        else
+                            hexCheckBox.Checked = false;
                         break;
 
                     case 5:
@@ -438,5 +444,19 @@ namespace ControlUI
         {
             toolTip1.SetToolTip(deleteButton, "Delete an entry in the Contents section");
         }
+
+        private void radioButton5_CheckedChanged(object sender, EventArgs e)
+        {
+            bitposComboBox.Enabled = false;
+            hexCheckBox.Enabled = true;
+        }
+
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            bitposComboBox.Enabled = true;
+            hexCheckBox.Enabled = false;
+        }
+
     }
+
 }

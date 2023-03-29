@@ -46,6 +46,7 @@ namespace ControlUI
             this.addrTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.typeGroupBox = new System.Windows.Forms.GroupBox();
+            this.hexCheckBox = new System.Windows.Forms.CheckBox();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.accessGroupBox = new System.Windows.Forms.GroupBox();
@@ -212,14 +213,25 @@ namespace ControlUI
             // 
             // typeGroupBox
             // 
+            this.typeGroupBox.Controls.Add(this.hexCheckBox);
             this.typeGroupBox.Controls.Add(this.radioButton5);
             this.typeGroupBox.Controls.Add(this.radioButton4);
-            this.typeGroupBox.Location = new System.Drawing.Point(184, 35);
+            this.typeGroupBox.Location = new System.Drawing.Point(195, 36);
             this.typeGroupBox.Name = "typeGroupBox";
-            this.typeGroupBox.Size = new System.Drawing.Size(140, 112);
+            this.typeGroupBox.Size = new System.Drawing.Size(194, 112);
             this.typeGroupBox.TabIndex = 1;
             this.typeGroupBox.TabStop = false;
             this.typeGroupBox.Text = "Control Type";
+            // 
+            // hexCheckBox
+            // 
+            this.hexCheckBox.AutoSize = true;
+            this.hexCheckBox.Location = new System.Drawing.Point(116, 59);
+            this.hexCheckBox.Name = "hexCheckBox";
+            this.hexCheckBox.Size = new System.Drawing.Size(47, 19);
+            this.hexCheckBox.TabIndex = 2;
+            this.hexCheckBox.Text = "Hex";
+            this.hexCheckBox.UseVisualStyleBackColor = true;
             // 
             // radioButton5
             // 
@@ -231,6 +243,7 @@ namespace ControlUI
             this.radioButton5.TabStop = true;
             this.radioButton5.Text = "Word";
             this.radioButton5.UseVisualStyleBackColor = true;
+            this.radioButton5.CheckedChanged += new System.EventHandler(this.radioButton5_CheckedChanged);
             // 
             // radioButton4
             // 
@@ -242,6 +255,7 @@ namespace ControlUI
             this.radioButton4.TabStop = true;
             this.radioButton4.Text = "Bit/Bool";
             this.radioButton4.UseVisualStyleBackColor = true;
+            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
             // 
             // accessGroupBox
             // 
@@ -428,5 +442,6 @@ namespace ControlUI
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.CheckBox hexCheckBox;
     }
 }

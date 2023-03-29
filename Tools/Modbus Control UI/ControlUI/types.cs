@@ -10,6 +10,15 @@ enum DATA_TYPES{
     UNKNOWN_TYPE
 }
 
+enum CONTROL_TYPES
+{
+    UNKNOWN,
+    TOGGLE_BIT,
+    TEXT_IO,
+    TEXT_IO_HEX    // hex numbers
+    
+}
+
 
 enum ADDRESS_ACCESS_TYPES
 {
@@ -33,7 +42,8 @@ enum ERROR_CODE
     ERROR_NONE,
     ERROR_CONFIG_FAIL,
     ERROR_NO_CONFIG,
-    ERROR_COMM_FAIL
+    ERROR_COMM_FAIL,
+    ERROR_INVALID_INPUT
 }
 
 
@@ -51,7 +61,7 @@ struct FIELD
     public DATA_TYPES dataType;
     public ushort address;
     public ADDRESS_ACCESS_TYPES access;
-    public byte controlType;
+    public CONTROL_TYPES controlType;
     public ushort bitpos;
     public string textLabel;
 

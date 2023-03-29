@@ -22,8 +22,6 @@ namespace ControlUI
     public partial class mainForm : Form
     {
 
-
-        
         const string CONFIG_FILE = "ControlUI.conf";
 
         bool bTerminate;
@@ -33,13 +31,11 @@ namespace ControlUI
         //fakeInterface mbcom;    
         comInterface mbcom;
 
-        
 
         public READ_DATA rdData;
         public WRITE_DATA wrData;
 
         pluginHandler plugin;
-
 
         System.Timers.Timer timer;
 
@@ -47,8 +43,6 @@ namespace ControlUI
 
         // Error
         ERROR_CODE errCode;
-        //ERROR_CODE errCode
-
 
         private string getExeDirectory()
         {
@@ -93,7 +87,6 @@ namespace ControlUI
             if (bGotError())
             {
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
-                DialogResult result;
 
                 // Displays the MessageBox.
                 MessageBox.Show("Unable to open config file. Application will not be operational.", "Error", buttons);
@@ -281,11 +274,13 @@ namespace ControlUI
                                             case 4:
                                                 // Control type: 1 - Checkbox, 2 - text box
                                                 if (kword.Trim() == "1")
-                                                    dfield[dfieldindex].controlType = 1;
+                                                    dfield[dfieldindex].controlType = CONTROL_TYPES.TOGGLE_BIT;
                                                 else if (kword.Trim() == "2")
-                                                    dfield[dfieldindex].controlType = 2;
+                                                    dfield[dfieldindex].controlType = CONTROL_TYPES.TEXT_IO;
+                                                else if (kword.Trim() == "3")
+                                                    dfield[dfieldindex].controlType = CONTROL_TYPES.TEXT_IO_HEX;
                                                 else
-                                                    dfield[dfieldindex].controlType = 0;
+                                                    dfield[dfieldindex].controlType = CONTROL_TYPES.UNKNOWN;
                                                 break;
 
                                             case 5:
@@ -383,7 +378,7 @@ namespace ControlUI
                 col = index / Constants.numfields_per_col;
                 row = index % Constants.numfields_per_col;
 
-                if (dfield[index].controlType == 1)
+                if (dfield[index].controlType == CONTROL_TYPES.TOGGLE_BIT)
                 {
                     // checkbox
                     var newCheckbox = new CheckBox();
@@ -414,42 +409,67 @@ namespace ControlUI
                     mainPanel1.Controls.Add(newCheckbox);
 
                 }
-                else if (dfield[index].controlType == 2)
+                else if ((dfield[index].controlType == CONTROL_TYPES.TEXT_IO) || (dfield[index].controlType == CONTROL_TYPES.TEXT_IO_HEX))
                 {
                     // Text box
                     var newLabel = new Label();
                     var newTextbox = new TextBox();
+                    var newLabel2 = new Label();
                     var newButton = new Button();
                     var readLabel = new Label();
 
                     newLabel.Text = dfield[index].textLabel;
                     newLabel.Left = Constants.offset_left + (col * Constants.col_offset);
                     newLabel.Top = Constants.offset_top + (row * Constants.height_offset);
+                    newLabel.Width = Constants.label_width;
                     newLabel.Tag = index;
                     newLabel.MouseEnter += new EventHandler(label_MouseHover);
                     newLabel.MouseLeave += new EventHandler(label_MouseLeave);
 
                     newTextbox.Left = Constants.offset_left + (col * Constants.col_offset) + Constants.label_width;
                     newTextbox.Top = Constants.offset_top + (row * Constants.height_offset);
-                    newTextbox.Width = Constants.textbox_width;
-                    newTextbox.MaxLength = 5;
+                    if (dfield[index].controlType == CONTROL_TYPES.TEXT_IO_HEX)
+                    {
+                        newTextbox.Width = Constants.textbox_short_width;
+                        newTextbox.MaxLength = 4;
+                    }
+                    else
+                    {
+                        newTextbox.Width = Constants.textbox_width;
+                        newTextbox.MaxLength = 5;
+                    }
                     newTextbox.Tag = index;
                     newTextbox.Name = "TxtBox" + index.ToString();
                     newTextbox.MouseEnter += new EventHandler(textBox_MouseHover);
                     newTextbox.MouseLeave += new EventHandler(textBox_MouseLeave);
 
 
+                    if (dfield[index].controlType == CONTROL_TYPES.TEXT_IO_HEX)
+                    {
+                        newLabel2 = new Label();
+                        newLabel2.Top = Constants.offset_top + (row * Constants.height_offset);
+                        newLabel2.Left = Constants.offset_left + (col * Constants.col_offset) + Constants.label_width + Constants.textbox_short_width;
+                        newLabel2.Width = Constants.label_width_short;
+                        newLabel2.Height = 20;
+                        newLabel2.Text = "H";
+
+                        mainPanel1.Controls.Add(newLabel2);
+                    }
+                    
+
                     if (dfield[index].access == ADDRESS_ACCESS_TYPES.WRITE_ONLY) 
                     {
                         newButton.Text = "APPLY";
-                        newButton.Left = Constants.offset_left + (col * Constants.col_offset) + Constants.label_width + Constants.textbox_width;
                         newButton.Top = Constants.offset_top + (row * Constants.height_offset);
+                        newButton.Left = Constants.offset_left + (col * Constants.col_offset) + Constants.label_width + Constants.textbox_width + Constants.label_width_short;
+                        
 
                         newButton.Tag = index;
 
-                        newButton.Click += new EventHandler(btn_Click);
+                        newButton.Click += new EventHandler(applyBtn_Click);
 
                         mainPanel1.Controls.Add(newTextbox);
+
                         mainPanel1.Controls.Add(newLabel);
                         mainPanel1.Controls.Add(newButton);
 
@@ -457,10 +477,10 @@ namespace ControlUI
                     else if (dfield[index].access == ADDRESS_ACCESS_TYPES.READ_WRITE) 
                     {
                         newButton.Text = "APPLY";
-                        newButton.Left = Constants.offset_left + (col * Constants.col_offset) + Constants.label_width + Constants.textbox_width;
+                        newButton.Left = Constants.offset_left + (col * Constants.col_offset) + Constants.label_width + Constants.textbox_width + Constants.label_width_short;
                         newButton.Top = Constants.offset_top + (row * Constants.height_offset);
                         newButton.Tag = index;
-                        newButton.Click += new EventHandler(btn_Click);
+                        newButton.Click += new EventHandler(applyBtn_Click);
 
 
                         readLabel.Text = "--";
@@ -515,7 +535,7 @@ namespace ControlUI
                 if ((dfield[i].access == ADDRESS_ACCESS_TYPES.READ_ONLY) ||
                     (dfield[i].access == ADDRESS_ACCESS_TYPES.READ_WRITE))
                 {
-                    if (dfield[i].controlType == 1) // checkbox,bool
+                    if (dfield[i].controlType == CONTROL_TYPES.TOGGLE_BIT) // checkbox,bool
                     {
 
                         if (rdData.cbValue[i])
@@ -528,12 +548,16 @@ namespace ControlUI
                         }
 
                     }
-                    else if (dfield[i].controlType == 2)    // label,value
+                    else if (dfield[i].controlType == CONTROL_TYPES.TEXT_IO)    // label,value
                     {
-
                         setLabel(i, rdData.tbValue[i].ToString());
                         
                     }
+                    else if (dfield[i].controlType == CONTROL_TYPES.TEXT_IO_HEX)    // label,value
+                    {
+                        setLabel(i, rdData.tbValue[i].ToString("X4") + "H");
+                    }
+
 
 
                 }   // if
@@ -620,13 +644,45 @@ namespace ControlUI
 
 
 
-    private string getTextValues(int index)
+        private string getTextValues(int index)
         {
             string tmpstr;
 
             tmpstr = ((TextBox)mainPanel1.Controls["TxtBox" + index.ToString()]).Text;
 
             return (tmpstr);
+        }
+
+
+        private bool isHex(IEnumerable<char> chars)
+        {
+            bool isHex;
+            foreach (var c in chars)
+            {
+                isHex = ((c >= '0' && c <= '9') ||
+                         (c >= 'a' && c <= 'f') ||
+                         (c >= 'A' && c <= 'F'));
+
+                if (!isHex)
+                    return false;
+            }
+            return true;
+        }
+
+
+        private ushort HexToDec(string strHex)
+        {
+            ushort ustmp;
+
+            if (isHex(strHex))
+            {
+                ustmp = (ushort)Convert.ToUInt16(strHex, 16);
+                return (ustmp);
+            }
+
+            errCode = ERROR_CODE.ERROR_INVALID_INPUT;
+
+            return (0);
         }
 
 
@@ -655,11 +711,9 @@ namespace ControlUI
                         }
 
                         errCode = (ERROR_CODE)mbcom.getError();
-
                     }   //if
 
                 }   // for
-
 
                 // Send updated data to plugin
                 plugin.dataUpdate(wrData, rdData, sysconfig.numFields);
@@ -726,16 +780,16 @@ namespace ControlUI
             adjustPanel();
         }
 
-
-        protected void btn_Click(object sender, EventArgs e)
+        // Apply button
+        protected void applyBtn_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
             int index;
             String str = "";
-            uint uitmp;
+            //uint uitmp;
             int itmp;
             ushort ustmp;
-
+            bool isNumeric;
 
             if (btn != null)
             {
@@ -744,28 +798,60 @@ namespace ControlUI
                 if ((dfield[index].access == ADDRESS_ACCESS_TYPES.WRITE_ONLY) ||
                     (dfield[index].access == ADDRESS_ACCESS_TYPES.READ_WRITE))
                 {
+
                     str = getTextValues(index).Trim();
 
-                    var isNumeric = int.TryParse(str, out int n);
+                    if (dfield[index].controlType == CONTROL_TYPES.TEXT_IO_HEX)
+                    {
+                        isNumeric = true;
+                    }
+                    else
+                    {
+                        isNumeric = int.TryParse(str, out int n);
+                    }
 
                     if ((str.Length > 0) && isNumeric)
                     {
                         switch (dfield[index].dataType)
                         {
                             case DATA_TYPES.UINT_TYPE:
-                                uitmp = UInt32.Parse(str);
-                                ustmp = Convert.ToUInt16(uitmp);
-                                mbcom.setRegister((ushort)dfield[index].address, ustmp);
-                                errCode = (ERROR_CODE) mbcom.getError();
+                                ustmp = 0;
+                                if (dfield[index].controlType == CONTROL_TYPES.TEXT_IO_HEX)
+                                    ustmp = HexToDec(str);
+                                else
+                                {
+                                    try
+                                    {
+                                        ustmp = UInt16.Parse(str);
+                                    }
+                                    catch
+                                    {
+                                        errCode = ERROR_CODE.ERROR_INVALID_INPUT;
+                                    }
+                                }
+
+                                if (mbcom != null)
+                                {
+                                    mbcom.setRegister((ushort)dfield[index].address, ustmp);
+                                    errCode = (ERROR_CODE)mbcom.getError();
+                                }
 
                                 wrData.WordValue[index] = ustmp;
 
                                 break;
                             case DATA_TYPES.INT_TYPE:
-                                itmp = Int32.Parse(str);
-                                ustmp = Convert.ToUInt16(itmp);
-                                mbcom.setRegister((ushort)dfield[index].address, ustmp);
-                                errCode = (ERROR_CODE) mbcom.getError();
+                                if (dfield[index].controlType == CONTROL_TYPES.TEXT_IO_HEX)
+                                    ustmp = HexToDec(str);
+                                else
+                                {
+                                    itmp = Int32.Parse(str);
+                                    ustmp = Convert.ToUInt16(itmp);
+                                }
+                                if (mbcom != null)
+                                {
+                                    mbcom.setRegister((ushort)dfield[index].address, ustmp);
+                                    errCode = (ERROR_CODE)mbcom.getError();
+                                }
 
                                 wrData.WordValue[index] = ustmp;
 

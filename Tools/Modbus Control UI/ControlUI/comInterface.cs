@@ -55,7 +55,7 @@ namespace ControlUI
         public bool init(string ipAddr)
         {
             int loctcpPort = iTcpPort;
-            ulong time_ms = 0;
+            //ulong time_ms = 0;
             bool bres;
 
             tcpClient = new TcpClient();
@@ -160,7 +160,8 @@ namespace ControlUI
         {
             try
             {
-                master.WriteSingleRegister(addr, value);
+                if (master != null)
+                    master.WriteSingleRegister(addr, value);
             }
             catch(Exception e)
             {
@@ -190,7 +191,7 @@ namespace ControlUI
                     return (0);
                 }
             }
-            catch(Exception e)
+            catch
             {
                 errCode = ERROR_CODE.ERROR_COMM_FAIL;
                 return (0);
@@ -224,9 +225,10 @@ namespace ControlUI
 
             try
             {
-                master.WriteSingleRegister(addr, ustmp);
+                if (master != null)
+                    master.WriteSingleRegister(addr, ustmp);
             }
-            catch(Exception e)
+            catch
             {
                 errCode = ERROR_CODE.ERROR_COMM_FAIL;
             }
@@ -238,26 +240,28 @@ namespace ControlUI
 
             ushort[] usarray;
             ushort usout;
-            bool btmp;
+            bool btmp = false;
 
             try
             {
-                usarray = master.ReadHoldingRegisters(addr, 1);
+                if (master != null)
+                {
+                    usarray = master.ReadHoldingRegisters(addr, 1);
+                    usout = usarray[0];
+
+                    if ((usout & binaryValue(bitpos)) != 0)
+                        btmp = true;
+                    else
+                        btmp = false;
+                }
             }
-            catch(Exception e)
+            catch 
             {
 
                 errCode = ERROR_CODE.ERROR_COMM_FAIL;
 
                 return (false);
             }
-
-            usout = usarray[0];
-
-            if ((usout & binaryValue(bitpos)) != 0)
-                btmp = true;
-            else
-                btmp = false;
 
             return (btmp);
         }

@@ -16,7 +16,9 @@ namespace ControlUI
         public const int offset_left = 10;
         public const int offset_top = 10;
         public const int label_width = 100;
+        public const int label_width_short = 15;
         public const int textbox_width = 50;
+        public const int textbox_short_width = 35;
         public const int button_width = 100;
         public const int height_offset = 30;
         public const int numfields_per_col = 20;

@@ -99,8 +99,12 @@ namespace ControlUI
                 return ((AssemblyCompanyAttribute)attributes[0]).Company;
             }
         }
+
         #endregion
 
+        private void labelVersion_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

@@ -5,7 +5,7 @@
   },
   "projects": {
     "C:\\Project\\internal\\DeltaService\\dev\\ControlUI\\ControlUI.csproj": {
-      "version": "0.1.1",
+      "version": "0.2.0",
       "restore": {
         "projectUniqueName": "C:\\Project\\internal\\DeltaService\\dev\\ControlUI\\ControlUI.csproj",
         "projectName": "ControlUI",
