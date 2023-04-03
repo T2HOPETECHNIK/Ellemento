@@ -161,7 +161,10 @@ namespace ControlUI
             try
             {
                 if (master != null)
+                {
                     master.WriteSingleRegister(addr, value);
+                    errCode = ERROR_CODE.ERROR_NONE;
+                }
             }
             catch(Exception e)
             {

@@ -16,12 +16,10 @@ using Label = System.Windows.Forms.Label;
 using System.IO;
 
 
-
 namespace ControlUI
 {
     public partial class mainForm : Form
     {
-
         const string CONFIG_FILE = "ControlUI.conf";
 
         bool bTerminate;
@@ -30,7 +28,6 @@ namespace ControlUI
         SYSTEM_CONFIG sysconfig = new SYSTEM_CONFIG();
         //fakeInterface mbcom;    
         comInterface mbcom;
-
 
         public READ_DATA rdData;
         public WRITE_DATA wrData;
@@ -93,7 +90,6 @@ namespace ControlUI
                 //TerminateApplication();
                 return;
             }
-            
 
             initcomm();
 
@@ -183,8 +179,6 @@ namespace ControlUI
                 iCntr++;
             }
 
-
-            //dfield[dfieldindex].address = (ushort)Int32.Parse(stmp);
         }
 
        
@@ -198,7 +192,6 @@ namespace ControlUI
 
             if (File.Exists(filename))
             {
-
                 try 
                 { 
                     // Reads file line by line
@@ -213,7 +206,6 @@ namespace ControlUI
 
                         if (validLine(line.Trim()))
                         {
-
                             string[] words = line.Split(',');
 
                             colindex = 0;
@@ -236,7 +228,6 @@ namespace ControlUI
                                 }
                                 else
                                 {
-
 
                                     if (configType == CONFIG_LINE_TYPE.CLT_CONTROL)
                                     {
@@ -264,8 +255,7 @@ namespace ControlUI
                                                     dfield[dfieldindex].bitpos = 0;
                                                 }
                                                 else
-                                                {
-                                                    // Assign address and bitpos to dfield
+                                                {   // Assign address and bitpos to dfield
                                                     assignAddress(dfieldindex, stmp);
                                                 }
 
@@ -310,8 +300,6 @@ namespace ControlUI
                                         }
 
                                     }   // if
-
-
 
                                 }   // if 2nd col and above, else ...
 
@@ -405,7 +393,6 @@ namespace ControlUI
                     newCheckbox.MouseEnter += new EventHandler(check_MouseHover);
                     newCheckbox.MouseLeave += new EventHandler(check_MouseLeave);
 
-
                     mainPanel1.Controls.Add(newCheckbox);
 
                 }
@@ -422,6 +409,7 @@ namespace ControlUI
                     newLabel.Left = Constants.offset_left + (col * Constants.col_offset);
                     newLabel.Top = Constants.offset_top + (row * Constants.height_offset);
                     newLabel.Width = Constants.label_width;
+                    newLabel.TextAlign = ContentAlignment.MiddleLeft;
                     newLabel.Tag = index;
                     newLabel.MouseEnter += new EventHandler(label_MouseHover);
                     newLabel.MouseLeave += new EventHandler(label_MouseLeave);
@@ -443,33 +431,30 @@ namespace ControlUI
                     newTextbox.MouseEnter += new EventHandler(textBox_MouseHover);
                     newTextbox.MouseLeave += new EventHandler(textBox_MouseLeave);
 
-
                     if (dfield[index].controlType == CONTROL_TYPES.TEXT_IO_HEX)
                     {
                         newLabel2 = new Label();
                         newLabel2.Top = Constants.offset_top + (row * Constants.height_offset);
                         newLabel2.Left = Constants.offset_left + (col * Constants.col_offset) + Constants.label_width + Constants.textbox_short_width;
                         newLabel2.Width = Constants.label_width_short;
+                        newLabel2.TextAlign = ContentAlignment.MiddleLeft;
                         newLabel2.Height = 20;
                         newLabel2.Text = "H";
 
                         mainPanel1.Controls.Add(newLabel2);
                     }
-                    
 
                     if (dfield[index].access == ADDRESS_ACCESS_TYPES.WRITE_ONLY) 
                     {
                         newButton.Text = "APPLY";
                         newButton.Top = Constants.offset_top + (row * Constants.height_offset);
                         newButton.Left = Constants.offset_left + (col * Constants.col_offset) + Constants.label_width + Constants.textbox_width + Constants.label_width_short;
-                        
 
                         newButton.Tag = index;
 
                         newButton.Click += new EventHandler(applyBtn_Click);
 
                         mainPanel1.Controls.Add(newTextbox);
-
                         mainPanel1.Controls.Add(newLabel);
                         mainPanel1.Controls.Add(newButton);
 
@@ -482,7 +467,6 @@ namespace ControlUI
                         newButton.Tag = index;
                         newButton.Click += new EventHandler(applyBtn_Click);
 
-
                         readLabel.Text = "--";
                         readLabel.Left = Constants.offset_left + (col * Constants.col_offset) + Constants.label_width + Constants.textbox_width + Constants.button_width;
                         readLabel.Top = Constants.offset_top + (row * Constants.height_offset);
@@ -490,7 +474,6 @@ namespace ControlUI
                         readLabel.MouseEnter += new EventHandler(readlabel_MouseHover);
                         readLabel.MouseLeave += new EventHandler(readlabel_MouseLeave);
                         readLabel.Name = "LblBox" + index.ToString();
-
 
                         mainPanel1.Controls.Add(newTextbox);
                         mainPanel1.Controls.Add(newLabel);
@@ -507,7 +490,6 @@ namespace ControlUI
                         readLabel.Tag = index;
                         readLabel.MouseEnter += new EventHandler(readlabel_MouseHover);
                         readLabel.MouseLeave += new EventHandler(readlabel_MouseLeave);
-
 
                         mainPanel1.Controls.Add(newLabel);
                         mainPanel1.Controls.Add(readLabel);
@@ -539,7 +521,7 @@ namespace ControlUI
                     {
 
                         if (rdData.cbValue[i])
-                        { //true
+                        {   //true
                             setCheckBox(i, true);
                         }
                         else
@@ -557,8 +539,6 @@ namespace ControlUI
                     {
                         setLabel(i, rdData.tbValue[i].ToString("X4") + "H");
                     }
-
-
 
                 }   // if
             }   //for
@@ -580,22 +560,15 @@ namespace ControlUI
                 }));
             }
 
-
         }   //updateControl
-
-
-
-        
 
 
         private void setCheckBox(int index, bool bCheck)
         {
-            
             CheckBox cb = (CheckBox)mainPanel1.Controls["Chkbox" + index.ToString()];
 
             if (cb != null)
             {
-
                 if (bCheck)
                 {
                     cb.BeginInvoke(new Action(() => { 
@@ -603,7 +576,6 @@ namespace ControlUI
                         cb.BackColor = Color.LightGreen;
                         cb.Checked = true;
                     }));
-
                 }
                 else
                 {
@@ -612,19 +584,15 @@ namespace ControlUI
                         cb.BackColor = SystemColors.ButtonFace;
                         cb.Checked = false;
                     }));
-
                 }
 
             }   //if
-            
 
         }   //setCheckBox
 
 
-
         private void setLabel(int index, string s)
         {
-            
             Label lb;
             string stmp;
 
@@ -634,7 +602,6 @@ namespace ControlUI
 
             if (lb != null)
             {
-                //lb.Text = stmp;
                 lb.BeginInvoke(new Action(() => {
                     lb.Text = stmp;
                 }));
@@ -686,6 +653,8 @@ namespace ControlUI
         }
 
 
+        //===============================================================
+
 
         void ReaderThreadFunction()
         {
@@ -701,7 +670,9 @@ namespace ControlUI
                     if ((dfield[i].access == ADDRESS_ACCESS_TYPES.READ_ONLY) ||
                         (dfield[i].access == ADDRESS_ACCESS_TYPES.READ_WRITE))
                     {
-                        if ((dfield[i].dataType == DATA_TYPES.UINT_TYPE) || (dfield[i].dataType == DATA_TYPES.INT_TYPE) || (dfield[i].dataType == DATA_TYPES.BYTE_TYPE))
+                        if ((dfield[i].dataType == DATA_TYPES.UINT_TYPE) || 
+                            (dfield[i].dataType == DATA_TYPES.INT_TYPE) || 
+                            (dfield[i].dataType == DATA_TYPES.BYTE_TYPE))
                         {
                             rdData.tbValue[i] = mbcom.getRegister(dfield[i].address);
                         }
@@ -720,7 +691,6 @@ namespace ControlUI
 
                 Thread.Sleep(sysconfig.updateCycle_ms);
             }   //while
-
 
         }   // ReaderThreadFunction
 
@@ -786,7 +756,6 @@ namespace ControlUI
             Button btn = sender as Button;
             int index;
             String str = "";
-            //uint uitmp;
             int itmp;
             ushort ustmp;
             bool isNumeric;
@@ -833,7 +802,6 @@ namespace ControlUI
                                 if (mbcom != null)
                                 {
                                     mbcom.setRegister((ushort)dfield[index].address, ustmp);
-                                    errCode = (ERROR_CODE)mbcom.getError();
                                 }
 
                                 wrData.WordValue[index] = ustmp;
@@ -850,7 +818,6 @@ namespace ControlUI
                                 if (mbcom != null)
                                 {
                                     mbcom.setRegister((ushort)dfield[index].address, ustmp);
-                                    errCode = (ERROR_CODE)mbcom.getError();
                                 }
 
                                 wrData.WordValue[index] = ustmp;
@@ -920,7 +887,7 @@ namespace ControlUI
                 statusLabel.Text = "None";
             }
 
-        }
+        }   //label_MouseHover
 
 
         void label_MouseLeave(object sender, EventArgs e)
@@ -938,7 +905,7 @@ namespace ControlUI
                 statusLabel.Text = "";
             }
 
-        }
+        }   //label_MouseLeave
 
 
         void textBox_MouseHover(object sender, EventArgs e)
@@ -975,7 +942,6 @@ namespace ControlUI
             }
 
         }
-
 
 
         void readlabel_MouseHover(object sender, EventArgs e)

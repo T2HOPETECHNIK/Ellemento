@@ -26,3 +26,4 @@ C:\Project\internal\DeltaService\dev\ControlUI\obj\Debug\net5.0-windows\ControlU
 C:\Project\internal\DeltaService\dev\ControlUI\obj\Debug\net5.0-windows\ref\ControlUI.dll
 C:\Project\internal\DeltaService\dev\ControlUI\obj\Debug\net5.0-windows\ControlUI.pdb
 C:\Project\internal\DeltaService\dev\ControlUI\obj\Debug\net5.0-windows\ControlUI.genruntimeconfig.cache
+C:\Project\internal\DeltaService\dev\ControlUI\obj\Debug\net5.0-windows\ControlUI.csproj.AssemblyReference.cache
