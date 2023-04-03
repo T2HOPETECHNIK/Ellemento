@@ -467,9 +467,10 @@ namespace ControlUI
                         newButton.Tag = index;
                         newButton.Click += new EventHandler(applyBtn_Click);
 
-                        readLabel.Text = "--";
+                        readLabel.Text = "---";
                         readLabel.Left = Constants.offset_left + (col * Constants.col_offset) + Constants.label_width + Constants.textbox_width + Constants.button_width;
                         readLabel.Top = Constants.offset_top + (row * Constants.height_offset);
+                        readLabel.TextAlign = ContentAlignment.MiddleLeft;
                         readLabel.Tag = index;
                         readLabel.MouseEnter += new EventHandler(readlabel_MouseHover);
                         readLabel.MouseLeave += new EventHandler(readlabel_MouseLeave);
@@ -483,9 +484,10 @@ namespace ControlUI
                     else
                     {
                         // read only
-                        readLabel.Text = "--";
+                        readLabel.Text = "---";
                         readLabel.Left = Constants.offset_left + (col * Constants.col_offset) + Constants.label_width;
                         readLabel.Top = Constants.offset_top + (row * Constants.height_offset);
+                        readLabel.TextAlign = ContentAlignment.MiddleLeft;
                         readLabel.Name = "LblBox" + index.ToString();
                         readLabel.Tag = index;
                         readLabel.MouseEnter += new EventHandler(readlabel_MouseHover);
