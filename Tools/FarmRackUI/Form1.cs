@@ -28,6 +28,7 @@ namespace FamrRackUI
 
 
         Label[] ctrl_shelfLabel;
+        CheckBox[] ctrl_valveControl;
         TextBox[] ctrl_valveSetting;
         CheckBox[] ctrl_lightControl;
         TrackBar[] ctrl_lightIntensity;
@@ -115,6 +116,7 @@ namespace FamrRackUI
             statusLabel.Left = this.Width - 150;
 
             ctrl_shelfLabel = new Label[Constants.maxShelf];
+            ctrl_valveControl = new CheckBox[Constants.maxShelf];
             ctrl_valveSetting = new TextBox[Constants.maxShelf];
             ctrl_lightControl = new CheckBox[Constants.maxLight];
             ctrl_lightIntensity = new TrackBar[Constants.maxLight];
@@ -313,6 +315,14 @@ namespace FamrRackUI
                 cb = (CheckBox)mainPanel.Controls["Ctrl_use_water_schedule_13"];
                 cb.Enabled = bControlEnabled;
 
+                cb = (CheckBox)mainPanel.Controls["Ctrl_valve_control_11"];
+                cb.Enabled = bControlEnabled;
+                cb = (CheckBox)mainPanel.Controls["Ctrl_valve_control_12"];
+                cb.Enabled = bControlEnabled;
+                cb = (CheckBox)mainPanel.Controls["Ctrl_valve_control_13"];
+                cb.Enabled = bControlEnabled;
+
+
                 tb = (TextBox)mainPanel.Controls["Ctrl_valve_setting_11"];
                 tb.Enabled = bControlEnabled;
                 tb = (TextBox)mainPanel.Controls["Ctrl_valve_setting_12"];
@@ -499,6 +509,24 @@ namespace FamrRackUI
 
                     positionX += Constants.WIDTH_CHECKBOX;
 
+                    ctrl_valveControl[index] = new CheckBox();
+                    ctrl_valveControl[index].Top = Constants.POS_TOP + positionY;
+                    ctrl_valveControl[index].Left = positionX;
+                    ctrl_valveControl[index].Width = Constants.WIDTH_CHECKBOX - 10;
+                    ctrl_valveControl[index].Text = "OFF";
+                    ctrl_valveControl[index].TextAlign = ContentAlignment.MiddleCenter;
+                    ctrl_valveControl[index].FlatStyle = FlatStyle.Popup;
+                    ctrl_valveControl[index].Appearance = Appearance.Button;
+                    ctrl_valveControl[index].Tag = index;
+                    ctrl_valveControl[index].Name = "Ctrl_valve_control_" + index.ToString();
+                    ctrl_valveControl[index].MouseHover += ValveControl_MouseHover;
+                    ctrl_valveControl[index].MouseLeave += Clear_HelpText;
+                    ctrl_valveControl[index].CheckedChanged += ValveControlCheckBox_Changed;
+                    mainPanel.Controls.Add(ctrl_valveControl[index]);
+
+
+                    positionX += Constants.WIDTH_CHECKBOX;
+
                     ctrl_valveSetting[index] = new TextBox();
                     ctrl_valveSetting[index].Top = Constants.POS_TOP + positionY;
                     ctrl_valveSetting[index].Left = positionX;
@@ -524,6 +552,8 @@ namespace FamrRackUI
                     ctrl_waterSchedule[index].TextAlign = ContentAlignment.MiddleCenter;
                     ctrl_waterSchedule[index].Tag = index;
                     ctrl_waterSchedule[index].Name = "Ctrl_water_schedule_" + index.ToString();
+                    ctrl_waterSchedule[index].MouseHover += WaterSchedule_MouseHover;
+                    ctrl_waterSchedule[index].MouseLeave += Clear_HelpText;
                     ctrl_waterSchedule[index].MouseClick += WaterScheduleClicked;
                     mainPanel.Controls.Add(ctrl_waterSchedule[index]);
 
@@ -589,6 +619,8 @@ namespace FamrRackUI
                         ctrl_lightSchedule[index].TextAlign = ContentAlignment.MiddleCenter;
                         ctrl_lightSchedule[index].Tag = index;
                         ctrl_lightSchedule[index].Name = "Ctrl_light_schedule_" + index.ToString();
+                        ctrl_lightSchedule[index].MouseHover += LightSchedule_MouseHover;
+                        ctrl_lightSchedule[index].MouseLeave += Clear_HelpText;
                         ctrl_lightSchedule[index].MouseClick += LightScheduleClicked;
                         mainPanel.Controls.Add(ctrl_lightSchedule[index]);
 
@@ -917,11 +949,11 @@ namespace FamrRackUI
         private void FillDrainClicked(object sender, System.EventArgs e)
         {
             CheckBox cb = sender as CheckBox;
-            int index;
+            ushort index;
 
             if (cb != null)
             {
-                index = (int)cb.Tag;
+                index = (ushort)(int)cb.Tag;
 
                 if (cb.Checked)
                 {
@@ -933,6 +965,9 @@ namespace FamrRackUI
                     cb.Text = "Normal";
                     cb.BackColor = SystemColors.ButtonFace;
                 }
+
+                if (mbi != null)
+                    mbi.fillDrainControl(index, cb.Checked);
             }
         }
 
@@ -1065,6 +1100,33 @@ namespace FamrRackUI
                 }
             }
         }   // UpdateValveSetting
+
+
+        private void ValveControlCheckBox_Changed(object sender, System.EventArgs e)
+        {
+            CheckBox cb = sender as CheckBox;
+            ushort index;
+
+            if (cb != null)
+            {
+                index = (ushort)(int)cb.Tag;
+
+                if (cb.Checked)
+                {
+                    cb.Text = "ON";
+                    cb.BackColor = Color.LightGreen;
+                }
+                else
+                {
+                    cb.Text = "OFF";
+                    cb.BackColor = SystemColors.ButtonFace;
+                }
+
+                if (mbi != null)
+                    mbi.setValveOnOff(index, cb.Checked);
+
+            }
+        }
 
 
         private void WaterLightScheduleCheckBox_Changed(object sender, System.EventArgs e)
@@ -1298,6 +1360,10 @@ namespace FamrRackUI
 
 
 
+        private void WaterSchedule_MouseHover(object sender, EventArgs e)
+        {
+            helpBarText.Text = "Click to select then set in scheduler";
+        }
 
         private void SetScheduleButton_MouseHover(object sender, EventArgs e)
         {
@@ -1313,7 +1379,7 @@ namespace FamrRackUI
 
         private void ModeCombo_MouseHover(object sender, EventArgs e)
         {
-            helpBarText.Text = "Select control mode";
+            helpBarText.Text = "Select control mode: Auto, Semi auto or Manual";
         }
 
 
@@ -1326,6 +1392,13 @@ namespace FamrRackUI
         {
             helpBarText.Text = "Slide to adjust light intensity";
         }
+
+
+        private void LightSchedule_MouseHover(object sender, EventArgs e)
+        {
+            helpBarText.Text = "Click to select then set in scheduler";
+        }
+
 
         private void PumpControl_MouseHover(object sender, EventArgs e)
         {
@@ -1355,6 +1428,12 @@ namespace FamrRackUI
         private void UseScheduler_MouseHover(object sender, EventArgs e)
         {
             helpBarText.Text = "Toggle to use normal mode control or scheduler";
+        }
+
+
+        private void ValveControl_MouseHover(object sender, EventArgs e)
+        {
+            helpBarText.Text = "Turn on or off valve";
         }
 
 

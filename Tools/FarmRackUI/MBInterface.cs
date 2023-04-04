@@ -30,6 +30,12 @@ namespace FamrRackUI
         string[] readMsgList;
         int arrayIndex2;
 
+        // Buffer (flag holders)
+        ushort buf_UseScheduler;
+        ushort buf_LightOn;
+        ushort buf_PVOn;
+        ushort buf_FDModeOn;
+        ushort buf_PumpOn;
 
         public MBInterface(string ip, int port)
         {
@@ -80,6 +86,8 @@ namespace FamrRackUI
                 try
                 {
                     master = ModbusIpMaster.CreateIp(tcpClient);
+
+                    updateStates();
                 }
                 catch
                 {
@@ -114,32 +122,57 @@ namespace FamrRackUI
         }
 
 
+        //===============================================
+
+        public void updateStates()
+        {
+            ushort[] usbuf;
+
+            usbuf = master.ReadHoldingRegisters(Addresses.ADDR_USE_SCHEDULER, 1);
+            buf_UseScheduler = usbuf[0];
+
+            usbuf = master.ReadHoldingRegisters(Addresses.ADDR_LIGHT_ON, 1);
+            buf_LightOn = usbuf[0];
+
+            usbuf = master.ReadHoldingRegisters(Addresses.ADDR_PV_ON, 1);
+            buf_PVOn = usbuf[0];
+
+            usbuf = master.ReadHoldingRegisters(Addresses.ADDR_PUMP_FILL_DRAIN_MODE, 1);
+            buf_FDModeOn = usbuf[0];
+
+            usbuf = master.ReadHoldingRegisters(Addresses.ADDR_PUMP_ON, 1);
+            buf_PumpOn = usbuf[0];
+
+        }
+
+
         // Shelf schedule set to ON/OFF
         public void setScheduleOnOff(ushort index, bool bVal)
         {
-            ushort uOut;
-            ushort uval = (ushort)Math.Pow(2,index);
             if (master != null)
             {
-                uOut = (ushort)(bVal ? uval : 0);
-                master.WriteSingleRegister(Addresses.ADDR_USE_SCHEDULER, uOut);
-                addToMsgList("[" + (Addresses.ADDR_USE_SCHEDULER + index).ToString() + "] <= " + uOut.ToString());
+                buf_UseScheduler = setBit(buf_UseScheduler, index, bVal);
+                
+                master.WriteSingleRegister(Addresses.ADDR_USE_SCHEDULER, buf_UseScheduler);
+                addToMsgList("[" + Addresses.ADDR_USE_SCHEDULER.ToString() + "] <= " + buf_UseScheduler.ToString());
             }
         }   // setScheduleOnOff
 
 
-        void setBit(ushort addr, ushort bitVal)
+        
+        private ushort setBit(ushort currentValue, ushort bitPos, bool isSet)
         {
-            ushort[] usarr;
             ushort ustmp;
-            if (master != null)
-            {
-                usarr = master.ReadHoldingRegisters(addr, 1);
-                ustmp = usarr[0];
-                ustmp |= bitVal;
-            }   // if
 
+            ustmp = currentValue;
+            if (isSet)
+                ustmp |= (ushort) (1 << bitPos);
+            else
+                ustmp &= (ushort) ~(1 << bitPos);
+
+            return ustmp;
         }   // setBit
+        
 
 
         // Shelf mode (Auto, Manual, Semi auto)
@@ -153,15 +186,15 @@ namespace FamrRackUI
         }
 
 
-        public void lightControl(ushort index, bool bval)
+        public void lightControl(ushort index, bool bVal)
         {
-            ushort uOut;
-            ushort uval = (ushort)Math.Pow(2, index);
+
             if (master != null)
             {
-                uOut = (ushort)((bval) ? uval : 0);
-                master.WriteSingleRegister(Addresses.ADDR_LIGHT_ON, uOut);
-                addToMsgList("[" + Addresses.ADDR_LIGHT_ON.ToString() + "] <= " + uOut.ToString());
+                buf_LightOn = setBit(buf_LightOn, index, bVal);
+
+                master.WriteSingleRegister(Addresses.ADDR_USE_SCHEDULER, buf_LightOn);
+                addToMsgList("[" + Addresses.ADDR_LIGHT_ON.ToString() + "] <= " + buf_LightOn.ToString());
             }
         }
 
@@ -175,16 +208,13 @@ namespace FamrRackUI
             }
         }
                 
-        public void pumpControl(ushort index, bool bval)
+        public void pumpControl(ushort index, bool bVal)
         {
-            ushort uval = (ushort)Math.Pow(2, index);
-            ushort uOut;
-
             if (master != null)
             {
-                uOut = (ushort)((bval) ? uval : 0);
-                master.WriteSingleRegister(Addresses.ADDR_PUMP_ON, uOut);
-                addToMsgList("[" + Addresses.ADDR_PUMP_ON.ToString() + "] <= " + uOut.ToString());
+                buf_PumpOn = setBit(buf_PumpOn, index, bVal);
+                master.WriteSingleRegister(Addresses.ADDR_PUMP_ON, buf_PumpOn);
+                addToMsgList("[" + Addresses.ADDR_PUMP_ON.ToString() + "] <= " + buf_PumpOn.ToString());
             }
         }
 
@@ -211,6 +241,20 @@ namespace FamrRackUI
                 addToMsgList("[" + Addresses.ADDR_APPLY.ToString() + "] <= 1");
             }
         }
+
+
+        public void setValveOnOff(ushort index, bool bVal)
+        {
+
+            if (master != null)
+            {
+                buf_PVOn = setBit(buf_PVOn, index, bVal);
+
+                master.WriteSingleRegister((ushort)(Addresses.ADDR_PV_ON + index), buf_PVOn);
+                addToMsgList("[" + Addresses.ADDR_PV_ON.ToString() + "] <= " + buf_PVOn.ToString());
+            }
+        }
+
 
         public void setValve(ushort index, ushort ival)
         {
@@ -332,6 +376,17 @@ namespace FamrRackUI
                 }
 
             }   //for
+        }
+
+
+        public void fillDrainControl(ushort index, bool bVal)
+        {
+            if (master != null)
+            {
+                buf_FDModeOn = setBit(buf_FDModeOn, index, bVal);
+                master.WriteSingleRegister((ushort)(Addresses.ADDR_PUMP_FILL_DRAIN_MODE + index), buf_FDModeOn);
+                addToMsgList("[" + Addresses.ADDR_PUMP_FILL_DRAIN_MODE.ToString() + "] <= " + buf_FDModeOn.ToString());
+            }
         }
 
 

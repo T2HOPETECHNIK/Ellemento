@@ -76,6 +76,7 @@
             this.helpBarText = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.IPLabel = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.mainPanel.SuspendLayout();
             this.SchedulerGroup.SuspendLayout();
@@ -144,6 +145,7 @@
             // mainPanel
             // 
             this.mainPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mainPanel.Controls.Add(this.label22);
             this.mainPanel.Controls.Add(this.readLogListBox);
             this.mainPanel.Controls.Add(this.label20);
             this.mainPanel.Controls.Add(this.logListBox);
@@ -200,7 +202,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(559, 15);
+            this.label21.Location = new System.Drawing.Point(641, 15);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(15, 13);
             this.label21.TabIndex = 6;
@@ -209,7 +211,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(431, 15);
+            this.label19.Location = new System.Drawing.Point(513, 15);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(39, 13);
             this.label19.TabIndex = 4;
@@ -218,7 +220,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(298, 15);
+            this.label18.Location = new System.Drawing.Point(360, 15);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(32, 13);
             this.label18.TabIndex = 3;
@@ -544,6 +546,15 @@
             this.IPLabel.TabIndex = 6;
             this.IPLabel.Text = "None selected";
             // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(293, 15);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(35, 13);
+            this.label22.TabIndex = 11;
+            this.label22.Text = "CTRL";
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -622,6 +633,7 @@
         private System.Windows.Forms.Label IPLabel;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ListBox readLogListBox;
+        private System.Windows.Forms.Label label22;
     }
 }
 

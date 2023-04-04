@@ -17,7 +17,6 @@ C:\Project\Ellemento\Part 2\dev\RackControllerUI\FarmRackUI\bin\Debug\FarmRackUI
 C:\Project\Ellemento\Part 2\dev\RackControllerUI\FarmRackUI\bin\Debug\FarmRackUI.pdb
 C:\Project\Ellemento\Part 2\dev\RackControllerUI\FarmRackUI\bin\Debug\NModbus4.dll
 C:\Project\Ellemento\Part 2\dev\RackControllerUI\FarmRackUI\bin\Debug\NModbus4.xml
-C:\Project\Ellemento\Part 2\dev\RackControllerUI\FarmRackUI\obj\Debug\FarmRackUI.csproj.AssemblyReference.cache
 C:\Project\Ellemento\Part 2\dev\RackControllerUI\FarmRackUI\obj\Debug\FamrRackUI.AboutBox1.resources
 C:\Project\Ellemento\Part 2\dev\RackControllerUI\FarmRackUI\obj\Debug\FamrRackUI.mainForm.resources
 C:\Project\Ellemento\Part 2\dev\RackControllerUI\FarmRackUI\obj\Debug\FarmRackUI.Properties.Resources.resources
