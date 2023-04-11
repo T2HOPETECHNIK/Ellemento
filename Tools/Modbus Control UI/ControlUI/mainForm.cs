@@ -29,6 +29,8 @@ namespace ControlUI
         //fakeInterface mbcom;    
         comInterface mbcom;
 
+        scriptHandler script;
+
         public READ_DATA rdData;
         public WRITE_DATA wrData;
 
@@ -37,6 +39,13 @@ namespace ControlUI
         System.Timers.Timer timer;
 
         bool bControlsLoaded;
+
+        bool bScriptRunning;
+        bool bExecuteScript;
+        string scriptFilename;
+
+        scriptlogForm logform;
+
 
         // Error
         ERROR_CODE errCode;
@@ -71,6 +80,11 @@ namespace ControlUI
 
             bTerminate = false;
 
+            bScriptRunning = false;
+            bExecuteScript = false;
+
+            script = new scriptHandler();
+
             plugin = new pluginHandler();
 
             rdData.tbValue = new ushort[Constants.max_fields];
@@ -94,6 +108,8 @@ namespace ControlUI
             initcomm();
 
             setupReader();
+
+            setupScript();
 
         }   // mainform
 
@@ -667,26 +683,31 @@ namespace ControlUI
                 if (errCode != ERROR_CODE.ERROR_NONE)
                     return;
 
-                for (i = 0; i < sysconfig.numFields; i++)
+                if (!bScriptRunning)
                 {
-                    if ((dfield[i].access == ADDRESS_ACCESS_TYPES.READ_ONLY) ||
-                        (dfield[i].access == ADDRESS_ACCESS_TYPES.READ_WRITE))
+
+                    for (i = 0; i < sysconfig.numFields; i++)
                     {
-                        if ((dfield[i].dataType == DATA_TYPES.UINT_TYPE) || 
-                            (dfield[i].dataType == DATA_TYPES.INT_TYPE) || 
-                            (dfield[i].dataType == DATA_TYPES.BYTE_TYPE))
+                        if ((dfield[i].access == ADDRESS_ACCESS_TYPES.READ_ONLY) ||
+                            (dfield[i].access == ADDRESS_ACCESS_TYPES.READ_WRITE))
                         {
-                            rdData.tbValue[i] = mbcom.getRegister(dfield[i].address);
-                        }
-                        else if (dfield[i].dataType == DATA_TYPES.BIT_TYPE)
-                        {
-                            rdData.cbValue[i] = mbcom.getCoil(dfield[i].address, dfield[i].bitpos);
-                        }
+                            if ((dfield[i].dataType == DATA_TYPES.UINT_TYPE) ||
+                                (dfield[i].dataType == DATA_TYPES.INT_TYPE) ||
+                                (dfield[i].dataType == DATA_TYPES.BYTE_TYPE))
+                            {
+                                rdData.tbValue[i] = mbcom.getRegister(dfield[i].address);
+                            }
+                            else if (dfield[i].dataType == DATA_TYPES.BIT_TYPE)
+                            {
+                                rdData.cbValue[i] = mbcom.getCoil(dfield[i].address, dfield[i].bitpos);
+                            }
 
-                        errCode = (ERROR_CODE)mbcom.getError();
-                    }   //if
+                            errCode = (ERROR_CODE)mbcom.getError();
+                        }   //if
 
-                }   // for
+                    }   // for
+
+                }   //if
 
                 // Send updated data to plugin
                 plugin.dataUpdate(wrData, rdData, sysconfig.numFields);
@@ -710,6 +731,109 @@ namespace ControlUI
             bTerminate = true;
             Environment.Exit(0);
         }
+
+        //=================================================
+
+        /*
+        public string runScript()
+        {
+            string strtmp = "";
+
+            bScriptRunning = true;
+
+            if (mbcom != null)
+            {
+                logform.addLog("Test");
+
+                script.executeScriptLines(mbcom);
+
+                strtmp = script.getError();
+
+            }
+            else
+            {
+                statusLabel.Text = "Modbus is null error.";
+            }
+
+            bScriptRunning = false;
+
+            return (strtmp);
+        }
+        */
+
+
+        public string runScript()
+        {
+            string strmsg = "";
+            string strRes = "";
+            bool bres = true;
+
+            bScriptRunning = true;
+
+            if (mbcom != null)
+            {
+                while (bres)
+                {
+                    bres = script.executeOneLine(mbcom, ref strmsg);
+                    logform.addLog(strmsg);
+                }
+            }
+            else
+            {
+                strRes = "Modbus is null error.";
+            }
+
+            return (strRes);
+
+        }   // runScript
+
+
+        void scriptReader()
+        {
+            string strtmp;
+
+            while (true)
+            {
+                while (!bExecuteScript)
+                {
+                    if (bTerminate)
+                        return;
+
+                    Thread.Sleep(1000);
+                }
+
+                strtmp = "";
+
+                script.ProcessScript(scriptFilename);
+                                
+                strtmp = runScript();
+
+
+                statusLabel.BeginInvoke(new Action(() => {
+                    if (strtmp != "")
+                    {
+                        statusLabel.Text = strtmp;
+                    }
+                    else
+                    {
+                        statusLabel.Text = "Script done.";
+                    }
+                }));
+
+                bExecuteScript = false;
+
+            }   //while
+
+        }   // ScriptReader
+
+
+
+        void setupScript()
+        {
+            Thread thread2 = new Thread(new ThreadStart(scriptReader));
+            thread2.Start();
+        }
+
 
         //=========================================================================================
         // Event handlers
@@ -1052,6 +1176,31 @@ namespace ControlUI
         {
             adjustPanel();
         }
+
+        private void runscriptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var filePath = string.Empty;
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = ".\\";
+            openFileDialog.Filter = "Script files (*.script)|*.script|All files (*.*)|*.*";
+            openFileDialog.FilterIndex = 2;
+            openFileDialog.RestoreDirectory = true;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                filePath = openFileDialog.FileName;
+
+                scriptFilename = filePath;
+
+                logform = new scriptlogForm();
+                logform.Show();
+
+
+                bExecuteScript = true;
+
+            }   // if
+        }   // runscriptToolStripMenuItem_Click
     }
 
 }

@@ -10,6 +10,9 @@
     <Compile Update="configMakerForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="scriptlogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="mainForm.cs">
       <SubType>Form</SubType>
     </Compile>

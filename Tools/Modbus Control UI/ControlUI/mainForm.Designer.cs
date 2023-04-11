@@ -37,10 +37,12 @@ namespace ControlUI
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.configurationEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.errorLabel = new System.Windows.Forms.Label();
+            this.runscripttoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,7 +78,9 @@ namespace ControlUI
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.runscripttoolStripMenuItem,
             this.configurationEditorToolStripMenuItem,
+            this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(61, 20);
@@ -88,6 +92,11 @@ namespace ControlUI
             this.configurationEditorToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.configurationEditorToolStripMenuItem.Text = "&Configuration Editor";
             this.configurationEditorToolStripMenuItem.Click += new System.EventHandler(this.configurationEditorToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(179, 6);
             // 
             // exitToolStripMenuItem
             // 
@@ -121,6 +130,13 @@ namespace ControlUI
             this.errorLabel.Size = new System.Drawing.Size(40, 17);
             this.errorLabel.TabIndex = 3;
             this.errorLabel.Text = "label1";
+            // 
+            // runscripttoolStripMenuItem
+            // 
+            this.runscripttoolStripMenuItem.Name = "runscripttoolStripMenuItem";
+            this.runscripttoolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.runscripttoolStripMenuItem.Text = "&Run script";
+            this.runscripttoolStripMenuItem.Click += new System.EventHandler(this.runscriptToolStripMenuItem_Click);
             // 
             // mainForm
             // 
@@ -158,6 +174,8 @@ namespace ControlUI
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Label errorLabel;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem runscripttoolStripMenuItem;
     }
 }
 

@@ -12,7 +12,7 @@ Designed for Delta PLC and other devices that uses Modbus TCP for primary commun
 Tested on Delta AS300N PLC.
 
 2023 by Vincent Lao</Description>
-    <Version>0.2.0</Version>
+    <Version>0.3.0</Version>
     <Product>Modbus TCP Control UI</Product>
   </PropertyGroup>
 
